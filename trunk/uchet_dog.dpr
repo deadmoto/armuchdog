@@ -3,9 +3,9 @@ program Uchet_Dog;
 uses
   Forms,
   ACC in 'ACC.pas' {Form1},
-  DMUnit in 'DMUnit.pas' {DM: TDataModule},
+  DMUnit in 'dmunit.pas' {DM: TDataModule},
   About in 'About.pas' {AboutBox},
-  AddUnit in 'AddUnit.pas' {FormAdd},
+  AddUnit in 'addunit.pas' {FormAdd},
   FldNameDBGUnit in 'FldNameDBGUnit.pas' {FormFldNameDBG},
   Name_DogDBGUnit in 'Name_DogDBGUnit.pas' {FormName_DogDBG},
   SupplierDBGUnit in 'SupplierDBGUnit.pas' {FormSupplierDBG},
@@ -22,7 +22,8 @@ uses
   contracts in 'data\contracts.pas',
   providerfm in 'forms\providerfm.pas' {provider},
   providerdlg in 'dialogs\providerdlg.pas' {provdlg},
-  util in 'database\util.pas';
+  util in 'database\util.pas',
+  contractfm in 'forms\contractfm.pas' {contract};
 
 {$R *.res}
 
@@ -43,5 +44,6 @@ begin
   Application.CreateForm(TFormFldNameDBGEdit, FormFldNameDBGEdit);
   Application.CreateForm(Treport_okved, report_okved);
   Application.CreateForm(Tdmod, dmod);
+  Application.CreateForm(Tcontract, contract);
   Application.Run;
 end.
