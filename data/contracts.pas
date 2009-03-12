@@ -9,7 +9,7 @@ uses
   sysutils;
 
 type
-  tcontract=class(tobject)
+  tcontract=record
     regn:integer;
     reg_n:integer;
     n_dog:string;
@@ -25,8 +25,6 @@ type
     sumdog:real;
     cosgu:string;
     sum_dog_all:real;
-  public
-    constructor create(regn:integer);
   end;
 
 implementation
@@ -34,10 +32,9 @@ implementation
 uses
   datamodule;
 
-constructor tcontract.create(regn:integer);
+procedure fetch(regn:integer);
 begin
-  inherited create;
-  try
+{  try
     dmod.query.sql.text:='select REGN,REG_N,N_DOG,DATA_REG,DATA_POST,FLDID,DATA_DOG,DATA_SROK,STATUS,ID_SUPPLIER'+#13+
                          'from reestrdog where regn=:regn';
     dmod.query.parameters.parambyname('regn').value:=regn;
@@ -55,7 +52,7 @@ begin
   except
     showmessage('Ошибка открытия договора!!!'+#13+'номер договора:'+inttostr(regn));
   end;
-end;
+}end;
 
 
 

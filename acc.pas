@@ -56,6 +56,7 @@ type
     BitBtnSpisok_Dog: TBitBtn;
     N23: TMenuItem;
     Timer1: TTimer;
+    Button1: TButton;
     procedure BitBtnExitClick(Sender: TObject);
     procedure ReestrDBGCellClick(Column: TColumn);
     procedure ReestrDBGKeyDown(Sender: TObject; var Key: Word;
@@ -88,6 +89,7 @@ type
     procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure Timer1Timer(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -106,7 +108,7 @@ uses
   AddUnit, COSGUDBGUnit, About, DMUnit, FldNameDBGUnit, Name_DogDBGUnit,
 SupplierDBGUnit, Name_DogDBGEditUnit, COSGUDBGEditUnit, SupplierDBGEditUnit,
 FldNameDBGEditUnit,
-  reportokved;
+  reportokved, contractfm;
 
 {$R *.dfm}
 
@@ -547,7 +549,7 @@ begin
 //----------------------------------------------------------------//
 {*******************************************************************************
 *******************************************************************************}
-  formadd.contract:=tcontract.create(strtoint(ReestrDBG.Fields[0].AsString));
+//  formadd.contract:=tcontract.create(strtoint(ReestrDBG.Fields[0].AsString));
   formadd.editregn.text:=inttostr(formadd.contract.regn);
 
   FormAdd.Visible:=True;
@@ -690,6 +692,11 @@ begin
   for i := 1 to (Length(CapForm1) - 1) do
     CapForm1[i] := Application.Title[i + 1];
   CapForm1[Length(CapForm1)] := Application.Title[1];
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  contract.add;
 end;
 
 end.
