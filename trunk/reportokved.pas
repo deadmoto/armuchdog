@@ -7,14 +7,11 @@ uses
   Dialogs, ExtCtrls, Grids, DBGrids, StdCtrls, ComCtrls, Buttons, FR_Class,
   FR_DSet, FR_DBSet;
 
-const
-  okved='SELECT ID_NOMENCL1'+#13+'FROM ReestrDog'+#13+'WHERE (ID_NOMENCL1<>'+'''+'''+')'+#13+'GROUP BY ID_NOMENCL1';
-
 type
   Treport_okved = class(TForm)
-    okvedbox: TGroupBox;
+    nomenclbox: TGroupBox;
     regionbox: TGroupBox;
-    okved: TComboBox;
+    nomencl: TComboBox;
     region: TComboBox;
     report: TDBGrid;
     panel: TPanel;
@@ -28,7 +25,7 @@ type
     frquery: TfrDBDataSet;
     frsummary: TfrReport;
     procedure FormShow(Sender: TObject);
-    procedure okvedKeyPress(Sender: TObject; var Key: Char);
+    procedure nomenclKeyPress(Sender: TObject; var Key: Char);
     procedure BitBtn1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
   private
@@ -60,17 +57,19 @@ begin
   else
     startpick.date:=encodedate(currentyear-1,month-3+12,1);
   endpick.date:=encodedate(currentyear,month,1);
-//filling okved combobox
-  dm.query.sql.text:=reportokved.okved;
-//  dm.query.parambyname('nomencl').value:='1';
+//filling nomencl combobox
+  dm.query.sql.text:='SELECT nomencl'+#13+
+                     'FROM subcontract'+#13+
+                     'WHERE nomencl IS NOT NULL'+#13+
+                     'GROUP BY nomencl';
   dm.query.open;
   dm.query.first;
   for i:=0 to dm.query.recordcount-1 do
     begin
-      okved.items.add(dm.query.fieldbyname('id_nomencl1').asstring);
+      nomencl.items.add(dm.query.fieldbyname('nomencl').asstring);
       dm.query.next;
     end;
-  okved.items.strings[0]:='*';
+  nomencl.items.strings[0]:='*';
 //filling region combobox
   region.items.add('*');
   dm.query.sql.text:=sqltext.regionid;
@@ -84,17 +83,26 @@ begin
   dm.query.close;
 end;
 
-procedure Treport_okved.okvedKeyPress(Sender: TObject; var Key: Char);
+procedure Treport_okved.nomenclKeyPress(Sender: TObject; var Key: Char);
 begin
   key:=chr(vk_cancel);
 end;
 
 procedure Treport_okved.BitBtn1Click(Sender: TObject);
 begin
-  dm.query.sql.text:=sqltext.report_okved;
+//  dm.query.sql.text:=sqltext.report_okved;
+  dm.query.sql.text:='SELECT subcontract.id,subcontract.nomencl,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
+                     'FROM subcontract'+#13+
+                     'INNER JOIN ReestrDog ON subcontract.id=ReestrDog.REGN'+#13+
+                     'INNER JOIN RegionIDDog ON ReestrDog.FLDID=RegionIDDog.FLDID'+#13+
+                     'INNER JOIN SupplierDog ON ReestrDog.ID_SUPPLIER = SupplierDog.ID_SUPPLIER'+#13+
+                     'WHERE (subcontract.nomencl LIKE '+quotedstr('%'+nomencl.text+'%')+') '+
+                     'AND (subcontract.subdate >= :start) '+
+                     'AND (subcontract.subdate < :finish) '+
+                     'AND (subcontract.nomencl <> '+quotedstr('')+')';
   dm.query.parambyname('start').value:=startpick.date;
-  dm.query.parambyname('end').value:=endpick.date;
-  dm.query.parambyname('okved').value:=okved.text;
+  dm.query.parambyname('finish').value:=endpick.date;
+//  dm.query.parambyname('nomencl').value:=nomencl.text;
   dm.query.open;
   report.columns.items[0].width:=8*10;
   report.columns.items[1].width:=8*28;

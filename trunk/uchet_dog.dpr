@@ -15,10 +15,10 @@ uses
   FldNameDBGEditUnit in 'fldnamedbgeditunit.pas' {FormFldNameDBGEdit},
   sqltext in 'sqltext.pas',
   defs in 'defs.pas',
-  ReportOKVED in 'ReportOKVED.pas' {report_okved},
-  balance in 'data\balance.pas',
+  ReportOKVED in 'reportokved.pas' {report_okved},
+  balance in 'database\balance.pas',
   datamodule in 'database\datamodule.pas' {dmod: TDataModule},
-  contracts in 'data\contracts.pas',
+  contracts in 'database\contracts.pas',
   providerfm in 'forms\providerfm.pas' {provider},
   provideredit in 'dialogs\provideredit.pas' {provdlg},
   util in 'database\util.pas',
@@ -31,7 +31,8 @@ uses
   cosgus in 'database\cosgus.pas',
   cosgudlg in 'dialogs\cosgudlg.pas' {cosguselect},
   regiondlg in 'dialogs\regiondlg.pas' {regionselect},
-  providerdlg in 'dialogs\providerdlg.pas' {providerselect};
+  providerdlg in 'dialogs\providerdlg.pas' {providerselect},
+  reports in 'database\reports.pas';
 
 {$R *.res}
 
