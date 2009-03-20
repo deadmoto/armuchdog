@@ -11,6 +11,7 @@ object regionselect: Tregionselect
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
   object btnbox: TGroupBox
