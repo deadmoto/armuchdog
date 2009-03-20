@@ -692,18 +692,18 @@ procedure TFormAdd.balancelab1Click(Sender: TObject);
 begin
   if labelnomenclid1.caption<>'' then
     begin
-      balancelab1.caption:=floattostr(defs.contractlimit-balance.getsum(labelnomenclid1.caption));
-      editreg_n.enabled:=balance.getsum(labelnomenclid1.caption)<defs.contractlimit;
-      if balance.getsum(labelnomenclid1.caption)>defs.contractlimit then
-        balancelab1.font.color:=clred
-      else
-        balancelab1.font.color:=clnone;
+//      balancelab1.caption:=floattostr(defs.contractlimit-balance.getsum(labelnomenclid1.caption));
+//      editreg_n.enabled:=balance.getsum(labelnomenclid1.caption)<defs.contractlimit;
+//    if balance.getsum(labelnomenclid1.caption)>defs.contractlimit then
+//      balancelab1.font.color:=clred
+//    else
+//      balancelab1.font.color:=clnone;
     end;
 end;
 
 procedure TFormAdd.balancelab2Click(Sender: TObject);
 begin
-  if labelnomenclid2.caption<>'' then
+{  if labelnomenclid2.caption<>'' then
     begin
       balancelab2.caption:=floattostr(defs.contractlimit-balance.getsum(labelnomenclid2.caption));
       editreg_n.enabled:=balance.getsum(labelnomenclid2.caption)<defs.contractlimit;
@@ -712,11 +712,11 @@ begin
       else
         balancelab2.font.color:=clnone;
     end;
-end;
+}end;
 
 procedure TFormAdd.balancelab3Click(Sender: TObject);
 begin
-  if labelnomenclid3.caption<>'' then
+{  if labelnomenclid3.caption<>'' then
     begin
       balancelab3.caption:=floattostr(defs.contractlimit-balance.getsum(labelnomenclid3.caption));
       editreg_n.enabled:=balance.getsum(labelnomenclid3.caption)<defs.contractlimit;
@@ -725,11 +725,11 @@ begin
       else
         balancelab3.font.color:=clnone;
     end;
-end;
+}end;
 
 procedure TFormAdd.balancelab4Click(Sender: TObject);
 begin
-  if labelnomenclid4.caption<>'' then
+{  if labelnomenclid4.caption<>'' then
     begin
       balancelab4.caption:=floattostr(defs.contractlimit-balance.getsum(labelnomenclid4.caption));
       editreg_n.enabled:=balance.getsum(labelnomenclid4.caption)<defs.contractlimit;
@@ -737,12 +737,12 @@ begin
         balancelab4.font.color:=clred
       else
         balancelab4.font.color:=clnone;
-    end;
+    end;}
 end;
 
 procedure TFormAdd.balancelab5Click(Sender: TObject);
 begin
-  if labelnomenclid5.caption<>'' then
+{  if labelnomenclid5.caption<>'' then
     begin
       balancelab5.caption:=floattostr(defs.contractlimit-balance.getsum(labelnomenclid5.caption));
       editreg_n.enabled:=balance.getsum(labelnomenclid5.caption)<defs.contractlimit;
@@ -750,7 +750,7 @@ begin
         balancelab5.font.color:=clred
       else
         balancelab5.font.color:=clnone;
-    end;
+    end;   }
 end;
 
 end.

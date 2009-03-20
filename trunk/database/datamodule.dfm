@@ -1,5 +1,6 @@
 object dmod: Tdmod
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Left = 381
   Top = 193
   Height = 358

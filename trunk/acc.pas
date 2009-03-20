@@ -57,6 +57,7 @@ type
     N23: TMenuItem;
     Timer1: TTimer;
     Button1: TButton;
+    Button2: TButton;
     procedure BitBtnExitClick(Sender: TObject);
     procedure ReestrDBGCellClick(Column: TColumn);
     procedure ReestrDBGKeyDown(Sender: TObject; var Key: Word;
@@ -90,6 +91,7 @@ type
       Y: Integer);
     procedure Timer1Timer(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -571,6 +573,7 @@ begin
     QueryDelete.SQL.Clear;
     QueryDelete.SQL.Add('delete from reestrdog where regn = ' + str);
     QueryDelete.ExecSQL;
+    dm.ReestrTb.Active:=true;
     DM.ReestrTb.Refresh;
     DM.ADOQuery1.Active:=not DM.ADOQuery1.Active;
     DM.ADOQuery1.Active:=not DM.ADOQuery1.Active;
@@ -585,7 +588,7 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   StatusBar.Panels[4].Text:='' + FormatDateTime('dd mmm yyyy ד. dddd', Date);
-  CapForm1 := 'ְ׀ּ "׃ק¸ע המדמגמנמג"...   '; 
+  CapForm1 := 'ְ׀ּ "׃ק¸ע המדמגמנמג"...   ';
 end;
 
 procedure TForm1.ApplicationEventsMessage(var Msg: tagMSG;
@@ -696,7 +699,12 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  contract.add;
+  contractform.add;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  contractform.edit(strtoint(reestrdbg.fields[0].asstring));
 end;
 
 end.

@@ -94,8 +94,6 @@ begin
   FormAdd.LabelNomenclName5.Caption:=Name_dogDBG.Fields[1].AsString;
   FormAdd.balancelab5Click(Sender);
   end;
-  FormAdd.Enabled:=True;
-  FormName_DogDBG.Visible:=False;
 end;
 
 procedure TFormName_DogDBG.FormClose(Sender: TObject;
@@ -176,7 +174,7 @@ var
 i: SmallInt;
 begin
 Name_dogDBG.ShowHint:=True;
-Name_dogDBG.Hint:=Name_dogDBG.Fields[1].AsString;
+//Name_dogDBG.Hint:=Name_dogDBG.Fields[1].AsString;
 
 if Msg.message = WM_MOUSEWHEEL then
 begin

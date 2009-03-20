@@ -43,7 +43,7 @@ end;
 
 procedure TFormCOSGUDBG.BitBtnCOSGUDBGEnterClick(Sender: TObject);
 begin
-  if (FormAdd.PageControl.TabIndex=1) then begin
+{  if (FormAdd.PageControl.TabIndex=1) then begin
   FormAdd.LabelCOSGUID1.Caption:=COSGUDBG.Fields[0].AsString;
   FormAdd.LabelCOSGUName1.Caption:=COSGUDBG.Fields[1].AsString;
   end;
@@ -66,7 +66,7 @@ begin
   
   FormAdd.Enabled:=True;
   FormCOSGUDBG.Visible:=False;
-end;
+}end;
 
 procedure TFormCOSGUDBG.COSGUDBGDblClick(Sender: TObject);
 begin

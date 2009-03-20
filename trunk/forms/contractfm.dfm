@@ -1,8 +1,8 @@
-object contract: Tcontract
-  Left = 239
-  Top = 161
+object contractform: Tcontractform
+  Left = 243
+  Top = 223
   Width = 800
-  Height = 600
+  Height = 405
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object contract: Tcontract
     Left = 0
     Top = 0
     Width = 396
-    Height = 546
+    Height = 359
     Align = alLeft
     Caption = #1044#1072#1085#1085#1099#1077' '#1076#1086#1075#1086#1074#1086#1088#1072':'
     TabOrder = 0
@@ -34,6 +34,7 @@ object contract: Tcontract
         Top = 16
         Width = 361
         Height = 21
+        Enabled = False
         TabOrder = 0
       end
     end
@@ -49,15 +50,18 @@ object contract: Tcontract
         Top = 16
         Width = 273
         Height = 21
+        Enabled = False
         TabOrder = 0
       end
-      object Button1: TButton
+      object btnregion: TButton
         Left = 288
-        Top = 16
+        Top = 15
         Width = 75
-        Height = 25
-        Caption = 'Button1'
+        Height = 22
+        Caption = #1042#1099#1073#1088#1072#1090#1100
+        Enabled = False
         TabOrder = 1
+        OnClick = btnregionClick
       end
     end
     object GroupBox4: TGroupBox
@@ -72,7 +76,10 @@ object contract: Tcontract
         Top = 16
         Width = 361
         Height = 21
+        Enabled = False
         TabOrder = 0
+        OnChange = reg_nChange
+        OnKeyPress = reg_nKeyPress
       end
     end
     object GroupBox5: TGroupBox
@@ -88,6 +95,7 @@ object contract: Tcontract
         Width = 361
         Height = 21
         TabOrder = 0
+        OnChange = n_dogChange
       end
     end
     object GroupBox6: TGroupBox
@@ -102,119 +110,191 @@ object contract: Tcontract
         Top = 16
         Width = 273
         Height = 21
+        Enabled = False
         TabOrder = 0
       end
-      object select: TButton
+      object btnsupplier: TButton
         Left = 288
-        Top = 16
+        Top = 15
         Width = 75
-        Height = 25
+        Height = 22
         Caption = #1042#1099#1073#1088#1072#1090#1100
         TabOrder = 1
+        OnClick = btnsupplierClick
       end
     end
     object GroupBox7: TGroupBox
-      Left = 8
-      Top = 256
+      Left = 200
+      Top = 304
       Width = 185
       Height = 49
       Caption = #1044#1072#1090#1072' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080' '#1076#1086#1075#1086#1074#1086#1088#1072
-      TabOrder = 5
-      object data_reg: TDateTimePicker
+      TabOrder = 8
+      object data_reg: TMaskEdit
         Left = 8
         Top = 16
-        Width = 169
+        Width = 166
         Height = 21
-        Date = 39884.374077500000000000
-        Time = 39884.374077500000000000
+        EditMask = '!99/99/0000;1;_'
+        MaxLength = 10
         TabOrder = 0
+        Text = '  .  .    '
+        OnChange = data_regChange
       end
     end
     object GroupBox8: TGroupBox
-      Left = 200
-      Top = 256
+      Left = 8
+      Top = 304
       Width = 185
       Height = 49
       Caption = #1044#1072#1090#1072' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103' '#1076#1086#1075#1086#1074#1086#1088#1072
-      TabOrder = 6
-      object data_post: TDateTimePicker
+      TabOrder = 7
+      object data_post: TMaskEdit
         Left = 8
         Top = 16
-        Width = 170
+        Width = 166
         Height = 21
-        Date = 39884.374369571760000000
-        Time = 39884.374369571760000000
+        EditMask = '!99/99/0000;1;_'
+        MaxLength = 10
         TabOrder = 0
+        Text = '  .  .    '
+        OnChange = data_postChange
       end
     end
     object GroupBox9: TGroupBox
       Left = 8
-      Top = 304
+      Top = 256
       Width = 185
       Height = 49
       Caption = #1044#1072#1090#1072' '#1076#1086#1075#1086#1074#1086#1088#1072
-      TabOrder = 7
-      object data_dog: TDateTimePicker
+      TabOrder = 5
+      object data_dog: TMaskEdit
         Left = 8
         Top = 16
-        Width = 169
+        Width = 168
         Height = 21
-        Date = 39884.375260775470000000
-        Time = 39884.375260775470000000
+        EditMask = '!99/99/0000;1;_'
+        MaxLength = 10
         TabOrder = 0
+        Text = '  .  .    '
+        OnChange = data_dogChange
       end
     end
     object GroupBox10: TGroupBox
       Left = 200
-      Top = 304
+      Top = 256
       Width = 185
       Height = 49
       Caption = #1057#1088#1086#1082' '#1076#1086#1075#1086#1074#1086#1088#1072
-      TabOrder = 8
-      object data_srok: TDateTimePicker
+      TabOrder = 6
+      object data_srok: TMaskEdit
         Left = 8
         Top = 16
-        Width = 169
+        Width = 166
         Height = 21
-        Date = 39884.375405092590000000
-        Time = 39884.375405092590000000
+        EditMask = '!99/99/0000;1;_'
+        MaxLength = 10
         TabOrder = 0
+        Text = '  .  .    '
+        OnChange = data_srokChange
       end
     end
   end
-  object GroupBox2: TGroupBox
+  object detailboxbox: TGroupBox
     Left = 396
     Top = 0
     Width = 396
-    Height = 546
+    Height = 359
     Align = alClient
-    Caption = #1057#1090#1072#1090#1100#1080' '#1087#1086' '#1076#1086#1075#1086#1074#1086#1088#1091
+    Caption = #1044#1077#1090#1072#1083#1080#1079#1072#1094#1080#1103
     TabOrder = 1
-    object StringGrid1: TStringGrid
+    object subctontractgrid: TStringGrid
       Left = 8
       Top = 16
       Width = 377
-      Height = 337
-      ColCount = 1
+      Height = 289
+      ColCount = 3
       DefaultColWidth = 316
       DefaultRowHeight = 16
       FixedCols = 0
-      RowCount = 1
-      FixedRows = 0
+      RowCount = 2
       TabOrder = 0
+      OnSelectCell = subctontractgridSelectCell
+      ColWidths = (
+        98
+        184
+        88)
+    end
+    object subcontractbox: TGroupBox
+      Left = 8
+      Top = 304
+      Width = 281
+      Height = 49
+      TabOrder = 1
+      object subcontractadd: TButton
+        Left = 8
+        Top = 16
+        Width = 88
+        Height = 25
+        Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+        TabOrder = 0
+        OnClick = subcontractaddClick
+      end
+      object subcontractupd: TButton
+        Left = 96
+        Top = 16
+        Width = 88
+        Height = 25
+        Caption = #1048#1079#1084#1077#1085#1080#1090#1100
+        TabOrder = 1
+        OnClick = subcontractupdClick
+      end
+      object subcontractdel: TButton
+        Left = 184
+        Top = 16
+        Width = 88
+        Height = 25
+        Caption = #1059#1076#1072#1083#1080#1090#1100
+        TabOrder = 2
+        OnClick = subcontractdelClick
+      end
+    end
+    object sumbox: TGroupBox
+      Left = 288
+      Top = 304
+      Width = 97
+      Height = 49
+      Caption = #1057#1091#1084#1084#1072' '#1076#1086#1075#1086#1074#1086#1088#1072
+      TabOrder = 2
+      object sum: TEdit
+        Left = 8
+        Top = 16
+        Width = 81
+        Height = 21
+        ReadOnly = True
+        TabOrder = 0
+        Text = '0'
+      end
     end
   end
   object main: TMainMenu
-    Left = 8
-    Top = 360
+    Left = 520
+    Top = 128
     object N1: TMenuItem
       Caption = #1060#1072#1081#1083
-      object commit: TMenuItem
-        Caption = 'Commit'
+      object insert: TMenuItem
+        Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+        Enabled = False
+        OnClick = insertClick
       end
-      object N3: TMenuItem
+      object update: TMenuItem
+        Caption = #1048#1079#1084#1077#1085#1080#1090#1100
+        Enabled = False
+        OnClick = updateClick
+      end
+      object discard: TMenuItem
         Caption = #1042#1099#1093#1086#1076
-        OnClick = N3Click
+        OnClick = discardClick
       end
     end
   end
