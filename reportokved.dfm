@@ -44,14 +44,14 @@ object report_okved: Treport_okved
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 1
-    object okvedbox: TGroupBox
+    object nomenclbox: TGroupBox
       Left = 8
       Top = 8
       Width = 89
       Height = 49
       Caption = #1054#1050#1042#1069#1044
       TabOrder = 0
-      object okved: TComboBox
+      object nomencl: TComboBox
         Left = 8
         Top = 16
         Width = 73
@@ -59,7 +59,7 @@ object report_okved: Treport_okved
         DropDownCount = 20
         ItemHeight = 13
         TabOrder = 0
-        OnKeyPress = okvedKeyPress
+        OnKeyPress = nomenclKeyPress
       end
     end
     object regionbox: TGroupBox
