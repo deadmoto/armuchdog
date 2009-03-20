@@ -31,8 +31,7 @@ uses
   cosgus in 'database\cosgus.pas',
   cosgudlg in 'dialogs\cosgudlg.pas' {cosguselect},
   regiondlg in 'dialogs\regiondlg.pas' {regionselect},
-  providerdlg in 'dialogs\providerdlg.pas' {providerselect},
-  reports in 'database\reports.pas';
+  providerdlg in 'dialogs\providerdlg.pas' {providerselect};
 
 {$R *.res}
 

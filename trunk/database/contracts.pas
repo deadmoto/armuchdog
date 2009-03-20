@@ -46,12 +46,6 @@ uses
   datamodule,
   util;
 
-function dateornull(date:tdate):string;
-begin
-  if date=0 then result:='null'
-  else result:=quotedstr(datetostr(date));
-end;
-
 function float(float:real):string;
 var
   i:integer;
