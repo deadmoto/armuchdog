@@ -40,7 +40,7 @@ implementation
 
 uses
   datamodule,
-  providerdlg,
+  provideredit,
   util;
 
 {$R *.dfm}

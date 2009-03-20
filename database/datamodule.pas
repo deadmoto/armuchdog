@@ -11,6 +11,7 @@ type
     report1: TADOQuery;
     query: TADOQuery;
     data: TDataSource;
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,7 +23,17 @@ var
 
 implementation
 
+uses
+  providers,
+  regions;
+
 {$R *.dfm}
+
+procedure Tdmod.DataModuleCreate(Sender: TObject);
+begin
+  regions.fetch;
+  providers.fetch;
+end;
 
 end.
 

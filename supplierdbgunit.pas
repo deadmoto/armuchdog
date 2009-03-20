@@ -53,15 +53,16 @@ begin
   FormAdd.LabelSupplierIDI.Caption:=SupplierDBG.Fields[0].AsString;
   FormAdd.LabelSupplierI.Caption:=SupplierDBG.Fields[1].AsString;
   FormAdd.Enabled:=True;
-  FormSupplierDBG.Visible:=False;
+//  FormSupplierDBG.Visible:=False;
   if FormAdd.EditN_Dog.Text='' then FormAdd.BitBtnAdd.Enabled:=False
   else FormAdd.BitBtnAdd.Enabled:=True;
+  self.close;
 end;
 
 procedure TFormSupplierDBG.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  FormAdd.Enabled:=True;
+//  FormAdd.Enabled:=True;
   FormSupplierDBG.Visible:=False;
   DM.ADOQuery4.Active:=False;
 end;
@@ -75,13 +76,14 @@ end;
 
 procedure TFormSupplierDBG.BitBtnSupplierDBGEnterClick(Sender: TObject);
 begin
-  FormAdd.LabelSupplierIDI.Caption:=SupplierDBG.Fields[0].AsString;
+{  FormAdd.LabelSupplierIDI.Caption:=SupplierDBG.Fields[0].AsString;
   FormAdd.LabelSupplierI.Caption:=SupplierDBG.Fields[1].AsString;
   FormAdd.Enabled:=True;
-  FormSupplierDBG.Visible:=False;
+//  FormSupplierDBG.Visible:=False;
   if FormAdd.EditN_Dog.Text='' then FormAdd.BitBtnAdd.Enabled:=False
   else FormAdd.BitBtnAdd.Enabled:=True;
-end;
+  self.close;
+}end;
 
 procedure TFormSupplierDBG.EditSupplierSearchChange(Sender: TObject);
 begin

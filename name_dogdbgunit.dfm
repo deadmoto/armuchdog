@@ -5148,6 +5148,7 @@ object FormName_DogDBG: TFormName_DogDBG
     Width = 81
     Height = 25
     Caption = #1042#1099#1073#1088#1072#1090#1100
+    ModalResult = 1
     TabOrder = 2
     OnClick = BitBtnName_dogDBGEnterClick
     Glyph.Data = {

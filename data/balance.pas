@@ -6,39 +6,26 @@ uses
   classes,
   sysutils;
 
-function getsum(okved:string):real;
+function getbalance(nomencl:string;id:integer):real;
 
 implementation
 
 uses
-  dmunit,
-  sqltext;
+  datamodule;
 
-function getokvedsum(okved:string;numdog:string):real;
+function getbalance(nomencl:string;id:integer):real;
 var
   i:integer;
 begin
   result:=0;
-  dm.query.sql.text:=sqltext.balance;
-  dm.query.sql.text:=format(sqltext.balance,[numdog,numdog,numdog]);
-  dm.query.parambyname('p').value:=okved;
-  dm.query.open;
-  dm.query.first;
-  for i:=0 to dm.query.recordcount-1 do
-    begin
-      result:=result+dm.query.fieldbyname('sum_nom').asfloat;
-      dm.query.next;
-    end;
-end;
-
-function getsum(okved:string):real;
-begin
-  result:=0;
-  result:=result+getokvedsum(okved,'1');
-  result:=result+getokvedsum(okved,'2');
-  result:=result+getokvedsum(okved,'3');
-  result:=result+getokvedsum(okved,'4');
-  result:=result+getokvedsum(okved,'5');
+  dmod.query.sql.text:='SELECT SUM(price) AS BALANCE'+#13+
+                       'FROM subcontract'+#13+
+                       'WHERE (nomencl='+quotedstr(nomencl)+')'+
+                       'AND (id<>'+quotedstr(inttostr(id))+')';
+  dmod.query.open;
+  dmod.query.first;
+  if dmod.query.recordcount>0 then
+    result:=result+dmod.query.fieldbyname('balance').asfloat;
 end;
 
 end.

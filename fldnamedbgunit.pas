@@ -50,7 +50,7 @@ begin
   Form1.Enabled:=True;
   DM.ADOQuery2.Active:=False;
   FormFldNameDBG.Visible:=False;
-  FormAdd.Close;
+//  FormAdd.Close;
 end;
 
 procedure TFormFldNameDBG.FormCreate(Sender: TObject);
@@ -63,7 +63,7 @@ var
 strmaxr, fldstr: String;
 int: Integer;
 begin
-//----------------------------------------------------------------//
+{//----------------------------------------------------------------//
   FormFldNameDBG.EditFldSearch.Text:='';
   FormAdd.LabelFLDNAMEI.Caption:='';
   FormAdd.LabelFLDIDI.Caption:='';
@@ -128,8 +128,8 @@ begin
   FormAdd.EditRegN.Text:=strmaxr;
   FormAdd.PageControl.TabIndex:=0;
   FormAdd.Enabled:=True;
-  FormFldNameDBG.Visible:=False;
-end;
+//  FormFldNameDBG.Visible:=False;
+}end;
 
 procedure TFormFldNameDBG.BitBtnFldNameDBGCancelClick(Sender: TObject);
 begin
