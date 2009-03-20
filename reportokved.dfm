@@ -1,6 +1,6 @@
 object report_okved: Treport_okved
-  Left = 221
-  Top = 163
+  Left = 234
+  Top = 176
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = #1054#1090#1095#1105#1090' '#1087#1086' '#1054#1050#1042#1069#1044
@@ -27,7 +27,7 @@ object report_okved: Treport_okved
     Width = 792
     Height = 490
     Align = alClient
-    DataSource = DM.DQuery
+    DataSource = source
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -35,6 +35,7 @@ object report_okved: Treport_okved
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = []
+    OnDblClick = reportDblClick
   end
   object panel: TPanel
     Left = 0
@@ -45,7 +46,7 @@ object report_okved: Treport_okved
     BevelOuter = bvLowered
     TabOrder = 1
     object nomenclbox: TGroupBox
-      Left = 8
+      Left = 208
       Top = 8
       Width = 89
       Height = 49
@@ -63,7 +64,7 @@ object report_okved: Treport_okved
       end
     end
     object regionbox: TGroupBox
-      Left = 96
+      Left = 296
       Top = 8
       Width = 193
       Height = 49
@@ -80,9 +81,9 @@ object report_okved: Treport_okved
       end
     end
     object BitBtn1: TBitBtn
-      Left = 296
+      Left = 488
       Top = 13
-      Width = 65
+      Width = 89
       Height = 44
       Caption = #1055#1086#1080#1089#1082
       TabOrder = 2
@@ -98,7 +99,7 @@ object report_okved: Treport_okved
         FFFFFFF000FFF000FFFFFFFFFFFFFFFFFFFF}
     end
     object startbox: TGroupBox
-      Left = 368
+      Left = 8
       Top = 8
       Width = 105
       Height = 49
@@ -115,7 +116,7 @@ object report_okved: Treport_okved
       end
     end
     object endbox: TGroupBox
-      Left = 472
+      Left = 112
       Top = 8
       Width = 97
       Height = 49
@@ -132,9 +133,9 @@ object report_okved: Treport_okved
       end
     end
     object Button1: TButton
-      Left = 576
+      Left = 577
       Top = 13
-      Width = 75
+      Width = 89
       Height = 44
       Caption = #1054#1090#1095#1105#1090
       TabOrder = 5
@@ -149,7 +150,7 @@ object report_okved: Treport_okved
     Panels = <>
   end
   object frquery: TfrDBDataSet
-    DataSet = DM.Query
+    DataSource = source
     Left = 88
     Top = 280
   end
@@ -160,5 +161,9 @@ object report_okved: Treport_okved
     Left = 120
     Top = 280
     ReportForm = {18000000}
+  end
+  object source: TDataSource
+    Left = 56
+    Top = 280
   end
 end

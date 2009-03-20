@@ -7,7 +7,8 @@ uses
   StdCtrls;
 
 function cropspace(s:string):string;
-function qs(s:string):string;
+function dateornull(date:tdate):string;
+function starorstr(text:string):string;
 procedure makelink;
 
 implementation
@@ -23,43 +24,18 @@ begin
   result:=copy(s,1,i);
 end;
 
-function qs(s:string):string;
+function dateornull(date:tdate):string;
 begin
-  result:=quotedstr(s);
+  if date=0 then result:='null'
+  else result:=quotedstr(datetostr(date));
 end;
 
-procedure CreateShotCut(SourceFile, ShortCutName, SourceParams: String);
-var 
-IUnk: IUnknown; 
-ShellLink: IShellLink; 
-ShellFile: IPersistFile; 
-tmpShortCutName: string; 
-WideStr: WideString; 
-i: Integer; 
-begin 
-IUnk := CreateComObject(CLSID_ShellLink); 
-ShellLink := IUnk as IShellLink; 
-ShellFile  := IUnk as IPersistFile; 
-
- ShellLink.SetPath(PChar(SourceFile)); 
-ShellLink.SetArguments(PChar(SourceParams)); 
-ShellLink.SetWorkingDirectory(PChar(ExtractFilePath(SourceFile))); 
-
- ShortCutName := ChangeFileExt(ShortCutName,'.lnk'); 
-if fileexists(ShortCutName) then 
-begin 
-ShortCutName := copy(ShortCutName,1,length(ShortCutName)-4); 
-i := 1; 
-repeat 
-tmpShortCutName := ShortCutName +'(' + inttostr(i)+ ').lnk'; 
-inc(i); 
-until not fileexists(tmpShortCutName); 
-WideStr := tmpShortCutName; 
-end 
-else 
-WideStr := ShortCutName; 
-ShellFile.Save(PWChar(WideStr),False); 
-end; 
+function starorstr(text:string):string;
+begin
+  result:='';
+  if text<>'*' then
+    result:=text;
+end;
 
 procedure makelink;
 var
