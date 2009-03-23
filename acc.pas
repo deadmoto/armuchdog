@@ -106,6 +106,7 @@ implementation
 
 uses
   contracts,
+  cosgufm,
   providerfm,
   AddUnit, COSGUDBGUnit, About, DMUnit, FldNameDBGUnit, Name_DogDBGUnit,
 SupplierDBGUnit, Name_DogDBGEditUnit, COSGUDBGEditUnit, SupplierDBGEditUnit,
@@ -227,8 +228,9 @@ end;
 
 procedure TForm1.N16Click(Sender: TObject);
 begin
-  FormCOSGUDBGEdit.Visible:=True;
-  Form1.Enabled:=False;
+  cosgu.showmodal;
+//  FormCOSGUDBGEdit.Visible:=True;
+//  Form1.Enabled:=False;
 end;
 
 procedure TForm1.N17Click(Sender: TObject);

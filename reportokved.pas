@@ -16,7 +16,7 @@ type
     report: TDBGrid;
     panel: TPanel;
     status: TStatusBar;
-    BitBtn1: TBitBtn;
+    search: TBitBtn;
     startpick: TDateTimePicker;
     startbox: TGroupBox;
     endbox: TGroupBox;
@@ -27,7 +27,7 @@ type
     source: TDataSource;
     procedure FormShow(Sender: TObject);
     procedure nomenclKeyPress(Sender: TObject; var Key: Char);
-    procedure BitBtn1Click(Sender: TObject);
+    procedure searchClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure reportDblClick(Sender: TObject);
   private
@@ -98,6 +98,8 @@ begin
   endpick.date:=encodedate(currentyear,month,1);
   getnomencls;
   getregions;
+  nomencl.itemindex:=0;
+  region.itemindex:=0;
 end;
 
 procedure Treport_okved.nomenclKeyPress(Sender: TObject; var Key: Char);
@@ -105,7 +107,7 @@ begin
   key:=chr(vk_cancel);
 end;
 
-procedure Treport_okved.BitBtn1Click(Sender: TObject);
+procedure Treport_okved.searchClick(Sender: TObject);
 begin
   dmod.query.sql.text:='SELECT subcontract.id,subcontract.nomencl,NomenclDog.NAME,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
                        'FROM subcontract'+#13+
@@ -135,7 +137,10 @@ end;
 
 procedure Treport_okved.Button1Click(Sender: TObject);
 begin
-  frsummary.loadfromfile(extractfilepath(paramstr(0))+'reports\summary.frf');
+  if nomencl.itemindex=0 then
+    frsummary.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_bypbs.frf')
+  else
+    frsummary.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_byokved.frf');
   frsummary.dictionary.variables.variable['start']:=startpick.datetime;
   frsummary.dictionary.variables.variable['end']:=endpick.datetime;
   frsummary.showreport;
@@ -145,6 +150,7 @@ procedure Treport_okved.reportDblClick(Sender: TObject);
 begin
   if dmod.query.recordcount>0 then
     contractform.edit(strtoint(report.fields[0].asstring));
+  search.click;
 end;
 
 end.

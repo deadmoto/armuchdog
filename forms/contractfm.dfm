@@ -1,8 +1,8 @@
 object contractform: Tcontractform
-  Left = 243
-  Top = 223
-  Width = 800
-  Height = 405
+  Left = 221
+  Top = 222
+  Width = 801
+  Height = 409
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object contractform: Tcontractform
     Left = 0
     Top = 0
     Width = 396
-    Height = 359
+    Height = 363
     Align = alLeft
     Caption = #1044#1072#1085#1085#1099#1077' '#1076#1086#1075#1086#1074#1086#1088#1072':'
     TabOrder = 0
@@ -203,8 +203,8 @@ object contractform: Tcontractform
   object detailboxbox: TGroupBox
     Left = 396
     Top = 0
-    Width = 396
-    Height = 359
+    Width = 397
+    Height = 363
     Align = alClient
     Caption = #1044#1077#1090#1072#1083#1080#1079#1072#1094#1080#1103
     TabOrder = 1

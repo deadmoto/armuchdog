@@ -2,15 +2,15 @@ program Uchet_Dog;
 
 uses
   Forms,
-  ACC in 'ACC.pas' {Form1},
+  ACC in 'acc.pas' {Form1},
   DMUnit in 'dmunit.pas' {DM: TDataModule},
   About in 'About.pas' {AboutBox},
   FldNameDBGUnit in 'fldnamedbgunit.pas' {FormFldNameDBG},
   Name_DogDBGUnit in 'Name_DogDBGUnit.pas' {FormName_DogDBG},
   SupplierDBGUnit in 'SupplierDBGUnit.pas' {FormSupplierDBG},
-  COSGUDBGUnit in 'COSGUDBGUnit.pas' {FormCOSGUDBG},
+  COSGUDBGUnit in 'cosgudbgunit.pas' {FormCOSGUDBG},
   Name_DogDBGEditUnit in 'Name_DogDBGEditUnit.pas' {FormName_DogDBGEdit},
-  COSGUDBGEditUnit in 'COSGUDBGEditUnit.pas' {FormCOSGUDBGEdit},
+  COSGUDBGEditUnit in 'cosgudbgeditunit.pas' {FormCOSGUDBGEdit},
   SupplierDBGEditUnit in 'SupplierDBGEditUnit.pas' {FormSupplierDBGEdit},
   FldNameDBGEditUnit in 'fldnamedbgeditunit.pas' {FormFldNameDBGEdit},
   sqltext in 'sqltext.pas',
@@ -31,7 +31,9 @@ uses
   cosgus in 'database\cosgus.pas',
   cosgudlg in 'dialogs\cosgudlg.pas' {cosguselect},
   regiondlg in 'dialogs\regiondlg.pas' {regionselect},
-  providerdlg in 'dialogs\providerdlg.pas' {providerselect};
+  providerdlg in 'dialogs\providerdlg.pas' {providerselect},
+  cosgufm in 'forms\cosgufm.pas' {cosgu},
+  cosguedit in 'dialogs\cosguedit.pas' {cosgued};
 
 {$R *.res}
 
@@ -57,5 +59,6 @@ begin
   Application.CreateForm(Tnomenclselect, nomenclselect);
   Application.CreateForm(Tcosguselect, cosguselect);
   Application.CreateForm(Tregionselect, regionselect);
+  Application.CreateForm(Tcosgu, cosgu);
   Application.Run;
 end.

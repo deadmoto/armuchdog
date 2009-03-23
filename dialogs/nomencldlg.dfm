@@ -1,9 +1,10 @@
 object nomenclselect: Tnomenclselect
-  Left = 353
-  Top = 198
-  Width = 480
-  Height = 480
+  Left = 365
+  Top = 181
+  BorderStyle = bsDialog
   Caption = #1042#1099#1073#1086#1088' '#1054#1050#1042#1069#1044
+  ClientHeight = 613
+  ClientWidth = 472
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +12,7 @@ object nomenclselect: Tnomenclselect
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
   object filterbox: TGroupBox
@@ -62,7 +64,7 @@ object nomenclselect: Tnomenclselect
     Left = 0
     Top = 65
     Width = 472
-    Height = 335
+    Height = 495
     Align = alClient
     ColCount = 2
     DefaultRowHeight = 16
@@ -73,7 +75,7 @@ object nomenclselect: Tnomenclselect
   end
   object btnbox: TGroupBox
     Left = 0
-    Top = 400
+    Top = 560
     Width = 472
     Height = 53
     Align = alBottom

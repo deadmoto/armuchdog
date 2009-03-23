@@ -10,12 +10,15 @@ uses
 
 type
   tcosgu=record
-    id:string;
+    id:longint;
     name:string;
   end;
 
 procedure fetch;
-function byid(id:string):string;
+procedure insert(cosgu:tcosgu);
+procedure update(cosgu:tcosgu);
+procedure delete(cosgu:tcosgu);
+function byid(id:longint):string;
 
 var
   ccosgu:array of tcosgu;
@@ -38,7 +41,7 @@ begin
     for i:=0 to dmod.query.recordcount do
       begin
         setlength(ccosgu,length(ccosgu)+1);
-        ccosgu[i].id:=cropspace(dmod.query.fieldbyname('cosgu').value);
+        ccosgu[i].id:=dmod.query.fieldbyname('cosgu').value;
         ccosgu[i].name:=cropspace(dmod.query.fieldbyname('name_artic').value);
         dmod.query.next;
       end
@@ -47,7 +50,47 @@ begin
   end;
 end;
 
-function byid(id:string):string;
+procedure insert(cosgu:tcosgu);
+begin
+  try
+    dmod.query.sql.text:='INSERT INTO ArticleDog'+#13+
+                         'VALUES ('+inttostr(cosgu.id)+','+quotedstr(cosgu.name)+')';
+    dmod.query.execsql;
+    showmessage('Статья успешно добавлена!!!');
+    fetch;
+  except
+    showmessage('Ошибка добавления статьи!!!');
+  end;
+end;
+
+procedure update(cosgu:tcosgu);
+begin
+  try
+    dmod.query.sql.text:='UPDATE ArticleDog'+#13+
+                         'SET name_artic='+quotedstr(cosgu.name)+#13+
+                         'WHERE cosgu='+inttostr(cosgu.id);
+    dmod.query.execsql;
+    showmessage('Статья успешно обновлена!!!');
+    fetch;
+  except
+    showmessage('Ошибка обновления статьи!!!');
+  end;
+end;
+
+procedure delete(cosgu:tcosgu);
+begin
+  try
+    dmod.query.sql.text:='DELETE FROM ArticleDog'+#13+
+                         'WHERE cosgu='+inttostr(cosgu.id);
+    dmod.query.execsql;
+    showmessage('Статья успешно удалена!!!');
+    fetch;
+  except
+    showmessage('Ошибка удаления статьи!!!');
+  end;
+end;
+
+function byid(id:longint):string;
 var
   i:integer;
 begin
