@@ -58,6 +58,7 @@ type
     Timer1: TTimer;
     Button1: TButton;
     Button2: TButton;
+    N24: TMenuItem;
     procedure BitBtnExitClick(Sender: TObject);
     procedure ReestrDBGCellClick(Column: TColumn);
     procedure ReestrDBGKeyDown(Sender: TObject; var Key: Word;
@@ -92,6 +93,7 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure N24Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -111,7 +113,7 @@ uses
   AddUnit, COSGUDBGUnit, About, DMUnit, FldNameDBGUnit, Name_DogDBGUnit,
 SupplierDBGUnit, Name_DogDBGEditUnit, COSGUDBGEditUnit, SupplierDBGEditUnit,
 FldNameDBGEditUnit,
-  reportokved, contractfm;
+  reportokved, contractfm, reportcosgu;
 
 {$R *.dfm}
 
@@ -707,6 +709,11 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
 begin
   contractform.edit(strtoint(reestrdbg.fields[0].asstring));
+end;
+
+procedure TForm1.N24Click(Sender: TObject);
+begin
+  report_cosgu.showmodal;
 end;
 
 end.

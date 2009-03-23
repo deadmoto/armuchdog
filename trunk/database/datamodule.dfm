@@ -1,6 +1,5 @@
 object dmod: Tdmod
   OldCreateOrder = False
-  OnCreate = DataModuleCreate
   Left = 381
   Top = 193
   Height = 358
@@ -94,5 +93,18 @@ object dmod: Tdmod
     DataSet = query
     Left = 72
     Top = 8
+  end
+  object report: TfrReport
+    Dataset = frdata
+    InitialZoom = pzDefault
+    PreviewButtons = [pbZoom, pbLoad, pbSave, pbPrint, pbFind, pbHelp, pbExit]
+    Left = 104
+    Top = 56
+    ReportForm = {18000000}
+  end
+  object frdata: TfrDBDataSet
+    DataSet = query
+    Left = 72
+    Top = 56
   end
 end

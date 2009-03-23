@@ -33,7 +33,8 @@ uses
   regiondlg in 'dialogs\regiondlg.pas' {regionselect},
   providerdlg in 'dialogs\providerdlg.pas' {providerselect},
   cosgufm in 'forms\cosgufm.pas' {cosgu},
-  cosguedit in 'dialogs\cosguedit.pas' {cosgued};
+  cosguedit in 'dialogs\cosguedit.pas' {cosgued},
+  reportcosgu in 'forms\reportcosgu.pas' {report_cosgu};
 
 {$R *.res}
 
@@ -43,6 +44,7 @@ begin
   Application.Title := 'ְ׀ּ "׃ק¸ע המדמגמנמג"';
   Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(Treport_cosgu, report_cosgu);
   Application.CreateForm(TAboutBox, AboutBox);
   Application.CreateForm(TFormFldNameDBG, FormFldNameDBG);
   Application.CreateForm(TFormName_DogDBG, FormName_DogDBG);
@@ -60,5 +62,7 @@ begin
   Application.CreateForm(Tcosguselect, cosguselect);
   Application.CreateForm(Tregionselect, regionselect);
   Application.CreateForm(Tcosgu, cosgu);
+  regions.fetch;
+  providers.fetch;
   Application.Run;
 end.
