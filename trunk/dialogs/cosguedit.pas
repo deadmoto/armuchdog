@@ -41,7 +41,7 @@ begin
   cosgued.ok.caption:='Добавить';
   if cosgued.showmodal=mrok then
     begin
-      cosgu.id:=strtoint(cosgued.cosgu.text);
+      cosgu.id:=cosgued.cosgu.text;
       cosgu.name:=cosgued.name.text;
       cosgus.insert(cosgu);
       result:=true;
@@ -57,11 +57,11 @@ begin
   cosgued.caption:='Изменение статьи КОСГУ';
   cosgued.ok.caption:='Изменить';
   cosgued.cosgu.readonly:=true;
-  cosgued.cosgu.text:=inttostr(cosgu.id);
+  cosgued.cosgu.text:=cosgu.id;
   cosgued.name.text:=cosgu.name;
   if cosgued.showmodal=mrok then
     begin
-      cosgu.id:=strtoint(cosgued.cosgu.text);
+      cosgu.id:=cosgued.cosgu.text;
       cosgu.name:=cosgued.name.text;
       cosgus.update(cosgu);
       result:=true;

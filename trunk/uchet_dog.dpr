@@ -34,7 +34,8 @@ uses
   providerdlg in 'dialogs\providerdlg.pas' {providerselect},
   cosgufm in 'forms\cosgufm.pas' {cosgu},
   cosguedit in 'dialogs\cosguedit.pas' {cosgued},
-  reportcosgu in 'forms\reportcosgu.pas' {report_cosgu};
+  reportcosgu in 'forms\reportcosgu.pas' {report_cosgu},
+  summaryrpt in 'forms\summaryrpt.pas' {report};
 
 {$R *.res}
 
@@ -54,7 +55,6 @@ begin
   Application.CreateForm(TFormCOSGUDBGEdit, FormCOSGUDBGEdit);
   Application.CreateForm(TFormSupplierDBGEdit, FormSupplierDBGEdit);
   Application.CreateForm(TFormFldNameDBGEdit, FormFldNameDBGEdit);
-  Application.CreateForm(Treport_okved, report_okved);
   Application.CreateForm(Tdmod, dmod);
   Application.CreateForm(Tcontractform, contractform);
   Application.CreateForm(Tsubcontractfm, subcontractfm);

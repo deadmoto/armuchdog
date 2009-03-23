@@ -110,14 +110,14 @@ object subcontractfm: Tsubcontractfm
     object pricebox: TGroupBox
       Left = 95
       Top = 0
-      Width = 306
+      Width = 186
       Height = 49
       Caption = #1057#1091#1084#1084#1072
       TabOrder = 1
       object price: TEdit
         Left = 8
         Top = 16
-        Width = 289
+        Width = 169
         Height = 21
         TabOrder = 0
         Text = '0'
@@ -126,21 +126,38 @@ object subcontractfm: Tsubcontractfm
       end
     end
     object balancebox: TGroupBox
-      Left = 400
+      Left = 279
       Top = 0
-      Width = 232
+      Width = 177
       Height = 49
       Caption = #1054#1089#1090#1072#1090#1086#1082
       TabOrder = 2
       object balance: TEdit
         Left = 8
         Top = 16
-        Width = 217
+        Width = 161
         Height = 21
         TabOrder = 0
         Text = '0'
         OnChange = priceChange
         OnKeyPress = priceKeyPress
+      end
+    end
+    object reportbox: TGroupBox
+      Left = 454
+      Top = 0
+      Width = 179
+      Height = 49
+      TabOrder = 3
+      object report: TCheckBox
+        Left = 8
+        Top = 18
+        Width = 161
+        Height = 17
+        Alignment = taLeftJustify
+        Caption = #1057#1082#1088#1099#1074#1072#1090#1100' '#1074' '#1086#1090#1095#1105#1090#1072#1093
+        TabOrder = 0
+        OnClick = reportClick
       end
     end
   end

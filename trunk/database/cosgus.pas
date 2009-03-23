@@ -10,7 +10,7 @@ uses
 
 type
   tcosgu=record
-    id:longint;
+    id:string;
     name:string;
   end;
 
@@ -18,7 +18,7 @@ procedure fetch;
 procedure insert(cosgu:tcosgu);
 procedure update(cosgu:tcosgu);
 procedure delete(cosgu:tcosgu);
-function byid(id:longint):string;
+function byid(id:string):string;
 
 var
   ccosgu:array of tcosgu;
@@ -54,7 +54,7 @@ procedure insert(cosgu:tcosgu);
 begin
   try
     dmod.query.sql.text:='INSERT INTO ArticleDog'+#13+
-                         'VALUES ('+inttostr(cosgu.id)+','+quotedstr(cosgu.name)+')';
+                         'VALUES ('+cosgu.id+','+quotedstr(cosgu.name)+')';
     dmod.query.execsql;
     showmessage('Статья успешно добавлена!!!');
     fetch;
@@ -68,7 +68,7 @@ begin
   try
     dmod.query.sql.text:='UPDATE ArticleDog'+#13+
                          'SET name_artic='+quotedstr(cosgu.name)+#13+
-                         'WHERE cosgu='+inttostr(cosgu.id);
+                         'WHERE cosgu='+cosgu.id;
     dmod.query.execsql;
     showmessage('Статья успешно обновлена!!!');
     fetch;
@@ -81,7 +81,7 @@ procedure delete(cosgu:tcosgu);
 begin
   try
     dmod.query.sql.text:='DELETE FROM ArticleDog'+#13+
-                         'WHERE cosgu='+inttostr(cosgu.id);
+                         'WHERE cosgu='+cosgu.id;
     dmod.query.execsql;
     showmessage('Статья успешно удалена!!!');
     fetch;
@@ -90,7 +90,7 @@ begin
   end;
 end;
 
-function byid(id:longint):string;
+function byid(id:string):string;
 var
   i:integer;
 begin

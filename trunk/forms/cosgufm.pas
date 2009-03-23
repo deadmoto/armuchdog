@@ -54,7 +54,7 @@ begin
   for i:=0 to length(ccosgu)-1 do
     begin
       grid.rowcount:=i+1;
-      grid.rows[i+1].strings[0]:=inttostr(ccosgu[i].id);
+      grid.rows[i+1].strings[0]:=ccosgu[i].id;
       grid.rows[i+1].strings[1]:=ccosgu[i].name;
     end;
   grid.fixedrows:=1;

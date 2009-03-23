@@ -7,6 +7,8 @@ uses
   Dialogs, ExtCtrls, Grids, DBGrids, StdCtrls, ComCtrls, Buttons, FR_Class,
   FR_DSet, FR_DBSet, DB;
 
+procedure showreport;overload;
+procedure showreport(startd,endd:tdatetime;nomencl:string);overload;
 type
   Treport_okved = class(TForm)
     nomenclbox: TGroupBox;
@@ -31,13 +33,10 @@ type
     procedure Button1Click(Sender: TObject);
     procedure reportDblClick(Sender: TObject);
   private
-    { Private declarations }
+    procedure getnomencls;
+    procedure getregions;
   public
-    { Public declarations }
   end;
-
-var
-  report_okved: Treport_okved;
 
 implementation
 
@@ -48,11 +47,11 @@ uses
 
 {$R *.dfm}
 
-procedure getnomencls;
+procedure treport_okved.getnomencls;
 var
   i:integer;
 begin
-  report_okved.nomencl.items.clear;
+  nomencl.items.clear;
   dmod.query.sql.text:='SELECT nomencl'+#13+
                        'FROM subcontract'+#13+
                        'WHERE nomencl IS NOT NULL'+#13+
@@ -61,25 +60,25 @@ begin
   dmod.query.first;
   for i:=0 to dmod.query.recordcount-1 do
     begin
-      report_okved.nomencl.items.add(cropspace(dmod.query.fieldbyname('nomencl').asstring));
+      nomencl.items.add(cropspace(dmod.query.fieldbyname('nomencl').asstring));
       dmod.query.next;
     end;
   dmod.query.close;
-  report_okved.nomencl.items.strings[0]:='*';
+  nomencl.items.strings[0]:='*';
 end;
 
-procedure getregions;
+procedure treport_okved.getregions;
 var
   i:integer;
 begin
-  report_okved.region.items.clear;
-  report_okved.region.items.add('*');
+  region.items.clear;
+  region.items.add('*');
   dmod.query.sql.text:='SELECT * FROM RegionID';
   dmod.query.open;
   dmod.query.first;
   for i:=0 to dmod.query.recordcount-1 do
     begin
-      report_okved.region.items.add(cropspace(dmod.query.fieldbyname('fldname').asstring));
+      region.items.add(cropspace(dmod.query.fieldbyname('fldname').asstring));
       dmod.query.next;
     end;
   dmod.query.close;
@@ -91,15 +90,46 @@ var
   temp:word;
 begin
   decodedate(now,temp,month,temp);
-  if month>3 then
-    startpick.date:=encodedate(currentyear,month-3,1)
-  else
-    startpick.date:=encodedate(currentyear-1,month-3+12,1);
   endpick.date:=encodedate(currentyear,month,1);
+  startpick.datetime:=incmonth(endpick.date,-3);
   getnomencls;
   getregions;
   nomencl.itemindex:=0;
   region.itemindex:=0;
+end;
+
+procedure showreport;
+var
+  month:word;
+  temp:word;
+  report:treport_okved;
+begin
+  report:=treport_okved.create(application.owner);
+  decodedate(now,temp,month,temp);
+  report.endpick.date:=encodedate(currentyear,month,1);
+  report.startpick.datetime:=incmonth(report.endpick.date,-3);
+  report.getnomencls;
+  report.getregions;
+  report.nomencl.itemindex:=0;
+  report.region.itemindex:=0;
+  report.showmodal;
+end;
+
+procedure showreport(startd,endd:tdatetime;nomencl:string);
+var
+  i:integer;
+  report:treport_okved;
+begin
+  report:=treport_okved.create(application.owner);
+  report.show;
+  report.startpick.date:=startd;
+  report.endpick.date:=endd;
+  report.getnomencls;
+  report.getregions;
+  for i:=0 to report.nomencl.items.count-1 do
+    if report.nomencl.items.strings[i]=nomencl then
+      report.nomencl.itemindex:=i;
+  report.search.click;
 end;
 
 procedure Treport_okved.nomenclKeyPress(Sender: TObject; var Key: Char);
@@ -117,9 +147,10 @@ begin
                        'INNER JOIN SupplierDog ON ReestrDog.ID_SUPPLIER = SupplierDog.ID_SUPPLIER'+#13+
                        'WHERE (subcontract.nomencl LIKE '+quotedstr('%'+starorstr(nomencl.text)+'%')+') '+
                        'AND (RegionIDDog.FLDNAME LIKE '+quotedstr('%'+starorstr(region.text)+'%')+') '+
-                       'AND (subcontract.subdate>='+dateornull(report_okved.startpick.date)+') '+
-                       'AND (subcontract.subdate<'+dateornull(report_okved.endpick.date)+')'+
-                       'AND (subcontract.nomencl<>'+quotedstr('')+')';
+                       'AND (subcontract.subdate>='+dateornull(startpick.date)+') '+
+                       'AND (subcontract.subdate<'+dateornull(endpick.date)+')'+
+                       'AND (subcontract.nomencl<>'+quotedstr('')+
+                       'AND (subcontract.report<>1)'+')';
   source.dataset:=dmod.query;
   dmod.query.open;
   dmod.query.fieldbyname('NAME').visible:=false;

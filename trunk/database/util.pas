@@ -6,6 +6,7 @@ uses
   sysutils,ComObj, ActiveX, ShlObj, windows, Messages,  Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls;
 
+function max(a,b:variant):variant;
 function cropspace(s:string):string;
 function dateornull(date:tdate):string;
 function starorstr(text:string):string;
@@ -15,6 +16,14 @@ implementation
 
 uses
   defs;
+
+function max(a,b:variant):variant;
+begin
+  if a>b then
+    result:=a
+  else
+    result:=b
+end;
 
 function cropspace(s:string):string;
 var i:integer;
