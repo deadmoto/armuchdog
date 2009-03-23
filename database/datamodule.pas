@@ -3,7 +3,7 @@ unit datamodule;
 interface
 
 uses
-  SysUtils, Classes, DB, ADODB;
+  SysUtils, Classes, DB, ADODB, FR_DSet, FR_DBSet, FR_Class;
 
 type
   Tdmod = class(TDataModule)
@@ -11,7 +11,8 @@ type
     report1: TADOQuery;
     query: TADOQuery;
     data: TDataSource;
-    procedure DataModuleCreate(Sender: TObject);
+    report: TfrReport;
+    frdata: TfrDBDataSet;
   private
     { Private declarations }
   public
@@ -23,17 +24,7 @@ var
 
 implementation
 
-uses
-  providers,
-  regions;
-
 {$R *.dfm}
-
-procedure Tdmod.DataModuleCreate(Sender: TObject);
-begin
-  regions.fetch;
-  providers.fetch;
-end;
 
 end.
 
