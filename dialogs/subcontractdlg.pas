@@ -29,12 +29,15 @@ type
     cancel: TButton;
     balancebox: TGroupBox;
     balance: TEdit;
+    reportbox: TGroupBox;
+    report: TCheckBox;
     procedure nomenclbtnClick(Sender: TObject);
     procedure codebtnClick(Sender: TObject);
     procedure priceChange(Sender: TObject);
     procedure priceKeyPress(Sender: TObject; var Key: Char);
     procedure subdateChange(Sender: TObject);
     procedure commentChange(Sender: TObject);
+    procedure reportClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -90,10 +93,11 @@ begin
   vsubcontract:=@csubcontract;
   subcontractfm.ok.caption:='Изменить';
   subcontractfm.nomencl.text:=nomencls.byid(vsubcontract^.nomencl);
-  subcontractfm.code.text:=cosgus.byid(strtoint(vsubcontract^.code));
+  subcontractfm.code.text:=cosgus.byid(vsubcontract^.code);
   if vsubcontract^.subdate<>0 then
     subcontractfm.subdate.text:=datetostr(vsubcontract^.subdate);
   subcontractfm.price.text:=floattostr(vsubcontract^.price);
+  subcontractfm.report.checked:=vsubcontract^.report;
   subcontractfm.comment.text:=vsubcontract^.comment;
   if subcontractfm.showmodal=mrok then
     begin
@@ -101,6 +105,7 @@ begin
       subcontract.code:=vsubcontract^.code;
       subcontract.subdate:=vsubcontract^.subdate;
       subcontract.price:=vsubcontract^.price;
+      subcontract.report:=vsubcontract^.report;
       subcontract.comment:=vsubcontract^.comment;
     end;
 end;
@@ -114,7 +119,7 @@ end;
 procedure tsubcontractfm.codebtnClick(Sender: TObject);
 begin
   vsubcontract^.code:=cosguselect.select;
-  self.code.text:=cosgus.byid(strtoint(vsubcontract^.code));
+  self.code.text:=cosgus.byid(vsubcontract^.code);
 end;
 
 procedure tsubcontractfm.priceChange(Sender: TObject);
@@ -155,6 +160,11 @@ end;
 procedure tsubcontractfm.commentChange(Sender: TObject);
 begin
   vsubcontract^.comment:=self.comment.text;
+end;
+
+procedure tsubcontractfm.reportClick(Sender: TObject);
+begin
+  vsubcontract^.report:=subcontractfm.report.checked;
 end;
 
 end.

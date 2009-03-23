@@ -14,6 +14,7 @@ type
     code:string;
     subdate:tdatetime;
     price:real;
+    report:boolean;
     comment:string;
   end;
 
@@ -102,6 +103,7 @@ begin
         result.subcontract[i].code:=cropspace(dmod.query.fieldbyname('code').value);
         result.subcontract[i].subdate:=dmod.query.fieldbyname('subdate').asdatetime;
         result.subcontract[i].price:=dmod.query.fieldbyname('price').value;
+        result.subcontract[i].report:=dmod.query.fieldbyname('report').value;
         result.subcontract[i].comment:=cropspace(dmod.query.fieldbyname('comment').value);
         dmod.query.next;
       end;
@@ -134,13 +136,14 @@ begin
     for i:=0 to length(contract.subcontract)-1 do
       begin
         dmod.query.sql.text:='INSERT INTO subcontract'+#13+
-                             '(id,nomencl,code,subdate,price,comment)'+#13+
+                             '(id,nomencl,code,subdate,price,report,comment)'+#13+
                              'VALUES ('+
                              inttostr(contract.regn)+','+
                              quotedstr(contract.subcontract[i].nomencl)+','+
                              quotedstr(contract.subcontract[i].code)+','+
                              dateornull(contract.subcontract[i].subdate)+','+
                              float(contract.subcontract[i].price)+','+
+                             booltostr(contract.subcontract[i].report)+','+
                              quotedstr(contract.subcontract[i].comment)+')';
         dmod.query.execsql;
         dmod.query.connection.committrans;
@@ -180,13 +183,14 @@ begin
     for i:=0 to length(contract.subcontract)-1 do
       begin
         dmod.query.sql.text:='INSERT INTO subcontract'+#13+
-                             '(id,nomencl,code,subdate,price,comment)'+#13+
+                             '(id,nomencl,code,subdate,price,report,comment)'+#13+
                              'VALUES ('+
                              inttostr(contract.regn)+','+
                              quotedstr(contract.subcontract[i].nomencl)+','+
                              quotedstr(contract.subcontract[i].code)+','+
                              dateornull(contract.subcontract[i].subdate)+','+
                              float(contract.subcontract[i].price)+','+
+                             booltostr(contract.subcontract[i].report)+','+
                              quotedstr(contract.subcontract[i].comment)+')';
         dmod.query.execsql;
       end;

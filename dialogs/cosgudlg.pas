@@ -48,7 +48,7 @@ begin
   for i:=0 to length(cosgus.ccosgu)-1 do
     begin
       self.cosgugrid.rowcount:=i+1;
-      self.cosgugrid.rows[i+1].strings[0]:=inttostr(cosgus.ccosgu[i].id);
+      self.cosgugrid.rows[i+1].strings[0]:=cosgus.ccosgu[i].id;
       self.cosgugrid.rows[i+1].strings[1]:=cosgus.ccosgu[i].name;
     end;
   self.cosgugrid.fixedrows:=1;

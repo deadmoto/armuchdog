@@ -59,6 +59,7 @@ type
     Button1: TButton;
     Button2: TButton;
     N24: TMenuItem;
+    summary: TMenuItem;
     procedure BitBtnExitClick(Sender: TObject);
     procedure ReestrDBGCellClick(Column: TColumn);
     procedure ReestrDBGKeyDown(Sender: TObject; var Key: Word;
@@ -94,6 +95,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure N24Click(Sender: TObject);
+    procedure summaryClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -110,6 +112,7 @@ uses
   contracts,
   cosgufm,
   providerfm,
+  summaryrpt,
   AddUnit, COSGUDBGUnit, About, DMUnit, FldNameDBGUnit, Name_DogDBGUnit,
 SupplierDBGUnit, Name_DogDBGEditUnit, COSGUDBGEditUnit, SupplierDBGEditUnit,
 FldNameDBGEditUnit,
@@ -257,7 +260,7 @@ end;
 
 procedure TForm1.N19Click(Sender: TObject);
 begin
-  report_okved.showmodal;
+  reportokved.showreport;
 end;
 
 procedure TForm1.N20Click(Sender: TObject);
@@ -266,300 +269,8 @@ begin
 end;
 
 procedure TForm1.BitBtnChangeClick(Sender: TObject);
-var
-strk, str, str1, strfldid, strid_supplier,
-strid_nomencl1, strid_nomencl2, strid_nomencl3, strid_nomencl4, strid_nomencl5,
-strcosgu1, strcosgu2, strcosgu3, strcosgu4, strcosgu5:string;
 begin
-  FormAdd.Caption:='Изменение договора';
-  FormAdd.BitBtnAdd.Visible:=False;
-  FormAdd.BitBtnChange.Visible:=True;
-//----------------------------------------------------------------//
-  FormFldNameDBG.EditFldSearch.Text:='';
-  FormAdd.LabelFLDNAMEI.Caption:='';
-  FormAdd.LabelFLDIDI.Caption:='';
-  FormAdd.EditReg_N.Text:='';
-  FormAdd.EditN_Dog.Text:='';
-  FormAdd.LabelSupplierIDI.Caption:='';
-  FormAdd.LabelSupplierI.Caption:='';
-  FormAdd.MaskEditData_Reg.Text:='  .  .    ';
-  FormAdd.MaskEditData_Dog.Text:='  .  .    ';
-  FormAdd.MaskEditData_Post.Text:='  .  .    ';
-  //-//
-  FormAdd.LabelNomenclID1.Caption:='';
-  FormAdd.LabelNomenclName1.Caption:='';
-  FormAdd.LabelCOSGUID1.Caption:='';
-  FormAdd.LabelCOSGUName1.Caption:='';
-  FormAdd.EditSumDog1.Text:='';
-  //--//
-  FormAdd.LabelNomenclID2.Caption:='';
-  FormAdd.LabelNomenclName2.Caption:='';
-  FormAdd.LabelCOSGUID2.Caption:='';
-  FormAdd.LabelCOSGUName2.Caption:='';
-  FormAdd.EditSumDog2.Text:='';
-  //---//
-  FormAdd.LabelNomenclID3.Caption:='';
-  FormAdd.LabelNomenclName3.Caption:='';
-  FormAdd.LabelCOSGUID3.Caption:='';
-  FormAdd.LabelCOSGUName3.Caption:='';
-  FormAdd.EditSumDog3.Text:='';
-  //----//
-  FormAdd.LabelNomenclID4.Caption:='';
-  FormAdd.LabelNomenclName4.Caption:='';
-  FormAdd.LabelCOSGUID4.Caption:='';
-  FormAdd.LabelCOSGUName4.Caption:='';
-  FormAdd.EditSumDog4.Text:='';
-  //-----//
-  FormAdd.LabelNomenclID5.Caption:='';
-  FormAdd.LabelNomenclName5.Caption:='';
-  FormAdd.LabelCOSGUID5.Caption:='';
-  FormAdd.LabelCOSGUName5.Caption:='';
-  FormAdd.EditSumDog5.Text:='';
-  FormAdd.PageControl.TabIndex:=0;
-
-  strk:=Form1.LabelStrK.Caption;
-//----------------------------------------------------------------//
-  begin
-    str:=ReestrDBG.Fields[0].AsString;
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select * from ReestrDog');
-    DM.Query.SQL.Add('where ReestrDog.regn='+str);
-    DM.Query.Open;
-    FormAdd.EditRegN.Text:=DM.Query.FieldValues['regn'];
-    str1:=DM.Query.FieldValues['fldid'];
-    FormAdd.LabelFLDIDI.Caption:=DM.Query.FieldValues['fldid'];
-    strfldid:=DM.Query.FieldValues['fldid'];
-    if DM.Query.FieldValues['reg_n']=Null then FormAdd.EditReg_N.Text:=''
-    else FormAdd.EditReg_N.Text:=DM.Query.FieldValues['reg_n'];
-    formadd.editreg_n.enabled:=dm.query.fieldvalues['STATUS']=0;
-    if DM.Query.FieldValues['n_dog']=Null then FormAdd.EditN_Dog.Text:=''
-    else FormAdd.EditN_Dog.Text:=DM.Query.FieldValues['n_dog'];
-    if DM.Query.FieldValues['id_supplier']=Null then begin
-      FormAdd.LabelSupplierIDI.Caption:='';
-      strid_supplier:='';
-    end
-    else begin
-      FormAdd.LabelSupplierIDI.Caption:=DM.Query.FieldValues['id_supplier'];
-      strid_supplier:=DM.Query.FieldValues['id_supplier'];
-    end;
-    if DM.Query.FieldValues['data_reg']=Null then FormAdd.MaskEditData_Reg.Text:='  .  .    '
-    else FormAdd.MaskEditData_Reg.Text:=DM.Query.FieldValues['data_reg'];
-    if DM.Query.FieldValues['data_dog']=Null then FormAdd.MaskEditData_Dog.Text:='  .  .    '
-    else FormAdd.MaskEditData_Dog.Text:=DM.Query.FieldValues['data_dog'];
-    if DM.Query.FieldValues['data_post']=Null then FormAdd.MaskEditData_Post.Text:='  .  .    '
-    else FormAdd.MaskEditData_Post.Text:=DM.Query.FieldValues['data_post'];
-    if DM.Query.FieldValues['sum_dog_all']=Null then FormAdd.EditSumDog.Text:=''
-    else FormAdd.EditSumDog.Text:=DM.Query.FieldValues['sum_dog_all'];
-    //-//
-    if DM.Query.FieldValues['id_nomencl1']=Null then begin
-      FormAdd.LabelNomenclID1.Caption:='';
-      strid_nomencl1:='';
-    end
-    else begin FormAdd.LabelNomenclID1.Caption:=DM.Query.FieldValues['id_nomencl1'];
-      strid_nomencl1:=DM.Query.FieldValues['id_nomencl1'];
-    end;
-    if DM.Query.FieldValues['cosgu1']=Null then begin FormAdd.LabelCOSGUID1.Caption:='';
-      strcosgu1:='';
-    end
-    else begin FormAdd.LabelCOSGUID1.Caption:=DM.Query.FieldValues['cosgu1'];
-      strcosgu1:=DM.Query.FieldValues['cosgu1']
-    end;
-    if DM.Query.FieldValues['sum_dog1']=Null then FormAdd.EditSumDog1.Text:=''
-    else FormAdd.EditSumDog1.Text:=DM.Query.FieldValues['sum_dog1'];
-    //--//
-    if DM.Query.FieldValues['id_nomencl2']=Null then begin
-      FormAdd.LabelNomenclID2.Caption:='';
-      strid_nomencl2:='';
-    end
-    else begin FormAdd.LabelNomenclID2.Caption:=DM.Query.FieldValues['id_nomencl2'];
-      strid_nomencl2:=DM.Query.FieldValues['id_nomencl2'];
-    end;
-    if DM.Query.FieldValues['cosgu2']=Null then begin FormAdd.LabelCOSGUID2.Caption:='';
-      strcosgu2:='';
-    end
-    else begin FormAdd.LabelCOSGUID2.Caption:=DM.Query.FieldValues['cosgu2'];
-      strcosgu2:=DM.Query.FieldValues['cosgu2']
-    end;
-    if DM.Query.FieldValues['sum_dog2']=Null then FormAdd.EditSumDog2.Text:=''
-    else FormAdd.EditSumDog2.Text:=DM.Query.FieldValues['sum_dog2'];
-    //---//
-    if DM.Query.FieldValues['id_nomencl3']=Null then begin
-      FormAdd.LabelNomenclID3.Caption:='';
-      strid_nomencl3:='';
-    end
-    else begin FormAdd.LabelNomenclID3.Caption:=DM.Query.FieldValues['id_nomencl3'];
-      strid_nomencl3:=DM.Query.FieldValues['id_nomencl3'];
-    end;
-    if DM.Query.FieldValues['cosgu3']=Null then begin FormAdd.LabelCOSGUID3.Caption:='';
-      strcosgu3:='';
-    end
-    else begin FormAdd.LabelCOSGUID3.Caption:=DM.Query.FieldValues['cosgu3'];
-      strcosgu3:=DM.Query.FieldValues['cosgu3']
-    end;
-    if DM.Query.FieldValues['sum_dog3']=Null then FormAdd.EditSumDog3.Text:=''
-    else FormAdd.EditSumDog3.Text:=DM.Query.FieldValues['sum_dog3'];
-    //----//
-    if DM.Query.FieldValues['id_nomencl4']=Null then begin
-      FormAdd.LabelNomenclID4.Caption:='';
-      strid_nomencl4:='';
-    end
-    else begin FormAdd.LabelNomenclID4.Caption:=DM.Query.FieldValues['id_nomencl4'];
-      strid_nomencl4:=DM.Query.FieldValues['id_nomencl4'];
-    end;
-    if DM.Query.FieldValues['cosgu4']=Null then begin FormAdd.LabelCOSGUID4.Caption:='';
-      strcosgu4:='';
-    end
-    else begin FormAdd.LabelCOSGUID4.Caption:=DM.Query.FieldValues['cosgu4'];
-      strcosgu4:=DM.Query.FieldValues['cosgu4']
-    end;
-    if DM.Query.FieldValues['sum_dog4']=Null then FormAdd.EditSumDog4.Text:=''
-    else FormAdd.EditSumDog4.Text:=DM.Query.FieldValues['sum_dog4'];
-    //-----//
-    if DM.Query.FieldValues['id_nomencl5']=Null then begin
-      FormAdd.LabelNomenclID5.Caption:='';
-      strid_nomencl5:='';
-    end
-    else begin FormAdd.LabelNomenclID5.Caption:=DM.Query.FieldValues['id_nomencl5'];
-      strid_nomencl5:=DM.Query.FieldValues['id_nomencl5'];
-    end;
-    if DM.Query.FieldValues['cosgu5']=Null then begin FormAdd.LabelCOSGUID5.Caption:='';
-      strcosgu5:='';
-    end
-    else begin FormAdd.LabelCOSGUID5.Caption:=DM.Query.FieldValues['cosgu5'];
-      strcosgu5:=DM.Query.FieldValues['cosgu5']
-    end;
-    if DM.Query.FieldValues['sum_dog5']=Null then FormAdd.EditSumDog5.Text:=''
-    else FormAdd.EditSumDog5.Text:=DM.Query.FieldValues['sum_dog5'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select FLDNAME from RegionIDDog');
-    DM.Query.SQL.Add('where fldid='+strfldid);
-    DM.Query.Open;
-    if DM.Query.FieldValues['fldname']=Null then FormAdd.LabelFLDNAMEI.Caption:=''
-    else FormAdd.LabelFLDNAMEI.Caption:=DM.Query.FieldValues['fldname'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select supplier from SupplierDog');
-    DM.Query.SQL.Add('where id_supplier='+strid_supplier);
-    DM.Query.Open;
-    if DM.Query.FieldValues['supplier']=Null then FormAdd.LabelSupplierI.Caption:=''
-    else FormAdd.LabelSupplierI.Caption:=DM.Query.FieldValues['supplier'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select name from NomenclDog');
-    DM.Query.SQL.Add('where id_nomencl='+strk+strid_nomencl1+strk);
-    DM.Query.Open;
-    if DM.Query.FieldValues['name']=Null then FormAdd.LabelNomenclName1.Caption:=''
-    else FormAdd.LabelNomenclName1.Caption:=DM.Query.FieldValues['name'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select name from NomenclDog');
-    DM.Query.SQL.Add('where id_nomencl='+strk+strid_nomencl2+strk);
-    DM.Query.Open;
-    if DM.Query.FieldValues['name']=Null then FormAdd.LabelNomenclName2.Caption:=''
-    else FormAdd.LabelNomenclName2.Caption:=DM.Query.FieldValues['name'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select name from NomenclDog');
-    DM.Query.SQL.Add('where id_nomencl='+strk+strid_nomencl3+strk);
-    DM.Query.Open;
-    if DM.Query.FieldValues['name']=Null then FormAdd.LabelNomenclName3.Caption:=''
-    else FormAdd.LabelNomenclName3.Caption:=DM.Query.FieldValues['name'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select name from NomenclDog');
-    DM.Query.SQL.Add('where id_nomencl='+strk+strid_nomencl4+strk);
-    DM.Query.Open;
-    if DM.Query.FieldValues['name']=Null then FormAdd.LabelNomenclName4.Caption:=''
-    else FormAdd.LabelNomenclName4.Caption:=DM.Query.FieldValues['name'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select name from NomenclDog');
-    DM.Query.SQL.Add('where id_nomencl='+strk+strid_nomencl5+strk);
-    DM.Query.Open;
-    if DM.Query.FieldValues['name']=Null then FormAdd.LabelNomenclName5.Caption:=''
-    else FormAdd.LabelNomenclName5.Caption:=DM.Query.FieldValues['name'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select name_artic from ArticleDog');
-    DM.Query.SQL.Add('where cosgu='+strk+strcosgu1+strk);
-    DM.Query.Open;
-    if DM.Query.FieldValues['name_artic']=Null then FormAdd.LabelCOSGUName1.Caption:=''
-    else FormAdd.LabelCOSGUName1.Caption:=DM.Query.FieldValues['name_artic'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select name_artic from ArticleDog');
-    DM.Query.SQL.Add('where cosgu='+strk+strcosgu2+strk);
-    DM.Query.Open;
-    if DM.Query.FieldValues['name_artic']=Null then FormAdd.LabelCOSGUName2.Caption:=''
-    else FormAdd.LabelCOSGUName2.Caption:=DM.Query.FieldValues['name_artic'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select name_artic from ArticleDog');
-    DM.Query.SQL.Add('where cosgu='+strk+strcosgu3+strk);
-    DM.Query.Open;
-    if DM.Query.FieldValues['name_artic']=Null then FormAdd.LabelCOSGUName3.Caption:=''
-    else FormAdd.LabelCOSGUName3.Caption:=DM.Query.FieldValues['name_artic'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select name_artic from ArticleDog');
-    DM.Query.SQL.Add('where cosgu='+strk+strcosgu4+strk);
-    DM.Query.Open;
-    if DM.Query.FieldValues['name_artic']=Null then FormAdd.LabelCOSGUName4.Caption:=''
-    else FormAdd.LabelCOSGUName4.Caption:=DM.Query.FieldValues['name_artic'];
-  end;
-//----------------------------------------------------------------//
-  begin
-    DM.Query.Close;
-    DM.Query.SQL.Clear;
-    DM.Query.SQL.Add('select name_artic from ArticleDog');
-    DM.Query.SQL.Add('where cosgu='+strk+strcosgu5+strk);
-    DM.Query.Open;
-    if DM.Query.FieldValues['name_artic']=Null then FormAdd.LabelCOSGUName5.Caption:=''
-    else FormAdd.LabelCOSGUName5.Caption:=DM.Query.FieldValues['name_artic'];
-  end;
-//----------------------------------------------------------------//
-{*******************************************************************************
-*******************************************************************************}
-//  formadd.contract:=tcontract.create(strtoint(ReestrDBG.Fields[0].AsString));
-  formadd.editregn.text:=inttostr(formadd.contract.regn);
-
-  FormAdd.Visible:=True;
-  Form1.Enabled:=False;
+  contractform.edit(strtoint(reestrdbg.fields[0].asstring));
 end;
 
 procedure TForm1.BitBtnDelClick(Sender: TObject);
@@ -693,7 +404,7 @@ end;
 procedure TForm1.Timer1Timer(Sender: TObject);
 var  
   i: Integer; 
-begin 
+begin
   Application.Title := CapForm1;
   Form1.Caption     := CapForm1;
   for i := 1 to (Length(CapForm1) - 1) do
@@ -714,6 +425,11 @@ end;
 procedure TForm1.N24Click(Sender: TObject);
 begin
   report_cosgu.showmodal;
+end;
+
+procedure TForm1.summaryClick(Sender: TObject);
+begin
+  summaryrpt.showreport;
 end;
 
 end.
