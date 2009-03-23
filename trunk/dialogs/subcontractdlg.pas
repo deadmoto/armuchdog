@@ -90,7 +90,7 @@ begin
   vsubcontract:=@csubcontract;
   subcontractfm.ok.caption:='Изменить';
   subcontractfm.nomencl.text:=nomencls.byid(vsubcontract^.nomencl);
-  subcontractfm.code.text:=cosgus.byid(vsubcontract^.code);
+  subcontractfm.code.text:=cosgus.byid(strtoint(vsubcontract^.code));
   if vsubcontract^.subdate<>0 then
     subcontractfm.subdate.text:=datetostr(vsubcontract^.subdate);
   subcontractfm.price.text:=floattostr(vsubcontract^.price);
@@ -114,7 +114,7 @@ end;
 procedure tsubcontractfm.codebtnClick(Sender: TObject);
 begin
   vsubcontract^.code:=cosguselect.select;
-  self.code.text:=cosgus.byid(vsubcontract^.code);
+  self.code.text:=cosgus.byid(strtoint(vsubcontract^.code));
 end;
 
 procedure tsubcontractfm.priceChange(Sender: TObject);

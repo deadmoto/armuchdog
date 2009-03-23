@@ -1,9 +1,10 @@
 object cosguselect: Tcosguselect
   Left = 316
   Top = 218
-  Width = 480
-  Height = 480
+  BorderStyle = bsDialog
   Caption = #1042#1099#1073#1086#1088' '#1050#1054#1057#1043#1059
+  ClientHeight = 613
+  ClientWidth = 472
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,11 +12,12 @@ object cosguselect: Tcosguselect
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
   object btnbox: TGroupBox
     Left = 0
-    Top = 416
+    Top = 576
     Width = 472
     Height = 37
     Align = alBottom
@@ -43,7 +45,7 @@ object cosguselect: Tcosguselect
     Left = 0
     Top = 0
     Width = 472
-    Height = 416
+    Height = 576
     Align = alClient
     ColCount = 2
     DefaultRowHeight = 16

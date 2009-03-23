@@ -46,7 +46,7 @@ object report_okved: Treport_okved
     BevelOuter = bvLowered
     TabOrder = 1
     object nomenclbox: TGroupBox
-      Left = 208
+      Left = 206
       Top = 8
       Width = 89
       Height = 49
@@ -64,7 +64,7 @@ object report_okved: Treport_okved
       end
     end
     object regionbox: TGroupBox
-      Left = 296
+      Left = 293
       Top = 8
       Width = 193
       Height = 49
@@ -80,14 +80,14 @@ object report_okved: Treport_okved
         TabOrder = 0
       end
     end
-    object BitBtn1: TBitBtn
-      Left = 488
+    object search: TBitBtn
+      Left = 486
       Top = 13
       Width = 89
       Height = 44
       Caption = #1055#1086#1080#1089#1082
       TabOrder = 2
-      OnClick = BitBtn1Click
+      OnClick = searchClick
       Glyph.Data = {
         EE000000424DEE000000000000007600000028000000100000000F0000000100
         0400000000007800000000000000000000001000000000000000000000000000
@@ -116,7 +116,7 @@ object report_okved: Treport_okved
       end
     end
     object endbox: TGroupBox
-      Left = 112
+      Left = 111
       Top = 8
       Width = 97
       Height = 49
@@ -133,7 +133,7 @@ object report_okved: Treport_okved
       end
     end
     object Button1: TButton
-      Left = 577
+      Left = 576
       Top = 13
       Width = 89
       Height = 44

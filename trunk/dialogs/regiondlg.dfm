@@ -1,9 +1,10 @@
 object regionselect: Tregionselect
   Left = 323
   Top = 207
-  Width = 320
-  Height = 480
+  BorderStyle = bsDialog
   Caption = #1042#1099#1073#1086#1088' '#1088#1072#1081#1086#1085#1072
+  ClientHeight = 613
+  ClientWidth = 472
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,8 +17,8 @@ object regionselect: Tregionselect
   TextHeight = 13
   object btnbox: TGroupBox
     Left = 0
-    Top = 416
-    Width = 312
+    Top = 576
+    Width = 472
     Height = 37
     Align = alBottom
     TabOrder = 1
@@ -43,8 +44,8 @@ object regionselect: Tregionselect
   object grid: TStringGrid
     Left = 0
     Top = 0
-    Width = 312
-    Height = 416
+    Width = 472
+    Height = 576
     Align = alClient
     ColCount = 2
     DefaultRowHeight = 16

@@ -1,9 +1,10 @@
 object providerselect: Tproviderselect
   Left = 436
   Top = 152
-  Width = 320
-  Height = 480
+  BorderStyle = bsDialog
   Caption = #1042#1099#1073#1086#1088' '#1087#1086#1089#1090#1072#1074#1097#1080#1082#1072
+  ClientHeight = 613
+  ClientWidth = 472
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,12 +12,13 @@ object providerselect: Tproviderselect
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
   object btnbox: TGroupBox
     Left = 0
-    Top = 400
-    Width = 312
+    Top = 560
+    Width = 472
     Height = 53
     Align = alBottom
     TabOrder = 0
@@ -42,8 +44,8 @@ object providerselect: Tproviderselect
   object grid: TStringGrid
     Left = 0
     Top = 49
-    Width = 312
-    Height = 351
+    Width = 472
+    Height = 511
     Align = alClient
     ColCount = 2
     DefaultRowHeight = 16
@@ -55,7 +57,7 @@ object providerselect: Tproviderselect
   object filterbox: TGroupBox
     Left = 0
     Top = 0
-    Width = 312
+    Width = 472
     Height = 49
     Align = alTop
     Caption = #1060#1080#1083#1100#1090#1088
@@ -63,7 +65,7 @@ object providerselect: Tproviderselect
     object filter: TEdit
       Left = 8
       Top = 16
-      Width = 297
+      Width = 457
       Height = 21
       TabOrder = 0
       OnChange = filterChange
