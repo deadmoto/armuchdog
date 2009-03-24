@@ -70,6 +70,15 @@ object report: Treport
       TabOrder = 2
       OnClick = reportClick
     end
+    object Button1: TButton
+      Left = 267
+      Top = 6
+      Width = 75
+      Height = 41
+      Caption = #1054#1090#1095#1105#1090
+      TabOrder = 3
+      OnClick = Button1Click
+    end
   end
   object grid: TStringGrid
     Left = 0

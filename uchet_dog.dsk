@@ -8,28 +8,38 @@ File_5=SourceModule,'D:\.sources\ACC\forms\reportcosgu.pas',0,1,137,9,139,1,0
 File_6=SourceModule,'D:\.sources\ACC\dialogs\providerdlg.pas',0,1,1,1,1,0,0
 
 [Modules]
-Module0=D:\.sources\ACC\forms\summaryrpt.pas
-Module1=D:\.sources\ACC\reportokved.pas
-Module2=D:\.sources\ACC\database\nomencls.pas
-Module3=D:\.sources\ACC\forms\contractfm.pas
-Module4=D:\.sources\ACC\dialogs\cosgudlg.pas
-Module5=D:\.sources\ACC\forms\cosgufm.pas
-Module6=D:\.sources\ACC\dialogs\cosguedit.pas
-Module7=D:\.sources\ACC\database\contracts.pas
-Module8=D:\.sources\ACC\uchet_dog.dpr
-Module9=D:\.sources\ACC\acc.pas
-Module10=c:\program files\borland\delphi7\source\vcl\grids.pas
-Module11=D:\.sources\ACC\fldnamedbgeditunit.pas
-Module12=D:\.sources\ACC\database\util.pas
-Module13=D:\.sources\ACC\dialogs\subcontractdlg.pas
-Module14=D:\.sources\ACC\database\cosgus.pas
-Module15=D:\.sources\ACC\database\datamodule.pas
+Module0=D:\.sources\ACC\database\datamodule.pas
+Module1=D:\.sources\ACC\dialogs\subcontractdlg.pas
+Module2=D:\.sources\ACC\forms\summaryrpt.pas
+Module3=D:\.sources\ACC\reportokved.pas
+Module4=D:\.sources\ACC\forms\contractfm.pas
+Module5=D:\.sources\ACC\acc.pas
+Module6=D:\.sources\ACC\dialogs\cosgudlg.pas
+Module7=D:\.sources\ACC\forms\cosgufm.pas
+Module8=D:\.sources\ACC\dialogs\cosguedit.pas
+Module9=D:\.sources\ACC\database\cosgus.pas
+Module10=D:\.sources\ACC\uchet_dog.dpr
+Module11=D:\.sources\ACC\database\util.pas
+Module12=D:\.sources\ACC\fldnamedbgeditunit.pas
+Module13=c:\program files\borland\delphi7\source\vcl\grids.pas
+Module14=D:\.sources\ACC\database\nomencls.pas
+Module15=D:\.sources\ACC\database\contracts.pas
 Count=16
 EditWindowCount=1
 
-[D:\.sources\ACC\forms\summaryrpt.pas]
+[D:\.sources\ACC\database\datamodule.pas]
 ModuleType=SourceModule
 FormState=1
+FormOnTop=1
+
+[D:\.sources\ACC\dialogs\subcontractdlg.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\.sources\ACC\forms\summaryrpt.pas]
+ModuleType=SourceModule
+FormState=0
 FormOnTop=0
 
 [D:\.sources\ACC\reportokved.pas]
@@ -37,15 +47,15 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\.sources\ACC\database\nomencls.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
 [D:\.sources\ACC\forms\contractfm.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
+
+[D:\.sources\ACC\acc.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
 
 [D:\.sources\ACC\dialogs\cosgudlg.pas]
 ModuleType=SourceModule
@@ -62,7 +72,7 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\.sources\ACC\database\contracts.pas]
+[D:\.sources\ACC\database\cosgus.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -72,12 +82,7 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\.sources\ACC\acc.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[c:\program files\borland\delphi7\source\vcl\grids.pas]
+[D:\.sources\ACC\database\util.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -87,27 +92,22 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\.sources\ACC\database\util.pas]
+[c:\program files\borland\delphi7\source\vcl\grids.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\.sources\ACC\dialogs\subcontractdlg.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\.sources\ACC\database\cosgus.pas]
+[D:\.sources\ACC\database\nomencls.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\.sources\ACC\database\datamodule.pas]
+[D:\.sources\ACC\database\contracts.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\.sources\ACC\ProjectGroup1.bpg]
+[C:\Program Files\Borland\Delphi7\Projects\ProjectGroup1.bpg]
 FormState=0
 FormOnTop=0
 
@@ -117,7 +117,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=16
-CurrentView=5
+CurrentView=0
 View0=0
 View1=1
 View2=2
@@ -161,15 +161,15 @@ BottomPanelData=00000400010000000B0000004D65737361676556696577000000000000000000
 
 [View0]
 Module=D:\.sources\ACC\database\datamodule.pas
-CursorX=30
-CursorY=12
+CursorX=111
+CursorY=6
 TopLine=1
 LeftCol=1
 
 [View1]
 Module=D:\.sources\ACC\dialogs\subcontractdlg.pas
-CursorX=53
-CursorY=167
+CursorX=16
+CursorY=89
 TopLine=81
 LeftCol=1
 
@@ -182,9 +182,9 @@ LeftCol=1
 
 [View3]
 Module=D:\.sources\ACC\reportokved.pas
-CursorX=58
-CursorY=137
-TopLine=105
+CursorX=1
+CursorY=178
+TopLine=169
 LeftCol=1
 
 [View4]
@@ -196,9 +196,9 @@ LeftCol=1
 
 [View5]
 Module=D:\.sources\ACC\forms\summaryrpt.pas
-CursorX=39
-CursorY=95
-TopLine=68
+CursorX=108
+CursorY=156
+TopLine=151
 LeftCol=1
 
 [View6]
