@@ -29,12 +29,14 @@ type
     endpick: TDateTimePicker;
     report: TButton;
     StatusBar1: TStatusBar;
+    Button1: TButton;
     procedure formshow(sender:tobject);
     procedure reportClick(Sender: TObject);
     procedure startpickChange(Sender: TObject);
     procedure endpickChange(Sender: TObject);
     procedure gridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
+    procedure Button1Click(Sender: TObject);
   private
   public
     selected:integer;
@@ -147,6 +149,14 @@ procedure treport.gridSelectCell(Sender: TObject; ACol, ARow: Integer;
 begin
   if arow>0 then
     selected:=arow;
+end;
+
+procedure treport.Button1Click(Sender: TObject);
+begin
+  dmod.report.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_summary.frf');
+  dmod.report.dictionary.variables.variable['start']:=startpick.datetime;
+  dmod.report.dictionary.variables.variable['finish']:=endpick.datetime;
+  dmod.report.showreport;
 end;
 
 end.
