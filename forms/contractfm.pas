@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Grids, ComCtrls, Menus, contracts, Mask;
+  Dialogs, StdCtrls, Grids, ComCtrls, Menus, contracts, Mask, ExtCtrls;
 
 type
   tcontractform = class(TForm)
@@ -42,6 +42,7 @@ type
     subcontractdel: TButton;
     sumbox: TGroupBox;
     sum: TEdit;
+    Panel1: TPanel;
     procedure discardClick(Sender: TObject);
     procedure btnsupplierClick(Sender: TObject);
     procedure btnregionClick(Sender: TObject);
@@ -59,6 +60,7 @@ type
     procedure subctontractgridSelectCell(Sender: TObject; ACol,
       ARow: Integer; var CanSelect: Boolean);
     procedure subcontractdelClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -75,13 +77,12 @@ var
 implementation
 
 uses
+  dmunit,
   providers,
   regions,
+  providerdlg,
   regiondlg,
-  supplierdbgunit,
-  dmunit,
-  addunit,
-  subcontractdlg, providerdlg;
+  subcontractdlg;
 
 {$R *.dfm}
 
@@ -94,19 +95,25 @@ begin
   if length(contract.subcontract)>0 then
     begin
       subctontractgrid.rowcount:=length(self.contract.subcontract)+1;
-      subctontractgrid.colcount:=3;
+      subctontractgrid.colcount:=5;
       subctontractgrid.fixedrows:=1;
-      subctontractgrid.cols[0].strings[0]:='Œ ¬›ƒ';
-      subctontractgrid.cols[1].strings[0]:=' Œ—√”';
-      subctontractgrid.cols[2].strings[0]:='—ÛÏÏ‡';
+      subctontractgrid.cols[0].strings[0]:='ƒ‡Ú‡';
+      subctontractgrid.cols[1].strings[0]:='—ÛÏÏ‡';
+      subctontractgrid.cols[2].strings[0]:='Œ ¬›ƒ';
+      subctontractgrid.cols[3].strings[0]:=' Œ—√”';
+      subctontractgrid.cols[4].strings[0]:=' ÓÏÏÂÌÚ‡ËÈ';
       subctontractgrid.colwidths[0]:=8*8;
       subctontractgrid.colwidths[1]:=8*8;
-      subctontractgrid.colwidths[2]:=subctontractgrid.width-(subctontractgrid.colwidths[0]+subctontractgrid.colwidths[1]+8);
+      subctontractgrid.colwidths[2]:=8*8;
+      subctontractgrid.colwidths[3]:=8*8;
+      subctontractgrid.colwidths[4]:=subctontractgrid.width-(subctontractgrid.colwidths[0]+subctontractgrid.colwidths[1]+subctontractgrid.colwidths[2]+subctontractgrid.colwidths[3]+8);
       for i:=0 to length(self.contract.subcontract)-1 do
         begin
-          subctontractgrid.rows[i+1].strings[0]:=contract.subcontract[i].nomencl;
-          subctontractgrid.rows[i+1].strings[1]:=contract.subcontract[i].code;
-          subctontractgrid.rows[i+1].strings[2]:=floattostr(contract.subcontract[i].price);
+          subctontractgrid.rows[i+1].strings[0]:=datetostr(contract.subcontract[i].subdate);
+          subctontractgrid.rows[i+1].strings[1]:=floattostr(contract.subcontract[i].price);
+          subctontractgrid.rows[i+1].strings[2]:=contract.subcontract[i].nomencl;
+          subctontractgrid.rows[i+1].strings[3]:=contract.subcontract[i].code;
+          subctontractgrid.rows[i+1].strings[4]:=contract.subcontract[i].comment;
           pricefull:=pricefull+contract.subcontract[i].price;
         end;
     end
@@ -126,7 +133,6 @@ begin
   self:=tcontractform.create(owner);
   self.insert.enabled:=true;
   self.btnregion.enabled:=true;
-  self.fill;
   self.showmodal;
 end;
 
@@ -160,8 +166,7 @@ begin
       self.data_srok.enabled:=true;
       self.data_srok.text:=datetostr(contract.data_srok);
     end;
-  self.fill;
-  self.showmodal;
+  showmodal;
 end;
 
 procedure tcontractform.btnsupplierClick(Sender: TObject);
@@ -173,7 +178,7 @@ end;
 
 procedure tcontractform.btnregionClick(Sender: TObject);
 begin
-  contract.region:=regionselect.select;
+  contract.region:=cregion[regiondlg.select].id;
   if contract.region<>0 then
     begin
       contract.regn:=contracts.maxregn(contract.region)+1;
@@ -242,7 +247,7 @@ begin
     begin
       setlength(contract.subcontract,length(contract.subcontract)+1);
       contract.subcontract[high(contract.subcontract)]:=subcontract;
-      self.fill;
+      fill;
     end;
 end;
 
@@ -251,7 +256,7 @@ begin
   if (selected>0) and (selected<=length(contract.subcontract)) then
     begin
       subcontractfm.upd(@contract.subcontract[selected-1]);
-      self.fill;
+      fill;
     end;
 end;
 
@@ -262,7 +267,7 @@ begin
   for i:=selected to length(self.contract.subcontract)-1 do
     self.contract.subcontract[i-1]:=self.contract.subcontract[i];
   setlength(self.contract.subcontract,length(self.contract.subcontract)-1);
-  self.fill;
+  fill;
 end;
 
 procedure tcontractform.subctontractgridSelectCell(Sender: TObject; ACol,
@@ -286,6 +291,11 @@ end;
 procedure tcontractform.discardClick(Sender: TObject);
 begin
   self.close;
+end;
+
+procedure tcontractform.FormShow(Sender: TObject);
+begin
+  fill;
 end;
 
 end.

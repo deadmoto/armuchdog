@@ -60,7 +60,7 @@ begin
   dmod.query.first;
   for i:=0 to dmod.query.recordcount-1 do
     begin
-      nomencl.items.add(cropspace(dmod.query.fieldbyname('nomencl').asstring));
+      nomencl.items.add(trim(dmod.query.fieldbyname('nomencl').asstring));
       dmod.query.next;
     end;
   dmod.query.close;
@@ -78,7 +78,7 @@ begin
   dmod.query.first;
   for i:=0 to dmod.query.recordcount-1 do
     begin
-      region.items.add(cropspace(dmod.query.fieldbyname('fldname').asstring));
+      region.items.add(trim(dmod.query.fieldbyname('fldname').asstring));
       dmod.query.next;
     end;
   dmod.query.close;

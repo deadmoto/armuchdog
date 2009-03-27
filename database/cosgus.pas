@@ -42,7 +42,7 @@ begin
       begin
         setlength(ccosgu,length(ccosgu)+1);
         ccosgu[i].id:=dmod.query.fieldbyname('cosgu').value;
-        ccosgu[i].name:=cropspace(dmod.query.fieldbyname('name_artic').value);
+        ccosgu[i].name:=trim(dmod.query.fieldbyname('name_artic').value);
         dmod.query.next;
       end
   except

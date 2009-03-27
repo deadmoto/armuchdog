@@ -1,9 +1,9 @@
 object DM: TDM
   OldCreateOrder = True
-  Left = 477
-  Top = 329
-  Height = 567
-  Width = 450
+  Left = 478
+  Top = 330
+  Height = 572
+  Width = 448
   object ADOConnection: TADOConnection
     ConnectionString = 
       'Provider=MSDASQL.1;Password="";Persist Security Info=True;User I' +

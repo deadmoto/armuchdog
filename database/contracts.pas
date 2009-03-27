@@ -39,7 +39,7 @@ function maxregn(region:integer):integer;
 function fetch(regn:integer):tcontract;
 procedure insert(contract:tcontract);
 procedure update(contract:tcontract);
-procedure delete(contract:tcontract);
+procedure delete(id:integer);
 
 implementation
 
@@ -85,7 +85,7 @@ begin
     dmod.query.parameters.parambyname('regn').value:=regn;
     dmod.query.open;
     result.reg_n:=dmod.query.fieldbyname('reg_n').asinteger;
-    result.n_dog:=cropspace(dmod.query.fieldbyname('n_dog').value);
+    result.n_dog:=trim(dmod.query.fieldbyname('n_dog').value);
     result.data_reg:=dmod.query.fieldbyname('data_reg').asdatetime;
     result.data_post:=dmod.query.fieldbyname('data_post').asdatetime;
     result.data_dog:=dmod.query.fieldbyname('data_dog').asdatetime;
@@ -99,12 +99,12 @@ begin
     for i:=0 to dmod.query.recordcount-1 do
       begin
         setlength(result.subcontract,length(result.subcontract)+1);
-        result.subcontract[i].nomencl:=cropspace(dmod.query.fieldbyname('nomencl').value);
-        result.subcontract[i].code:=cropspace(dmod.query.fieldbyname('code').value);
+        result.subcontract[i].nomencl:=trim(dmod.query.fieldbyname('nomencl').value);
+        result.subcontract[i].code:=trim(dmod.query.fieldbyname('code').value);
         result.subcontract[i].subdate:=dmod.query.fieldbyname('subdate').asdatetime;
         result.subcontract[i].price:=dmod.query.fieldbyname('price').value;
         result.subcontract[i].report:=dmod.query.fieldbyname('report').value;
-        result.subcontract[i].comment:=cropspace(dmod.query.fieldbyname('comment').value);
+        result.subcontract[i].comment:=trim(dmod.query.fieldbyname('comment').value);
         dmod.query.next;
       end;
   except
@@ -203,8 +203,23 @@ begin
   end;
 end;
 
-procedure delete(contract:tcontract);
+procedure delete(id:integer);
 begin
+  dmod.query.connection.begintrans;
+  try
+    dmod.query.sql.text:='DELETE FROM ReestrDog WHERE regn=:id';
+    dmod.query.parameters.parambyname('id').value:=id;
+    dmod.query.execsql;
+    dmod.query.sql.text:='DELETE FROM subcontract WHERE id=:id';
+    dmod.query.parameters.parambyname('id').value:=id;
+    dmod.query.execsql;
+    dmod.query.connection.committrans;
+    showmessage('Договор успешно удалён!!!');
+  except
+    dmod.query.connection.rollbacktrans;
+    showmessage('Ошибка обновления договора!!!'+#13+
+                 dmod.query.sql.text);
+  end;
 end;
 
 end.

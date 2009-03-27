@@ -88,8 +88,8 @@ begin
       grid.fixedrows:=1;
       for i:=0 to dmod.query.recordcount-1 do
         begin
-          grid.cells[0,i+1]:=cropspace(dmod.query.fieldbyname('nomencl').value);
-          grid.cells[1,i+1]:=cropspace(dmod.query.fieldbyname('name').value);
+          grid.cells[0,i+1]:=trim(dmod.query.fieldbyname('nomencl').value);
+          grid.cells[1,i+1]:=trim(dmod.query.fieldbyname('name').value);
           if dmod.query.fieldbyname('price').value>100000 then
             if not dmod.query.fieldbyname('report').asboolean then
               grid.cells[3,i+1]:=floattostr(dmod.query.fieldbyname('price').value-10000)

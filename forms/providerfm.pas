@@ -7,7 +7,7 @@ uses
   Dialogs, Menus, Grids, DBGrids, StdCtrls;
 
 type
-  Tprovider = class(TForm)
+  Tproviderform = class(TForm)
     grid: TDBGrid;
     popup: TPopupMenu;
     add: TMenuItem;
@@ -34,7 +34,7 @@ type
   end;
 
 var
-  provider: Tprovider;
+  providerform: Tproviderform;
 
 implementation
 
@@ -45,7 +45,7 @@ uses
 
 {$R *.dfm}
 
-procedure tprovider.fill;
+procedure tproviderform.fill;
 begin
   search.text:='';
   dmod.query.sql.text:='SELECT * FROM SupplierDog';
@@ -53,20 +53,20 @@ begin
   grid.columns.items[0].title.caption:='ID';
   grid.columns.items[1].title.caption:='Поставщик';
   grid.columns.items[0].width:=7*8;
-  grid.columns.items[1].width:=provider.width-grid.columns.items[0].width-48;
+  grid.columns.items[1].width:=width-grid.columns.items[0].width-48;
 end;
 
-procedure tprovider.fill(text:string);
+procedure tproviderform.fill(text:string);
 begin
   dmod.query.sql.text:='SELECT * FROM SupplierDog WHERE SUPPLIER LIKE '+quotedstr('%'+text+'%');
   dmod.query.open;
   grid.columns.items[0].title.caption:='ID';
   grid.columns.items[1].title.caption:='Поставщик';
   grid.columns.items[0].width:=7*8;
-  grid.columns.items[1].width:=provider.width-grid.columns.items[0].width-48;
+  grid.columns.items[1].width:=width-grid.columns.items[0].width-48;
 end;
 
-procedure Tprovider.addClick(Sender: TObject);
+procedure Tproviderform.addClick(Sender: TObject);
 begin
   provdlg:=tprovdlg.create(owner);
   provdlg.caption:='Добавление поставщика';
@@ -81,12 +81,12 @@ begin
     end;
 end;
 
-procedure Tprovider.updClick(Sender: TObject);
+procedure Tproviderform.updClick(Sender: TObject);
 begin
   provdlg:=tprovdlg.create(owner);
   provdlg.caption:='Изменение поставщика';
   provdlg.ok.caption:='Изменить';
-  provdlg.prov.text:=cropspace(grid.fields[1].text);
+  provdlg.prov.text:=trim(grid.fields[1].text);
   if provdlg.showmodal=mrok then
     begin
       dmod.query.sql.text:='UPDATE SupplierDog SET SUPPLIER=:provider WHERE ID_SUPPLIER='+grid.fields[0].text;
@@ -96,7 +96,7 @@ begin
     end;
 end;
 
-procedure Tprovider.delClick(Sender: TObject);
+procedure Tproviderform.delClick(Sender: TObject);
 begin
   if messagebox(self.handle,pchar('Вы действительно хотите удалить поставщика?'),pchar(self.caption),mb_okcancel)=id_ok then
     begin
@@ -106,22 +106,22 @@ begin
     end
 end;
 
-procedure Tprovider.FormShow(Sender: TObject);
+procedure Tproviderform.FormShow(Sender: TObject);
 begin
   fill;
 end;
 
-procedure Tprovider.upClick(Sender: TObject);
+procedure Tproviderform.upClick(Sender: TObject);
 begin
   dmod.query.first;
 end;
 
-procedure Tprovider.downClick(Sender: TObject);
+procedure Tproviderform.downClick(Sender: TObject);
 begin
   dmod.query.last;
 end;
 
-procedure Tprovider.searchChange(Sender: TObject);
+procedure Tproviderform.searchChange(Sender: TObject);
 begin
   fill(search.text);
 end;

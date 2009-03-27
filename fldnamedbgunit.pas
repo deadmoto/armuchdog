@@ -59,9 +59,6 @@ begin
 end;
 
 procedure TFormFldNameDBG.BitBtnFldNameDBGEnterClick(Sender: TObject);
-var
-strmaxr, fldstr: String;
-int: Integer;
 begin
 {//----------------------------------------------------------------//
   FormFldNameDBG.EditFldSearch.Text:='';

@@ -1,8 +1,8 @@
 object contractform: Tcontractform
-  Left = 221
-  Top = 222
-  Width = 801
-  Height = 409
+  Left = 109
+  Top = 148
+  Width = 940
+  Height = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,13 +12,15 @@ object contractform: Tcontractform
   Menu = main
   OldCreateOrder = False
   Position = poDesktopCenter
+  WindowState = wsMaximized
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object databox: TGroupBox
     Left = 0
     Top = 0
     Width = 396
-    Height = 363
+    Height = 556
     Align = alLeft
     Caption = #1044#1072#1085#1085#1099#1077' '#1076#1086#1075#1086#1074#1086#1088#1072':'
     TabOrder = 0
@@ -203,78 +205,90 @@ object contractform: Tcontractform
   object detailboxbox: TGroupBox
     Left = 396
     Top = 0
-    Width = 397
-    Height = 363
+    Width = 536
+    Height = 556
     Align = alClient
     Caption = #1044#1077#1090#1072#1083#1080#1079#1072#1094#1080#1103
     TabOrder = 1
+    object Panel1: TPanel
+      Left = 2
+      Top = 502
+      Width = 532
+      Height = 52
+      Align = alBottom
+      BevelOuter = bvLowered
+      TabOrder = 0
+      object subcontractbox: TGroupBox
+        Left = 1
+        Top = 1
+        Width = 433
+        Height = 50
+        Align = alClient
+        TabOrder = 0
+        object subcontractadd: TButton
+          Left = 8
+          Top = 16
+          Width = 88
+          Height = 25
+          Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+          TabOrder = 0
+          OnClick = subcontractaddClick
+        end
+        object subcontractupd: TButton
+          Left = 96
+          Top = 16
+          Width = 88
+          Height = 25
+          Caption = #1048#1079#1084#1077#1085#1080#1090#1100
+          TabOrder = 1
+          OnClick = subcontractupdClick
+        end
+        object subcontractdel: TButton
+          Left = 184
+          Top = 16
+          Width = 88
+          Height = 25
+          Caption = #1059#1076#1072#1083#1080#1090#1100
+          TabOrder = 2
+          OnClick = subcontractdelClick
+        end
+      end
+      object sumbox: TGroupBox
+        Left = 434
+        Top = 1
+        Width = 97
+        Height = 50
+        Align = alRight
+        Caption = #1057#1091#1084#1084#1072' '#1076#1086#1075#1086#1074#1086#1088#1072
+        TabOrder = 1
+        object sum: TEdit
+          Left = 8
+          Top = 16
+          Width = 81
+          Height = 21
+          ReadOnly = True
+          TabOrder = 0
+          Text = '0'
+        end
+      end
+    end
     object subctontractgrid: TStringGrid
-      Left = 8
-      Top = 16
-      Width = 377
-      Height = 289
+      Left = 2
+      Top = 15
+      Width = 532
+      Height = 487
+      Align = alClient
       ColCount = 3
       DefaultColWidth = 316
       DefaultRowHeight = 16
       FixedCols = 0
       RowCount = 2
-      TabOrder = 0
+      TabOrder = 1
       OnSelectCell = subctontractgridSelectCell
       ColWidths = (
         98
         184
         88)
-    end
-    object subcontractbox: TGroupBox
-      Left = 8
-      Top = 304
-      Width = 281
-      Height = 49
-      TabOrder = 1
-      object subcontractadd: TButton
-        Left = 8
-        Top = 16
-        Width = 88
-        Height = 25
-        Caption = #1044#1086#1073#1072#1074#1080#1090#1100
-        TabOrder = 0
-        OnClick = subcontractaddClick
-      end
-      object subcontractupd: TButton
-        Left = 96
-        Top = 16
-        Width = 88
-        Height = 25
-        Caption = #1048#1079#1084#1077#1085#1080#1090#1100
-        TabOrder = 1
-        OnClick = subcontractupdClick
-      end
-      object subcontractdel: TButton
-        Left = 184
-        Top = 16
-        Width = 88
-        Height = 25
-        Caption = #1059#1076#1072#1083#1080#1090#1100
-        TabOrder = 2
-        OnClick = subcontractdelClick
-      end
-    end
-    object sumbox: TGroupBox
-      Left = 288
-      Top = 304
-      Width = 97
-      Height = 49
-      Caption = #1057#1091#1084#1084#1072' '#1076#1086#1075#1086#1074#1086#1088#1072
-      TabOrder = 2
-      object sum: TEdit
-        Left = 8
-        Top = 16
-        Width = 81
-        Height = 21
-        ReadOnly = True
-        TabOrder = 0
-        Text = '0'
-      end
     end
   end
   object main: TMainMenu

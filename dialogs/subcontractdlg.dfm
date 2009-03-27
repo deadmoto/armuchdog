@@ -1,10 +1,10 @@
 object subcontractfm: Tsubcontractfm
-  Left = 375
-  Top = 172
+  Left = 376
+  Top = 173
   BorderStyle = bsDialog
   Caption = 'Dialog'
-  ClientHeight = 333
-  ClientWidth = 632
+  ClientHeight = 331
+  ClientWidth = 630
   Color = clBtnFace
   ParentFont = True
   OldCreateOrder = True
@@ -14,7 +14,7 @@ object subcontractfm: Tsubcontractfm
   object nomenclbox: TGroupBox
     Left = 0
     Top = 0
-    Width = 632
+    Width = 630
     Height = 49
     Align = alTop
     Caption = #1054#1050#1042#1069#1044
@@ -40,7 +40,7 @@ object subcontractfm: Tsubcontractfm
   object codebox: TGroupBox
     Left = 0
     Top = 49
-    Width = 632
+    Width = 630
     Height = 49
     Align = alTop
     Caption = #1050#1054#1057#1043#1059
@@ -66,7 +66,7 @@ object subcontractfm: Tsubcontractfm
   object commentbox: TGroupBox
     Left = 0
     Top = 146
-    Width = 632
+    Width = 630
     Height = 151
     Align = alTop
     Caption = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1081
@@ -74,7 +74,7 @@ object subcontractfm: Tsubcontractfm
     object comment: TMemo
       Left = 2
       Top = 15
-      Width = 628
+      Width = 626
       Height = 134
       Align = alClient
       TabOrder = 0
@@ -84,7 +84,7 @@ object subcontractfm: Tsubcontractfm
   object panel: TPanel
     Left = 0
     Top = 98
-    Width = 632
+    Width = 630
     Height = 48
     Align = alTop
     TabOrder = 2
@@ -163,8 +163,8 @@ object subcontractfm: Tsubcontractfm
   end
   object btns: TPanel
     Left = 0
-    Top = 296
-    Width = 632
+    Top = 294
+    Width = 630
     Height = 37
     Align = alBottom
     BevelOuter = bvLowered

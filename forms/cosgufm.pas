@@ -4,7 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Grids, Menus;
+  Dialogs, StdCtrls, Grids, Menus, ComCtrls;
+
+procedure showeditor;
 
 type
   tcosgu = class(TForm)
@@ -15,6 +17,7 @@ type
     upd: TMenuItem;
     N4: TMenuItem;
     del: TMenuItem;
+    status: TStatusBar;
     procedure FormShow(Sender: TObject);
     procedure addClick(Sender: TObject);
     procedure updClick(Sender: TObject);
@@ -24,7 +27,7 @@ type
   private
     { Private declarations }
   public
-    selected:integer;
+    selected:^integer;
     procedure fill;
   end;
 
@@ -40,10 +43,24 @@ uses
 
 {$R *.dfm}
 
+procedure showeditor;
+var
+  main:tcosgu;
+begin
+  main:=tcosgu.create(application.owner);
+  main.showmodal;
+  main.destroy;
+end;
+
 procedure tcosgu.gridSelectCell(Sender: TObject; ACol, ARow: Integer;
   var CanSelect: Boolean);
 begin
-  selected:=arow;
+  if (arow>0) and (arow<grid.rowcount) then
+    begin
+      selected:=@arow;
+      status.panels.items[1].text:=grid.cells[0,arow];
+      status.panels.items[3].text:=grid.cells[1,arow];
+    end;
 end;
 
 procedure tcosgu.fill;
@@ -77,7 +94,7 @@ end;
 
 procedure tcosgu.updClick(Sender: TObject);
 begin
-  if cosguedit.update(owner,ccosgu[selected-1]) then
+  if cosguedit.update(owner,ccosgu[selected^-1]) then
     fill;
 end;
 
@@ -85,7 +102,7 @@ procedure tcosgu.delClick(Sender: TObject);
 begin
   if messagebox(handle,'Удалить?','',mb_yesno)=id_yes then
     begin
-      cosgus.delete(ccosgu[selected-1]);
+      cosgus.delete(ccosgu[selected^-1]);
       fill;
     end;
 end;

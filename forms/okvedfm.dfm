@@ -1,8 +1,8 @@
-object cosgu: Tcosgu
+object okved: Tokved
   Left = 351
   Top = 166
   BorderStyle = bsDialog
-  Caption = #1056#1077#1076#1072#1082#1090#1086#1088' '#1050#1054#1057#1043#1059
+  Caption = #1056#1077#1076#1072#1082#1090#1086#1088' '#1054#1050#1042#1069#1044
   ClientHeight = 611
   ClientWidth = 470
   Color = clBtnFace
@@ -37,7 +37,7 @@ object cosgu: Tcosgu
     Height = 19
     Panels = <
       item
-        Text = #1050#1054#1057#1043#1059':'
+        Text = #1054#1050#1042#1069#1044':'
         Width = 44
       end
       item

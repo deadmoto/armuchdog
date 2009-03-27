@@ -53,7 +53,7 @@ function select:integer;
 var
   provider:tproviderselect;
 begin
-  result:=0;
+  result:=-1;
   fetch;
   provider:=tproviderselect.create(application);
   provider.fill;

@@ -39,7 +39,7 @@ begin
       begin
         setlength(cregion,length(cregion)+1);
         cregion[i].id:=dmod.query.fieldbyname('fldid').value;
-        cregion[i].name:=cropspace(dmod.query.fieldbyname('fldname').value);
+        cregion[i].name:=trim(dmod.query.fieldbyname('fldname').value);
         dmod.query.next;
       end
   except
