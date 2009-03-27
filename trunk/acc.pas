@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, DB, DBTables, Grids, DBGrids, ComCtrls, StdCtrls, Buttons,
-  AppEvnts, FR_Class, FR_DSet, FR_DBSet, ShellAPI, ExtCtrls;
+  AppEvnts, FR_Class, FR_DSet, FR_DBSet, ShellAPI, ExtCtrls, XPMan;
 type
   TForm1 = class(TForm)
     MainMenu: TMainMenu;
@@ -32,12 +32,8 @@ type
     N21: TMenuItem;
     ReestrDBG: TDBGrid;
     StatusBar: TStatusBar;
-    BitBtnAdd: TBitBtn;
-    BitBtnChange: TBitBtn;
-    BitBtnDel: TBitBtn;
     BitBtnFilter: TBitBtn;
     BitBtnExit: TBitBtn;
-    QueryDelete: TQuery;
     ApplicationEvents: TApplicationEvents;
     LabelFiltr: TLabel;
     RadioButton1: TRadioButton;
@@ -60,12 +56,14 @@ type
     Button2: TButton;
     N24: TMenuItem;
     summary: TMenuItem;
+    Button3: TButton;
+    Button4: TButton;
+    XPManifest1: TXPManifest;
     procedure BitBtnExitClick(Sender: TObject);
     procedure ReestrDBGCellClick(Column: TColumn);
     procedure ReestrDBGKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure N21Click(Sender: TObject);
-    procedure BitBtnAddClick(Sender: TObject);
     procedure N8Click(Sender: TObject);
     procedure N9Click(Sender: TObject);
     procedure N14Click(Sender: TObject);
@@ -77,7 +75,6 @@ type
     procedure N19Click(Sender: TObject);
     procedure N20Click(Sender: TObject);
     procedure BitBtnChangeClick(Sender: TObject);
-    procedure BitBtnDelClick(Sender: TObject);
     procedure BitBtnFilterClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG;
@@ -91,11 +88,11 @@ type
     procedure N23Click(Sender: TObject);
     procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
-    procedure Timer1Timer(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure N24Click(Sender: TObject);
     procedure summaryClick(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -109,8 +106,10 @@ var
 implementation
 
 uses
+  mainfm,
   contracts,
   cosgufm,
+  okvedfm,
   providerfm,
   summaryrpt,
   AddUnit, COSGUDBGUnit, About, DMUnit, FldNameDBGUnit, Name_DogDBGUnit,
@@ -155,60 +154,6 @@ begin
   Form1.Enabled:=False;
 end;
 
-procedure TForm1.BitBtnAddClick(Sender: TObject);
-begin
-//----------------------------------------------------------------//
-  FormFldNameDBG.EditFldSearch.Text:='';
-  FormAdd.LabelFLDNAMEI.Caption:='';
-  FormAdd.LabelFLDIDI.Caption:='';
-  FormAdd.EditReg_N.Text:='';
-  FormAdd.EditN_Dog.Text:='';
-  FormAdd.LabelSupplierIDI.Caption:='';
-  FormAdd.LabelSupplierI.Caption:='';
-  FormAdd.MaskEditData_Reg.Text:='  .  .    ';
-  FormAdd.MaskEditData_Dog.Text:='  .  .    ';
-  FormAdd.MaskEditData_Post.Text:='  .  .    ';
-  //-//
-  FormAdd.LabelNomenclID1.Caption:='';
-  FormAdd.LabelNomenclName1.Caption:='';
-  FormAdd.LabelCOSGUID1.Caption:='';
-  FormAdd.LabelCOSGUName1.Caption:='';
-  FormAdd.EditSumDog1.Text:='';
-  //--//
-  FormAdd.LabelNomenclID2.Caption:='';
-  FormAdd.LabelNomenclName2.Caption:='';
-  FormAdd.LabelCOSGUID2.Caption:='';
-  FormAdd.LabelCOSGUName2.Caption:='';
-  FormAdd.EditSumDog2.Text:='';
-  //---//
-  FormAdd.LabelNomenclID3.Caption:='';
-  FormAdd.LabelNomenclName3.Caption:='';
-  FormAdd.LabelCOSGUID3.Caption:='';
-  FormAdd.LabelCOSGUName3.Caption:='';
-  FormAdd.EditSumDog3.Text:='';
-  //----//
-  FormAdd.LabelNomenclID4.Caption:='';
-  FormAdd.LabelNomenclName4.Caption:='';
-  FormAdd.LabelCOSGUID4.Caption:='';
-  FormAdd.LabelCOSGUName4.Caption:='';
-  FormAdd.EditSumDog4.Text:='';
-  //-----//
-  FormAdd.LabelNomenclID5.Caption:='';
-  FormAdd.LabelNomenclName5.Caption:='';
-  FormAdd.LabelCOSGUID5.Caption:='';
-  FormAdd.LabelCOSGUName5.Caption:='';
-  FormAdd.EditSumDog5.Text:='';
-//----------------------------------------------------------------//
-  FormAdd.PageControl.TabIndex:=0;
-  FormAdd.BitBtnChange.Visible:=False;
-  FormAdd.BitBtnAdd.Visible:=True;
-  DM.ADOQuery2.Active:=True;
-  FormAdd.Visible:=True;
-  FormAdd.Enabled:=False;
-  Form1.Enabled:=False;
-  FormFldNameDBG.Visible:=True;
-end;
-
 procedure TForm1.N8Click(Sender: TObject);
 begin
   DM.ReestrTb.Refresh;
@@ -233,29 +178,24 @@ end;
 
 procedure TForm1.N16Click(Sender: TObject);
 begin
-  cosgu.showmodal;
-//  FormCOSGUDBGEdit.Visible:=True;
-//  Form1.Enabled:=False;
+  cosgufm.showeditor;
 end;
 
 procedure TForm1.N17Click(Sender: TObject);
 begin
-  FormName_DogDBGEdit.Visible:=True;
-  Form1.Enabled:=False;
-  FormName_DogDBGEdit.EditName_dog.Text:='';
-  FormName_DogDBGEdit.RadioButton3.Checked:=True;
+  okvedfm.showeditor;
 end;
 
 procedure TForm1.N18Click(Sender: TObject);
 begin
-  provider:=tprovider.create(owner);
-  provider.showmodal;
+//говнокод
+  providerform:=tproviderform.create(owner);
+  providerform.showmodal;
 end;
 
 procedure TForm1.N15Click(Sender: TObject);
 begin
-  FormFldNameDBGEdit.Visible:=True;
-  Form1.Enabled:=False;
+//
 end;
 
 procedure TForm1.N19Click(Sender: TObject);
@@ -271,28 +211,6 @@ end;
 procedure TForm1.BitBtnChangeClick(Sender: TObject);
 begin
   contractform.edit(strtoint(reestrdbg.fields[0].asstring));
-end;
-
-procedure TForm1.BitBtnDelClick(Sender: TObject);
-var
-str, str1: String;
-begin
-  str:=Form1.ReestrDBG.Fields[0].AsString;
-  str1:=Form1.ReestrDBG.Fields[1].AsString;
-  if MessageDlg('№ ' + str + #13#10 +
-                'Вы уверенны, что хотите' + #13#10 +
-                'удалить договор № ' + str1,
-                mtWarning, [mbYes, mbNo], 0) = mrYes then
-  begin
-    QueryDelete.Close;
-    QueryDelete.SQL.Clear;
-    QueryDelete.SQL.Add('delete from reestrdog where regn = ' + str);
-    QueryDelete.ExecSQL;
-    dm.ReestrTb.Active:=true;
-    DM.ReestrTb.Refresh;
-    DM.ADOQuery1.Active:=not DM.ADOQuery1.Active;
-    DM.ADOQuery1.Active:=not DM.ADOQuery1.Active;
-  end;
 end;
 
 procedure TForm1.BitBtnFilterClick(Sender: TObject);
@@ -401,17 +319,6 @@ begin
   Perform(WM_SYSCOMMAND, $F012, 0);
 end;
 
-procedure TForm1.Timer1Timer(Sender: TObject);
-var  
-  i: Integer; 
-begin
-  Application.Title := CapForm1;
-  Form1.Caption     := CapForm1;
-  for i := 1 to (Length(CapForm1) - 1) do
-    CapForm1[i] := Application.Title[i + 1];
-  CapForm1[Length(CapForm1)] := Application.Title[1];
-end;
-
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   contractform.add;
@@ -430,6 +337,11 @@ end;
 procedure TForm1.summaryClick(Sender: TObject);
 begin
   summaryrpt.showreport;
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+  mainfm.main.show;
 end;
 
 end.

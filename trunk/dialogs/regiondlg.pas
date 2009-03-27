@@ -6,6 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, StdCtrls;
 
+function select:integer;
+
 type
   tregionselect = class(TForm)
     ok: TButton;
@@ -19,11 +21,7 @@ type
   public
     selected:integer;
     procedure fill;
-    function select:integer;
   end;
-
-var
-  regionselect: tregionselect;
 
 implementation
 
@@ -55,13 +53,17 @@ begin
   self.grid.fixedrows:=1;
 end;
 
-function tregionselect.select:integer;
+function select:integer;
+var
+  region:tregionselect;
 begin
-  result:=0;
-  regionselect:=tregionselect.create(owner);
-  fill;
-  if showmodal=mrok then
-    result:=cregion[selected-1].id;
+  result:=-1;
+  fetch;
+  region:=tregionselect.create(application);
+  region.fill;
+  if region.showmodal=mrok then
+    result:=cregion[region.selected-1].id;
+  region.free;
 end;
 
 end.

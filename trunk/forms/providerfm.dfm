@@ -1,4 +1,4 @@
-object provider: Tprovider
+object providerform: Tproviderform
   Left = 217
   Top = 145
   Width = 800
@@ -19,7 +19,7 @@ object provider: Tprovider
     Left = 0
     Top = 49
     Width = 792
-    Height = 524
+    Height = 517
     Align = alClient
     DataSource = dmod.data
     PopupMenu = popup

@@ -1,73 +1,78 @@
 [Closed Files]
-File_0=SourceModule,'D:\.sources\ACC\database\balance.pas',0,1,1,1,17,0,0
-File_1=SourceModule,'c:\program files\borland\delphi7\source\vcl\Graphics.pas',0,1,58,10,89,0,0
-File_2=SourceModule,'c:\program files\borland\delphi7\source\rtl\Sys\sysutils.pas',0,1,11119,64,11140,0,0
-File_3=SourceModule,'D:\.sources\ACC\database\regions.pas',0,1,13,1,46,0,0
-File_4=SourceModule,'D:\.sources\ACC\database\providers.pas',0,1,1,1,36,0,0
-File_5=SourceModule,'D:\.sources\ACC\forms\reportcosgu.pas',0,1,137,9,139,1,0
-File_6=SourceModule,'D:\.sources\ACC\dialogs\providerdlg.pas',0,1,1,1,1,0,0
+File_0=SourceModule,'D:\.sources\ACC\forms\contractfm.pas',0,1,161,24,181,0,0
+File_1=SourceModule,'D:\.sources\ACC\dialogs\subcontractdlg.pas',0,1,1,1,1,0,0
+File_2=SourceModule,'D:\.sources\ACC\forms\cosgufm.pas',0,1,4,21,9,1,0
+File_3=SourceModule,'D:\.sources\ACC\forms\providerfm.pas',0,1,1,1,9,1,0
+File_4=SourceModule,'c:\program files\borland\delphi7\source\rtl\Win\Windows.pas',0,1,18202,1,18223,0,0
+File_5=SourceModule,'c:\program files\borland\delphi7\source\vcl\grids.pas',0,1,554,24,577,0,0
 
 [Modules]
-Module0=D:\.sources\ACC\database\datamodule.pas
-Module1=D:\.sources\ACC\dialogs\subcontractdlg.pas
-Module2=D:\.sources\ACC\forms\summaryrpt.pas
-Module3=D:\.sources\ACC\reportokved.pas
-Module4=D:\.sources\ACC\forms\contractfm.pas
-Module5=D:\.sources\ACC\acc.pas
-Module6=D:\.sources\ACC\dialogs\cosgudlg.pas
-Module7=D:\.sources\ACC\forms\cosgufm.pas
-Module8=D:\.sources\ACC\dialogs\cosguedit.pas
-Module9=D:\.sources\ACC\database\cosgus.pas
-Module10=D:\.sources\ACC\uchet_dog.dpr
-Module11=D:\.sources\ACC\database\util.pas
-Module12=D:\.sources\ACC\fldnamedbgeditunit.pas
-Module13=c:\program files\borland\delphi7\source\vcl\grids.pas
-Module14=D:\.sources\ACC\database\nomencls.pas
-Module15=D:\.sources\ACC\database\contracts.pas
-Count=16
+Module0=D:\.sources\ACC\forms\mainfm.pas
+Module1=D:\.sources\ACC\forms\okvedfm.pas
+Module2=D:\.sources\ACC\dialogs\okvededit.pas
+Module3=D:\.sources\ACC\acc.pas
+Module4=D:\.sources\ACC\database\contracts.pas
+Module5=D:\.sources\ACC\dialogs\providerdlg.pas
+Module6=D:\.sources\ACC\dialogs\regiondlg.pas
+Module7=D:\.sources\ACC\database\util.pas
+Module8=D:\.sources\ACC\database\providers.pas
+Module9=D:\.sources\ACC\database\regions.pas
+Module10=D:\.sources\ACC\database\nomencls.pas
+Module11=D:\.sources\ACC\database\cosgus.pas
+Count=12
 EditWindowCount=1
 
-[D:\.sources\ACC\database\datamodule.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=1
-
-[D:\.sources\ACC\dialogs\subcontractdlg.pas]
+[D:\.sources\ACC\forms\mainfm.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\.sources\ACC\forms\summaryrpt.pas]
+[D:\.sources\ACC\forms\okvedfm.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\.sources\ACC\dialogs\okvededit.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
-
-[D:\.sources\ACC\reportokved.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\.sources\ACC\forms\contractfm.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=1
 
 [D:\.sources\ACC\acc.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
-[D:\.sources\ACC\dialogs\cosgudlg.pas]
+[D:\.sources\ACC\database\contracts.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\.sources\ACC\forms\cosgufm.pas]
+[D:\.sources\ACC\dialogs\providerdlg.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\.sources\ACC\dialogs\cosguedit.pas]
+[D:\.sources\ACC\dialogs\regiondlg.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\.sources\ACC\database\util.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\.sources\ACC\database\providers.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\.sources\ACC\database\regions.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\.sources\ACC\database\nomencls.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -78,32 +83,6 @@ FormState=0
 FormOnTop=0
 
 [D:\.sources\ACC\uchet_dog.dpr]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\.sources\ACC\database\util.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\.sources\ACC\fldnamedbgeditunit.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[c:\program files\borland\delphi7\source\vcl\grids.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\.sources\ACC\database\nomencls.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\.sources\ACC\database\contracts.pas]
-ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
@@ -115,9 +94,13 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
+[D:\.sources\ACC\database\datamodule.pas]
+FormState=0
+FormOnTop=0
+
 [EditWindow0]
-ViewCount=16
-CurrentView=0
+ViewCount=12
+CurrentView=3
 View0=0
 View1=1
 View2=2
@@ -130,10 +113,6 @@ View8=8
 View9=9
 View10=10
 View11=11
-View12=12
-View13=13
-View14=14
-View15=15
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -144,131 +123,103 @@ Top=198
 Width=1113
 Height=646
 MaxLeft=-4
-MaxTop=97
+MaxTop=104
 MaxWidth=1288
-MaxHeight=903
+MaxHeight=894
 ClientWidth=1280
-ClientHeight=876
+ClientHeight=860
 LeftPanelSize=181
 LeftPanelClients=CodeExplorer@EditWindow0,ProjectManager
-LeftPanelData=00000400010000000C000000436F64654578706C6F726572B500000000000000026C030000000000000100000000B50000001200000050726F6A6563744D616E61676572466F726D01000000000000000000000000FFFFFFFF
+LeftPanelData=00000400010000000C000000436F64654578706C6F726572B5000000000000000204030000000000000100000000B50000001200000050726F6A6563744D616E61676572466F726D01000000000000000000000000FFFFFFFF
 RightPanelSize=190
 RightPanelClients=ObjectTree,PropertyInspector
-RightPanelData=00000400000000006C0300000000000001BE000000000000000100000000090100000E0000004F626A656374547265655669657701000000006C0300001100000050726F7065727479496E73706563746F72FFFFFFFF
-BottomPanelSize=0
+RightPanelData=0000040000000000040300000000000001BE000000000000000100000000F60000000E0000004F626A65637454726565566965770100000000040300001100000050726F7065727479496E73706563746F72FFFFFFFF
+BottomPanelSize=85
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=00000400010000000B0000004D6573736167655669657700000000000000000000000000000000000100000000000000000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=000004000000000000000000000000000000000000000000000100000000000000000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
-Module=D:\.sources\ACC\database\datamodule.pas
-CursorX=111
-CursorY=6
-TopLine=1
+Module=D:\.sources\ACC\acc.pas
+CursorX=1
+CursorY=335
+TopLine=332
 LeftCol=1
 
 [View1]
-Module=D:\.sources\ACC\dialogs\subcontractdlg.pas
-CursorX=16
-CursorY=89
-TopLine=81
+Module=D:\.sources\ACC\database\util.pas
+CursorX=1
+CursorY=36
+TopLine=1
 LeftCol=1
 
 [View2]
-Module=D:\.sources\ACC\database\contracts.pas
-CursorX=1
-CursorY=194
-TopLine=157
+Module=D:\.sources\ACC\forms\okvedfm.pas
+CursorX=126
+CursorY=37
+TopLine=1
 LeftCol=1
 
 [View3]
-Module=D:\.sources\ACC\reportokved.pas
+Module=D:\.sources\ACC\forms\mainfm.pas
 CursorX=1
-CursorY=178
-TopLine=169
+CursorY=120
+TopLine=92
 LeftCol=1
 
 [View4]
-Module=D:\.sources\ACC\database\nomencls.pas
-CursorX=52
-CursorY=21
-TopLine=43
+Module=D:\.sources\ACC\dialogs\okvededit.pas
+CursorX=1
+CursorY=1
+TopLine=1
 LeftCol=1
 
 [View5]
-Module=D:\.sources\ACC\forms\summaryrpt.pas
-CursorX=108
-CursorY=156
-TopLine=151
+Module=D:\.sources\ACC\database\contracts.pas
+CursorX=34
+CursorY=28
+TopLine=196
 LeftCol=1
 
 [View6]
-Module=c:\program files\borland\delphi7\source\vcl\grids.pas
-CursorX=55
-CursorY=194
-TopLine=171
+Module=D:\.sources\ACC\dialogs\providerdlg.pas
+CursorX=38
+CursorY=51
+TopLine=29
 LeftCol=1
 
 [View7]
-Module=D:\.sources\ACC\fldnamedbgeditunit.pas
-CursorX=1
-CursorY=62
-TopLine=38
+Module=D:\.sources\ACC\dialogs\regiondlg.pas
+CursorX=42
+CursorY=65
+TopLine=34
 LeftCol=1
 
 [View8]
-Module=D:\.sources\ACC\database\util.pas
+Module=D:\.sources\ACC\database\regions.pas
 CursorX=1
-CursorY=10
-TopLine=4
+CursorY=50
+TopLine=27
 LeftCol=1
 
 [View9]
-Module=D:\.sources\ACC\uchet_dog.dpr
+Module=D:\.sources\ACC\database\cosgus.pas
 CursorX=1
-CursorY=58
-TopLine=32
+CursorY=1
+TopLine=1
 LeftCol=1
 
 [View10]
-Module=D:\.sources\ACC\acc.pas
-CursorX=25
-CursorY=263
-TopLine=242
+Module=D:\.sources\ACC\database\nomencls.pas
+CursorX=49
+CursorY=99
+TopLine=83
 LeftCol=1
 
 [View11]
-Module=D:\.sources\ACC\database\cosgus.pas
-CursorX=24
-CursorY=21
-TopLine=6
-LeftCol=1
-
-[View12]
-Module=D:\.sources\ACC\dialogs\cosguedit.pas
-CursorX=35
-CursorY=64
-TopLine=32
-LeftCol=1
-
-[View13]
-Module=D:\.sources\ACC\forms\cosgufm.pas
-CursorX=46
-CursorY=57
-TopLine=36
-LeftCol=1
-
-[View14]
-Module=D:\.sources\ACC\dialogs\cosgudlg.pas
-CursorX=63
-CursorY=51
-TopLine=30
-LeftCol=1
-
-[View15]
-Module=D:\.sources\ACC\forms\contractfm.pas
+Module=D:\.sources\ACC\database\providers.pas
 CursorX=1
-CursorY=254
-TopLine=233
+CursorY=73
+TopLine=50
 LeftCol=1
 
 [Watches]
@@ -291,7 +242,7 @@ Height=105
 MaxLeft=-1
 MaxTop=-1
 MaxWidth=1288
-MaxHeight=105
+MaxHeight=112
 ClientWidth=1280
 ClientHeight=78
 
@@ -302,14 +253,31 @@ State=0
 Left=0
 Top=12
 Width=181
-Height=864
+Height=760
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=181
-ClientHeight=864
-TBDockHeight=864
+ClientHeight=760
+TBDockHeight=760
 LRDockWidth=438
 Dockable=1
+
+[CPUWindow]
+Create=1
+Visible=0
+State=0
+Left=107
+Top=135
+Width=1066
+Height=753
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=1058
+ClientHeight=719
+DumpPane=79
+DisassemblyPane=187
+RegisterPane=231
+FlagPane=64
 
 [AlignmentPalette]
 Create=1
@@ -318,7 +286,7 @@ State=0
 Left=200
 Top=107
 Width=156
-Height=82
+Height=84
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=150
@@ -329,20 +297,20 @@ Create=1
 Visible=1
 State=0
 Left=0
-Top=277
+Top=258
 Width=190
-Height=599
+Height=514
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=190
-ClientHeight=599
+ClientHeight=514
 TBDockHeight=525
 LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
 SelectedItem=Name
-ExpandedItems=
+ExpandedItems=Constraints
 HiddenCategories=
 
 [ObjectTree]
@@ -352,11 +320,11 @@ State=0
 Left=0
 Top=12
 Width=190
-Height=249
+Height=230
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=190
-ClientHeight=249
+ClientHeight=230
 TBDockHeight=354
 LRDockWidth=190
 Dockable=1
@@ -379,7 +347,7 @@ Dockable=1
 
 [MessageView@EditWindow0]
 Create=1
-Visible=0
+Visible=1
 State=0
 Left=12
 Top=0

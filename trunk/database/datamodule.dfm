@@ -1,4 +1,4 @@
-object dmod: Tdmod
+object Tdmod
   OldCreateOrder = False
   Left = 381
   Top = 193

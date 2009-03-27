@@ -40,7 +40,7 @@ begin
       begin
         setlength(cprovider,length(cprovider)+1);
         cprovider[i].id:=dmod.query.fieldbyname('id_supplier').value;
-        cprovider[i].name:=dmod.query.fieldbyname('supplier').value;
+        cprovider[i].name:=trim(dmod.query.fieldbyname('supplier').value);
         dmod.query.next;
       end;
   except
@@ -62,7 +62,7 @@ begin
       begin
         setlength(cprovider,length(cprovider)+1);
         cprovider[i].id:=dmod.query.fieldbyname('id_supplier').value;
-        cprovider[i].name:=dmod.query.fieldbyname('supplier').value;
+        cprovider[i].name:=trim(dmod.query.fieldbyname('supplier').value);
         dmod.query.next;
       end;
   except

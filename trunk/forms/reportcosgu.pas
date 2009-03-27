@@ -62,7 +62,7 @@ begin
   dmod.query.first;
   for i:=0 to dmod.query.recordcount-1 do
     begin
-      report_cosgu.cosgu.items.add(cropspace(dmod.query.fieldbyname('code').asstring));
+      report_cosgu.cosgu.items.add(trim(dmod.query.fieldbyname('code').asstring));
       dmod.query.next;
     end;
   dmod.query.close;
@@ -80,7 +80,7 @@ begin
   dmod.query.first;
   for i:=0 to dmod.query.recordcount-1 do
     begin
-      report_cosgu.pbs.items.add(cropspace(dmod.query.fieldbyname('fldname').asstring));
+      report_cosgu.pbs.items.add(trim(dmod.query.fieldbyname('fldname').asstring));
       dmod.query.next;
     end;
   dmod.query.close;

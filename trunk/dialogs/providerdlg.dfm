@@ -32,7 +32,7 @@ object providerselect: Tproviderselect
       TabOrder = 0
     end
     object cancel: TButton
-      Left = 174
+      Left = 334
       Top = 16
       Width = 128
       Height = 25

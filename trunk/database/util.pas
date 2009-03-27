@@ -6,8 +6,8 @@ uses
   sysutils,ComObj, ActiveX, ShlObj, windows, Messages,  Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls;
 
+function min(a,b:variant):variant;
 function max(a,b:variant):variant;
-function cropspace(s:string):string;
 function dateornull(date:tdate):string;
 function starorstr(text:string):string;
 procedure makelink;
@@ -17,20 +17,20 @@ implementation
 uses
   defs;
 
+function min(a,b:variant):variant;
+begin
+  if a>b then
+    result:=b
+  else
+    result:=a
+end;
+
 function max(a,b:variant):variant;
 begin
   if a>b then
     result:=a
   else
     result:=b
-end;
-
-function cropspace(s:string):string;
-var i:integer;
-begin
-  for i:=length(s) downto 1 do
-    if s[i]<>chr(32) then break;
-  result:=copy(s,1,i);
 end;
 
 function dateornull(date:tdate):string;
@@ -51,6 +51,7 @@ var
   SL: IShellLink;
   link:ipersistfile;
   result:hresult;
+  s:string;
 const
   lnkname='\Рабочий стол\АРМ Учёт договоров.lnk';
 begin
@@ -60,7 +61,7 @@ begin
   link:= SL as IPersistFile;
   OleCheck(SL.SetPath(pchar(paramstr(0)))); // set link path to proper file
   { create a path location and filename for link file }
-  result:=link.save(pwidechar(widestring(copy(getenv('USERPROFILE'),0,length(getenv('USERPROFILE'))-1)+lnkname)),true);// save link file
+  result:=link.save(pwidechar(widestring(getenv('USERPROFILE')+lnkname)),true);// save link file
 end;
 
 end.
