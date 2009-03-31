@@ -8,6 +8,7 @@ uses
 
 function min(a,b:variant):variant;
 function max(a,b:variant):variant;
+function booltobit(bool:boolean):char;
 function dateornull(date:tdate):string;
 function starorstr(text:string):string;
 procedure makelink;
@@ -31,6 +32,14 @@ begin
     result:=a
   else
     result:=b
+end;
+
+function booltobit(bool:boolean):char;
+begin
+  if bool then
+    result:='1'
+  else
+    result:='0';
 end;
 
 function dateornull(date:tdate):string;

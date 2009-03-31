@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, StdCtrls, Grids, ComCtrls, XPMan;
+  Dialogs, ExtCtrls, StdCtrls, Grids, ComCtrls, XPMan, Mask;
 
 type
   tmain = class(TForm)
@@ -14,12 +14,12 @@ type
     TabSheet3: TTabSheet;
     status: TStatusBar;
     grid: TStringGrid;
-    Button1: TButton;
+    add: TButton;
     mainpanel: TPanel;
     Panel2: TPanel;
     exit: TButton;
-    Button3: TButton;
-    Button4: TButton;
+    upd: TButton;
+    del: TButton;
     Button5: TButton;
     Button6: TButton;
     Button7: TButton;
@@ -35,17 +35,21 @@ type
     providerbox: TGroupBox;
     provider: TButton;
     pbs: TButton;
+    startbox: TGroupBox;
+    finishbox: TGroupBox;
+    start: TMaskEdit;
+    finish: TMaskEdit;
     procedure exitClick(Sender: TObject);
     procedure allClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure providerClick(Sender: TObject);
     procedure pbsClick(Sender: TObject);
     procedure numberChange(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
+    procedure addClick(Sender: TObject);
+    procedure updClick(Sender: TObject);
     procedure gridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure Button4Click(Sender: TObject);
+    procedure delClick(Sender: TObject);
     procedure Button8Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
@@ -53,10 +57,14 @@ type
     procedure Button9Click(Sender: TObject);
     procedure Button10Click(Sender: TObject);
     procedure Button11Click(Sender: TObject);
+    procedure startChange(Sender: TObject);
+    procedure finishChange(Sender: TObject);
+    procedure gridDblClick(Sender: TObject);
   private
     { Private declarations }
   public
     ipbs,iprovider,selected:integer;
+    startd,finishd:tdatetime;
     procedure fill;
   end;
 
@@ -137,6 +145,12 @@ begin
   if iprovider>0 then
     dmod.query.sql.text:=dmod.query.sql.text+
                          'AND ReestrDog.ID_SUPPLIER='+inttostr(iprovider)+#13;
+  if startd<>0 then
+    dmod.query.sql.text:=dmod.query.sql.text+
+                         'AND ReestrDog.DATA_DOG>='+dateornull(startd)+#13;
+  if finishd<>0 then
+    dmod.query.sql.text:=dmod.query.sql.text+
+                         'AND ReestrDog.DATA_DOG<='+dateornull(finishd)+#13;
   dmod.query.sql.text:=dmod.query.sql.text+
                        'GROUP BY ReestrDog.REGN,ReestrDog.REG_N,ReestrDog.N_DOG,'+
                        'ReestrDog.DATA_DOG,ReestrDog.DATA_SROK,ReestrDog.DATA_POST,'+
@@ -172,6 +186,8 @@ begin
   provider.caption:='Не выбран';
   iprovider:=-1;
   ipbs:=-1;
+  start.text:='__.__.____';
+  finish.text:='__.__.____';
   fill;
   status.panels.items[1].text:=inttostr(grid.rowcount-1);
 end;
@@ -183,7 +199,7 @@ begin
     if length(providers.byid(iprovider))>45 then
       provider.caption:=copy(providers.byid(iprovider),0,42)+'...'
     else
-      provider.caption:=providers.byid(iprovider);
+      provider.caption:='Не выбран';
   fill;
 end;
 
@@ -206,19 +222,53 @@ begin
   status.panels.items[1].text:=inttostr(grid.rowcount-1);
 end;
 
-procedure tmain.Button1Click(Sender: TObject);
+procedure tmain.startChange(Sender: TObject);
+begin
+  if trystrtodate(start.text,startd) and (start.text[10] in ['0'..'9']) then
+    begin
+      start.font.color:=clnone;
+      fill;
+    end
+  else
+    begin
+      start.font.color:=clred;
+      startd:=0;
+    end;
+end;
+
+procedure tmain.finishChange(Sender: TObject);
+begin
+  if trystrtodate(finish.text,finishd) and (finish.text[10] in ['0'..'9']) then
+    begin
+      finish.font.color:=clnone;
+      fill;
+    end
+  else
+    begin
+      finish.font.color:=clred;
+      finishd:=0;
+    end;
+end;
+
+procedure tmain.addClick(Sender: TObject);
 begin
   contractform.add;
   fill;
 end;
 
-procedure tmain.Button3Click(Sender: TObject);
+procedure tmain.updClick(Sender: TObject);
 begin
   contractform.edit(strtoint(grid.cells[0,selected]));
   fill;
 end;
 
-procedure tmain.Button4Click(Sender: TObject);
+procedure tmain.gridDblClick(Sender: TObject);
+begin
+  contractform.edit(strtoint(grid.cells[0,selected]));
+  fill;
+end;
+
+procedure tmain.delClick(Sender: TObject);
 begin
   if messagebox(handle,pchar('Вы действительно хотите удалить договор '+grid.cells[0,selected]+'?'),pchar(caption),mb_yesno)=mryes then
     contracts.delete(strtoint(grid.cells[0,selected]));

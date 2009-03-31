@@ -35,6 +35,9 @@ type
     subcontract:array of tsubcontract;
   end;
 
+type
+  pcontract=^tcontract;
+
 function maxregn(region:integer):integer;
 function fetch(regn:integer):tcontract;
 procedure insert(contract:tcontract);
@@ -64,10 +67,11 @@ begin
     dmod.query.sql.text:='SELECT MAX(REGN) AS REGN FROM ReestrDog WHERE (fldid=:fldid)';
     dmod.query.parameters.parambyname('fldid').value:=region;
     dmod.query.open;
-    if dmod.query.fieldbyname('regn').asinteger<>0 then
-      result:=dmod.query.fieldbyname('regn').value
-    else
-      result:=900000000+region*1000000;
+    if dmod.query.recordcount>0 then
+      if dmod.query.fieldbyname('regn').asinteger<>0 then
+        result:=dmod.query.fieldbyname('regn').value
+      else
+        result:=900000000+region*1000000;
   except
     showmessage('Ошибка получения максимального регистрационного номера договора!!!');
   end;
@@ -130,8 +134,7 @@ begin
                          ','+inttostr(contract.region)+
                          ','+inttostr(contract.id_supplier)+')';
     dmod.query.execsql;
-    dmod.query.sql.text:='DELETE FROM subcontract WHERE id=:id';
-    dmod.query.parameters.parambyname('id').value:=contract.regn;
+    dmod.query.sql.text:='DELETE FROM subcontract WHERE id='+inttostr(contract.regn);
     dmod.query.execsql;
     for i:=0 to length(contract.subcontract)-1 do
       begin
@@ -143,7 +146,7 @@ begin
                              quotedstr(contract.subcontract[i].code)+','+
                              dateornull(contract.subcontract[i].subdate)+','+
                              float(contract.subcontract[i].price)+','+
-                             booltostr(contract.subcontract[i].report)+','+
+                             booltobit(contract.subcontract[i].report)+','+
                              quotedstr(contract.subcontract[i].comment)+')';
         dmod.query.execsql;
         dmod.query.connection.committrans;
