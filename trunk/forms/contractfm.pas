@@ -178,7 +178,7 @@ end;
 
 procedure tcontractform.btnregionClick(Sender: TObject);
 begin
-  contract.region:=cregion[regiondlg.select].id;
+  contract.region:=regiondlg.select;
   if contract.region<>0 then
     begin
       contract.regn:=contracts.maxregn(contract.region)+1;

@@ -41,6 +41,7 @@ type
   private
     { Private declarations }
   public
+    function getlimit(var price:double):real;
     procedure add(subcontract:psubcontract;result:pbool);
     procedure upd(subcontract:psubcontract);
   end;
@@ -48,7 +49,7 @@ type
 var
   subcontractfm:tsubcontractfm;
   vsubcontract:^tsubcontract;
-
+  contract:pcontract;
 
 implementation
 
@@ -63,6 +64,18 @@ uses
 
 {$R *.dfm}
 
+function tsubcontractfm.getlimit(var price:double):real;
+var
+  i:integer;
+begin
+  if length(contractform.contract.subcontract)>0 then
+    for i:=0 to length(contractform.contract.subcontract) do
+      if (contractform.contract.subcontract[i].nomencl=vsubcontract^.nomencl)
+      and (contractform.selected-1<>i) then
+        price:=price+contractform.contract.subcontract[i].price;
+  result:=defs.contractlimit-getbalance(contractform.contract.regn,vsubcontract^.nomencl)-price;
+end;
+
 procedure tsubcontractfm.add(subcontract:psubcontract;result:pbool);
 var
   csubcontract:tsubcontract;
@@ -71,6 +84,7 @@ begin
   vsubcontract:=@csubcontract;
   vsubcontract^.subdate:=0;
   vsubcontract^.price:=0;
+  vsubcontract^.report:=false;
   subcontractfm.ok.caption:='Добавить';
   subcontractfm.subdate.text:=datetostr(subcontract.subdate);
   if subcontractfm.showmodal=mrok then
@@ -80,6 +94,7 @@ begin
       subcontract.subdate:=vsubcontract^.subdate;
       subcontract.price:=vsubcontract^.price;
       subcontract.comment:=vsubcontract^.comment;
+      subcontract.report:=vsubcontract^.report;
       result^:=true;
     end;
 end;
@@ -135,11 +150,11 @@ begin
     self.price.font.color:=clred;
   if vsubcontract^.nomencl<>'' then
     begin
-      if vsubcontract^.price>defs.contractlimit then
+      if getlimit(price)<0 then
         self.balance.font.color:=clred
       else
         self.balance.font.color:=clnone;
-      self.balance.text:=floattostr(defs.contractlimit-getbalance(vsubcontract^.nomencl,contractform.contract.regn)-vsubcontract^.price);
+      self.balance.text:=floattostr(getlimit(price));
     end
 end;
 

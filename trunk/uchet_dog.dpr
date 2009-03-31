@@ -2,7 +2,6 @@ program Uchet_Dog;
 
 uses
   Forms,
-  ACC in 'acc.pas' {Form1},
   DMUnit in 'dmunit.pas' {DM: TDataModule},
   About in 'About.pas' {AboutBox},
   sqltext in 'sqltext.pas',

@@ -1,8 +1,8 @@
 object main: Tmain
-  Left = 90
-  Top = 212
-  Width = 915
-  Height = 645
+  Left = 66
+  Top = 138
+  Width = 1078
+  Height = 769
   Caption = #1040#1056#1052' "'#1059#1095#1105#1090' '#1076#1086#1075#1086#1074#1086#1088#1086#1074'"'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,8 +17,8 @@ object main: Tmain
   TextHeight = 13
   object status: TStatusBar
     Left = 0
-    Top = 587
-    Width = 907
+    Top = 711
+    Width = 1070
     Height = 24
     Panels = <
       item
@@ -52,8 +52,8 @@ object main: Tmain
   object grid: TStringGrid
     Left = 0
     Top = 73
-    Width = 907
-    Height = 514
+    Width = 1070
+    Height = 638
     Align = alClient
     ColCount = 1
     DefaultColWidth = 0
@@ -62,12 +62,13 @@ object main: Tmain
     RowCount = 1
     FixedRows = 0
     TabOrder = 1
+    OnDblClick = gridDblClick
     OnSelectCell = gridSelectCell
   end
   object mainpanel: TPanel
     Left = 0
     Top = 0
-    Width = 907
+    Width = 1070
     Height = 73
     Align = alTop
     BevelOuter = bvLowered
@@ -75,7 +76,7 @@ object main: Tmain
     object mainmenu: TPageControl
       Left = 1
       Top = 1
-      Width = 813
+      Width = 976
       Height = 71
       ActivePage = filters
       Align = alClient
@@ -142,36 +143,86 @@ object main: Tmain
             OnClick = providerClick
           end
         end
+        object startbox: TGroupBox
+          Left = 665
+          Top = 0
+          Width = 81
+          Height = 41
+          Caption = #1057
+          TabOrder = 4
+          object start: TMaskEdit
+            Left = 8
+            Top = 16
+            Width = 65
+            Height = 21
+            EditMask = '!99/99/0000;1;_'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            MaxLength = 10
+            ParentFont = False
+            TabOrder = 0
+            Text = '  .  .    '
+            OnChange = startChange
+          end
+        end
+        object finishbox: TGroupBox
+          Left = 746
+          Top = 0
+          Width = 81
+          Height = 41
+          Caption = #1055#1086
+          TabOrder = 5
+          object finish: TMaskEdit
+            Left = 8
+            Top = 16
+            Width = 65
+            Height = 21
+            EditMask = '!99/99/0000;1;_'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            MaxLength = 10
+            ParentFont = False
+            TabOrder = 0
+            Text = '  .  .    '
+            OnChange = finishChange
+          end
+        end
       end
       object TabSheet1: TTabSheet
         Caption = #1044#1086#1075#1086#1074#1086#1088#1072
-        Constraints.MaxHeight = 40
-        object Button1: TButton
+        Constraints.MaxHeight = 43
+        object add: TButton
           Left = 0
           Top = 8
           Width = 75
           Height = 25
           Caption = #1044#1086#1073#1072#1074#1080#1090#1100
           TabOrder = 0
-          OnClick = Button1Click
+          OnClick = addClick
         end
-        object Button3: TButton
+        object upd: TButton
           Left = 80
           Top = 8
           Width = 75
           Height = 25
           Caption = #1048#1079#1084#1077#1085#1080#1090#1100
           TabOrder = 1
-          OnClick = Button3Click
+          OnClick = updClick
         end
-        object Button4: TButton
+        object del: TButton
           Left = 160
           Top = 8
           Width = 75
           Height = 25
           Caption = #1059#1076#1072#1083#1080#1090#1100
           TabOrder = 2
-          OnClick = Button4Click
+          OnClick = delClick
         end
       end
       object TabSheet2: TTabSheet
@@ -247,7 +298,7 @@ object main: Tmain
       end
     end
     object Panel2: TPanel
-      Left = 814
+      Left = 977
       Top = 1
       Width = 92
       Height = 71

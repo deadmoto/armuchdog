@@ -3,17 +3,18 @@ unit balance;
 interface
 
 uses
-  classes,
+  //  classes,
   sysutils;
 
-function getbalance(nomencl:string;id:integer):real;
+function getbalance(id:integer;nomencl:string):real;
 
 implementation
 
 uses
+  contracts,
   datamodule;
 
-function getbalance(nomencl:string;id:integer):real;
+function getbalance(id:integer;nomencl:string):real;
 begin
   result:=0;
   dmod.query.sql.text:='SELECT SUM(price) AS BALANCE'+#13+
