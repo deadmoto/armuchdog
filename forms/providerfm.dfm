@@ -1,9 +1,9 @@
 object providerform: Tproviderform
   Left = 217
   Top = 145
-  Width = 800
-  Height = 600
   Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082#1080
+  ClientHeight = 566
+  ClientWidth = 792
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object providerform: Tproviderform
     Width = 792
     Height = 517
     Align = alClient
-    DataSource = dmod.data
+    DataSource = dm.data
     PopupMenu = popup
     ReadOnly = True
     TabOrder = 1

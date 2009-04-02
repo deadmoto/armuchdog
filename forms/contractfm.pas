@@ -3,27 +3,38 @@ unit contractfm;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Grids, ComCtrls, Menus, contracts, Mask, ExtCtrls;
+//–ø–∞—Ä–∞–º–µ—Ç—Ä—ã –ø—Ä–æ—Ü–µ–¥—É—Ä
+  contracts,
+//
+  classes,
+  controls,
+  stdctrls,
+  extctrls,
+  forms,
+  menus,
+  graphics,
+  grids,
+  mask,
+  sysutils;
 
 type
-  tcontractform = class(TForm)
-    databox: TGroupBox;
-    detailboxbox: TGroupBox;
-    GroupBox1: TGroupBox;
+  tcontractform=class(tform)
+    databox:tgroupbox;
+    detailboxbox:tgroupbox;
+    GroupBox1: tgroupbox;
     regn: TEdit;
-    GroupBox3: TGroupBox;
-    GroupBox4: TGroupBox;
+    GroupBox3: tgroupbox;
+    GroupBox4: tgroupbox;
     reg_n: TEdit;
-    GroupBox5: TGroupBox;
+    GroupBox5: tgroupbox;
     n_dog: TEdit;
-    GroupBox6: TGroupBox;
+    GroupBox6: tgroupbox;
     id_supplier: TEdit;
     btnsupplier: TButton;
-    GroupBox7: TGroupBox;
-    GroupBox8: TGroupBox;
-    GroupBox9: TGroupBox;
-    GroupBox10: TGroupBox;
+    GroupBox7: tgroupbox;
+    GroupBox8: tgroupbox;
+    GroupBox9: tgroupbox;
+    GroupBox10: tgroupbox;
     subctontractgrid: TStringGrid;
     fldid: TEdit;
     btnregion: TButton;
@@ -36,11 +47,11 @@ type
     data_srok: TMaskEdit;
     data_post: TMaskEdit;
     data_reg: TMaskEdit;
-    subcontractbox: TGroupBox;
+    subcontractbox: tgroupbox;
     subcontractadd: TButton;
     subcontractupd: TButton;
     subcontractdel: TButton;
-    sumbox: TGroupBox;
+    sumbox: tgroupbox;
     sum: TEdit;
     Panel1: TPanel;
     procedure discardClick(Sender: TObject);
@@ -61,30 +72,56 @@ type
       ARow: Integer; var CanSelect: Boolean);
     procedure subcontractdelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure subctontractgridDblClick(Sender: TObject);
   private
     { Private declarations }
   public
     selected:integer;
     contract:tcontract;
+    function checklimit:boolean;
     procedure add;
     procedure edit(regn:integer);
     procedure fill;
   end;
 
 var
-  contractform: tcontractform;
+  contractform:tcontractform;
 
 implementation
 
 uses
-  dmunit,
+  defs,
+  balance,
   providers,
   regions,
   providerdlg,
   regiondlg,
-  subcontractdlg;
+  subcontractdlg,
+  progressdlg,
+  util;
 
 {$R *.dfm}
+
+function tcontractform.checklimit:boolean;
+var
+  i,j:integer;
+  limit:real;
+begin
+  result:=true;
+  for i:=0 to length(contract.subcontract)-1 do
+    begin
+      limit:=defs.contractlimit;
+      limit:=limit-getbalance(contract.regn,contract.subcontract[i].nomencl,contract.subcontract[i].subdate);
+      for j:=0 to length(contract.subcontract)-1 do
+        if (contract.subcontract[i].nomencl=contract.subcontract[j].nomencl)
+        and (not contract.subcontract[j].skip)
+        and (quarter(contract.subcontract[i].subdate)=quarter(contract.subcontract[j].subdate))
+        and (year(contract.subcontract[i].subdate)=year(contract.subcontract[j].subdate)) then
+          limit:=limit-contract.subcontract[j].price;
+      if limit<0 then result:=false;
+    end;
+end;
 
 procedure tcontractform.fill;
 var
@@ -97,11 +134,11 @@ begin
       subctontractgrid.rowcount:=length(self.contract.subcontract)+1;
       subctontractgrid.colcount:=5;
       subctontractgrid.fixedrows:=1;
-      subctontractgrid.cols[0].strings[0]:='ƒ‡Ú‡';
-      subctontractgrid.cols[1].strings[0]:='—ÛÏÏ‡';
-      subctontractgrid.cols[2].strings[0]:='Œ ¬›ƒ';
-      subctontractgrid.cols[3].strings[0]:=' Œ—√”';
-      subctontractgrid.cols[4].strings[0]:=' ÓÏÏÂÌÚ‡ËÈ';
+      subctontractgrid.cols[0].strings[0]:='–î–∞—Ç–∞';
+      subctontractgrid.cols[1].strings[0]:='–°—É–º–º–∞';
+      subctontractgrid.cols[2].strings[0]:='–û–ö–í–≠–î';
+      subctontractgrid.cols[3].strings[0]:='–ö–û–°–ì–£';
+      subctontractgrid.cols[4].strings[0]:='–ö–æ–º–º–µ–Ω—Ç–∞—Ä–∏–π';
       subctontractgrid.colwidths[0]:=8*8;
       subctontractgrid.colwidths[1]:=8*8;
       subctontractgrid.colwidths[2]:=8*8;
@@ -126,6 +163,7 @@ begin
   sum.text:=floattostr(pricefull);
   subcontractupd.enabled:=length(contract.subcontract)>0;
   subcontractdel.enabled:=length(contract.subcontract)>0;
+  data_reg.enabled:=checklimit;
 end;
 
 procedure tcontractform.add;
@@ -176,6 +214,12 @@ begin
     id_supplier.text:=providers.byid(self.contract.id_supplier);
 end;
 
+procedure tcontractform.Button1Click(Sender: TObject);
+begin
+  subcontractdlg.showeditor(contract);
+  fill;
+end;
+
 procedure tcontractform.btnregionClick(Sender: TObject);
 begin
   contract.region:=regiondlg.select;
@@ -199,7 +243,7 @@ end;
 
 procedure tcontractform.reg_nKeyPress(Sender: TObject; var Key: Char);
 begin
-  if not (key in ['0'..'9',#8]) then
+  if not charinset(key,['0'..'9',#8]) then
     key:=chr(0);
 end;
 
@@ -239,23 +283,26 @@ end;
 procedure tcontractform.subcontractaddClick(Sender: TObject);
 var
   subcontract:tsubcontract;
-  result:boolean;
 begin
   subcontract.subdate:=contract.data_dog;
-  subcontractfm.add(@subcontract,@result);
-  if result then
-    begin
-      setlength(contract.subcontract,length(contract.subcontract)+1);
-      contract.subcontract[high(contract.subcontract)]:=subcontract;
-      fill;
-    end;
+  subcontractdlg.showeditor(contract);
+  fill;
 end;
 
 procedure tcontractform.subcontractupdClick(Sender: TObject);
 begin
   if (selected>0) and (selected<=length(contract.subcontract)) then
     begin
-      subcontractfm.upd(@contract.subcontract[selected-1]);
+      subcontractdlg.showeditor(contract,selected-1);
+      fill;
+    end;
+end;
+
+procedure tcontractform.subctontractgridDblClick(Sender: TObject);
+begin
+  if (selected>0) and (selected<=length(contract.subcontract)) then
+    begin
+      subcontractdlg.showeditor(contract,selected-1);
       fill;
     end;
 end;

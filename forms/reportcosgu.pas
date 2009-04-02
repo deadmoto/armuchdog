@@ -54,18 +54,18 @@ var
   i:integer;
 begin
   report_cosgu.cosgu.items.clear;
-  dmod.query.sql.text:='SELECT code'+#13+
+  dm.query.sql.text:='SELECT code'+#13+
                        'FROM subcontract'+#13+
                        'WHERE code IS NOT NULL'+#13+
                        'GROUP BY code';
-  dmod.query.open;
-  dmod.query.first;
-  for i:=0 to dmod.query.recordcount-1 do
+  dm.query.open;
+  dm.query.first;
+  for i:=0 to dm.query.recordcount-1 do
     begin
-      report_cosgu.cosgu.items.add(trim(dmod.query.fieldbyname('code').asstring));
-      dmod.query.next;
+      report_cosgu.cosgu.items.add(trim(dm.query.fieldbyname('code').asstring));
+      dm.query.next;
     end;
-  dmod.query.close;
+  dm.query.close;
   report_cosgu.cosgu.items.strings[0]:='*';
 end;
 
@@ -75,15 +75,15 @@ var
 begin
   report_cosgu.pbs.items.clear;
   report_cosgu.pbs.items.add('*');
-  dmod.query.sql.text:='SELECT * FROM RegionID';
-  dmod.query.open;
-  dmod.query.first;
-  for i:=0 to dmod.query.recordcount-1 do
+  dm.query.sql.text:='SELECT * FROM RegionID';
+  dm.query.open;
+  dm.query.first;
+  for i:=0 to dm.query.recordcount-1 do
     begin
-      report_cosgu.pbs.items.add(trim(dmod.query.fieldbyname('fldname').asstring));
-      dmod.query.next;
+      report_cosgu.pbs.items.add(trim(dm.query.fieldbyname('fldname').asstring));
+      dm.query.next;
     end;
-  dmod.query.close;
+  dm.query.close;
 end;
 
 procedure treport_cosgu.FormShow(Sender: TObject);
@@ -115,7 +115,7 @@ end;
 
 procedure treport_cosgu.searchClick(Sender: TObject);
 begin
-  dmod.query.sql.text:='SELECT subcontract.id,subcontract.code,ArticleDog.name_artic,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
+  dm.query.sql.text:='SELECT subcontract.id,subcontract.code,ArticleDog.name_artic,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
                        'FROM subcontract'+#13+
                        'INNER JOIN ArticleDog ON subcontract.code=ArticleDog.cosgu'+#13+
                        'INNER JOIN ReestrDog ON subcontract.id=ReestrDog.REGN'+#13+
@@ -126,37 +126,38 @@ begin
                        'AND (subcontract.subdate>='+dateornull(startpick.date)+') '+
                        'AND (subcontract.subdate<'+dateornull(endpick.date)+')'+
                        'AND (subcontract.code<>'+quotedstr('')+')';
-  grid.datasource.dataset:=dmod.query;
-  dmod.query.open;
-  dmod.query.fieldbyname('code').visible:=false;
+  grid.datasource.dataset:=dm.query;
+  dm.query.open;
+  dm.query.fieldbyname('code').visible:=false;
   grid.columns.items[0].width:=8*9;
   grid.columns.items[1].width:=8*32;
   grid.columns.items[2].width:=8*12;
   grid.columns.items[4].width:=8*8;
   grid.columns.items[3].width:=grid.width-(grid.columns.items[0].width+grid.columns.items[1].width+grid.columns.items[2].width+grid.columns.items[4].width+36);
-  grid.columns.items[0].title.caption:='¹ äîãîâîðà';
-  grid.columns.items[1].title.caption:='ÊÎÑÃÓ';
-  grid.columns.items[2].title.caption:='ÏÁÑ';
-  grid.columns.items[3].title.caption:='Ïîñòàâùèê';
-  grid.columns.items[4].title.caption:='Ñóììà';
+  grid.columns.items[0].title.caption:='â„– Ð´Ð¾Ð³Ð¾Ð²Ð¾Ñ€Ð°';
+  grid.columns.items[1].title.caption:='ÐšÐžÐ¡Ð“Ð£';
+  grid.columns.items[2].title.caption:='ÐŸÐ‘Ð¡';
+  grid.columns.items[3].title.caption:='ÐŸÐ¾ÑÑ‚Ð°Ð²Ñ‰Ð¸Ðº';
+  grid.columns.items[4].title.caption:='Ð¡ÑƒÐ¼Ð¼Ð°';
 end;
 
 procedure treport_cosgu.reportClick(Sender: TObject);
 begin
   if cosgu.itemindex=0 then
-    dmod.report.loadfromfile(extractfilepath(paramstr(0))+'reports\cosgu_bypbs.frf')
+    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\cosgu_bypbs.frf')
   else
-    dmod.report.loadfromfile(extractfilepath(paramstr(0))+'reports\cosgu_bycosgu.frf');
-  dmod.report.dictionary.variables.variable['start']:=startpick.datetime;
-  dmod.report.dictionary.variables.variable['end']:=endpick.datetime;
-  dmod.report.showreport;
+    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\cosgu_bycosgu.frf');
+  dm.report.variables.variables['start']:=startpick.datetime;
+  dm.report.variables.variables['end']:=endpick.datetime;
+  dm.report.showreport;
 end;
 
 procedure treport_cosgu.gridDblClick(Sender: TObject);
 begin
-  if dmod.query.recordcount>0 then
+  if dm.query.recordcount>0 then
     contractform.edit(strtoint(grid.fields[0].asstring));
   search.click;
 end;
 
 end.
+

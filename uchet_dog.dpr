@@ -2,13 +2,11 @@ program Uchet_Dog;
 
 uses
   Forms,
-  DMUnit in 'dmunit.pas' {DM: TDataModule},
-  About in 'About.pas' {AboutBox},
   sqltext in 'sqltext.pas',
   defs in 'defs.pas',
-  ReportOKVED in 'reportokved.pas' {report_okved},
+  reportokved in 'forms\reportokved.pas' {report_okved},
   balance in 'database\balance.pas',
-  datamodule in 'database\datamodule.pas' {dmod: TDataModule},
+  datamodule in 'database\datamodule.pas' {dm: TDataModule},
   contracts in 'database\contracts.pas',
   providerfm in 'forms\providerfm.pas' {providerform},
   provideredit in 'dialogs\provideredit.pas' {provdlg},
@@ -29,23 +27,27 @@ uses
   summaryrpt in 'forms\summaryrpt.pas' {report},
   okvedfm in 'forms\okvedfm.pas' {okved},
   okvededit in 'dialogs\okvededit.pas' {okveded},
-  mainfm in 'forms\mainfm.pas' {main};
+  mainfm in 'forms\mainfm.pas' {main},
+  version in 'version.pas',
+  progressdlg in 'dialogs\progressdlg.pas' {progress},
+  model in 'database\model.pas',
+  quarterrpt in 'forms\quarterrpt.pas' {reportquarter};
 
 {$R *.res}
 
 begin
-  Application.Initialize;
+  application.initialize;
   makelink;
-  Application.Title := '¿–Ã "”˜∏Ú ‰Ó„Ó‚ÓÓ‚"';
+  application.title:='–ê–†–ú "–£—á—ë—Ç –¥–æ–≥–æ–≤–æ—Ä–æ–≤"';
+  Application.CreateForm(Tdm, dm);
   Application.CreateForm(Tmain, main);
-  Application.CreateForm(TDM, DM);
   Application.CreateForm(Treport_cosgu, report_cosgu);
-  Application.CreateForm(Tdmod, dmod);
   Application.CreateForm(Tcontractform, contractform);
   Application.CreateForm(Tsubcontractfm, subcontractfm);
   Application.CreateForm(Tnomenclselect, nomenclselect);
   Application.CreateForm(Tcosguselect, cosguselect);
+  Application.CreateForm(Treportquarter, reportquarter);
   regions.fetch;
   providers.fetch;
-  Application.Run;
+  application.run;
 end.

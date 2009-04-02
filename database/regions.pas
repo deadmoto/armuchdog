@@ -32,18 +32,18 @@ var
 begin
   setlength(cregion,0);
   try
-    dmod.query.sql.text:='SELECT * FROM RegionIDDog';
-    dmod.query.open;
-    dmod.query.first;
-    for i:=0 to dmod.query.recordcount-1 do
+    dm.query.sql.text:='SELECT * FROM RegionIDDog';
+    dm.query.open;
+    dm.query.first;
+    for i:=0 to dm.query.recordcount-1 do
       begin
         setlength(cregion,length(cregion)+1);
-        cregion[i].id:=dmod.query.fieldbyname('fldid').value;
-        cregion[i].name:=trim(dmod.query.fieldbyname('fldname').value);
-        dmod.query.next;
+        cregion[i].id:=dm.query.fieldbyname('fldid').value;
+        cregion[i].name:=trim(dm.query.fieldbyname('fldname').value);
+        dm.query.next;
       end
   except
-    showmessage('Ошибка получения списка районов!!!');
+    showmessage('РћС€РёР±РєР° РїРѕР»СѓС‡РµРЅРёСЏ СЃРїРёСЃРєР° СЂР°Р№РѕРЅРѕРІ!!!');
   end;
 end;
 
@@ -56,4 +56,5 @@ begin
       result:=cregion[i].name;
 end;
 
-end. 
+end.
+

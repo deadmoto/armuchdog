@@ -1,8 +1,8 @@
 object contractform: Tcontractform
   Left = 109
   Top = 148
-  Width = 940
-  Height = 610
+  ClientHeight = 556
+  ClientWidth = 932
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -284,6 +284,7 @@ object contractform: Tcontractform
       FixedCols = 0
       RowCount = 2
       TabOrder = 1
+      OnDblClick = subctontractgridDblClick
       OnSelectCell = subctontractgridSelectCell
       ColWidths = (
         98

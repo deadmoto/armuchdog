@@ -3,13 +3,20 @@ unit util;
 interface
 
 uses
-  sysutils,ComObj, ActiveX, ShlObj, windows, Messages,  Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls;
+//—Å–æ–∑–¥–∞–Ω–∏–µ —è—Ä–ª—ã–∫–∞
+  activex,
+  comobj,
+  shlobj,
+//
+  dialogs,
+  sysutils;
 
 function min(a,b:variant):variant;
 function max(a,b:variant):variant;
 function booltobit(bool:boolean):char;
 function dateornull(date:tdate):string;
+function quarter(date:tdate):byte;
+function year(date:tdate):integer;
 function starorstr(text:string):string;
 procedure makelink;
 
@@ -45,7 +52,23 @@ end;
 function dateornull(date:tdate):string;
 begin
   if date=0 then result:='null'
-  else result:=quotedstr(datetostr(date));
+  else result:=quotedstr(formatdatetime('yyyymmdd',date));
+end;
+
+function quarter(date:tdate):byte;
+var
+  year,month,day:word;
+begin
+  decodedate(date,year,month,day);
+  result:=month div 4;
+end;
+
+function year(date:tdate):integer;
+var
+  year,month,day:word;
+begin
+  decodedate(date,year,month,day);
+  result:=year;
 end;
 
 function starorstr(text:string):string;
@@ -57,20 +80,18 @@ end;
 
 procedure makelink;
 var
-  SL: IShellLink;
+  slink:ishelllink;
   link:ipersistfile;
-  result:hresult;
-  s:string;
+//  result:hresult;
 const
-  lnkname='\–‡·Ó˜ËÈ ÒÚÓÎ\¿–Ã ”˜∏Ú ‰Ó„Ó‚ÓÓ‚.lnk';
+  lnkname='\–†–∞–±–æ—á–∏–π —Å—Ç–æ–ª\–ê–†–ú –£—á—ë—Ç –¥–æ–≥–æ–≤–æ—Ä–æ–≤.lnk';
 begin
-  olecheck(CoCreateInstance(CLSID_ShellLink, nil, CLSCTX_INPROC_SERVER,
-    IShellLink, SL));
-  { IShellLink implementers are required to implement IPersistFile }
-  link:= SL as IPersistFile;
-  OleCheck(SL.SetPath(pchar(paramstr(0)))); // set link path to proper file
-  { create a path location and filename for link file }
-  result:=link.save(pwidechar(widestring(getenv('USERPROFILE')+lnkname)),true);// save link file
+  olecheck(cocreateinstance(clsid_shelllink,nil,clsctx_inproc_server,ishelllink,slink));
+  link:=slink as ipersistfile;
+  olecheck(slink.setpath(pchar(paramstr(0)))); // set link path to proper file
+//  result:=link.save(pwidechar(widestring(getenv('USERPROFILE')+lnkname)),true);// save link file
+  link.save(pwidechar(widestring(getenv('USERPROFILE')+lnkname)),true);
 end;
 
 end.
+
