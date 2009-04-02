@@ -7,10 +7,10 @@ object report_okved: Treport_okved
   ClientHeight = 573
   ClientWidth = 792
   Color = clBtnFace
-  Constraints.MaxHeight = 600
+  Constraints.MaxHeight = 605
   Constraints.MaxWidth = 800
   Constraints.MinHeight = 600
-  Constraints.MinWidth = 800
+  Constraints.MinWidth = 798
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -87,8 +87,7 @@ object report_okved: Treport_okved
       Width = 89
       Height = 44
       Caption = #1055#1086#1080#1089#1082
-      TabOrder = 2
-      OnClick = searchClick
+      DoubleBuffered = True
       Glyph.Data = {
         EE000000424DEE000000000000007600000028000000100000000F0000000100
         0400000000007800000000000000000000001000000000000000000000000000
@@ -98,6 +97,9 @@ object report_okved: Treport_okved
         000F00F000000F00000F00F000F00F00000F00F000F00F00000FF00000000000
         00FFFF0F000F0F000FFFFF00000F00000FFFFFF000FFF000FFFFFFF0F0FFF0F0
         FFFFFFF000FFF000FFFFFFFFFFFFFFFFFFFF}
+      ParentDoubleBuffered = False
+      TabOrder = 2
+      OnClick = searchClick
     end
     object startbox: TGroupBox
       Left = 8
@@ -149,19 +151,6 @@ object report_okved: Treport_okved
     Width = 792
     Height = 19
     Panels = <>
-  end
-  object frquery: TfrDBDataSet
-    DataSource = source
-    Left = 88
-    Top = 280
-  end
-  object frsummary: TfrReport
-    Dataset = frquery
-    InitialZoom = pzDefault
-    PreviewButtons = [pbZoom, pbLoad, pbSave, pbPrint, pbFind, pbHelp, pbExit]
-    Left = 120
-    Top = 280
-    ReportForm = {18000000}
   end
   object source: TDataSource
     Left = 56

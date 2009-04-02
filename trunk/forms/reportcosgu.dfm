@@ -22,7 +22,7 @@ object report_cosgu: Treport_cosgu
     Width = 852
     Height = 524
     Align = alClient
-    DataSource = dmod.data
+    DataSource = dm.data
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

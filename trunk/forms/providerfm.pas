@@ -48,8 +48,8 @@ uses
 procedure tproviderform.fill;
 begin
   search.text:='';
-  dmod.query.sql.text:='SELECT * FROM SupplierDog';
-  dmod.query.open;
+  dm.query.sql.text:='SELECT * FROM SupplierDog';
+  dm.query.open;
   grid.columns.items[0].title.caption:='ID';
   grid.columns.items[1].title.caption:='Поставщик';
   grid.columns.items[0].width:=7*8;
@@ -58,8 +58,8 @@ end;
 
 procedure tproviderform.fill(text:string);
 begin
-  dmod.query.sql.text:='SELECT * FROM SupplierDog WHERE SUPPLIER LIKE '+quotedstr('%'+text+'%');
-  dmod.query.open;
+  dm.query.sql.text:='SELECT * FROM SupplierDog WHERE SUPPLIER LIKE '+quotedstr('%'+text+'%');
+  dm.query.open;
   grid.columns.items[0].title.caption:='ID';
   grid.columns.items[1].title.caption:='Поставщик';
   grid.columns.items[0].width:=7*8;
@@ -73,11 +73,11 @@ begin
   provdlg.ok.caption:='Добавить';
   if provdlg.showmodal=mrok then
     begin
-      dmod.query.sql.text:='INSERT INTO SupplierDog (SUPPLIER) VALUES (:provider)';
-      dmod.query.parameters.parambyname('provider').value:=provdlg.prov.text;
-      dmod.query.execsql;
+      dm.query.sql.text:='INSERT INTO SupplierDog (SUPPLIER) VALUES (:provider)';
+      dm.query.parameters.parambyname('provider').value:=provdlg.prov.text;
+      dm.query.execsql;
       fill;
-      dmod.query.last;
+      dm.query.last;
     end;
 end;
 
@@ -89,9 +89,9 @@ begin
   provdlg.prov.text:=trim(grid.fields[1].text);
   if provdlg.showmodal=mrok then
     begin
-      dmod.query.sql.text:='UPDATE SupplierDog SET SUPPLIER=:provider WHERE ID_SUPPLIER='+grid.fields[0].text;
-      dmod.query.parameters.parambyname('provider').value:=provdlg.prov.text;
-      dmod.query.execsql;
+      dm.query.sql.text:='UPDATE SupplierDog SET SUPPLIER=:provider WHERE ID_SUPPLIER='+grid.fields[0].text;
+      dm.query.parameters.parambyname('provider').value:=provdlg.prov.text;
+      dm.query.execsql;
       fill;
     end;
 end;
@@ -100,8 +100,8 @@ procedure Tproviderform.delClick(Sender: TObject);
 begin
   if messagebox(self.handle,pchar('Вы действительно хотите удалить поставщика?'),pchar(self.caption),mb_okcancel)=id_ok then
     begin
-      dmod.query.sql.text:='DELETE FROM SupplierDog WHERE ID_SUPPLIER='+grid.fields[0].text;
-      dmod.query.execsql;
+      dm.query.sql.text:='DELETE FROM SupplierDog WHERE ID_SUPPLIER='+grid.fields[0].text;
+      dm.query.execsql;
       fill;
     end
 end;
@@ -113,12 +113,12 @@ end;
 
 procedure Tproviderform.upClick(Sender: TObject);
 begin
-  dmod.query.first;
+  dm.query.first;
 end;
 
 procedure Tproviderform.downClick(Sender: TObject);
 begin
-  dmod.query.last;
+  dm.query.last;
 end;
 
 procedure Tproviderform.searchChange(Sender: TObject);

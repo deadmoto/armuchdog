@@ -4,8 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, Grids, DBGrids, StdCtrls, ComCtrls, Buttons, FR_Class,
-  FR_DSet, FR_DBSet, DB;
+  Dialogs, ExtCtrls, Grids, DBGrids, StdCtrls, ComCtrls, Buttons,DB;
 
 procedure showreport;overload;
 procedure showreport(startd,endd:tdatetime;nomencl:string);overload;
@@ -24,8 +23,6 @@ type
     endbox: TGroupBox;
     endpick: TDateTimePicker;
     Button1: TButton;
-    frquery: TfrDBDataSet;
-    frsummary: TfrReport;
     source: TDataSource;
     procedure FormShow(Sender: TObject);
     procedure nomenclKeyPress(Sender: TObject; var Key: Char);
@@ -52,18 +49,18 @@ var
   i:integer;
 begin
   nomencl.items.clear;
-  dmod.query.sql.text:='SELECT nomencl'+#13+
+  dm.query.sql.text:='SELECT nomencl'+#13+
                        'FROM subcontract'+#13+
                        'WHERE nomencl IS NOT NULL'+#13+
                        'GROUP BY nomencl';
-  dmod.query.open;
-  dmod.query.first;
-  for i:=0 to dmod.query.recordcount-1 do
+  dm.query.open;
+  dm.query.first;
+  for i:=0 to dm.query.recordcount-1 do
     begin
-      nomencl.items.add(trim(dmod.query.fieldbyname('nomencl').asstring));
-      dmod.query.next;
+      nomencl.items.add(trim(dm.query.fieldbyname('nomencl').asstring));
+      dm.query.next;
     end;
-  dmod.query.close;
+  dm.query.close;
   nomencl.items.strings[0]:='*';
 end;
 
@@ -73,15 +70,15 @@ var
 begin
   region.items.clear;
   region.items.add('*');
-  dmod.query.sql.text:='SELECT * FROM RegionID';
-  dmod.query.open;
-  dmod.query.first;
-  for i:=0 to dmod.query.recordcount-1 do
+  dm.query.sql.text:='SELECT * FROM RegionID';
+  dm.query.open;
+  dm.query.first;
+  for i:=0 to dm.query.recordcount-1 do
     begin
-      region.items.add(trim(dmod.query.fieldbyname('fldname').asstring));
-      dmod.query.next;
+      region.items.add(trim(dm.query.fieldbyname('fldname').asstring));
+      dm.query.next;
     end;
-  dmod.query.close;
+  dm.query.close;
 end;
 
 procedure Treport_okved.FormShow(Sender: TObject);
@@ -139,7 +136,7 @@ end;
 
 procedure Treport_okved.searchClick(Sender: TObject);
 begin
-  dmod.query.sql.text:='SELECT subcontract.id,subcontract.nomencl,NomenclDog.NAME,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
+  dm.query.sql.text:='SELECT subcontract.id,subcontract.nomencl,NomenclDog.NAME,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
                        'FROM subcontract'+#13+
                        'INNER JOIN NomenclDog ON subcontract.nomencl=NomenclDog.ID_NOMENCL'+#13+
                        'INNER JOIN ReestrDog ON subcontract.id=ReestrDog.REGN'+#13+
@@ -151,37 +148,38 @@ begin
                        'AND (subcontract.subdate<'+dateornull(endpick.date)+')'+
                        'AND (subcontract.nomencl<>'+quotedstr('')+
                        'AND (subcontract.report<>1)'+')';
-  source.dataset:=dmod.query;
-  dmod.query.open;
-  dmod.query.fieldbyname('NAME').visible:=false;
+  source.dataset:=dm.query;
+  dm.query.open;
+  dm.query.fieldbyname('NAME').visible:=false;
   report.columns.items[0].width:=8*9;
   report.columns.items[1].width:=8*9;
   report.columns.items[2].width:=8*12;
   report.columns.items[4].width:=8*8;
   report.columns.items[3].width:=report.width-(report.columns.items[0].width+report.columns.items[1].width+report.columns.items[2].width+report.columns.items[4].width+36);
-  report.columns.items[0].title.caption:='¹ äîãîâîðà';
-  report.columns.items[1].title.caption:='ÎÊÂÝÄ';
-  report.columns.items[2].title.caption:='ÏÁÑ';
-  report.columns.items[3].title.caption:='Ïîñòàâùèê';
-  report.columns.items[4].title.caption:='Ñóììà';
+  report.columns.items[0].title.caption:='â„– Ð´Ð¾Ð³Ð¾Ð²Ð¾Ñ€Ð°';
+  report.columns.items[1].title.caption:='ÐžÐšÐ’Ð­Ð”';
+  report.columns.items[2].title.caption:='ÐŸÐ‘Ð¡';
+  report.columns.items[3].title.caption:='ÐŸÐ¾ÑÑ‚Ð°Ð²Ñ‰Ð¸Ðº';
+  report.columns.items[4].title.caption:='Ð¡ÑƒÐ¼Ð¼Ð°';
 end;
 
 procedure Treport_okved.Button1Click(Sender: TObject);
 begin
   if nomencl.itemindex=0 then
-    frsummary.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_bypbs.frf')
+    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_by_pbs.fr3')
   else
-    frsummary.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_byokved.frf');
-  frsummary.dictionary.variables.variable['start']:=startpick.datetime;
-  frsummary.dictionary.variables.variable['end']:=endpick.datetime;
-  frsummary.showreport;
+    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_by_okved.fr3');
+  dm.report.variables.variables['start']:=startpick.datetime;
+  dm.report.variables.variables['finish']:=endpick.datetime;
+  dm.report.showreport;
 end;
 
 procedure Treport_okved.reportDblClick(Sender: TObject);
 begin
-  if dmod.query.recordcount>0 then
+  if dm.query.recordcount>0 then
     contractform.edit(strtoint(report.fields[0].asstring));
   search.click;
 end;
 
 end.
+

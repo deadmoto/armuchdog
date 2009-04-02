@@ -36,19 +36,19 @@ var
 begin
   setlength(cnomencl,0);
   try
-    dmod.query.sql.text:='SELECT * FROM NomenclDog'+#13+
+    dm.query.sql.text:='SELECT * FROM NomenclDog'+#13+
                          'ORDER BY id_nomencl';
-    dmod.query.open;
-    dmod.query.first;
-    for i:=0 to dmod.query.recordcount do
+    dm.query.open;
+    dm.query.first;
+    for i:=0 to dm.query.recordcount do
       begin
         setlength(cnomencl,length(cnomencl)+1);
-        cnomencl[i].id:=trim(dmod.query.fieldbyname('id_nomencl').value);
-        cnomencl[i].name:=trim(dmod.query.fieldbyname('name').value);
-        dmod.query.next;
+        cnomencl[i].id:=trim(dm.query.fieldbyname('id_nomencl').value);
+        cnomencl[i].name:=trim(dm.query.fieldbyname('name').value);
+        dm.query.next;
       end
   except
-    showmessage('Ошибка получения списка номенклатур!!!');
+    showmessage('РћС€РёР±РєР° РїРѕР»СѓС‡РµРЅРёСЏ СЃРїРёСЃРєР° РЅРѕРјРµРЅРєР»Р°С‚СѓСЂ!!!');
   end;
 end;
 
@@ -58,60 +58,60 @@ var
 begin
   setlength(cnomencl,0);
   try
-    dmod.query.sql.text:='SELECT * FROM NomenclDog'+#13+
+    dm.query.sql.text:='SELECT * FROM NomenclDog'+#13+
                          'WHERE '+column+' LIKE '+quotedstr('%'+filter+'%');
-    dmod.query.open;
-    dmod.query.first;
-    for i:=0 to dmod.query.recordcount-1 do
+    dm.query.open;
+    dm.query.first;
+    for i:=0 to dm.query.recordcount-1 do
       begin
         setlength(cnomencl,length(cnomencl)+1);
-        cnomencl[i].id:=trim(dmod.query.fieldbyname('id_nomencl').value);
-        cnomencl[i].name:=trim(dmod.query.fieldbyname('name').value);
-        dmod.query.next;
+        cnomencl[i].id:=trim(dm.query.fieldbyname('id_nomencl').value);
+        cnomencl[i].name:=trim(dm.query.fieldbyname('name').value);
+        dm.query.next;
       end
   except
-    showmessage('Ошибка получения списка номенклатур!!!');
+    showmessage('РћС€РёР±РєР° РїРѕР»СѓС‡РµРЅРёСЏ СЃРїРёСЃРєР° РЅРѕРјРµРЅРєР»Р°С‚СѓСЂ!!!');
   end;
 end;
 
 procedure insert(nomencl:tnomencl);
 begin
   try
-    dmod.query.sql.text:='INSERT INTO NomenclDog'+#13+
+    dm.query.sql.text:='INSERT INTO NomenclDog'+#13+
                          'VALUES ('+quotedstr(nomencl.id)+','+quotedstr(nomencl.name)+')';
-    dmod.query.execsql;
-    showmessage('ОКВЭД успешно добавлен!!!');
+    dm.query.execsql;
+    showmessage('РћРљР’Р­Р” СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅ!!!');
     fetch;
   except
-    showmessage('Ошибка добавления ОКВЭД!!!');
+    showmessage('РћС€РёР±РєР° РґРѕР±Р°РІР»РµРЅРёСЏ РћРљР’Р­Р”!!!');
   end;
 end;
 
 procedure update(nomencl:tnomencl);
 begin
   try
-    dmod.query.sql.text:='UPDATE NomenclDog'+#13+
+    dm.query.sql.text:='UPDATE NomenclDog'+#13+
                          'SET name='+quotedstr(nomencl.name)+#13+
                          ',id_nomencl='+quotedstr(nomencl.id)+#13+
                          'WHERE id_nomencl='+quotedstr(nomencl.id);
-    dmod.query.execsql;
-    showmessage('Статья успешно обновлен!!!');
+    dm.query.execsql;
+    showmessage('РЎС‚Р°С‚СЊСЏ СѓСЃРїРµС€РЅРѕ РѕР±РЅРѕРІР»РµРЅ!!!');
     fetch;
   except
-    showmessage('ОКВЭД обновления ОКВЭД!!!');
+    showmessage('РћРљР’Р­Р” РѕР±РЅРѕРІР»РµРЅРёСЏ РћРљР’Р­Р”!!!');
   end;
 end;
 
 procedure delete(nomencl:tnomencl);
 begin
   try
-    dmod.query.sql.text:='DELETE FROM NomenclDog'+#13+
+    dm.query.sql.text:='DELETE FROM NomenclDog'+#13+
                          'WHERE id_nomencl='+quotedstr(nomencl.id);
-    dmod.query.execsql;
-    showmessage('ОКВЭД успешно удален!!!');
+    dm.query.execsql;
+    showmessage('РћРљР’Р­Р” СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅ!!!');
     fetch;
   except
-    showmessage('Ошибка удаления ОКВЭД!!!');
+    showmessage('РћС€РёР±РєР° СѓРґР°Р»РµРЅРёСЏ РћРљР’Р­Р”!!!');
   end;
 end;
 
@@ -126,3 +126,4 @@ begin
 end;
 
 end.
+

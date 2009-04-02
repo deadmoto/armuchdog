@@ -1,15 +1,14 @@
-object Tdmod
+object dm: Tdm
   OldCreateOrder = False
-  Left = 381
-  Top = 193
-  Height = 358
-  Width = 623
+  Height = 371
+  Width = 543
   object sqlsub: TADOConnection
     Connected = True
     ConnectionString = 
-      'Provider=MSDASQL.1;Password="";Persist Security Info=True;User I' +
-      'D=sa;Data Source=SQLSub;Initial Catalog=Subsidy'
+      'Provider=SQLOLEDB.1;Password="";Persist Security Info=True;User ' +
+      'ID=sa;Initial Catalog=Subsidy;Data Source=OPAO-BLAD'
     LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
     Left = 8
     Top = 8
   end
@@ -94,17 +93,32 @@ object Tdmod
     Left = 72
     Top = 8
   end
-  object report: TfrReport
-    Dataset = frdata
-    InitialZoom = pzDefault
-    PreviewButtons = [pbZoom, pbLoad, pbSave, pbPrint, pbFind, pbHelp, pbExit]
-    Left = 104
-    Top = 56
-    ReportForm = {18000000}
+  object report: TfrxReport
+    Version = '4.7.12'
+    DataSet = frquery
+    DataSetName = 'frquery'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 39903.664180729200000000
+    ReportOptions.LastChange = 39903.721154837960000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    StoreInDFM = False
+    Left = 184
+    Top = 8
   end
-  object frdata: TfrDBDataSet
-    DataSet = query
-    Left = 72
-    Top = 56
+  object frquery: TfrxDBDataset
+    UserName = 'frquery'
+    CloseDataSource = True
+    DataSource = data
+    Left = 144
+    Top = 8
   end
 end

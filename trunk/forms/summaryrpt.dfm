@@ -1,9 +1,9 @@
 object report: Treport
   Left = 212
   Top = 146
-  Width = 800
-  Height = 600
   Caption = #1057#1091#1084#1084#1072#1088#1085#1099#1081' '#1086#1090#1095#1105#1090' '#1087#1086' '#1054#1050#1042#1069#1044
+  ClientHeight = 566
+  ClientWidth = 792
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -84,7 +84,7 @@ object report: Treport
     Left = 0
     Top = 49
     Width = 792
-    Height = 505
+    Height = 498
     Align = alClient
     ColCount = 1
     DefaultRowHeight = 16
@@ -96,7 +96,7 @@ object report: Treport
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 554
+    Top = 547
     Width = 792
     Height = 19
     Panels = <>

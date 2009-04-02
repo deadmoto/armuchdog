@@ -1,10 +1,13 @@
 object main: Tmain
   Left = 66
   Top = 138
-  Width = 1078
-  Height = 769
+  BorderStyle = bsSingle
   Caption = #1040#1056#1052' "'#1059#1095#1105#1090' '#1076#1086#1075#1086#1074#1086#1088#1086#1074'"'
+  ClientHeight = 737
+  ClientWidth = 1018
   Color = clBtnFace
+  Constraints.MinHeight = 768
+  Constraints.MinWidth = 1024
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -12,13 +15,14 @@ object main: Tmain
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object status: TStatusBar
     Left = 0
-    Top = 711
-    Width = 1070
+    Top = 713
+    Width = 1018
     Height = 24
     Panels = <
       item
@@ -52,8 +56,8 @@ object main: Tmain
   object grid: TStringGrid
     Left = 0
     Top = 73
-    Width = 1070
-    Height = 638
+    Width = 1018
+    Height = 640
     Align = alClient
     ColCount = 1
     DefaultColWidth = 0
@@ -68,7 +72,7 @@ object main: Tmain
   object mainpanel: TPanel
     Left = 0
     Top = 0
-    Width = 1070
+    Width = 1018
     Height = 73
     Align = alTop
     BevelOuter = bvLowered
@@ -76,7 +80,7 @@ object main: Tmain
     object mainmenu: TPageControl
       Left = 1
       Top = 1
-      Width = 976
+      Width = 924
       Height = 71
       ActivePage = filters
       Align = alClient
@@ -295,10 +299,19 @@ object main: Tmain
           TabOrder = 2
           OnClick = Button11Click
         end
+        object Button1: TButton
+          Left = 241
+          Top = 8
+          Width = 75
+          Height = 25
+          Caption = #1047#1072' '#1082#1074#1072#1088#1090#1072#1083
+          TabOrder = 3
+          OnClick = Button1Click
+        end
       end
     end
     object Panel2: TPanel
-      Left = 977
+      Left = 925
       Top = 1
       Width = 92
       Height = 71

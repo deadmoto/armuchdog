@@ -6,8 +6,7 @@ uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
   Buttons, ExtCtrls, Mask,
   contracts, Menus;
 
-type
-  pbool=^boolean;
+procedure showeditor(var contract:tcontract;const index:integer=-1);
 
 type
   tsubcontractfm = class(TForm)
@@ -41,132 +40,142 @@ type
   private
     { Private declarations }
   public
-    function getlimit(var price:double):real;
-    procedure add(subcontract:psubcontract;result:pbool);
-    procedure upd(subcontract:psubcontract);
+    index:integer;
+    function getlimit(var price:double;var date:tdatetime):real;
+    function add:boolean;
+    function upd(index:integer):boolean;
   end;
 
 var
   subcontractfm:tsubcontractfm;
-  vsubcontract:^tsubcontract;
-  contract:pcontract;
+  psubcontract:^tsubcontract;
+  pcontract:^tcontract;
 
 implementation
 
 uses
+  dialogs,
   defs,
   balance,
   nomencls,
   cosgus,
   nomencldlg,
   cosgudlg,
-  contractfm;
+  contractfm,
+  util;
 
 {$R *.dfm}
 
-function tsubcontractfm.getlimit(var price:double):real;
+procedure showeditor(var contract:tcontract;const index:integer=-1);
+begin
+  subcontractfm:=tsubcontractfm.create(application.owner);
+  subcontractfm.index:=index;
+  pcontract:=@contract;
+  if index=-1 then
+    begin
+      if subcontractfm.add then
+        begin
+          setlength(contract.subcontract,length(contract.subcontract)+1);
+          contract.subcontract[high(contract.subcontract)]:=psubcontract^;
+        end
+    end
+  else
+    if subcontractfm.upd(index) then
+      contract.subcontract[index]:=psubcontract^;
+end;
+
+function tsubcontractfm.getlimit(var price:double;var date:tdatetime):real;
 var
   i:integer;
 begin
-  if length(contractform.contract.subcontract)>0 then
-    for i:=0 to length(contractform.contract.subcontract) do
-      if (contractform.contract.subcontract[i].nomencl=vsubcontract^.nomencl)
-      and (contractform.selected-1<>i) then
-        price:=price+contractform.contract.subcontract[i].price;
-  result:=defs.contractlimit-getbalance(contractform.contract.regn,vsubcontract^.nomencl)-price;
+  result:=defs.contractlimit;
+  result:=result-getbalance(contractform.contract.regn,psubcontract.nomencl,date);
+  result:=result-price;
+  if length(pcontract.subcontract)>0 then
+    for i:=0 to length(pcontract.subcontract)-1 do
+      if (index<>i) then
+        if (pcontract.subcontract[i].nomencl=psubcontract.nomencl)
+          and (not pcontract.subcontract[i].skip)
+          and (quarter(pcontract.subcontract[i].subdate)=quarter(date))
+          and (year(pcontract.subcontract[i].subdate)=year(date)) then
+            result:=result-pcontract.subcontract[i].price;
 end;
 
-procedure tsubcontractfm.add(subcontract:psubcontract;result:pbool);
-var
-  csubcontract:tsubcontract;
+function tsubcontractfm.add:boolean;
 begin
-  subcontractfm:=tsubcontractfm.create(owner);
-  vsubcontract:=@csubcontract;
-  vsubcontract^.subdate:=0;
-  vsubcontract^.price:=0;
-  vsubcontract^.report:=false;
-  subcontractfm.ok.caption:='Äîáàâèòü';
-  subcontractfm.subdate.text:=datetostr(subcontract.subdate);
-  if subcontractfm.showmodal=mrok then
-    begin
-      subcontract.nomencl:=vsubcontract^.nomencl;
-      subcontract.code:=vsubcontract^.code;
-      subcontract.subdate:=vsubcontract^.subdate;
-      subcontract.price:=vsubcontract^.price;
-      subcontract.comment:=vsubcontract^.comment;
-      subcontract.report:=vsubcontract^.report;
-      result^:=true;
-    end;
+  result:=false;
+  new(psubcontract);
+  psubcontract.subdate:=pcontract.data_dog;
+  psubcontract.price:=0;
+  psubcontract.skip:=false;
+  ok.caption:='Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ';
+  subdate.text:=datetostr(psubcontract.subdate);
+  if showmodal=mrok then
+    result:=true;
 end;
 
-procedure tsubcontractfm.upd(subcontract:psubcontract);
-var
-  csubcontract:tsubcontract;
+function tsubcontractfm.upd(index:integer):boolean;
 begin
-  subcontractfm:=tsubcontractfm.create(owner);
-  csubcontract:=subcontract^;
-  vsubcontract:=@csubcontract;
-  subcontractfm.ok.caption:='Èçìåíèòü';
-  subcontractfm.nomencl.text:=nomencls.byid(vsubcontract^.nomencl);
-  subcontractfm.code.text:=cosgus.byid(vsubcontract^.code);
-  if vsubcontract^.subdate<>0 then
-    subcontractfm.subdate.text:=datetostr(vsubcontract^.subdate);
-  subcontractfm.price.text:=floattostr(vsubcontract^.price);
-  subcontractfm.report.checked:=vsubcontract^.report;
-  subcontractfm.comment.text:=vsubcontract^.comment;
-  if subcontractfm.showmodal=mrok then
-    begin
-      subcontract.nomencl:=vsubcontract^.nomencl;
-      subcontract.code:=vsubcontract^.code;
-      subcontract.subdate:=vsubcontract^.subdate;
-      subcontract.price:=vsubcontract^.price;
-      subcontract.report:=vsubcontract^.report;
-      subcontract.comment:=vsubcontract^.comment;
-    end;
+  result:=false;
+  new(psubcontract);
+  psubcontract^:=pcontract.subcontract[index];
+  ok.caption:='Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ';
+  subcontractfm.nomencl.text:=nomencls.byid(psubcontract.nomencl);
+  subcontractfm.code.text:=cosgus.byid(psubcontract.code);
+  if psubcontract.subdate<>0 then
+    subcontractfm.subdate.text:=datetostr(psubcontract.subdate);
+  subcontractfm.price.text:=floattostr(psubcontract.price);
+  subcontractfm.report.checked:=psubcontract.skip;
+  subcontractfm.comment.text:=psubcontract.comment;
+  if showmodal=mrok then
+    result:=true;
 end;
 
 procedure tsubcontractfm.nomenclbtnClick(Sender: TObject);
 begin
-  vsubcontract^.nomencl:=nomenclselect.select;
-  self.nomencl.text:=nomencls.byid(vsubcontract^.nomencl);
+  psubcontract.nomencl:=nomenclselect.select;
+  self.nomencl.text:=nomencls.byid(psubcontract.nomencl);
 end;
 
 procedure tsubcontractfm.codebtnClick(Sender: TObject);
 begin
-  vsubcontract^.code:=cosguselect.select;
-  self.code.text:=cosgus.byid(vsubcontract^.code);
+  psubcontract.code:=cosguselect.select;
+  self.code.text:=cosgus.byid(psubcontract.code);
 end;
 
 procedure tsubcontractfm.priceChange(Sender: TObject);
 var
-  price:double;
+  price,limit:double;
 begin
   if trystrtofloat(self.price.text,price) then
     begin
       self.price.font.color:=clnone;
-      vsubcontract^.price:=price;
+      psubcontract.price:=price;
     end
   else
     self.price.font.color:=clred;
-  if vsubcontract^.nomencl<>'' then
+  if (psubcontract.nomencl<>'') and (not psubcontract.skip) then
     begin
-      if getlimit(price)<0 then
+      limit:=getlimit(price,psubcontract.subdate);
+      if limit<0 then
         self.balance.font.color:=clred
       else
         self.balance.font.color:=clnone;
-      self.balance.text:=floattostr(getlimit(price));
+      self.balance.text:=floattostr(limit);
     end
+  else
+    balance.text:='ÐÐµ ÑƒÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°ÐµÑ‚ÑÑ';
 end;
 
 procedure tsubcontractfm.priceKeyPress(Sender: TObject; var Key: Char);
 begin
-  if not (key in ['0'..'9',',','-',#8]) then
+  if not charinset(key,['0'..'9',',','-',#8]) then
     key:=chr(0);
 end;
 
 procedure tsubcontractfm.subdateChange(Sender: TObject);
 begin
-  if trystrtodate(self.subdate.text,vsubcontract^.subdate) then
+  if trystrtodate(self.subdate.text,psubcontract.subdate) then
     self.subdate.font.color:=clnone
   else
     self.subdate.font.color:=clred;
@@ -174,12 +183,13 @@ end;
 
 procedure tsubcontractfm.commentChange(Sender: TObject);
 begin
-  vsubcontract^.comment:=self.comment.text;
+  psubcontract.comment:=self.comment.text;
 end;
 
 procedure tsubcontractfm.reportClick(Sender: TObject);
 begin
-  vsubcontract^.report:=subcontractfm.report.checked;
+  psubcontract.skip:=subcontractfm.report.checked;
+  price.onchange(sender);
 end;
 
 end.

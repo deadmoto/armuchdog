@@ -35,58 +35,58 @@ var
 begin
   setlength(ccosgu,0);
   try
-    dmod.query.sql.text:='SELECT * FROM ArticleDog';
-    dmod.query.open;
-    dmod.query.first;
-    for i:=0 to dmod.query.recordcount do
+    dm.query.sql.text:='SELECT * FROM ArticleDog';
+    dm.query.open;
+    dm.query.first;
+    for i:=0 to dm.query.recordcount do
       begin
         setlength(ccosgu,length(ccosgu)+1);
-        ccosgu[i].id:=dmod.query.fieldbyname('cosgu').value;
-        ccosgu[i].name:=trim(dmod.query.fieldbyname('name_artic').value);
-        dmod.query.next;
+        ccosgu[i].id:=dm.query.fieldbyname('cosgu').value;
+        ccosgu[i].name:=trim(dm.query.fieldbyname('name_artic').value);
+        dm.query.next;
       end
   except
-    showmessage('Ошибка получения списка статей!!!');
+    showmessage('РћС€РёР±РєР° РїРѕР»СѓС‡РµРЅРёСЏ СЃРїРёСЃРєР° СЃС‚Р°С‚РµР№!!!');
   end;
 end;
 
 procedure insert(cosgu:tcosgu);
 begin
   try
-    dmod.query.sql.text:='INSERT INTO ArticleDog'+#13+
+    dm.query.sql.text:='INSERT INTO ArticleDog'+#13+
                          'VALUES ('+cosgu.id+','+quotedstr(cosgu.name)+')';
-    dmod.query.execsql;
-    showmessage('Статья успешно добавлена!!!');
+    dm.query.execsql;
+    showmessage('РЎС‚Р°С‚СЊСЏ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅР°!!!');
     fetch;
   except
-    showmessage('Ошибка добавления статьи!!!');
+    showmessage('РћС€РёР±РєР° РґРѕР±Р°РІР»РµРЅРёСЏ СЃС‚Р°С‚СЊРё!!!');
   end;
 end;
 
 procedure update(cosgu:tcosgu);
 begin
   try
-    dmod.query.sql.text:='UPDATE ArticleDog'+#13+
+    dm.query.sql.text:='UPDATE ArticleDog'+#13+
                          'SET name_artic='+quotedstr(cosgu.name)+#13+
                          'WHERE cosgu='+cosgu.id;
-    dmod.query.execsql;
-    showmessage('Статья успешно обновлена!!!');
+    dm.query.execsql;
+    showmessage('РЎС‚Р°С‚СЊСЏ СѓСЃРїРµС€РЅРѕ РѕР±РЅРѕРІР»РµРЅР°!!!');
     fetch;
   except
-    showmessage('Ошибка обновления статьи!!!');
+    showmessage('РћС€РёР±РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ СЃС‚Р°С‚СЊРё!!!');
   end;
 end;
 
 procedure delete(cosgu:tcosgu);
 begin
   try
-    dmod.query.sql.text:='DELETE FROM ArticleDog'+#13+
+    dm.query.sql.text:='DELETE FROM ArticleDog'+#13+
                          'WHERE cosgu='+cosgu.id;
-    dmod.query.execsql;
-    showmessage('Статья успешно удалена!!!');
+    dm.query.execsql;
+    showmessage('РЎС‚Р°С‚СЊСЏ СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅР°!!!');
     fetch;
   except
-    showmessage('Ошибка удаления статьи!!!');
+    showmessage('РћС€РёР±РєР° СѓРґР°Р»РµРЅРёСЏ СЃС‚Р°С‚СЊРё!!!');
   end;
 end;
 
@@ -101,3 +101,4 @@ begin
 end;
 
 end.
+

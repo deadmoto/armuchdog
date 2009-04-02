@@ -14,7 +14,7 @@ type
     code:string;
     subdate:tdatetime;
     price:real;
-    report:boolean;
+    skip:boolean;
     comment:string;
   end;
 
@@ -64,16 +64,16 @@ function maxregn(region:integer):integer;
 begin
   result:=-1;
   try
-    dmod.query.sql.text:='SELECT MAX(REGN) AS REGN FROM ReestrDog WHERE (fldid=:fldid)';
-    dmod.query.parameters.parambyname('fldid').value:=region;
-    dmod.query.open;
-    if dmod.query.recordcount>0 then
-      if dmod.query.fieldbyname('regn').asinteger<>0 then
-        result:=dmod.query.fieldbyname('regn').value
+    dm.query.sql.text:='SELECT MAX(REGN) AS REGN FROM ReestrDog WHERE (fldid=:fldid)';
+    dm.query.parameters.parambyname('fldid').value:=region;
+    dm.query.open;
+    if dm.query.recordcount>0 then
+      if dm.query.fieldbyname('regn').asinteger<>0 then
+        result:=dm.query.fieldbyname('regn').value
       else
         result:=900000000+region*1000000;
   except
-    showmessage('Ошибка получения максимального регистрационного номера договора!!!');
+    showmessage('РћС€РёР±РєР° РїРѕР»СѓС‡РµРЅРёСЏ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ СЂРµРіРёСЃС‚СЂР°С†РёРѕРЅРЅРѕРіРѕ РЅРѕРјРµСЂР° РґРѕРіРѕРІРѕСЂР°!!!');
   end;
 end;
 
@@ -84,35 +84,35 @@ begin
   result.regn:=regn;
   setlength(result.subcontract,0);
   try
-    dmod.query.sql.text:='select REGN,REG_N,N_DOG,DATA_REG,DATA_POST,FLDID,DATA_DOG,DATA_SROK,STATUS,ID_SUPPLIER'+#13+
+    dm.query.sql.text:='select REGN,REG_N,N_DOG,DATA_REG,DATA_POST,FLDID,DATA_DOG,DATA_SROK,STATUS,ID_SUPPLIER'+#13+
                          'from reestrdog where regn=:regn';
-    dmod.query.parameters.parambyname('regn').value:=regn;
-    dmod.query.open;
-    result.reg_n:=dmod.query.fieldbyname('reg_n').asinteger;
-    result.n_dog:=trim(dmod.query.fieldbyname('n_dog').value);
-    result.data_reg:=dmod.query.fieldbyname('data_reg').asdatetime;
-    result.data_post:=dmod.query.fieldbyname('data_post').asdatetime;
-    result.data_dog:=dmod.query.fieldbyname('data_dog').asdatetime;
-    result.data_srok:=dmod.query.fieldbyname('data_srok').asdatetime;
-    result.region:=dmod.query.fieldbyname('fldid').value;
-    result.id_supplier:=dmod.query.fieldbyname('id_supplier').value;
-    dmod.query.sql.text:='SELECT * FROM subcontract WHERE id=:id';
-    dmod.query.parameters.parambyname('id').value:=regn;
-    dmod.query.open;
-    dmod.query.first;
-    for i:=0 to dmod.query.recordcount-1 do
+    dm.query.parameters.parambyname('regn').value:=regn;
+    dm.query.open;
+    result.reg_n:=dm.query.fieldbyname('reg_n').asinteger;
+    result.n_dog:=trim(dm.query.fieldbyname('n_dog').value);
+    result.data_reg:=dm.query.fieldbyname('data_reg').asdatetime;
+    result.data_post:=dm.query.fieldbyname('data_post').asdatetime;
+    result.data_dog:=dm.query.fieldbyname('data_dog').asdatetime;
+    result.data_srok:=dm.query.fieldbyname('data_srok').asdatetime;
+    result.region:=dm.query.fieldbyname('fldid').value;
+    result.id_supplier:=dm.query.fieldbyname('id_supplier').value;
+    dm.query.sql.text:='SELECT * FROM subcontract WHERE id=:id';
+    dm.query.parameters.parambyname('id').value:=regn;
+    dm.query.open;
+    dm.query.first;
+    for i:=0 to dm.query.recordcount-1 do
       begin
         setlength(result.subcontract,length(result.subcontract)+1);
-        result.subcontract[i].nomencl:=trim(dmod.query.fieldbyname('nomencl').value);
-        result.subcontract[i].code:=trim(dmod.query.fieldbyname('code').value);
-        result.subcontract[i].subdate:=dmod.query.fieldbyname('subdate').asdatetime;
-        result.subcontract[i].price:=dmod.query.fieldbyname('price').value;
-        result.subcontract[i].report:=dmod.query.fieldbyname('report').value;
-        result.subcontract[i].comment:=trim(dmod.query.fieldbyname('comment').value);
-        dmod.query.next;
+        result.subcontract[i].nomencl:=trim(dm.query.fieldbyname('nomencl').value);
+        result.subcontract[i].code:=trim(dm.query.fieldbyname('code').value);
+        result.subcontract[i].subdate:=dm.query.fieldbyname('subdate').asdatetime;
+        result.subcontract[i].price:=dm.query.fieldbyname('price').value;
+        result.subcontract[i].skip:=dm.query.fieldbyname('report').value;
+        result.subcontract[i].comment:=trim(dm.query.fieldbyname('comment').value);
+        dm.query.next;
       end;
   except
-    showmessage('Ошибка открытия договора!!!'+#13+'номер договора:'+inttostr(regn));
+    showmessage('РћС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ РґРѕРіРѕРІРѕСЂР°!!!'+#13+'РЅРѕРјРµСЂ РґРѕРіРѕРІРѕСЂР°:'+inttostr(regn));
   end;
 end;
 
@@ -121,8 +121,8 @@ var
   i:integer;
 begin
   try
-    dmod.query.connection.begintrans;
-    dmod.query.sql.text:='INSERT INTO ReestrDog'+#13+
+    dm.query.connection.begintrans;
+    dm.query.sql.text:='INSERT INTO ReestrDog'+#13+
                          '(regn,reg_n,n_dog,data_reg,data_post,data_dog,data_srok,fldid,id_supplier)'+#13+
                          'VALUES ('+inttostr(contract.regn)+
                          ','+inttostr(contract.reg_n)+
@@ -133,12 +133,12 @@ begin
                          ','+dateornull(contract.data_srok)+
                          ','+inttostr(contract.region)+
                          ','+inttostr(contract.id_supplier)+')';
-    dmod.query.execsql;
-    dmod.query.sql.text:='DELETE FROM subcontract WHERE id='+inttostr(contract.regn);
-    dmod.query.execsql;
+    dm.query.execsql;
+    dm.query.sql.text:='DELETE FROM subcontract WHERE id='+inttostr(contract.regn);
+    dm.query.execsql;
     for i:=0 to length(contract.subcontract)-1 do
       begin
-        dmod.query.sql.text:='INSERT INTO subcontract'+#13+
+        dm.query.sql.text:='INSERT INTO subcontract'+#13+
                              '(id,nomencl,code,subdate,price,report,comment)'+#13+
                              'VALUES ('+
                              inttostr(contract.regn)+','+
@@ -146,16 +146,15 @@ begin
                              quotedstr(contract.subcontract[i].code)+','+
                              dateornull(contract.subcontract[i].subdate)+','+
                              float(contract.subcontract[i].price)+','+
-                             booltobit(contract.subcontract[i].report)+','+
+                             booltobit(contract.subcontract[i].skip)+','+
                              quotedstr(contract.subcontract[i].comment)+')';
-        dmod.query.execsql;
-        dmod.query.connection.committrans;
+        dm.query.execsql;
+        dm.query.connection.committrans;
       end;
-    showmessage('Договор успешно добавлен!!!');
+    showmessage('Р”РѕРіРѕРІРѕСЂ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅ!!!');
   except
-    dmod.query.connection.rollbacktrans;
-    showmessage('Ошибка добавления договора!!!'+#13+
-                dmod.query.sql.text);
+    dm.query.connection.rollbacktrans;
+    showmessage('РћС€РёР±РєР° РґРѕР±Р°РІР»РµРЅРёСЏ РґРѕРіРѕРІРѕСЂР°!!!'+#13+dm.query.sql.text);
   end;
 end;
 
@@ -164,28 +163,28 @@ var
   i:integer;
 begin
   try
-    dmod.query.connection.begintrans;
-    dmod.query.sql.text:='UPDATE ReestrDog'+#13+
-                         'SET '+
-                         'reg_n=:reg_n,'+
-                         'n_dog=:n_dog,'+
-                         'data_reg='+dateornull(contract.data_reg)+','+
-                         'data_post='+dateornull(contract.data_post)+','+
-                         'data_dog='+dateornull(contract.data_dog)+','+
-                         'data_srok='+dateornull(contract.data_srok)+','+
-                         'id_supplier=:id_supplier'+#13+
-                         'WHERE regn=:regn';
-    dmod.query.parameters.parambyname('regn').value:=contract.regn;
-    dmod.query.parameters.parambyname('reg_n').value:=contract.reg_n;
-    dmod.query.parameters.parambyname('n_dog').value:=contract.n_dog;
-    dmod.query.parameters.parambyname('id_supplier').value:=contract.id_supplier;
-    dmod.query.execsql;
-    dmod.query.sql.text:='DELETE FROM subcontract WHERE id=:id';
-    dmod.query.parameters.parambyname('id').value:=contract.regn;
-    dmod.query.execsql;
+    dm.query.connection.begintrans;
+    dm.query.sql.text:='UPDATE ReestrDog'+#13+
+                       'SET '+
+                       'reg_n=:reg_n,'+
+                       'n_dog=:n_dog,'+
+                       'data_reg='+dateornull(contract.data_reg)+','+
+                       'data_post='+dateornull(contract.data_post)+','+
+                       'data_dog='+dateornull(contract.data_dog)+','+
+                       'data_srok='+dateornull(contract.data_srok)+','+
+                       'id_supplier=:id_supplier'+#13+
+                       'WHERE regn=:regn';
+    dm.query.parameters.parambyname('regn').value:=contract.regn;
+    dm.query.parameters.parambyname('reg_n').value:=contract.reg_n;
+    dm.query.parameters.parambyname('n_dog').value:=contract.n_dog;
+    dm.query.parameters.parambyname('id_supplier').value:=contract.id_supplier;
+    dm.query.execsql;
+    dm.query.sql.text:='DELETE FROM subcontract WHERE id=:id';
+    dm.query.parameters.parambyname('id').value:=contract.regn;
+    dm.query.execsql;
     for i:=0 to length(contract.subcontract)-1 do
       begin
-        dmod.query.sql.text:='INSERT INTO subcontract'+#13+
+        dm.query.sql.text:='INSERT INTO subcontract'+#13+
                              '(id,nomencl,code,subdate,price,report,comment)'+#13+
                              'VALUES ('+
                              inttostr(contract.regn)+','+
@@ -193,35 +192,33 @@ begin
                              quotedstr(contract.subcontract[i].code)+','+
                              dateornull(contract.subcontract[i].subdate)+','+
                              float(contract.subcontract[i].price)+','+
-                             booltostr(contract.subcontract[i].report)+','+
+                             booltobit(contract.subcontract[i].skip)+','+
                              quotedstr(contract.subcontract[i].comment)+')';
-        dmod.query.execsql;
+        dm.query.execsql;
       end;
-    dmod.query.connection.committrans;
-    showmessage('Договор успешно обновлён!!!');
+    dm.query.connection.committrans;
+    showmessage('Р”РѕРіРѕРІРѕСЂ СѓСЃРїРµС€РЅРѕ РѕР±РЅРѕРІР»С‘РЅ!!!');
   except
-    dmod.query.connection.rollbacktrans;
-    showmessage('Ошибка обновления договора!!!'+#13+
-                 dmod.query.sql.text);
+    dm.query.connection.rollbacktrans;
+    showmessage('РћС€РёР±РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ РґРѕРіРѕРІРѕСЂР°!!!'+#13+dm.query.sql.text);
   end;
 end;
 
 procedure delete(id:integer);
 begin
-  dmod.query.connection.begintrans;
+  dm.query.connection.begintrans;
   try
-    dmod.query.sql.text:='DELETE FROM ReestrDog WHERE regn=:id';
-    dmod.query.parameters.parambyname('id').value:=id;
-    dmod.query.execsql;
-    dmod.query.sql.text:='DELETE FROM subcontract WHERE id=:id';
-    dmod.query.parameters.parambyname('id').value:=id;
-    dmod.query.execsql;
-    dmod.query.connection.committrans;
-    showmessage('Договор успешно удалён!!!');
+    dm.query.sql.text:='DELETE FROM ReestrDog WHERE regn=:id';
+    dm.query.parameters.parambyname('id').value:=id;
+    dm.query.execsql;
+    dm.query.sql.text:='DELETE FROM subcontract WHERE id=:id';
+    dm.query.parameters.parambyname('id').value:=id;
+    dm.query.execsql;
+    dm.query.connection.committrans;
+    showmessage('Р”РѕРіРѕРІРѕСЂ СѓСЃРїРµС€РЅРѕ СѓРґР°Р»С‘РЅ!!!');
   except
-    dmod.query.connection.rollbacktrans;
-    showmessage('Ошибка обновления договора!!!'+#13+
-                 dmod.query.sql.text);
+    dm.query.connection.rollbacktrans;
+    showmessage('РћС€РёР±РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ РґРѕРіРѕРІРѕСЂР°!!!'+#13+dm.query.sql.text);
   end;
 end;
 

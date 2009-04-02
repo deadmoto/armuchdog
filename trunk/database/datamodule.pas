@@ -3,16 +3,16 @@ unit datamodule;
 interface
 
 uses
-  SysUtils, Classes, DB, ADODB, FR_DSet, FR_DBSet, FR_Class;
+  SysUtils, Classes, DB, ADODB, frxClass, frxDBSet;
 
 type
-  Tdmod = class(TDataModule)
+  Tdm = class(TDataModule)
     sqlsub: TADOConnection;
     report1: TADOQuery;
     query: TADOQuery;
     data: TDataSource;
-    report: TfrReport;
-    frdata: TfrDBDataSet;
+    report: TfrxReport;
+    frquery: TfrxDBDataset;
   private
     { Private declarations }
   public
@@ -20,7 +20,7 @@ type
   end;
 
 var
-  dmod: Tdmod;
+  dm: Tdm;
 
 implementation
 

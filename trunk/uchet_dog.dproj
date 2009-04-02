@@ -1,0 +1,179 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{C876448F-FC09-4E41-A02D-818873F65D22}</ProjectGuid>
+			<MainSource>uchet_dog.dpr</MainSource>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<ProjectVersion>12.0</ProjectVersion>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_DependencyCheckOutputName>release\uchet_dog.exe</DCC_DependencyCheckOutputName>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_UsePackage>vcl;rtl;inet;xmlrtl;vclie;inetdbbde;inetdbxpress;vclx;dbrtl;dsnap;dsnapcon;vcldb;dbexpress;dbxcds;inetdb;bdertl;vcldbx;webdsnap;websnap;adortl;ibxpress;teeui;teedb;tee;dss;visualclx;visualdbclx;vclactnband;dclOfficeXP;FR7;frx12;frxADO12;frxBDE12;frxDB12;frxDBX12;frxe12;frxTee12;fs12;fsADO12;fsBDE12;fsDB12;fsTee12</DCC_UsePackage>
+			<DCC_ExeOutput>release</DCC_ExeOutput>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_Platform>x86</DCC_Platform>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_K>false</DCC_K>
+			<DCC_N>true</DCC_N>
+			<DCC_S>false</DCC_S>
+			<DCC_F>false</DCC_F>
+			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+			<DCC_DcuOutput>dcu</DCC_DcuOutput>
+			<DCC_E>false</DCC_E>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="uchet_dog.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="sqltext.pas"/>
+			<DCCReference Include="defs.pas"/>
+			<DCCReference Include="forms\reportokved.pas">
+				<Form>report_okved</Form>
+			</DCCReference>
+			<DCCReference Include="database\balance.pas"/>
+			<DCCReference Include="database\datamodule.pas">
+				<Form>dm</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="database\contracts.pas"/>
+			<DCCReference Include="forms\providerfm.pas">
+				<Form>providerform</Form>
+			</DCCReference>
+			<DCCReference Include="dialogs\provideredit.pas">
+				<Form>provdlg</Form>
+			</DCCReference>
+			<DCCReference Include="database\util.pas"/>
+			<DCCReference Include="forms\contractfm.pas">
+				<Form>contractform</Form>
+			</DCCReference>
+			<DCCReference Include="database\regions.pas"/>
+			<DCCReference Include="database\providers.pas"/>
+			<DCCReference Include="dialogs\subcontractdlg.pas">
+				<Form>subcontractfm</Form>
+			</DCCReference>
+			<DCCReference Include="dialogs\nomencldlg.pas">
+				<Form>nomenclselect</Form>
+			</DCCReference>
+			<DCCReference Include="database\nomencls.pas"/>
+			<DCCReference Include="database\cosgus.pas"/>
+			<DCCReference Include="dialogs\cosgudlg.pas">
+				<Form>cosguselect</Form>
+			</DCCReference>
+			<DCCReference Include="dialogs\regiondlg.pas">
+				<Form>regionselect</Form>
+			</DCCReference>
+			<DCCReference Include="dialogs\providerdlg.pas">
+				<Form>providerselect</Form>
+			</DCCReference>
+			<DCCReference Include="forms\cosgufm.pas">
+				<Form>cosgu</Form>
+			</DCCReference>
+			<DCCReference Include="dialogs\cosguedit.pas">
+				<Form>cosgued</Form>
+			</DCCReference>
+			<DCCReference Include="forms\reportcosgu.pas">
+				<Form>report_cosgu</Form>
+			</DCCReference>
+			<DCCReference Include="forms\summaryrpt.pas">
+				<Form>report</Form>
+			</DCCReference>
+			<DCCReference Include="forms\okvedfm.pas">
+				<Form>okved</Form>
+			</DCCReference>
+			<DCCReference Include="dialogs\okvededit.pas">
+				<Form>okveded</Form>
+			</DCCReference>
+			<DCCReference Include="forms\mainfm.pas">
+				<Form>main</Form>
+			</DCCReference>
+			<DCCReference Include="version.pas"/>
+			<DCCReference Include="dialogs\progressdlg.pas">
+				<Form>progress</Form>
+			</DCCReference>
+			<DCCReference Include="database\model.pas"/>
+			<DCCReference Include="forms\quarterrpt.pas">
+				<Form>reportquarter</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>VCLApplication</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">uchet_dog.dpr</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">1</VersionInfo>
+						<VersionInfo Name="Release">1</VersionInfo>
+						<VersionInfo Name="Build">19</VersionInfo>
+						<VersionInfo Name="Debug">True</VersionInfo>
+						<VersionInfo Name="PreRelease">True</VersionInfo>
+						<VersionInfo Name="Special">True</VersionInfo>
+						<VersionInfo Name="Private">True</VersionInfo>
+						<VersionInfo Name="DLL">True</VersionInfo>
+						<VersionInfo Name="Locale">1049</VersionInfo>
+						<VersionInfo Name="CodePage">1251</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.1.1.19</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+						<VersionInfoKeys Name="SpecialBuild"/>
+						<VersionInfoKeys Name="PrivateBuild"/>
+					</VersionInfoKeys>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

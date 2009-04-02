@@ -33,18 +33,18 @@ var
 begin
   setlength(cprovider,0);
   try
-    dmod.query.sql.text:='SELECT * FROM SupplierDog';
-    dmod.query.open;
-    dmod.query.first;
-    for i:=0 to dmod.query.recordcount-1 do
+    dm.query.sql.text:='SELECT * FROM SupplierDog';
+    dm.query.open;
+    dm.query.first;
+    for i:=0 to dm.query.recordcount-1 do
       begin
         setlength(cprovider,length(cprovider)+1);
-        cprovider[i].id:=dmod.query.fieldbyname('id_supplier').value;
-        cprovider[i].name:=trim(dmod.query.fieldbyname('supplier').value);
-        dmod.query.next;
+        cprovider[i].id:=dm.query.fieldbyname('id_supplier').value;
+        cprovider[i].name:=trim(dm.query.fieldbyname('supplier').value);
+        dm.query.next;
       end;
   except
-    showmessage('Ошибка получения списка поставщиков!!!');
+    showmessage('РћС€РёР±РєР° РїРѕР»СѓС‡РµРЅРёСЏ СЃРїРёСЃРєР° РїРѕСЃС‚Р°РІС‰РёРєРѕРІ!!!');
   end;
 end;
 
@@ -54,19 +54,19 @@ var
 begin
   setlength(cprovider,0);
   try
-    dmod.query.sql.text:='SELECT * FROM SupplierDog'+#13+
+    dm.query.sql.text:='SELECT * FROM SupplierDog'+#13+
                          'WHERE '+column+' LIKE '+quotedstr('%'+filter+'%');
-    dmod.query.open;
-    dmod.query.first;
-    for i:=0 to dmod.query.recordcount-1 do
+    dm.query.open;
+    dm.query.first;
+    for i:=0 to dm.query.recordcount-1 do
       begin
         setlength(cprovider,length(cprovider)+1);
-        cprovider[i].id:=dmod.query.fieldbyname('id_supplier').value;
-        cprovider[i].name:=trim(dmod.query.fieldbyname('supplier').value);
-        dmod.query.next;
+        cprovider[i].id:=dm.query.fieldbyname('id_supplier').value;
+        cprovider[i].name:=trim(dm.query.fieldbyname('supplier').value);
+        dm.query.next;
       end;
   except
-    showmessage('Ошибка получения списка поставщиков!!!');
+    showmessage('РћС€РёР±РєР° РїРѕР»СѓС‡РµРЅРёСЏ СЃРїРёСЃРєР° РїРѕСЃС‚Р°РІС‰РёРєРѕРІ!!!');
   end;
 end;
 
@@ -80,3 +80,4 @@ begin
 end;
 
 end.
+
