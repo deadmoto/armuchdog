@@ -327,7 +327,7 @@ end;
 
 procedure tmain.Button1Click(Sender: TObject);
 begin
-//  quarterrpt.
+  quarterrpt.showreport;
 end;
 
 procedure tmain.exitClick(Sender: TObject);
