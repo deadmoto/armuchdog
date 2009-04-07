@@ -56,8 +56,8 @@ begin
   nomencls.fetch;
   grid.rowcount:=length(cnomencl)+1;
   grid.fixedrows:=1;
-  grid.cells[0,0]:='ОКВЭД';
-  grid.cells[1,0]:='Наименование';
+  grid.cells[0,0]:='РћРљР’Р­Р”';
+  grid.cells[1,0]:='РќР°РёРјРµРЅРѕРІР°РЅРёРµ';
   for i:=0 to length(cnomencl)-1 do
     begin
       grid.cells[0,i+1]:=cnomencl[i].id;

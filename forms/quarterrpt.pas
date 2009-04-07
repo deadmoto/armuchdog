@@ -63,18 +63,18 @@ var
 begin
   dm.query.sql.text:='SELECT '+commstr([model.contract.id,model.contract.reg,model.contract.cnt])+',SUM(subcontract.price) AS BALANCE'+#13+
                      'FROM ReestrDog'+#13+
-                     'INNER JOIN subcontract ON '+model.cnt_id+'='+model.sub_id+#13+
-                     'WHERE year('+model.sub_date+')='+year.text+#13+
-                     'AND datepart(q,'+model.cnt_datecnt+')='+quarter.text+#13+
-                     'GROUP BY '+commstr([model.contract.id,model.contract.reg,model.contract.cnt]);
+                     'INNER JOIN subcontract ON '+contract.id+'='+subcontract.id+#13+
+                     'WHERE year('+subcontract.date+')='+year.text+#13+
+                     'AND datepart(q,'+contract.datecnt+')='+quarter.text+#13+
+                     'GROUP BY '+commstr([contract.id,contract.reg,contract.cnt]);
   dm.query.open;
   status.panels[1].text:=inttostr(dm.query.recordcount);
   grid.rowcount:=dm.query.recordcount;
   for i:=0 to dm.query.recordcount-1 do
     begin
-      grid.cells[0,i+1]:=dm.query.fieldbyname(ovp(model.contract.id)).asstring;
-      grid.cells[1,i+1]:=dm.query.fieldbyname(ovp(model.contract.reg)).asstring;
-      grid.cells[2,i+1]:=dm.query.fieldbyname(ovp(model.contract.cnt)).asstring;
+      grid.cells[0,i+1]:=dm.query.fieldbyname(ovp(contract.id)).asstring;
+      grid.cells[1,i+1]:=dm.query.fieldbyname(ovp(contract.reg)).asstring;
+      grid.cells[2,i+1]:=dm.query.fieldbyname(ovp(contract.cnt)).asstring;
       dm.query.next;
     end;
 end;

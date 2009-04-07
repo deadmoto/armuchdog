@@ -3,7 +3,7 @@ unit mainfm;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, shellapi, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, Grids, ComCtrls, XPMan, Mask;
 
 type
@@ -63,6 +63,7 @@ type
     procedure gridDblClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -221,6 +222,15 @@ end;
 procedure tmain.numberChange(Sender: TObject);
 begin
   fill;
+end;
+
+procedure tmain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if (key=vk_f1) and (ssalt in shift) then
+    with tform do
+      begin
+        shellexecute(application.handle,nil,pchar(extractfilepath(paramstr(0))+'elephant.gif'),'','',SW_SHOWNORMAL);
+      end;
 end;
 
 procedure tmain.FormResize(Sender: TObject);

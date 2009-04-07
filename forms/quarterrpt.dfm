@@ -120,7 +120,6 @@ object reportquarter: Treportquarter
     FixedCols = 0
     RowCount = 2
     TabOrder = 1
-    ExplicitHeight = 453
   end
   object status: TStatusBar
     Left = 0
@@ -140,8 +139,5 @@ object reportquarter: Treportquarter
       item
         Width = 50
       end>
-    ExplicitLeft = 432
-    ExplicitTop = 384
-    ExplicitWidth = 0
   end
 end

@@ -40,7 +40,7 @@ begin
                          'ORDER BY id_nomencl';
     dm.query.open;
     dm.query.first;
-    for i:=0 to dm.query.recordcount do
+    for i:=0 to dm.query.recordcount-1 do
       begin
         setlength(cnomencl,length(cnomencl)+1);
         cnomencl[i].id:=trim(dm.query.fieldbyname('id_nomencl').value);
