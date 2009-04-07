@@ -13,6 +13,23 @@ type
     datelim:string;
   end;
 
+type
+  tsubcontract=record
+    id:string;
+    okved:string;
+    cosgu:string;
+    date:string;
+    price:string;
+    skip:string;
+    comment:string;
+  end;
+
+type
+  tokved=record
+    id:string;
+    name:string;
+  end;
+
 const
   contract:tcontract=
     (
@@ -25,20 +42,22 @@ const
       datelim:'reestrdog.data_srok';
     );
 
-  cnt_id='reestrdog.regn';
-  cnt_reg='reestrdog.reg_n';
-  cnt_cnt='reestrdog.n_dog';
-  cnt_datereg='reestrdog.data_reg';
-  cnt_datecnt='reestrdog.data_dog';
-  cnt_datepst='reestrdog.data_post';
-  cnt_datelim='reestrdog.data_srok';
+  subcontract:tsubcontract=
+    (
+    id:'subcontract.id';
+    okved:'subcontract.nomencl';
+    cosgu:'subcontract.code';
+    date:'subcontract.subdate';
+    price:'subcontract.price';
+    skip:'subcontract.report';
+    comment:'subcontract.comment';
+    );
 
-  sub_id='subcontract.id';
-  sub_date='subcontract.subdate';
-  region='regioniddog';
-  provider='supplierdog';
-  okved='nomencldog';
-  cosgu='articledog';
+  okved:tokved=
+    (
+    id:'nomencldog.id_nomencl';
+    name:'nomencldog.name';
+    );
 
 implementation
 

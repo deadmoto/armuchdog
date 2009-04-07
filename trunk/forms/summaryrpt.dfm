@@ -1,4 +1,4 @@
-object report: Treport
+object sumaryreport: Tsumaryreport
   Left = 212
   Top = 146
   Caption = #1057#1091#1084#1084#1072#1088#1085#1099#1081' '#1086#1090#1095#1105#1090' '#1087#1086' '#1054#1050#1042#1069#1044
@@ -61,23 +61,65 @@ object report: Treport
         OnChange = endpickChange
       end
     end
-    object report: TButton
-      Left = 192
-      Top = 6
-      Width = 75
-      Height = 41
-      Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+    object btnbox: TGroupBox
+      Left = 193
+      Top = 1
+      Width = 168
+      Height = 47
+      Align = alLeft
       TabOrder = 2
-      OnClick = reportClick
+      object reportbtn: TButton
+        Left = 87
+        Top = 9
+        Width = 75
+        Height = 31
+        Caption = #1054#1090#1095#1105#1090
+        TabOrder = 0
+        OnClick = reportbtnClick
+      end
+      object detailbtn: TButton
+        Left = 6
+        Top = 9
+        Width = 75
+        Height = 31
+        Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+        TabOrder = 1
+        OnClick = detailbtnClick
+      end
     end
-    object Button1: TButton
-      Left = 267
-      Top = 6
-      Width = 75
-      Height = 41
-      Caption = #1054#1090#1095#1105#1090
+    object GroupBox1: TGroupBox
+      Left = 361
+      Top = 1
+      Width = 112
+      Height = 47
+      Align = alLeft
+      Caption = #1055#1086#1080#1089#1082
       TabOrder = 3
-      OnClick = Button1Click
+      object search: TEdit
+        Left = 6
+        Top = 16
+        Width = 99
+        Height = 21
+        TabOrder = 0
+        OnChange = searchChange
+      end
+    end
+    object closebox: TGroupBox
+      Left = 704
+      Top = 1
+      Width = 87
+      Height = 47
+      Align = alRight
+      TabOrder = 4
+      object closebtn: TButton
+        Left = 7
+        Top = 9
+        Width = 75
+        Height = 31
+        Caption = #1042#1099#1093#1086#1076
+        TabOrder = 0
+        OnClick = closebtnClick
+      end
     end
   end
   object grid: TStringGrid
@@ -92,6 +134,7 @@ object report: Treport
     RowCount = 1
     FixedRows = 0
     TabOrder = 1
+    OnDblClick = gridDblClick
     OnSelectCell = gridSelectCell
   end
   object StatusBar1: TStatusBar

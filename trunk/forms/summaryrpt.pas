@@ -20,23 +20,31 @@ uses
 procedure showreport;
 
 type
-  treport = class(TForm)
+  tsumaryreport = class(TForm)
     panel: TPanel;
     grid: TStringGrid;
     startbox: TGroupBox;
     endbox: TGroupBox;
     startpick: TDateTimePicker;
     endpick: TDateTimePicker;
-    report: TButton;
+    detailbtn: TButton;
     StatusBar1: TStatusBar;
-    Button1: TButton;
+    reportbtn: TButton;
+    btnbox: TGroupBox;
+    GroupBox1: TGroupBox;
+    search: TEdit;
+    closebox: TGroupBox;
+    closebtn: TButton;
     procedure formshow(sender:tobject);
-    procedure reportClick(Sender: TObject);
+    procedure detailbtnClick(Sender: TObject);
     procedure startpickChange(Sender: TObject);
     procedure endpickChange(Sender: TObject);
     procedure gridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure Button1Click(Sender: TObject);
+    procedure reportbtnClick(Sender: TObject);
+    procedure searchChange(Sender: TObject);
+    procedure closebtnClick(Sender: TObject);
+    procedure gridDblClick(Sender: TObject);
   private
   public
     selected:integer;
@@ -47,6 +55,7 @@ implementation
 
 uses
   datamodule,
+  model,
   reportokved,
   util;
 
@@ -54,13 +63,13 @@ uses
 
 procedure showreport;
 var
-  report:treport;
+  report:tsumaryreport;
 begin
-  report:=treport.create(application.owner);
+  report:=tsumaryreport.create(application.owner);
   report.showmodal;
 end;
 
-procedure treport.fill;
+procedure tsumaryreport.fill;
 var
   i:integer;
 begin
@@ -68,14 +77,13 @@ begin
   grid.defaultrowheight:=16;
   grid.fixedcols:=0;
   dm.query.sql.text:='SELECT subcontract.nomencl,subcontract.report,nomencldog.name,sum(subcontract.price) as price'+#13+
-                       'FROM subcontract'+#13+
-                       'INNER JOIN nomencldog ON (subcontract.nomencl=nomencldog.id_nomencl)'+#13+
-                       'WHERE (subcontract.nomencl<>'+quotedstr('')+')'+#13+
-                       'AND (subcontract.subdate>='+dateornull(startpick.date)+')'+#13+
-                       'AND (subcontract.subdate<'+dateornull(endpick.date)+')'+#13+
-//                       'AND (subcontract.report<>1)'+#13+
-                       'GROUP BY subcontract.nomencl,subcontract.report,nomencldog.name'+#13+
-                       'ORDER BY subcontract.nomencl';
+                     'FROM subcontract'+#13+
+                     'INNER JOIN nomencldog ON '+subcontract.okved+'='+okved.id+#13+
+                     'WHERE ('+subcontract.okved+'<>'+quotedstr('')+')'+#13+
+                     'AND ('+subcontract.date+'>='+dateornull(startpick.date)+')'+#13+
+                     'AND ('+subcontract.date+'<'+dateornull(endpick.date)+')'+#13+
+                     'GROUP BY '+commstr([subcontract.okved,subcontract.skip,okved.name])+#13+
+                     'ORDER BY '+commstr([subcontract.okved]);
   dm.query.open;
   grid.colcount:=4;
   grid.rowcount:=max(dm.query.recordcount+1,1);
@@ -107,7 +115,7 @@ begin
   grid.rows[0].strings[3]:='Превышение';
 end;
 
-procedure treport.formshow(sender:tobject);
+procedure tsumaryreport.formshow(sender:tobject);
 var
   month:word;
   temp:word;
@@ -118,7 +126,7 @@ begin
   fill;
 end;
 
-procedure treport.reportClick(Sender: TObject);
+procedure tsumaryreport.detailbtnClick(Sender: TObject);
 begin
   if startpick.datetime>endpick.datetime then
     showmessage('Установите правильные даты!!!')
@@ -126,7 +134,27 @@ begin
     reportokved.showreport(startpick.datetime,endpick.datetime,grid.cells[0,selected]);
 end;
 
-procedure treport.startpickChange(Sender: TObject);
+procedure tsumaryreport.gridDblClick(Sender: TObject);
+begin
+  if startpick.datetime>endpick.datetime then
+    showmessage('Установите правильные даты!!!')
+  else
+    reportokved.showreport(startpick.datetime,endpick.datetime,grid.cells[0,selected]);
+end;
+
+procedure tsumaryreport.searchChange(Sender: TObject);
+var
+  i:integer;
+begin
+  for i:=1 to grid.rowcount-1 do
+      if copy(grid.cells[0,i],0,length(search.text))=search.text then
+        begin
+          grid.row:=i;
+          exit;
+        end;
+end;
+
+procedure tsumaryreport.startpickChange(Sender: TObject);
 begin
   if startpick.datetime>endpick.datetime then
     startpick.color:=clred
@@ -135,7 +163,7 @@ begin
   fill;
 end;
 
-procedure treport.endpickChange(Sender: TObject);
+procedure tsumaryreport.endpickChange(Sender: TObject);
 begin
   if endpick.datetime<startpick.datetime then
     endpick.color:=clred
@@ -144,19 +172,24 @@ begin
   fill;
 end;
 
-procedure treport.gridSelectCell(Sender: TObject; ACol, ARow: Integer;
+procedure tsumaryreport.gridSelectCell(Sender: TObject; ACol, ARow: Integer;
   var CanSelect: Boolean);
 begin
   if arow>0 then
     selected:=arow;
 end;
 
-procedure treport.Button1Click(Sender: TObject);
+procedure tsumaryreport.reportbtnClick(Sender: TObject);
 begin
   dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_summary.fr3');
   dm.report.variables.variables['start']:=startpick.datetime;
   dm.report.variables.variables['finish']:=endpick.datetime;
   dm.report.showreport;
+end;
+
+procedure tsumaryreport.closebtnClick(Sender: TObject);
+begin
+  close;
 end;
 
 end.

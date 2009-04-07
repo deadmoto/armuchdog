@@ -98,7 +98,7 @@
 				<Form>report_cosgu</Form>
 			</DCCReference>
 			<DCCReference Include="forms\summaryrpt.pas">
-				<Form>report</Form>
+				<Form>sumaryreport</Form>
 			</DCCReference>
 			<DCCReference Include="forms\okvedfm.pas">
 				<Form>okved</Form>

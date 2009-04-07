@@ -24,7 +24,7 @@ uses
   cosgufm in 'forms\cosgufm.pas' {cosgu},
   cosguedit in 'dialogs\cosguedit.pas' {cosgued},
   reportcosgu in 'forms\reportcosgu.pas' {report_cosgu},
-  summaryrpt in 'forms\summaryrpt.pas' {report},
+  summaryrpt in 'forms\summaryrpt.pas' {sumaryreport},
   okvedfm in 'forms\okvedfm.pas' {okved},
   okvededit in 'dialogs\okvededit.pas' {okveded},
   mainfm in 'forms\mainfm.pas' {main},
