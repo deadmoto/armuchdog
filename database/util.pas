@@ -18,6 +18,8 @@ function dateornull(date:tdate):string;
 function quarter(date:tdate):byte;
 function year(date:tdate):integer;
 function starorstr(text:string):string;
+function ovp(s:string):string;
+function commstr(a:array of string):string;
 procedure makelink;
 
 implementation
@@ -76,6 +78,27 @@ begin
   result:='';
   if text<>'*' then
     result:=text;
+end;
+
+function ovp(s:string):string;
+var
+  i:integer;
+begin
+  result:='';
+  for i:=length(s) downto 0 do
+    if s[i]<>'.' then result:=s[i]+result
+  else
+    exit;
+end;
+
+function commstr(a:array of string):string;
+var
+  i:integer;
+begin
+  result:='';
+  for i:=0 to length(a)-1 do
+    result:=result+a[i]+',';
+  result:=copy(result,0,length(result)-1);
 end;
 
 procedure makelink;

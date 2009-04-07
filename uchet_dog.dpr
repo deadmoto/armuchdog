@@ -46,7 +46,6 @@ begin
   Application.CreateForm(Tsubcontractfm, subcontractfm);
   Application.CreateForm(Tnomenclselect, nomenclselect);
   Application.CreateForm(Tcosguselect, cosguselect);
-  Application.CreateForm(Treportquarter, reportquarter);
   regions.fetch;
   providers.fetch;
   application.run;

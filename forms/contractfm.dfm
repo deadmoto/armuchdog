@@ -100,14 +100,14 @@ object contractform: Tcontractform
         OnChange = n_dogChange
       end
     end
-    object GroupBox6: TGroupBox
+    object providerbox: TGroupBox
       Left = 8
       Top = 208
       Width = 377
       Height = 49
       Caption = #1050#1086#1085#1090#1088#1072#1075#1077#1085#1090' ('#1087#1086#1089#1090#1072#1074#1097#1080#1082')'
       TabOrder = 4
-      object id_supplier: TEdit
+      object provider: TEdit
         Left = 8
         Top = 16
         Width = 273
@@ -115,14 +115,14 @@ object contractform: Tcontractform
         Enabled = False
         TabOrder = 0
       end
-      object btnsupplier: TButton
+      object providerbtn: TButton
         Left = 288
         Top = 15
         Width = 75
         Height = 22
         Caption = #1042#1099#1073#1088#1072#1090#1100
         TabOrder = 1
-        OnClick = btnsupplierClick
+        OnClick = providerbtnClick
       end
     end
     object GroupBox7: TGroupBox

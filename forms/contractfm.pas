@@ -28,9 +28,9 @@ type
     reg_n: TEdit;
     GroupBox5: tgroupbox;
     n_dog: TEdit;
-    GroupBox6: tgroupbox;
-    id_supplier: TEdit;
-    btnsupplier: TButton;
+    providerbox: TGroupBox;
+    provider: TEdit;
+    providerbtn: TButton;
     GroupBox7: tgroupbox;
     GroupBox8: tgroupbox;
     GroupBox9: tgroupbox;
@@ -55,7 +55,7 @@ type
     sum: TEdit;
     Panel1: TPanel;
     procedure discardClick(Sender: TObject);
-    procedure btnsupplierClick(Sender: TObject);
+    procedure providerbtnClick(Sender: TObject);
     procedure btnregionClick(Sender: TObject);
     procedure reg_nChange(Sender: TObject);
     procedure n_dogChange(Sender: TObject);
@@ -183,7 +183,7 @@ begin
   self.fldid.text:=regions.byid(contract.region);
   self.reg_n.text:=inttostr(contract.reg_n);
   self.n_dog.text:=contract.n_dog;
-  self.id_supplier.text:=providers.byid(contract.id_supplier);
+  provider.text:=providers.byid(contract.id_supplier);
   if contract.data_reg<>0 then
     begin
       self.data_reg.enabled:=true;
@@ -207,11 +207,11 @@ begin
   showmodal;
 end;
 
-procedure tcontractform.btnsupplierClick(Sender: TObject);
+procedure tcontractform.providerbtnClick(Sender: TObject);
 begin
   contract.id_supplier:=providerdlg.select;
-  if contract.id_supplier<>0 then
-    id_supplier.text:=providers.byid(self.contract.id_supplier);
+  if contract.id_supplier<>-1 then
+    provider.text:=providers.byid(contract.id_supplier);
 end;
 
 procedure tcontractform.Button1Click(Sender: TObject);
