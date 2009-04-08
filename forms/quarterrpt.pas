@@ -27,9 +27,13 @@ type
     procedure registeredClick(Sender: TObject);
     procedure printClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure gridDblClick(Sender: TObject);
+    procedure gridSelectCell(Sender: TObject; ACol, ARow: Integer;
+      var CanSelect: Boolean);
   private
     { Private declarations }
   public
+    selected:integer;
     function getfreewidth(index:integer):integer;
     procedure setcolsizes;
     procedure fill;
@@ -42,6 +46,7 @@ uses
   model,
   providers,
   regions,
+  contractfm,
   util;
 
 {$R *.dfm}
@@ -136,6 +141,17 @@ begin
   for i:=0 to grid.colcount-1 do
     if i<>index then
       result:=result-grid.colwidths[i];
+end;
+
+procedure treportquarter.gridDblClick(Sender: TObject);
+begin
+  contractform.edit(strtoint(grid.cells[0,selected]));
+end;
+
+procedure treportquarter.gridSelectCell(Sender: TObject; ACol, ARow: Integer;
+  var CanSelect: Boolean);
+begin
+  selected:=arow;
 end;
 
 procedure treportquarter.setcolsizes;
