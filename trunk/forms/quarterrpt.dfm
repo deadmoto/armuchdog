@@ -13,6 +13,8 @@ object reportquarter: Treportquarter
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  WindowState = wsMaximized
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object panel: TPanel
@@ -28,6 +30,8 @@ object reportquarter: Treportquarter
       Width = 130
       Height = 17
       Caption = #1047#1072#1088#1077#1075#1080#1089#1090#1088#1080#1088#1086#1074#1072#1085#1085#1099#1077
+      Checked = True
+      State = cbChecked
       TabOrder = 0
       OnClick = registeredClick
     end
@@ -46,8 +50,12 @@ object reportquarter: Treportquarter
         Height = 21
         DropDownCount = 40
         ItemHeight = 13
+        ItemIndex = 0
         TabOrder = 0
+        Text = '*'
         OnChange = pbsChange
+        Items.Strings = (
+          '*')
       end
     end
     object print: TButton
