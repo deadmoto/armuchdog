@@ -145,13 +145,13 @@ object subcontractfm: Tsubcontractfm
     end
     object reportbox: TGroupBox
       Left = 454
-      Top = 0
+      Top = 6
       Width = 179
-      Height = 49
+      Height = 43
       TabOrder = 3
       object report: TCheckBox
         Left = 8
-        Top = 18
+        Top = 12
         Width = 161
         Height = 17
         Alignment = taLeftJustify

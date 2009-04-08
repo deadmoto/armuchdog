@@ -19,6 +19,7 @@ type
     procedure gridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure filterChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
   public
     selected:integer;
@@ -75,6 +76,11 @@ begin
       fetch('supplier',filter.text);
       fill;
     end;
+end;
+
+procedure tproviderselect.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  fetch;
 end;
 
 end.

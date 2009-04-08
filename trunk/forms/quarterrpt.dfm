@@ -128,6 +128,8 @@ object reportquarter: Treportquarter
     FixedCols = 0
     RowCount = 2
     TabOrder = 1
+    OnDblClick = gridDblClick
+    OnSelectCell = gridSelectCell
   end
   object status: TStatusBar
     Left = 0
