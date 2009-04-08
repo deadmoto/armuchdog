@@ -3,29 +3,61 @@ unit model;
 interface
 
 type
-  tcontract=record
-    id:string;
-    reg:string;
-    cnt:string;
-    datereg:string;
-    datecnt:string;
-    datepst:string;
-    datelim:string;
+  tfield=packed record
+  strict private
+    table:^string;
+    function getname:string;
+  public
+    column:string;
+    caption:string;
+    width:integer;
+    property name:string read getname;
   end;
 
 type
-  tsubcontract=record
+  tcontract=packed record
+  public
+    table:string;
+    id:tfield;
+    cnt:tfield;
+    reg:tfield;
+    datecnt:tfield;
+    datereg:tfield;
+    datepst:tfield;
+    datelim:tfield;
+    region:tfield;
+    provider:tfield;
+  end;
+
+type
+  tsubcontract=packed record
+  public
+    table:string;
     id:string;
     okved:string;
     cosgu:string;
     date:string;
-    price:string;
+    price:tfield;
     skip:string;
     comment:string;
   end;
 
 type
-  tokved=record
+  tregion=packed record
+    table:string;
+    id:tfield;
+    name:tfield;
+  end;
+
+type
+  tprovider=packed record
+    table:string;
+    id:tfield;
+    name:tfield;
+  end;
+
+type
+  tokved=packed record
     id:string;
     name:string;
   end;
@@ -33,24 +65,42 @@ type
 const
   contract:tcontract=
     (
-      id:'reestrdog.regn';
-      reg:'reestrdog.reg_n';
-      cnt:'reestrdog.n_dog';
-      datereg:'reestrdog.data_reg';
-      datecnt:'reestrdog.data_dog';
-      datepst:'reestrdog.data_post';
-      datelim:'reestrdog.data_srok';
+      table:'reestrdog';
+      id:(table:@contract.table;column:'regn';caption:'№';width:8*8);
+      cnt:(table:@contract.table;column:'n_dog';caption:'Номер дог.';width:8*8);
+      reg:(table:@contract.table;column:'reg_n';caption:'Рег. номер';width:8*8);
+      datecnt:(table:@contract.table;column:'data_dog';caption:'Дата договора';width:8*10);
+      datereg:(table:@contract.table;column:'data_reg';caption:'Регистрация';width:8*10);
+      datepst:(table:@contract.table;column:'data_post';caption:'Поступил';width:8*10);
+      datelim:(table:@contract.table;column:'data_srok';caption:'Срок договора';width:8*10);
+      region:(table:@contract.table;column:'fldid';caption:'Район';width:8*24);
+      provider:(table:@contract.table;column:'id_supplier';caption:'Поставщик';width:8*24);
     );
 
   subcontract:tsubcontract=
     (
-    id:'subcontract.id';
-    okved:'subcontract.nomencl';
-    cosgu:'subcontract.code';
-    date:'subcontract.subdate';
-    price:'subcontract.price';
-    skip:'subcontract.report';
-    comment:'subcontract.comment';
+      table:'subcontract';
+      id:'subcontract.id';
+      okved:'subcontract.nomencl';
+      cosgu:'subcontract.code';
+      date:'subcontract.subdate';
+      price:(table:@subcontract.table;column:'price';caption:'Сумма';width:8*8);
+      skip:'subcontract.report';
+      comment:'subcontract.comment';
+    );
+
+  region:tregion=
+    (
+      table:'regioniddog';
+      id:(table:@region.table;column:'fldid';caption:'№';width:8*8);
+      name:(table:@region.table;column:'fldname';caption:'Наименование';width:8*12);
+    );
+
+  provider:tprovider=
+    (
+      table:'supplierdog';
+      id:(table:@provider.table;column:'id_supplier';caption:'№';width:8*8);
+      name:(table:@provider.table;column:'supplier';caption:'Наименование';width:8*12);
     );
 
   okved:tokved=
@@ -60,5 +110,10 @@ const
     );
 
 implementation
+
+function tfield.getname:string;
+begin
+  result:=table^+'.'+column;
+end;
 
 end.
