@@ -36,6 +36,7 @@ type
     procedure gridDblClick(Sender: TObject);
   private
   public
+    procedure fill;
   end;
 
 var
@@ -86,6 +87,35 @@ begin
   dm.query.close;
 end;
 
+procedure treport_cosgu.fill;
+begin
+  dm.query.sql.text:='SELECT subcontract.id,subcontract.code,ArticleDog.name_artic,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
+                       'FROM subcontract'+#13+
+                       'INNER JOIN ArticleDog ON subcontract.code=ArticleDog.cosgu'+#13+
+                       'INNER JOIN ReestrDog ON subcontract.id=ReestrDog.REGN'+#13+
+                       'INNER JOIN RegionIDDog ON ReestrDog.FLDID=RegionIDDog.FLDID'+#13+
+                       'INNER JOIN SupplierDog ON ReestrDog.ID_SUPPLIER = SupplierDog.ID_SUPPLIER'+#13+
+                       'WHERE (subcontract.code LIKE '+quotedstr('%'+starorstr(cosgu.text)+'%')+') '+
+                       'AND (RegionIDDog.FLDNAME LIKE '+quotedstr('%'+starorstr(pbs.text)+'%')+') '+
+                       'AND (subcontract.subdate>='+dateornull(startpick.date)+') '+
+                       'AND (subcontract.subdate<'+dateornull(endpick.date)+')'+
+                       'AND (subcontract.code<>'+quotedstr('')+')'+#13+
+                       'ORDER BY RegionIDDog.FLDNAME';
+  grid.datasource.dataset:=dm.query;
+  dm.query.open;
+  dm.query.fieldbyname('code').visible:=false;
+  grid.columns.items[0].width:=8*9;
+  grid.columns.items[1].width:=8*32;
+  grid.columns.items[2].width:=8*12;
+  grid.columns.items[4].width:=8*8;
+  grid.columns.items[3].width:=grid.width-(grid.columns.items[0].width+grid.columns.items[1].width+grid.columns.items[2].width+grid.columns.items[4].width+36);
+  grid.columns.items[0].title.caption:='№ договора';
+  grid.columns.items[1].title.caption:='КОСГУ';
+  grid.columns.items[2].title.caption:='ПБС';
+  grid.columns.items[3].title.caption:='Поставщик';
+  grid.columns.items[4].title.caption:='Сумма';
+end;
+
 procedure treport_cosgu.FormShow(Sender: TObject);
 var
   month:word;
@@ -115,41 +145,19 @@ end;
 
 procedure treport_cosgu.searchClick(Sender: TObject);
 begin
-  dm.query.sql.text:='SELECT subcontract.id,subcontract.code,ArticleDog.name_artic,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
-                       'FROM subcontract'+#13+
-                       'INNER JOIN ArticleDog ON subcontract.code=ArticleDog.cosgu'+#13+
-                       'INNER JOIN ReestrDog ON subcontract.id=ReestrDog.REGN'+#13+
-                       'INNER JOIN RegionIDDog ON ReestrDog.FLDID=RegionIDDog.FLDID'+#13+
-                       'INNER JOIN SupplierDog ON ReestrDog.ID_SUPPLIER = SupplierDog.ID_SUPPLIER'+#13+
-                       'WHERE (subcontract.code LIKE '+quotedstr('%'+starorstr(cosgu.text)+'%')+') '+
-                       'AND (RegionIDDog.FLDNAME LIKE '+quotedstr('%'+starorstr(pbs.text)+'%')+') '+
-                       'AND (subcontract.subdate>='+dateornull(startpick.date)+') '+
-                       'AND (subcontract.subdate<'+dateornull(endpick.date)+')'+
-                       'AND (subcontract.code<>'+quotedstr('')+')';
-  grid.datasource.dataset:=dm.query;
-  dm.query.open;
-  dm.query.fieldbyname('code').visible:=false;
-  grid.columns.items[0].width:=8*9;
-  grid.columns.items[1].width:=8*32;
-  grid.columns.items[2].width:=8*12;
-  grid.columns.items[4].width:=8*8;
-  grid.columns.items[3].width:=grid.width-(grid.columns.items[0].width+grid.columns.items[1].width+grid.columns.items[2].width+grid.columns.items[4].width+36);
-  grid.columns.items[0].title.caption:='№ договора';
-  grid.columns.items[1].title.caption:='КОСГУ';
-  grid.columns.items[2].title.caption:='ПБС';
-  grid.columns.items[3].title.caption:='Поставщик';
-  grid.columns.items[4].title.caption:='Сумма';
+  fill;
 end;
 
 procedure treport_cosgu.reportClick(Sender: TObject);
 begin
   if cosgu.itemindex=0 then
-    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\cosgu_bypbs.frf')
+    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\cosgu_by_pbs.fr3')
   else
-    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\cosgu_bycosgu.frf');
+    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\cosgu_by_cosgu.fr3');
   dm.report.variables.variables['start']:=startpick.datetime;
-  dm.report.variables.variables['end']:=endpick.datetime;
+  dm.report.variables.variables['finish']:=endpick.datetime;
   dm.report.showreport;
+  fill;
 end;
 
 procedure treport_cosgu.gridDblClick(Sender: TObject);

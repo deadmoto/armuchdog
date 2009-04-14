@@ -54,8 +54,8 @@ type
 implementation
 
 uses
+  datamodel,
   datamodule,
-  model,
   reportokved,
   util;
 
