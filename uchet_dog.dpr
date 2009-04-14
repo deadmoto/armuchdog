@@ -30,7 +30,7 @@ uses
   mainfm in 'forms\mainfm.pas' {main},
   version in 'version.pas',
   progressdlg in 'dialogs\progressdlg.pas' {progress},
-  model in 'database\model.pas',
+  datamodel in 'database\datamodel.pas',
   quarterrpt in 'forms\quarterrpt.pas' {reportquarter};
 
 {$R *.res}

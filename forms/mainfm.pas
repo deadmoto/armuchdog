@@ -78,6 +78,7 @@ var
 implementation
 
 uses
+  datamodel,
   datamodule,
   contracts,
   providers,
@@ -107,39 +108,37 @@ var
   i,j:integer;
   price:real;
 begin
-  j:=0;price:=0;
+  price:=0;
   main:=tmain.create(owner);
   grid.colcount:=10;
   grid.rowcount:=1;
-  grid.colwidths[j]:=8*8;inc(j);
-  grid.colwidths[j]:=8*8;inc(j);
-  grid.colwidths[j]:=8*8;inc(j);
-  grid.colwidths[j]:=8*10;inc(j);
-  grid.colwidths[j]:=8*10;inc(j);
-  grid.colwidths[j]:=8*10;inc(j);
-  grid.colwidths[j]:=8*10;inc(j);
-  grid.colwidths[j]:=8*16;inc(j);
-  grid.colwidths[j]:=8*8;inc(j);
-  grid.colwidths[j]:=8*8;inc(j);
-  j:=0;
-  grid.cells[j,0]:='№';inc(j);
-  grid.cells[j,0]:='Рег. номер';inc(j);
-  grid.cells[j,0]:='Номер дог.';inc(j);
-  grid.cells[j,0]:='Дата договора';inc(j);
-  grid.cells[j,0]:='Срок договора';inc(j);
-  grid.cells[j,0]:='Поступил';inc(j);
-  grid.cells[j,0]:='Регистрация';inc(j);
-  grid.cells[j,0]:='Район';inc(j);
-  grid.cells[j,0]:='Контрагент';inc(j);
-  grid.cells[j,0]:='Сумма';inc(j);
+  grid.colwidths[0]:=contract.id.width;
+  grid.colwidths[1]:=contract.reg.width;
+  grid.colwidths[2]:=contract.cnt.width;
+  grid.colwidths[3]:=contract.datecnt.width;
+  grid.colwidths[4]:=contract.datelim.width;
+  grid.colwidths[5]:=contract.datercv.width;
+  grid.colwidths[6]:=contract.datereg.width;
+  grid.colwidths[7]:=contract.region.width;
   grid.colwidths[8]:=grid.width-32;
-  for j:=0 to grid.colcount-1 do
-    if j<>8 then
-      grid.colwidths[8]:=grid.colwidths[8]-grid.colwidths[j];
-  dm.query.sql.text:='SELECT ReestrDog.REGN,ReestrDog.REG_N,ReestrDog.N_DOG,'+
-                     'ReestrDog.DATA_DOG,ReestrDog.DATA_SROK,ReestrDog.DATA_POST,'+
-                     'ReestrDog.DATA_REG,ReestrDog.FLDID,ReestrDog.ID_SUPPLIER,'+
-                     'SUM(subcontract.price) AS price'+#13+
+  grid.colwidths[9]:=subcontract.price.width;
+  for i:=0 to grid.colcount-1 do
+    if i<>8 then
+      grid.colwidths[8]:=grid.colwidths[8]-grid.colwidths[i];
+  grid.cells[0,0]:=contract.id.caption;
+  grid.cells[1,0]:=contract.reg.caption;
+  grid.cells[2,0]:=contract.cnt.caption;
+  grid.cells[3,0]:=contract.datecnt.caption;
+  grid.cells[4,0]:=contract.datelim.caption;
+  grid.cells[5,0]:=contract.datercv.caption;
+  grid.cells[6,0]:=contract.datereg.caption;
+  grid.cells[7,0]:=contract.region.caption;
+  grid.cells[8,0]:=contract.provider.caption;
+  grid.cells[9,0]:=subcontract.price.caption;
+  dm.query.sql.text:='SELECT '+commstr([contract.id.name,contract.reg.name,contract.cnt.name,
+                                        contract.datecnt.name,contract.datelim.name,contract.datercv.name,
+                                        contract.datereg.name,contract.region.name,contract.provider.name,
+                                        'SUM('+subcontract.price.name+') AS '+subcontract.price.column])+#13+
                      'FROM ReestrDog'+#13+
                      'INNER JOIN subcontract ON subcontract.id = ReestrDog.REGN'+#13+
                      'WHERE (ReestrDog.REGN LIKE '+quotedstr('%'+number.text+'%')+' '+

@@ -42,8 +42,8 @@ type
 implementation
 
 uses
+  datamodel,
   datamodule,
-  model,
   providers,
   regions,
   contractfm,
@@ -92,10 +92,10 @@ begin
                       'AND ('+contract.datereg.name+' IS NULL'+#13+
                       'OR '+contract.reg.name+' IS NULL)'+#13;
   dm.query.sql.text:=dm.query.sql.text+
-                     'GROUP BY '+commstr([contract.id.name,contract.cnt.name,
-                                          contract.reg.name,contract.datecnt.name,
-                                          contract.datereg.name,region.name.name,
-                                        provider.name.name]);
+                      'GROUP BY '+commstr([contract.id.name,contract.cnt.name,
+                                           contract.reg.name,contract.datecnt.name,
+                                           contract.datereg.name,region.name.name,
+                                           provider.name.name]);
   dm.query.open;
   status.panels[1].text:=inttostr(dm.query.recordcount);
   grid.rowcount:=dm.query.recordcount;

@@ -89,7 +89,7 @@ var
   i:integer;
 begin
   result:=defs.contractlimit;
-  result:=result-getbalance(contractform.contract.regn,psubcontract.nomencl,date);
+  result:=result-getbalance(pcontract.regn,psubcontract.nomencl,date);
   result:=result-price;
   if length(pcontract.subcontract)>0 then
     for i:=0 to length(pcontract.subcontract)-1 do

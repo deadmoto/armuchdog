@@ -113,7 +113,7 @@
 			<DCCReference Include="dialogs\progressdlg.pas">
 				<Form>progress</Form>
 			</DCCReference>
-			<DCCReference Include="database\model.pas"/>
+			<DCCReference Include="database\datamodel.pas"/>
 			<DCCReference Include="forms\quarterrpt.pas">
 				<Form>reportquarter</Form>
 			</DCCReference>
