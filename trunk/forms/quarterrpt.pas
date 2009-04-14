@@ -67,7 +67,9 @@ end;
 procedure treportquarter.fill;
 var
   i:integer;
+  price:real;
 begin
+  price:=0;
   dm.query.sql.text:='SELECT '+commstr([contract.id.name,contract.cnt.name,
                                         contract.reg.name,contract.datecnt.name,
                                         contract.datereg.name,region.name.name,
@@ -124,8 +126,10 @@ begin
       grid.cells[5,i+1]:=dm.query.fieldbyname(region.name.column).asstring;
       grid.cells[6,i+1]:=dm.query.fieldbyname(provider.name.column).asstring;
       grid.cells[7,i+1]:=dm.query.fieldbyname(subcontract.price.column).asstring;
+      price:=price+dm.query.fieldbyname(subcontract.price.column).value;
       dm.query.next;
     end;
+  status.panels.items[3].text:=floattostr(price);
 end;
 
 procedure treportquarter.FormResize(Sender: TObject);

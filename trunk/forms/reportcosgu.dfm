@@ -20,7 +20,7 @@ object report_cosgu: Treport_cosgu
     Left = 0
     Top = 49
     Width = 852
-    Height = 524
+    Height = 505
     Align = alClient
     DataSource = dm.data
     TabOrder = 0
@@ -129,5 +129,31 @@ object report_cosgu: Treport_cosgu
       TabOrder = 5
       OnClick = reportClick
     end
+  end
+  object status: TStatusBar
+    Left = 0
+    Top = 554
+    Width = 852
+    Height = 19
+    Panels = <
+      item
+        Text = #1044#1086#1075#1086#1074#1086#1088#1086#1074' '#1074' '#1092#1080#1083#1100#1090#1088#1077':'
+        Width = 120
+      end
+      item
+        Text = '0'
+        Width = 32
+      end
+      item
+        Text = #1053#1072' '#1089#1091#1084#1084#1091':'
+        Width = 64
+      end
+      item
+        Text = '0'
+        Width = 50
+      end>
+    ExplicitLeft = 336
+    ExplicitTop = 352
+    ExplicitWidth = 0
   end
 end

@@ -150,7 +150,23 @@ object report_okved: Treport_okved
     Top = 554
     Width = 792
     Height = 19
-    Panels = <>
+    Panels = <
+      item
+        Text = #1044#1086#1075#1086#1074#1086#1088#1086#1074' '#1074' '#1092#1080#1083#1100#1090#1088#1077':'
+        Width = 120
+      end
+      item
+        Text = '0'
+        Width = 32
+      end
+      item
+        Text = #1053#1072' '#1089#1091#1084#1084#1091':'
+        Width = 64
+      end
+      item
+        Text = '0'
+        Width = 50
+      end>
   end
   object source: TDataSource
     Left = 56

@@ -3,7 +3,7 @@ unit subcontractdlg;
 interface
 
 uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls, 
-  Buttons, ExtCtrls, Mask,
+  Buttons, ExtCtrls,math, Mask,
   contracts, Menus;
 
 procedure showeditor(var contract:tcontract;const index:integer=-1);
@@ -161,7 +161,7 @@ begin
         self.balance.font.color:=clred
       else
         self.balance.font.color:=clnone;
-      self.balance.text:=floattostr(limit);
+      self.balance.text:=floattostr(roundto(limit,-2));
     end
   else
     balance.text:='Не учитывается';

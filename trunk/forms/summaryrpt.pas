@@ -28,7 +28,7 @@ type
     startpick: TDateTimePicker;
     endpick: TDateTimePicker;
     detailbtn: TButton;
-    StatusBar1: TStatusBar;
+    status: TStatusBar;
     reportbtn: TButton;
     btnbox: TGroupBox;
     GroupBox1: TGroupBox;
@@ -72,7 +72,9 @@ end;
 procedure tsumaryreport.fill;
 var
   i:integer;
+  price:real;
 begin
+  price:=0;
   grid.create(owner);
   grid.defaultrowheight:=16;
   grid.fixedcols:=0;
@@ -91,6 +93,7 @@ begin
   grid.colwidths[2]:=8*8;
   grid.colwidths[3]:=8*9;
   grid.colwidths[1]:=grid.width-(grid.colwidths[0]+grid.colwidths[2]+grid.colwidths[3]+24);
+  status.panels.items[1].text:=inttostr(dm.query.recordcount);
   if dm.query.recordcount>0 then
     begin
       grid.fixedrows:=1;
@@ -106,8 +109,10 @@ begin
           else
             grid.cells[3,i+1]:='Нет';
           grid.cells[2,i+1]:=dm.query.fieldbyname('price').value;
+          price:=price+dm.query.fieldbyname('price').value;
           dm.query.next;
         end;
+      status.panels.items[3].text:=floattostr(price);
     end;
   grid.rows[0].strings[0]:='ОКВЭД';
   grid.rows[0].strings[1]:='Наименование';

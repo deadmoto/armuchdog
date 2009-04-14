@@ -28,6 +28,7 @@ type
     report: TButton;
     cosgu: TComboBox;
     pbs: TComboBox;
+    status: TStatusBar;
     procedure FormShow(Sender: TObject);
     procedure cosguKeyPress(Sender: TObject; var Key: Char);
     procedure pbsKeyPress(Sender: TObject; var Key: Char);
@@ -45,6 +46,7 @@ var
 implementation
 
 uses
+  datamodel,
   contractfm,
   util;
 
@@ -88,6 +90,9 @@ begin
 end;
 
 procedure treport_cosgu.fill;
+var
+  i:integer;
+  price:real;
 begin
   dm.query.sql.text:='SELECT subcontract.id,subcontract.code,ArticleDog.name_artic,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
                        'FROM subcontract'+#13+
@@ -103,6 +108,7 @@ begin
                        'ORDER BY RegionIDDog.FLDNAME';
   grid.datasource.dataset:=dm.query;
   dm.query.open;
+  status.panels.items[1].text:=inttostr(dm.query.recordcount);
   dm.query.fieldbyname('code').visible:=false;
   grid.columns.items[0].width:=8*9;
   grid.columns.items[1].width:=8*32;
@@ -114,6 +120,13 @@ begin
   grid.columns.items[2].title.caption:='ПБС';
   grid.columns.items[3].title.caption:='Поставщик';
   grid.columns.items[4].title.caption:='Сумма';
+  dm.query.first;
+  for i:=0 to dm.query.recordcount-1 do
+    begin
+      price:=price+dm.query.fieldbyname(subcontract.price.column).value;
+      dm.query.next;
+    end;
+  status.panels.items[3].text:=floattostr(price);
 end;
 
 procedure treport_cosgu.FormShow(Sender: TObject);

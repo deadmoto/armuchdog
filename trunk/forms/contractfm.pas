@@ -8,6 +8,7 @@ uses
 //
   classes,
   controls,
+  dialogs,
   stdctrls,
   extctrls,
   forms,
@@ -80,6 +81,7 @@ type
     selected:integer;
     contract:tcontract;
     function checklimit:boolean;
+    function checkfill:boolean;
     procedure add;
     procedure edit(regn:integer);
     procedure fill;
@@ -121,6 +123,11 @@ begin
           limit:=limit-contract.subcontract[j].price;
       if limit<0 then result:=false;
     end;
+end;
+
+function tcontractform.checkfill;
+begin
+  result:=(contract.data_dog<>0) and (length(contract.n_dog)>0);
 end;
 
 procedure tcontractform.fill;
@@ -325,14 +332,24 @@ end;
 
 procedure tcontractform.insertClick(Sender: TObject);
 begin
-  contracts.insert(self.contract);
-  self.close;
+  if checkfill then
+    begin
+      contracts.insert(self.contract);
+      close;
+    end
+  else
+    showmessage('Пожалуйста введите номер и дату договора!!!');
 end;
 
 procedure tcontractform.updateClick(Sender: TObject);
 begin
-  contracts.update(self.contract);
-  self.close;
+  if checkfill then
+    begin
+      contracts.update(self.contract);
+      close;
+    end
+  else
+    showmessage('Пожалуйста введите номер и дату договора!!!');
 end;
 
 procedure tcontractform.discardClick(Sender: TObject);
