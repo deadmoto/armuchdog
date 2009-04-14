@@ -38,6 +38,7 @@ type
 implementation
 
 uses
+  datamodel,
   datamodule,
   contractfm,
   util;
@@ -135,7 +136,11 @@ begin
 end;
 
 procedure Treport_okved.searchClick(Sender: TObject);
+var
+  i:integer;
+  price:real;
 begin
+  price:=0;
   dm.query.sql.text:='SELECT subcontract.id,subcontract.nomencl,NomenclDog.NAME,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
                        'FROM subcontract'+#13+
                        'INNER JOIN NomenclDog ON subcontract.nomencl=NomenclDog.ID_NOMENCL'+#13+
@@ -150,6 +155,7 @@ begin
                        'AND (subcontract.report<>1)'+')';
   source.dataset:=dm.query;
   dm.query.open;
+  status.panels.items[1].text:=inttostr(dm.query.recordcount);
   dm.query.fieldbyname('NAME').visible:=false;
   report.columns.items[0].width:=8*9;
   report.columns.items[1].width:=8*9;
@@ -161,6 +167,13 @@ begin
   report.columns.items[2].title.caption:='ПБС';
   report.columns.items[3].title.caption:='Поставщик';
   report.columns.items[4].title.caption:='Сумма';
+  dm.query.first;
+  for i:=0 to dm.query.recordcount-1 do
+    begin
+      price:=price+dm.query.fieldbyname(subcontract.price.column).value;
+      dm.query.next;
+    end;
+  status.panels.items[3].text:=floattostr(price);
 end;
 
 procedure Treport_okved.Button1Click(Sender: TObject);

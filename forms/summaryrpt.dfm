@@ -137,11 +137,27 @@ object sumaryreport: Tsumaryreport
     OnDblClick = gridDblClick
     OnSelectCell = gridSelectCell
   end
-  object StatusBar1: TStatusBar
+  object status: TStatusBar
     Left = 0
     Top = 547
     Width = 792
     Height = 19
-    Panels = <>
+    Panels = <
+      item
+        Text = #1057#1090#1072#1090#1077#1081' '#1074' '#1092#1080#1083#1100#1090#1088#1077':'
+        Width = 102
+      end
+      item
+        Text = '0'
+        Width = 32
+      end
+      item
+        Text = #1053#1072' '#1089#1091#1084#1084#1091':'
+        Width = 64
+      end
+      item
+        Text = '0'
+        Width = 50
+      end>
   end
 end
