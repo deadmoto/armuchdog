@@ -83,14 +83,14 @@ object report_cosgu: Treport_cosgu
       Align = alLeft
       Caption = #1050#1054#1057#1043#1059
       TabOrder = 2
-      object cosgu: TComboBox
+      object cosguselect: TComboBox
         Left = 8
         Top = 16
         Width = 89
         Height = 21
         ItemHeight = 13
         TabOrder = 0
-        OnKeyPress = cosguKeyPress
+        OnKeyPress = cosguselectKeyPress
       end
     end
     object pbsbox: TGroupBox
@@ -152,8 +152,5 @@ object report_cosgu: Treport_cosgu
         Text = '0'
         Width = 50
       end>
-    ExplicitLeft = 336
-    ExplicitTop = 352
-    ExplicitWidth = 0
   end
 end

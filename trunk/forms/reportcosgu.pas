@@ -26,11 +26,11 @@ type
     pbsbox: TGroupBox;
     search: TButton;
     report: TButton;
-    cosgu: TComboBox;
+    cosguselect: TComboBox;
     pbs: TComboBox;
     status: TStatusBar;
     procedure FormShow(Sender: TObject);
-    procedure cosguKeyPress(Sender: TObject; var Key: Char);
+    procedure cosguselectKeyPress(Sender: TObject; var Key: Char);
     procedure pbsKeyPress(Sender: TObject; var Key: Char);
     procedure searchClick(Sender: TObject);
     procedure reportClick(Sender: TObject);
@@ -56,7 +56,7 @@ procedure getcosgu;
 var
   i:integer;
 begin
-  report_cosgu.cosgu.items.clear;
+  report_cosgu.cosguselect.items.clear;
   dm.query.sql.text:='SELECT code'+#13+
                        'FROM subcontract'+#13+
                        'WHERE code IS NOT NULL'+#13+
@@ -65,11 +65,11 @@ begin
   dm.query.first;
   for i:=0 to dm.query.recordcount-1 do
     begin
-      report_cosgu.cosgu.items.add(trim(dm.query.fieldbyname('code').asstring));
+      report_cosgu.cosguselect.items.add(trim(dm.query.fieldbyname('code').asstring));
       dm.query.next;
     end;
   dm.query.close;
-  report_cosgu.cosgu.items.strings[0]:='*';
+  report_cosgu.cosguselect.items.strings[0]:='*';
 end;
 
 procedure getpbs;
@@ -94,18 +94,29 @@ var
   i:integer;
   price:real;
 begin
-  dm.query.sql.text:='SELECT subcontract.id,subcontract.code,ArticleDog.name_artic,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
-                       'FROM subcontract'+#13+
-                       'INNER JOIN ArticleDog ON subcontract.code=ArticleDog.cosgu'+#13+
-                       'INNER JOIN ReestrDog ON subcontract.id=ReestrDog.REGN'+#13+
-                       'INNER JOIN RegionIDDog ON ReestrDog.FLDID=RegionIDDog.FLDID'+#13+
-                       'INNER JOIN SupplierDog ON ReestrDog.ID_SUPPLIER = SupplierDog.ID_SUPPLIER'+#13+
-                       'WHERE (subcontract.code LIKE '+quotedstr('%'+starorstr(cosgu.text)+'%')+') '+
-                       'AND (RegionIDDog.FLDNAME LIKE '+quotedstr('%'+starorstr(pbs.text)+'%')+') '+
-                       'AND (subcontract.subdate>='+dateornull(startpick.date)+') '+
-                       'AND (subcontract.subdate<'+dateornull(endpick.date)+')'+
-                       'AND (subcontract.code<>'+quotedstr('')+')'+#13+
-                       'ORDER BY RegionIDDog.FLDNAME';
+  dm.query.sql.text:='SELECT '+commstr([subcontract.id.name,subcontract.cosgu.name,
+                                        cosgu.name.name,region.name.name,provider.name.name,
+                                        subcontract.price.name])+#13+
+                     'FROM '+subcontract.table+#13+
+                     'INNER JOIN '+cosgu.table+
+                     ' ON '+subcontract.cosgu.name+'='+cosgu.id.name+#13+
+                     'INNER JOIN '+contract.table+
+                     ' ON '+contract.id.name+'='+subcontract.id.name+#13+
+                     'INNER JOIN '+region.table+
+                     ' ON '+contract.region.name+'='+region.id.name+#13+
+                     'INNER JOIN '+provider.table+
+                     ' ON '+contract.provider.name+'='+provider.id.name+#13+
+                     'WHERE ('+subcontract.cosgu.name+
+                     ' LIKE '+quotedstr('%'+starorstr(cosguselect.text)+'%')+')';
+  if pbs.itemindex>0 then
+    dm.query.sql.text:=dm.query.sql.text+
+                       'AND ('+region.name.name+
+                       '='+quotedstr(pbs.text)+')';
+  dm.query.sql.text:=dm.query.sql.text+
+                     'AND ('+subcontract.date.name+'>='+dateornull(startpick.date)+')'+
+                     'AND ('+subcontract.date.name+'<'+dateornull(endpick.date)+')'+
+                     'AND ('+subcontract.cosgu.name+'<>'+quotedstr('')+')'+#13+
+                     'ORDER BY '+commstr([subcontract.cosgu.name,region.name.name]);
   grid.datasource.dataset:=dm.query;
   dm.query.open;
   status.panels.items[1].text:=inttostr(dm.query.recordcount);
@@ -142,11 +153,11 @@ begin
   endpick.date:=encodedate(currentyear,month,1);
   getcosgu;
   getpbs;
-  cosgu.itemindex:=0;
+  cosguselect.itemindex:=0;
   pbs.itemindex:=0;
 end;
 
-procedure treport_cosgu.cosguKeyPress(Sender: TObject; var Key: Char);
+procedure treport_cosgu.cosguselectKeyPress(Sender: TObject; var Key: Char);
 begin
   key:=chr(vk_cancel);
 end;
@@ -163,7 +174,7 @@ end;
 
 procedure treport_cosgu.reportClick(Sender: TObject);
 begin
-  if cosgu.itemindex=0 then
+  if cosguselect.itemindex=0 then
     dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\cosgu_by_pbs.fr3')
   else
     dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\cosgu_by_cosgu.fr3');

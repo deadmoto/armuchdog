@@ -77,10 +77,10 @@ begin
                                         ',SUM('+subcontract.price.name+') AS '+
                                         subcontract.price.column+#13+
                      'FROM '+contract.table+#13+
-                     'INNER JOIN '+subcontract.table+' ON '+contract.id.name+'='+subcontract.id+#13+
+                     'INNER JOIN '+subcontract.table+' ON '+contract.id.name+'='+subcontract.id.name+#13+
                      'INNER JOIN '+region.table+' ON '+contract.region.name+'='+region.id.name+#13+
                      'INNER JOIN '+provider.table+' ON '+contract.provider.name+'='+provider.id.name+#13+
-                     'WHERE year('+subcontract.date+')='+year.text+#13+
+                     'WHERE year('+subcontract.date.name+')='+year.text+#13+
                      'AND datepart(q,'+contract.datecnt.name+')='+quarter.text+#13;
   if pbs.itemindex>0 then
     dm.query.sql.text:=dm.query.sql.text+
