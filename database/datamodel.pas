@@ -24,9 +24,9 @@ type
   end;
 
 type
+  tcontract=packed record
 {*******************************************************************************
 *******************************************************************************}
-  tcontract=packed record
   public
     table:string;
     id:tfield;
@@ -42,32 +42,36 @@ type
 
 type
 {*******************************************************************************
+Декларация служебной структуры TSubcontract. table - содержит имя таблицы
+(применяется потомками), id - номер договора, okved - ОКВЭД, cosgu - КОСГУ,
+date - дата детализации, price - сумма детализации, skip - триггер отображения в
+отчётах, comment - текстовое пояснение
 *******************************************************************************}
   tsubcontract=packed record
   public
     table:string;
-    id:string;
-    okved:string;
-    cosgu:string;
-    date:string;
+    id:tfield;
+    okved:tfield;
+    cosgu:tfield;
+    date:tfield;
     price:tfield;
-    skip:string;
-    comment:string;
+    skip:tfield;
+    comment:tfield;
   end;
 
 type
-{*******************************************************************************
-*******************************************************************************}
   tregion=packed record
-    table:string;
-    id:tfield;
-    name:tfield;
-  end;
-
-type
 {*******************************************************************************
 *******************************************************************************}
+    table:string;
+    id:tfield;
+    name:tfield;
+  end;
+
+type
   tprovider=packed record
+{*******************************************************************************
+*******************************************************************************}
     table:string;
     id:tfield;
     name:tfield;
@@ -75,10 +79,24 @@ type
 
 type
 {*******************************************************************************
+Декларация служебной структуры TOkved. table - содержит имя таблицы (применяется
+потомками), id - идентификатор, name - наименование
 *******************************************************************************}
   tokved=packed record
-    id:string;
-    name:string;
+    table:string;
+    id:tfield;
+    name:tfield;
+  end;
+
+type
+{*******************************************************************************
+Декларация служебной структуры TCosgu. table - содержит имя таблицы (применяется
+потомками), id - идентификатор, name - наименование
+*******************************************************************************}
+  tcosgu=packed record
+    table:string;
+    id:tfield;
+    name:tfield;
   end;
 
 const
@@ -107,13 +125,13 @@ const
 *******************************************************************************}
     (
       table:'subcontract';
-      id:'subcontract.id';
-      okved:'subcontract.nomencl';
-      cosgu:'subcontract.code';
-      date:'subcontract.subdate';
+      id:(table:@subcontract.table;column:'id';caption:'№';width:8*8);
+      okved:(table:@subcontract.table;column:'nomencl';caption:'ОКВЕД';width:8*8);
+      cosgu:(table:@subcontract.table;column:'code';caption:'КОСГУ';width:8*8);
+      date:(table:@subcontract.table;column:'subdate';caption:'Дата';width:8*10);
       price:(table:@subcontract.table;column:'price';caption:'Сумма';width:8*8);
-      skip:'subcontract.report';
-      comment:'subcontract.comment';
+      skip:(table:@subcontract.table;column:'report';caption:'Скрывать в отчётах';width:8*8);
+      comment:(table:@subcontract.table;column:'comment';caption:'Комментарий';width:8*8);
     );
 
   region:tregion=
@@ -138,8 +156,18 @@ const
 {*******************************************************************************
 *******************************************************************************}
     (
-    id:'nomencldog.id_nomencl';
-    name:'nomencldog.name';
+      table:'nomencldog';
+      id:(table:@okved.table;column:'id_nomencl';caption:'№';width:8*8);
+      name:(table:@okved.table;column:'name';caption:'Наименование';width:8*8);
+    );
+
+  cosgu:tcosgu=
+{*******************************************************************************
+*******************************************************************************}
+    (
+      table:'articledog';
+      id:(table:@cosgu.table;column:'cosgu';caption:'№';width:8*8);
+      name:(table:@cosgu.table;column:'name_artic';caption:'Наименование';width:8*8);
     );
 
 implementation

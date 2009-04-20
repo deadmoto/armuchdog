@@ -112,17 +112,19 @@ var
 begin
   result:=true;
   for i:=0 to length(contract.subcontract)-1 do
-    begin
-      limit:=defs.contractlimit;
-      limit:=limit-getbalance(contract.regn,contract.subcontract[i].nomencl,contract.subcontract[i].subdate);
-      for j:=0 to length(contract.subcontract)-1 do
-        if (contract.subcontract[i].nomencl=contract.subcontract[j].nomencl)
-        and (not contract.subcontract[j].skip)
-        and (quarter(contract.subcontract[i].subdate)=quarter(contract.subcontract[j].subdate))
-        and (year(contract.subcontract[i].subdate)=year(contract.subcontract[j].subdate)) then
-          limit:=limit-contract.subcontract[j].price;
-      if limit<0 then result:=false;
-    end;
+    if length(contract.subcontract[i].nomencl)>0 then
+      begin
+        limit:=defs.contractlimit;
+        limit:=limit-getbalance(contract.regn,contract.subcontract[i].nomencl,contract.subcontract[i].subdate);
+        for j:=0 to length(contract.subcontract)-1 do
+          if (contract.subcontract[i].nomencl=contract.subcontract[j].nomencl)
+          and (not contract.subcontract[j].skip)
+          and (quarter(contract.subcontract[i].subdate)=quarter(contract.subcontract[j].subdate))
+          and (year(contract.subcontract[i].subdate)=year(contract.subcontract[j].subdate)) then
+            limit:=limit-contract.subcontract[j].price;
+      end;
+  if limit<0 then
+    result:=false;
 end;
 
 function tcontractform.checkfill;
