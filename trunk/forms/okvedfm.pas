@@ -35,7 +35,7 @@ implementation
 uses
   datamodule,
   okvededit,
-  nomencls,
+  sizers,
   util;
 
 {$R *.dfm}
@@ -53,15 +53,15 @@ procedure tokved.fill;
 var
   i:integer;
 begin
-  nomencls.fetch;
-  grid.rowcount:=length(cnomencl)+1;
+  sizers.fetch;
+  grid.rowcount:=length(asizer)+1;
   grid.fixedrows:=1;
   grid.cells[0,0]:='РћРљР’Р­Р”';
   grid.cells[1,0]:='РќР°РёРјРµРЅРѕРІР°РЅРёРµ';
-  for i:=0 to length(cnomencl)-1 do
+  for i:=0 to length(asizer)-1 do
     begin
-      grid.cells[0,i+1]:=cnomencl[i].id;
-      grid.cells[1,i+1]:=cnomencl[i].name;
+      grid.cells[0,i+1]:=asizer[i].id;
+      grid.cells[1,i+1]:=asizer[i].name;
     end;
   grid.colwidths[0]:=8*8;
   grid.colwidths[1]:=grid.width-grid.colwidths[0]-24;
@@ -81,15 +81,15 @@ end;
 
 procedure tokved.updClick(Sender: TObject);
 begin
-  okvededit.update(cnomencl[selected-1]);
+  okvededit.update(asizer[selected-1]);
   fill;
 end;
 
 procedure tokved.delClick(Sender: TObject);
 begin
-  if messagebox(handle,pchar('Удалить ОКВЭД '+cnomencl[selected-1].id+'?'),'Внимание!',mb_yesno)=id_yes then
+  if messagebox(handle,pchar('Удалить ОКВЭД '+asizer[selected-1].id+'?'),'Внимание!',mb_yesno)=id_yes then
     begin
-      nomencls.delete(cnomencl[selected-1]);
+      sizers.delete(asizer[selected-1]);
       fill;
     end;
 end;

@@ -37,7 +37,7 @@ var
 implementation
 
 uses
-  nomencls;
+  sizers;
 
 {$R *.dfm}
 
@@ -48,11 +48,11 @@ begin
   self.nomenclgrid.colwidths[1]:=386;
   self.nomenclgrid.rows[0].strings[0]:='ОКВЭД';
   self.nomenclgrid.rows[0].strings[1]:='Наименование';
-  for i:=0 to length(nomencls.cnomencl)-1 do
+  for i:=0 to length(sizers.asizer)-1 do
     begin
       self.nomenclgrid.rowcount:=i+1;
-      self.nomenclgrid.rows[i+1].strings[0]:=nomencls.cnomencl[i].id;
-      self.nomenclgrid.rows[i+1].strings[1]:=nomencls.cnomencl[i].name;
+      self.nomenclgrid.rows[i+1].strings[0]:=sizers.asizer[i].id;
+      self.nomenclgrid.rows[i+1].strings[1]:=sizers.asizer[i].name;
     end;
   self.nomenclgrid.fixedrows:=1;
 end;
@@ -60,7 +60,7 @@ end;
 function tnomenclselect.select:string;
 begin
   nomenclselect:=tnomenclselect.create(owner);
-  nomencls.fetch;
+  sizers.fetch;
   self.fill;
   if self.showmodal=mrok then
     result:=self.nomenclgrid.cols[0].strings[selected];
@@ -77,9 +77,9 @@ begin
   if filter.text<>'' then
     begin
       if filterid.checked then
-        nomencls.fetch('id_nomencl',filter.text);
+        sizers.fetch('id_nomencl',filter.text);
       if filtername.checked then
-        nomencls.fetch('name',filter.text);
+        sizers.fetch('name',filter.text);
       self.fill;
     end;
 end;

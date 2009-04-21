@@ -57,7 +57,7 @@ uses
   dialogs,
   defs,
   balance,
-  nomencls,
+  sizers,
   cosgus,
   nomencldlg,
   cosgudlg,
@@ -120,7 +120,7 @@ begin
   new(psubcontract);
   psubcontract^:=pcontract.subcontract[index];
   ok.caption:='Изменить';
-  subcontractfm.nomencl.text:=nomencls.byid(psubcontract.nomencl);
+  subcontractfm.nomencl.text:=sizers.byid(psubcontract.nomencl);
   subcontractfm.code.text:=cosgus.byid(psubcontract.code);
   if psubcontract.subdate<>0 then
     subcontractfm.subdate.text:=datetostr(psubcontract.subdate);
@@ -134,7 +134,7 @@ end;
 procedure tsubcontractfm.nomenclbtnClick(Sender: TObject);
 begin
   psubcontract.nomencl:=nomenclselect.select;
-  self.nomencl.text:=nomencls.byid(psubcontract.nomencl);
+  self.nomencl.text:=sizers.byid(psubcontract.nomencl);
 end;
 
 procedure tsubcontractfm.codebtnClick(Sender: TObject);

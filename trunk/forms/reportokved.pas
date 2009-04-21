@@ -9,12 +9,11 @@ uses
 procedure showreport;overload;
 procedure showreport(startd,endd:tdatetime;nomencl:string);overload;
 type
-  Treport_okved = class(TForm)
+  treport_okved = class(TForm)
     nomenclbox: TGroupBox;
     regionbox: TGroupBox;
     nomencl: TComboBox;
     regioncbx: TComboBox;
-    report: TDBGrid;
     panel: TPanel;
     status: TStatusBar;
     search: TBitBtn;
@@ -23,15 +22,23 @@ type
     endbox: TGroupBox;
     endpick: TDateTimePicker;
     Button1: TButton;
-    source: TDataSource;
+    grid: TStringGrid;
     procedure FormShow(Sender: TObject);
     procedure nomenclKeyPress(Sender: TObject; var Key: Char);
     procedure searchClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure reportDblClick(Sender: TObject);
+    procedure gridSelectCell(Sender: TObject; ACol, ARow: Integer;
+      var CanSelect: Boolean);
+    procedure regioncbxChange(Sender: TObject);
+    procedure nomenclChange(Sender: TObject);
+    procedure gridDblClick(Sender: TObject);
+    procedure endpickChange(Sender: TObject);
+    procedure startpickChange(Sender: TObject);
   private
+    selected:integer;
     procedure getnomencls;
     procedure getregions;
+    procedure fill;
   public
   end;
 
@@ -41,6 +48,8 @@ uses
   datamodel,
   datamodule,
   contractfm,
+  regions,
+  providers,
   util;
 
 {$R *.dfm}
@@ -82,7 +91,70 @@ begin
   dm.query.close;
 end;
 
-procedure Treport_okved.FormShow(Sender: TObject);
+procedure treport_okved.fill;
+var
+  i:integer;
+  price:real;
+begin
+  with grid do
+    begin
+      cells[0,0]:=subcontract.okved.caption;
+      cells[1,0]:=sizer.name.caption;
+      cells[2,0]:=region.name.caption;
+      cells[3,0]:=subcontract.price.caption;
+      colwidths[0]:=subcontract.okved.width;
+      colwidths[2]:=region.name.width;
+      colwidths[3]:=subcontract.price.width;
+      colwidths[1]:=width-(colwidths[0]+colwidths[2]+colwidths[3]+24);
+    end;
+  dm.query.sql.text:='SELECT '+commstr([subcontract.okved.name,sizer.name.name,
+                                        region.name.name,sum(subcontract.price)])+#13+
+                     'FROM '+subcontract.table+#13+
+                     'INNER JOIN '+contract.table+
+                     ' ON '+subcontract.id.name+'='+contract.id.name+#13+
+                     'INNER JOIN '+sizer.table+
+                     ' ON '+subcontract.okved.name+'='+sizer.id.name+#13+
+                     'INNER JOIN '+region.table+
+                     ' ON '+contract.region.name+'='+region.id.name+#13+
+                     'WHERE ('+subcontract.okved.name+' LIKE '+
+                     quotedstr('%'+starorstr(nomencl.text)+'%')+')'+#13;
+  if regioncbx.itemindex>0 then
+    dm.query.sql.text:=dm.query.sql.text+'AND ('+contract.region.name+'='+
+                       inttostr(regions.cregion[regioncbx.itemindex-1].id)+')'+#13;
+  dm.query.sql.text:=dm.query.sql.text+
+                     'AND ('+subcontract.date.name+'>='+
+                     dateornull(startpick.date)+')'+#13+
+                     'AND ('+subcontract.date.name+'<'+
+                     dateornull(endpick.date)+')'+#13+
+                     'AND ('+subcontract.okved.name+'<>'+quotedstr('')+
+                     'AND ('+subcontract.skip.name+'<>1)'+')'+#13+
+                     'GROUP BY '+commstr([region.name.name,sizer.name.name,
+                                          subcontract.okved.name])+#13+
+                     'ORDER BY '+commstr([region.name.name,subcontract.okved.name]);
+  dm.query.open;
+  grid.rowcount:=max(dm.query.recordcount+1,2);
+  status.panels.items[1].text:=inttostr(dm.query.recordcount);
+  if dm.query.recordcount>0 then
+    begin
+      grid.rowheights[1]:=grid.defaultrowheight;
+      dm.query.first;
+      with dm.query do
+        for i:=0 to recordcount-1 do
+          begin
+            grid.cells[0,i+1]:=fieldbyname(subcontract.okved.column).value;
+            grid.cells[1,i+1]:=fieldbyname(sizer.name.column).value;
+            grid.cells[2,i+1]:=fieldbyname(region.name.column).value;
+            grid.cells[3,i+1]:=fieldbyname(subcontract.price.column).value;
+            price:=price+fieldbyname(subcontract.price.column).value;
+            dm.query.next;
+          end;
+    end
+  else
+    grid.rowheights[1]:=-1;
+  status.panels.items[3].text:=floattostr(price);
+end;
+
+procedure treport_okved.FormShow(Sender: TObject);
 var
   month:word;
   temp:word;
@@ -94,6 +166,7 @@ begin
   getregions;
   nomencl.itemindex:=0;
   regioncbx.itemindex:=0;
+  fill;
 end;
 
 procedure showreport;
@@ -110,6 +183,9 @@ begin
   report.getregions;
   report.nomencl.itemindex:=0;
   report.regioncbx.itemindex:=0;
+
+  report.startpick.OnChange:=report.regioncbx.OnChange;
+
   report.showmodal;
 end;
 
@@ -130,66 +206,12 @@ begin
   report.search.click;
 end;
 
-procedure Treport_okved.nomenclKeyPress(Sender: TObject; var Key: Char);
+procedure treport_okved.nomenclKeyPress(Sender: TObject; var Key: Char);
 begin
   key:=chr(vk_cancel);
 end;
 
-procedure Treport_okved.searchClick(Sender: TObject);
-var
-  i:integer;
-  price:real;
-begin
-  price:=0;
-  dm.query.sql.text:='SELECT '+commstr([subcontract.id.name,subcontract.okved.name,
-                                        okved.name.name,region.name.name,provider.name.name,
-                                        sum(subcontract.price)])+#13+
-                     'FROM '+subcontract.table+#13+
-                     'INNER JOIN '+okved.table+
-                     ' ON '+subcontract.okved.name+'='+okved.id.name+#13+
-                     'INNER JOIN '+contract.table+
-                     ' ON '+subcontract.id.name+'='+contract.id.name+#13+
-                     'INNER JOIN '+region.table+
-                     ' ON '+contract.region.name+'='+region.id.name+#13+
-                     'INNER JOIN '+provider.table+
-                     ' ON '+contract.provider.name+'='+provider.id.name+#13+
-                     'WHERE ('+subcontract.okved.name+' LIKE '+
-                     quotedstr('%'+starorstr(nomencl.text)+'%')+')'+#13+
-                     'AND ('+region.name.name+' LIKE '+
-                     quotedstr('%'+starorstr(regioncbx.text)+'%')+')'+#13+
-                     'AND ('+subcontract.date.name+'>='+
-                     dateornull(startpick.date)+')'+#13+
-                     'AND ('+subcontract.date.name+'<'+
-                     dateornull(endpick.date)+')'+#13+
-                     'AND ('+subcontract.okved.name+'<>'+quotedstr('')+
-                     'AND ('+subcontract.skip.name+'<>1)'+')'+#13+
-                     'GROUP BY '+commstr([subcontract.id.name,subcontract.okved.name,
-                                          okved.name.name,region.name.name,
-                                          provider.name.name]);
-  source.dataset:=dm.query;
-  dm.query.open;
-  status.panels.items[1].text:=inttostr(dm.query.recordcount);
-  dm.query.fieldbyname('NAME').visible:=false;
-  report.columns.items[0].width:=8*9;
-  report.columns.items[1].width:=8*9;
-  report.columns.items[2].width:=8*12;
-  report.columns.items[4].width:=8*8;
-  report.columns.items[3].width:=report.width-(report.columns.items[0].width+report.columns.items[1].width+report.columns.items[2].width+report.columns.items[4].width+36);
-  report.columns.items[0].title.caption:='№ договора';
-  report.columns.items[1].title.caption:='ОКВЭД';
-  report.columns.items[2].title.caption:='ПБС';
-  report.columns.items[3].title.caption:='Поставщик';
-  report.columns.items[4].title.caption:='Сумма';
-  dm.query.first;
-  for i:=0 to dm.query.recordcount-1 do
-    begin
-      price:=price+dm.query.fieldbyname(subcontract.price.column).value;
-      dm.query.next;
-    end;
-  status.panels.items[3].text:=floattostr(price);
-end;
-
-procedure Treport_okved.Button1Click(Sender: TObject);
+procedure treport_okved.Button1Click(Sender: TObject);
 begin
   if nomencl.itemindex=0 then
     dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_by_pbs.fr3')
@@ -200,11 +222,41 @@ begin
   dm.report.showreport;
 end;
 
-procedure Treport_okved.reportDblClick(Sender: TObject);
+procedure treport_okved.gridDblClick;
 begin
-  if dm.query.recordcount>0 then
-    contractform.edit(strtoint(report.fields[0].asstring));
-  search.click;
+//  if dm.query.recordcount>0 then
+//    contractform.edit(strtoint(grid.cells[0,selected]));
+end;
+
+procedure treport_okved.gridselectcell;
+begin
+  if arow>0 then
+    selected:=arow;
+end;
+
+procedure treport_okved.searchClick;
+begin
+  fill;
+end;
+
+procedure treport_okved.endpickChange;
+begin
+  fill;
+end;
+
+procedure treport_okved.startpickChange;
+begin
+//  fill;
+end;
+
+procedure treport_okved.regioncbxChange;
+begin
+  fill;
+end;
+
+procedure treport_okved.nomenclChange;
+begin
+  fill;
 end;
 
 end.

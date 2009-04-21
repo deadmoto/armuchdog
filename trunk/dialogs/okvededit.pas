@@ -3,12 +3,12 @@ unit okvededit;
 interface
 
 uses
-  nomencls,
+  sizers,
   windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls;
 
 procedure insert;
-procedure update(nomencl:tnomencl);
+procedure update(sizer:tsizer);
 
 type
   tokveded = class(TForm)
@@ -35,33 +35,33 @@ uses cosguedit, cosgufm;
 procedure insert;
 var
   main:tokveded;
-  nomencl:tnomencl;
+  sizer:tsizer;
 begin
   main:=tokveded.create(application.owner);
   main.caption:='Добавление статьи КОСГУ';
   main.ok.caption:='Добавить';
   if main.showmodal=mrok then
     begin
-      nomencl.id:=main.okved.text;
-      nomencl.name:=main.name.text;
-      nomencls.insert(nomencl);
+      sizer.id:=main.okved.text;
+      sizer.name:=main.name.text;
+      sizers.insert(sizer);
     end;
 end;
 
-procedure update(nomencl:tnomencl);
+procedure update;
 var
   main:tokveded;
 begin
   main:=tokveded.create(application.owner);
   main.caption:='Изменение статьи КОСГУ';
   main.ok.caption:='Изменить';
-  main.okved.text:=nomencl.id;
-  main.name.text:=nomencl.name;
+  main.okved.text:=sizer.id;
+  main.name.text:=sizer.name;
   if main.showmodal=mrok then
     begin
-      nomencl.id:=main.okved.text;
-      nomencl.name:=main.name.text;
-      nomencls.update(nomencl);
+      sizer.id:=main.okved.text;
+      sizer.name:=main.name.text;
+      sizers.update(sizer);
     end;
 end;
 

@@ -1,8 +1,8 @@
 object okveded: Tokveded
   Left = 364
   Top = 226
-  Width = 478
-  Height = 185
+  ClientHeight = 151
+  ClientWidth = 470
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,11 +15,12 @@ object okveded: Tokveded
   object okvedbox: TGroupBox
     Left = 0
     Top = 0
-    Width = 453
+    Width = 470
     Height = 49
     Align = alTop
     Caption = #1050#1054#1057#1043#1059
     TabOrder = 0
+    ExplicitWidth = 453
     object okved: TEdit
       Left = 8
       Top = 16
@@ -33,11 +34,12 @@ object okveded: Tokveded
   object namebox: TGroupBox
     Left = 0
     Top = 49
-    Width = 453
+    Width = 470
     Height = 48
     Align = alTop
     Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
     TabOrder = 1
+    ExplicitWidth = 453
     object name: TEdit
       Left = 8
       Top = 16
@@ -50,7 +52,7 @@ object okveded: Tokveded
   object btnbox: TGroupBox
     Left = 0
     Top = 97
-    Width = 453
+    Width = 470
     Height = 56
     Align = alTop
     TabOrder = 2
