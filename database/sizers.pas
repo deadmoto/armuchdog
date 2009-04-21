@@ -1,4 +1,4 @@
-unit nomencls;
+unit sizers;
 
 interface
 
@@ -9,20 +9,20 @@ uses
   sysutils;
 
 type
-  tnomencl=record
+  tsizer=record
     id:string;
     name:string;
   end;
 
 procedure fetch;overload;
 procedure fetch(column,filter:string);overload;
-procedure insert(nomencl:tnomencl);
-procedure update(nomencl:tnomencl);
-procedure delete(nomencl:tnomencl);
+procedure insert(sizer:tsizer);
+procedure update(sizer:tsizer);
+procedure delete(sizer:tsizer);
 function byid(id:string):string;
 
 var
-  cnomencl:array of tnomencl;
+  asizer:array of tsizer;
 
 implementation
 
@@ -34,7 +34,7 @@ procedure fetch;overload;
 var
   i:integer;
 begin
-  setlength(cnomencl,0);
+  setlength(asizer,0);
   try
     dm.query.sql.text:='SELECT * FROM NomenclDog'+#13+
                          'ORDER BY id_nomencl';
@@ -42,9 +42,9 @@ begin
     dm.query.first;
     for i:=0 to dm.query.recordcount-1 do
       begin
-        setlength(cnomencl,length(cnomencl)+1);
-        cnomencl[i].id:=trim(dm.query.fieldbyname('id_nomencl').value);
-        cnomencl[i].name:=trim(dm.query.fieldbyname('name').value);
+        setlength(asizer,length(asizer)+1);
+        asizer[i].id:=trim(dm.query.fieldbyname('id_nomencl').value);
+        asizer[i].name:=trim(dm.query.fieldbyname('name').value);
         dm.query.next;
       end
   except
@@ -56,7 +56,7 @@ procedure fetch(column,filter:string);overload;
 var
   i:integer;
 begin
-  setlength(cnomencl,0);
+  setlength(asizer,0);
   try
     dm.query.sql.text:='SELECT * FROM NomenclDog'+#13+
                          'WHERE '+column+' LIKE '+quotedstr('%'+filter+'%');
@@ -64,9 +64,9 @@ begin
     dm.query.first;
     for i:=0 to dm.query.recordcount-1 do
       begin
-        setlength(cnomencl,length(cnomencl)+1);
-        cnomencl[i].id:=trim(dm.query.fieldbyname('id_nomencl').value);
-        cnomencl[i].name:=trim(dm.query.fieldbyname('name').value);
+        setlength(asizer,length(asizer)+1);
+        asizer[i].id:=trim(dm.query.fieldbyname('id_nomencl').value);
+        asizer[i].name:=trim(dm.query.fieldbyname('name').value);
         dm.query.next;
       end
   except
@@ -74,11 +74,11 @@ begin
   end;
 end;
 
-procedure insert(nomencl:tnomencl);
+procedure insert;
 begin
   try
     dm.query.sql.text:='INSERT INTO NomenclDog'+#13+
-                         'VALUES ('+quotedstr(nomencl.id)+','+quotedstr(nomencl.name)+')';
+                         'VALUES ('+quotedstr(sizer.id)+','+quotedstr(sizer.name)+')';
     dm.query.execsql;
     showmessage('ОКВЭД успешно добавлен!!!');
     fetch;
@@ -87,13 +87,13 @@ begin
   end;
 end;
 
-procedure update(nomencl:tnomencl);
+procedure update;
 begin
   try
     dm.query.sql.text:='UPDATE NomenclDog'+#13+
-                         'SET name='+quotedstr(nomencl.name)+#13+
-                         ',id_nomencl='+quotedstr(nomencl.id)+#13+
-                         'WHERE id_nomencl='+quotedstr(nomencl.id);
+                         'SET name='+quotedstr(sizer.name)+#13+
+                         ',id_nomencl='+quotedstr(sizer.id)+#13+
+                         'WHERE id_nomencl='+quotedstr(sizer.id);
     dm.query.execsql;
     showmessage('Статья успешно обновлен!!!');
     fetch;
@@ -102,11 +102,11 @@ begin
   end;
 end;
 
-procedure delete(nomencl:tnomencl);
+procedure delete;
 begin
   try
     dm.query.sql.text:='DELETE FROM NomenclDog'+#13+
-                         'WHERE id_nomencl='+quotedstr(nomencl.id);
+                         'WHERE id_nomencl='+quotedstr(sizer.id);
     dm.query.execsql;
     showmessage('ОКВЭД успешно удален!!!');
     fetch;
@@ -115,14 +115,14 @@ begin
   end;
 end;
 
-function byid(id:string):string;
+function byid;
 var
   i:integer;
 begin
   fetch;
-  for i:=0 to length(cnomencl)-1 do
-    if cnomencl[i].id=id then
-      result:=cnomencl[i].name;
+  for i:=0 to length(asizer)-1 do
+    if asizer[i].id=id then
+      result:=asizer[i].name;
 end;
 
 end.

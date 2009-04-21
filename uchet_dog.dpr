@@ -16,7 +16,7 @@ uses
   providers in 'database\providers.pas',
   subcontractdlg in 'dialogs\subcontractdlg.pas' {subcontractfm},
   nomencldlg in 'dialogs\nomencldlg.pas' {nomenclselect},
-  nomencls in 'database\nomencls.pas',
+  sizers in 'database\sizers.pas',
   cosgus in 'database\cosgus.pas',
   cosgudlg in 'dialogs\cosgudlg.pas' {cosguselect},
   regiondlg in 'dialogs\regiondlg.pas' {regionselect},

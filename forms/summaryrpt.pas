@@ -80,11 +80,11 @@ begin
   grid.fixedcols:=0;
   dm.query.sql.text:='SELECT subcontract.nomencl,subcontract.report,nomencldog.name,sum(subcontract.price) as price'+#13+
                      'FROM subcontract'+#13+
-                     'INNER JOIN nomencldog ON '+subcontract.okved.name+'='+okved.id.name+#13+
+                     'INNER JOIN nomencldog ON '+subcontract.okved.name+'='+sizer.id.name+#13+
                      'WHERE ('+subcontract.okved.name+'<>'+quotedstr('')+')'+#13+
                      'AND ('+subcontract.date.name+'>='+dateornull(startpick.date)+')'+#13+
                      'AND ('+subcontract.date.name+'<'+dateornull(endpick.date)+')'+#13+
-                     'GROUP BY '+commstr([subcontract.okved.name,subcontract.skip.name,okved.name.name])+#13+
+                     'GROUP BY '+commstr([subcontract.okved.name,subcontract.skip.name,sizer.name.name])+#13+
                      'ORDER BY '+commstr([subcontract.okved.name]);
   dm.query.open;
   grid.colcount:=4;

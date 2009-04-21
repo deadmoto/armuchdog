@@ -82,7 +82,7 @@ type
 Декларация служебной структуры TOkved. table - содержит имя таблицы (применяется
 потомками), id - идентификатор, name - наименование
 *******************************************************************************}
-  tokved=packed record
+  tsizer=packed record
     table:string;
     id:tfield;
     name:tfield;
@@ -129,7 +129,7 @@ const
       okved:(table:@subcontract.table;column:'nomencl';caption:'ОКВЕД';width:8*8);
       cosgu:(table:@subcontract.table;column:'code';caption:'КОСГУ';width:8*8);
       date:(table:@subcontract.table;column:'subdate';caption:'Дата';width:8*10);
-      price:(table:@subcontract.table;column:'price';caption:'Сумма';width:8*8);
+      price:(table:@subcontract.table;column:'price';caption:'Сумма';width:8*10);
       skip:(table:@subcontract.table;column:'report';caption:'Скрывать в отчётах';width:8*8);
       comment:(table:@subcontract.table;column:'comment';caption:'Комментарий';width:8*8);
     );
@@ -140,7 +140,7 @@ const
     (
       table:'regioniddog';
       id:(table:@region.table;column:'fldid';caption:'№';width:8*8);
-      name:(table:@region.table;column:'fldname';caption:'Наименование';width:8*12);
+      name:(table:@region.table;column:'fldname';caption:'Наименование ПБС';width:8*13);
     );
 
   provider:tprovider=
@@ -152,13 +152,13 @@ const
       name:(table:@provider.table;column:'supplier';caption:'Наименование';width:8*12);
     );
 
-  okved:tokved=
+  sizer:tsizer=
 {*******************************************************************************
 *******************************************************************************}
     (
       table:'nomencldog';
-      id:(table:@okved.table;column:'id_nomencl';caption:'№';width:8*8);
-      name:(table:@okved.table;column:'name';caption:'Наименование';width:8*8);
+      id:(table:@sizer.table;column:'id_nomencl';caption:'№';width:8*8);
+      name:(table:@sizer.table;column:'name';caption:'Наименование ОКВЭД';width:8*8);
     );
 
   cosgu:tcosgu=

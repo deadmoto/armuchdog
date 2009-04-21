@@ -3,6 +3,7 @@ object dm: Tdm
   Height = 371
   Width = 543
   object sqlsub: TADOConnection
+    Connected = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Password="";Persist Security Info=True;User ' +
       'ID=sa;Initial Catalog=Subsidy;Data Source=10.250.108.16'
@@ -94,8 +95,6 @@ object dm: Tdm
   end
   object report: TfrxReport
     Version = '4.7.12'
-    DataSet = frquery
-    DataSetName = 'frquery'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -103,7 +102,7 @@ object dm: Tdm
     PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 39903.664180729200000000
-    ReportOptions.LastChange = 39903.721154837960000000
+    ReportOptions.LastChange = 39924.373969872690000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'

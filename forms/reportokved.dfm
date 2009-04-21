@@ -21,23 +21,6 @@ object report_okved: Treport_okved
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object report: TDBGrid
-    Left = 0
-    Top = 64
-    Width = 792
-    Height = 490
-    Align = alClient
-    DataSource = source
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-    ReadOnly = True
-    TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    OnDblClick = reportDblClick
-  end
   object panel: TPanel
     Left = 0
     Top = 0
@@ -45,7 +28,7 @@ object report_okved: Treport_okved
     Height = 64
     Align = alTop
     BevelOuter = bvLowered
-    TabOrder = 1
+    TabOrder = 0
     object nomenclbox: TGroupBox
       Left = 206
       Top = 8
@@ -61,6 +44,7 @@ object report_okved: Treport_okved
         DropDownCount = 20
         ItemHeight = 13
         TabOrder = 0
+        OnChange = nomenclChange
         OnKeyPress = nomenclKeyPress
       end
     end
@@ -79,6 +63,7 @@ object report_okved: Treport_okved
         DropDownCount = 20
         ItemHeight = 13
         TabOrder = 0
+        OnChange = regioncbxChange
       end
     end
     object search: TBitBtn
@@ -116,6 +101,7 @@ object report_okved: Treport_okved
         Date = 39814.363207465280000000
         Time = 39814.363207465280000000
         TabOrder = 0
+        OnChange = startpickChange
       end
     end
     object endbox: TGroupBox
@@ -133,6 +119,7 @@ object report_okved: Treport_okved
         Date = 39903.371019236110000000
         Time = 39903.371019236110000000
         TabOrder = 0
+        OnChange = endpickChange
       end
     end
     object Button1: TButton
@@ -168,8 +155,20 @@ object report_okved: Treport_okved
         Width = 50
       end>
   end
-  object source: TDataSource
-    Left = 56
-    Top = 280
+  object grid: TStringGrid
+    Left = 0
+    Top = 64
+    Width = 792
+    Height = 490
+    Align = alClient
+    ColCount = 4
+    DefaultColWidth = -1
+    DefaultRowHeight = 16
+    FixedCols = 0
+    RowCount = 2
+    ScrollBars = ssVertical
+    TabOrder = 2
+    OnDblClick = gridDblClick
+    OnSelectCell = gridSelectCell
   end
 end

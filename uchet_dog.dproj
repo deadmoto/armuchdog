@@ -77,7 +77,7 @@
 			<DCCReference Include="dialogs\nomencldlg.pas">
 				<Form>nomenclselect</Form>
 			</DCCReference>
-			<DCCReference Include="database\nomencls.pas"/>
+			<DCCReference Include="database\sizers.pas"/>
 			<DCCReference Include="database\cosgus.pas"/>
 			<DCCReference Include="dialogs\cosgudlg.pas">
 				<Form>cosguselect</Form>
