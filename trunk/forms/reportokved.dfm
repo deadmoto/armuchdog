@@ -71,7 +71,7 @@ object report_okved: Treport_okved
       Height = 49
       Caption = #1055#1041#1057
       TabOrder = 1
-      object region: TComboBox
+      object regioncbx: TComboBox
         Left = 8
         Top = 16
         Width = 177

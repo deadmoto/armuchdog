@@ -5,6 +5,7 @@ interface
 uses
 //создание ярлыка
   activex,
+  datamodel,
   comobj,
   shlobj,
 //
@@ -20,6 +21,7 @@ function year(date:tdate):integer;
 function starorstr(text:string):string;
 function ovp(s:string):string;
 function commstr(a:array of string):string;
+function sum(field:tfield):string;
 procedure makelink;
 
 implementation
@@ -27,7 +29,7 @@ implementation
 uses
   defs;
 
-function min(a,b:variant):variant;
+function min;
 begin
   if a>b then
     result:=b
@@ -35,7 +37,7 @@ begin
     result:=a
 end;
 
-function max(a,b:variant):variant;
+function max;
 begin
   if a>b then
     result:=a
@@ -43,7 +45,7 @@ begin
     result:=b
 end;
 
-function booltobit(bool:boolean):char;
+function booltobit;
 begin
   if bool then
     result:='1'
@@ -51,13 +53,13 @@ begin
     result:='0';
 end;
 
-function dateornull(date:tdate):string;
+function dateornull;
 begin
   if date=0 then result:='null'
   else result:=quotedstr(formatdatetime('yyyymmdd',date));
 end;
 
-function quarter(date:tdate):byte;
+function quarter;
 var
   year,month,day:word;
 begin
@@ -65,7 +67,7 @@ begin
   result:=month div 4;
 end;
 
-function year(date:tdate):integer;
+function year;
 var
   year,month,day:word;
 begin
@@ -73,14 +75,14 @@ begin
   result:=year;
 end;
 
-function starorstr(text:string):string;
+function starorstr;
 begin
   result:='';
   if text<>'*' then
     result:=text;
 end;
 
-function ovp(s:string):string;
+function ovp;
 var
   i:integer;
 begin
@@ -91,7 +93,7 @@ begin
     exit;
 end;
 
-function commstr(a:array of string):string;
+function commstr;
 var
   i:integer;
 begin
@@ -99,6 +101,11 @@ begin
   for i:=0 to length(a)-1 do
     result:=result+a[i]+',';
   result:=copy(result,0,length(result)-1);
+end;
+
+function sum;
+begin
+  result:='SUM('+field.name+') as '+field.column;
 end;
 
 procedure makelink;
