@@ -13,7 +13,7 @@ type
     nomenclbox: TGroupBox;
     regionbox: TGroupBox;
     nomencl: TComboBox;
-    region: TComboBox;
+    regioncbx: TComboBox;
     report: TDBGrid;
     panel: TPanel;
     status: TStatusBar;
@@ -69,14 +69,14 @@ procedure treport_okved.getregions;
 var
   i:integer;
 begin
-  region.items.clear;
-  region.items.add('*');
+  regioncbx.items.clear;
+  regioncbx.items.add('*');
   dm.query.sql.text:='SELECT * FROM RegionID';
   dm.query.open;
   dm.query.first;
   for i:=0 to dm.query.recordcount-1 do
     begin
-      region.items.add(trim(dm.query.fieldbyname('fldname').asstring));
+      regioncbx.items.add(trim(dm.query.fieldbyname('fldname').asstring));
       dm.query.next;
     end;
   dm.query.close;
@@ -93,7 +93,7 @@ begin
   getnomencls;
   getregions;
   nomencl.itemindex:=0;
-  region.itemindex:=0;
+  regioncbx.itemindex:=0;
 end;
 
 procedure showreport;
@@ -109,7 +109,7 @@ begin
   report.getnomencls;
   report.getregions;
   report.nomencl.itemindex:=0;
-  report.region.itemindex:=0;
+  report.regioncbx.itemindex:=0;
   report.showmodal;
 end;
 
@@ -141,18 +141,31 @@ var
   price:real;
 begin
   price:=0;
-  dm.query.sql.text:='SELECT subcontract.id,subcontract.nomencl,NomenclDog.NAME,RegionIDDog.FLDNAME,SupplierDog.SUPPLIER,subcontract.price'+#13+
-                       'FROM subcontract'+#13+
-                       'INNER JOIN NomenclDog ON subcontract.nomencl=NomenclDog.ID_NOMENCL'+#13+
-                       'INNER JOIN ReestrDog ON subcontract.id=ReestrDog.REGN'+#13+
-                       'INNER JOIN RegionIDDog ON ReestrDog.FLDID=RegionIDDog.FLDID'+#13+
-                       'INNER JOIN SupplierDog ON ReestrDog.ID_SUPPLIER = SupplierDog.ID_SUPPLIER'+#13+
-                       'WHERE (subcontract.nomencl LIKE '+quotedstr('%'+starorstr(nomencl.text)+'%')+') '+
-                       'AND (RegionIDDog.FLDNAME LIKE '+quotedstr('%'+starorstr(region.text)+'%')+') '+
-                       'AND (subcontract.subdate>='+dateornull(startpick.date)+') '+
-                       'AND (subcontract.subdate<'+dateornull(endpick.date)+')'+
-                       'AND (subcontract.nomencl<>'+quotedstr('')+
-                       'AND (subcontract.report<>1)'+')';
+  dm.query.sql.text:='SELECT '+commstr([subcontract.id.name,subcontract.okved.name,
+                                        okved.name.name,region.name.name,provider.name.name,
+                                        sum(subcontract.price)])+#13+
+                     'FROM '+subcontract.table+#13+
+                     'INNER JOIN '+okved.table+
+                     ' ON '+subcontract.okved.name+'='+okved.id.name+#13+
+                     'INNER JOIN '+contract.table+
+                     ' ON '+subcontract.id.name+'='+contract.id.name+#13+
+                     'INNER JOIN '+region.table+
+                     ' ON '+contract.region.name+'='+region.id.name+#13+
+                     'INNER JOIN '+provider.table+
+                     ' ON '+contract.provider.name+'='+provider.id.name+#13+
+                     'WHERE ('+subcontract.okved.name+' LIKE '+
+                     quotedstr('%'+starorstr(nomencl.text)+'%')+')'+#13+
+                     'AND ('+region.name.name+' LIKE '+
+                     quotedstr('%'+starorstr(regioncbx.text)+'%')+')'+#13+
+                     'AND ('+subcontract.date.name+'>='+
+                     dateornull(startpick.date)+')'+#13+
+                     'AND ('+subcontract.date.name+'<'+
+                     dateornull(endpick.date)+')'+#13+
+                     'AND ('+subcontract.okved.name+'<>'+quotedstr('')+
+                     'AND ('+subcontract.skip.name+'<>1)'+')'+#13+
+                     'GROUP BY '+commstr([subcontract.id.name,subcontract.okved.name,
+                                          okved.name.name,region.name.name,
+                                          provider.name.name]);
   source.dataset:=dm.query;
   dm.query.open;
   status.panels.items[1].text:=inttostr(dm.query.recordcount);
