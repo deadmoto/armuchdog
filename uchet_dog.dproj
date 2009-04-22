@@ -51,7 +51,7 @@
 			<DCCReference Include="sqltext.pas"/>
 			<DCCReference Include="defs.pas"/>
 			<DCCReference Include="forms\reportokved.pas">
-				<Form>report_okved</Form>
+				<Form>sizerrpt</Form>
 			</DCCReference>
 			<DCCReference Include="database\balance.pas"/>
 			<DCCReference Include="database\datamodule.pas">

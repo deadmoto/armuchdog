@@ -1,4 +1,4 @@
-object report_okved: Treport_okved
+object sizerrpt: Tsizerrpt
   Left = 234
   Top = 176
   BorderIcons = [biSystemMenu]
@@ -19,7 +19,6 @@ object report_okved: Treport_okved
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object panel: TPanel
@@ -38,9 +37,6 @@ object report_okved: Treport_okved
       Align = alLeft
       Caption = #1054#1050#1042#1069#1044
       TabOrder = 0
-      ExplicitLeft = 206
-      ExplicitTop = 8
-      ExplicitHeight = 49
       object nomencl: TComboBox
         Left = 10
         Top = 19
@@ -61,9 +57,6 @@ object report_okved: Treport_okved
       Align = alLeft
       Caption = #1055#1041#1057
       TabOrder = 1
-      ExplicitLeft = 293
-      ExplicitTop = 8
-      ExplicitHeight = 49
       object regioncbx: TComboBox
         Left = 8
         Top = 19
@@ -117,7 +110,6 @@ object report_okved: Treport_okved
       Align = alLeft
       Caption = #1043#1086#1076
       TabOrder = 4
-      ExplicitHeight = 62
       object yearcbx: TComboBox
         Left = 4
         Top = 19
@@ -136,7 +128,6 @@ object report_okved: Treport_okved
       Align = alLeft
       Caption = #1050#1074#1072#1088#1090#1072#1083
       TabOrder = 5
-      ExplicitHeight = 62
       object quarterud: TUpDown
         Left = 39
         Top = 17
@@ -159,15 +150,15 @@ object report_okved: Treport_okved
       end
     end
     object btnpanel: TPanel
-      Left = 608
+      Left = 528
       Top = 1
-      Width = 183
+      Width = 263
       Height = 50
       Align = alRight
       BevelInner = bvLowered
       TabOrder = 6
       object exit: TButton
-        Left = 96
+        Left = 176
         Top = 13
         Width = 75
         Height = 25
@@ -176,12 +167,22 @@ object report_okved: Treport_okved
         OnClick = exitClick
       end
       object print: TButton
-        Left = 15
-        Top = 14
+        Left = 95
+        Top = 13
         Width = 75
         Height = 25
         Caption = #1055#1077#1095#1072#1090#1100
         TabOrder = 1
+        OnClick = printClick
+      end
+      object left: TButton
+        Left = 14
+        Top = 13
+        Width = 75
+        Height = 25
+        Caption = #1054#1089#1090#1072#1090#1082#1080
+        TabOrder = 2
+        OnClick = leftClick
       end
     end
   end
@@ -214,16 +215,12 @@ object report_okved: Treport_okved
     Width = 792
     Height = 502
     Align = alClient
-    ColCount = 4
     DefaultColWidth = -1
     DefaultRowHeight = 16
     FixedCols = 0
     RowCount = 2
     ScrollBars = ssVertical
     TabOrder = 2
-    OnDblClick = gridDblClick
     OnSelectCell = gridSelectCell
-    ExplicitLeft = 8
-    ExplicitTop = 57
   end
 end

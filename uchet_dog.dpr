@@ -4,7 +4,7 @@ uses
   Forms,
   sqltext in 'sqltext.pas',
   defs in 'defs.pas',
-  reportokved in 'forms\reportokved.pas' {report_okved},
+  reportokved in 'forms\reportokved.pas' {sizerrpt},
   balance in 'database\balance.pas',
   datamodule in 'database\datamodule.pas' {dm: TDataModule},
   contracts in 'database\contracts.pas',
