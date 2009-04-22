@@ -16,27 +16,35 @@ type
     regioncbx: TComboBox;
     panel: TPanel;
     status: TStatusBar;
-    search: TBitBtn;
     startpick: TDateTimePicker;
     startbox: TGroupBox;
     endbox: TGroupBox;
     endpick: TDateTimePicker;
-    Button1: TButton;
     grid: TStringGrid;
+    GroupBox1: TGroupBox;
+    yearcbx: TComboBox;
+    GroupBox2: TGroupBox;
+    quarterud: TUpDown;
+    quartered: TEdit;
+    btnpanel: TPanel;
+    exit: TButton;
+    print: TButton;
     procedure FormShow(Sender: TObject);
     procedure nomenclKeyPress(Sender: TObject; var Key: Char);
-    procedure searchClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure gridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure regioncbxChange(Sender: TObject);
     procedure nomenclChange(Sender: TObject);
     procedure gridDblClick(Sender: TObject);
-    procedure endpickChange(Sender: TObject);
-    procedure startpickChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure quarterudChangingEx(Sender: TObject; var AllowChange: Boolean;
+      NewValue: SmallInt; Direction: TUpDownDirection);
+    procedure exitClick(Sender: TObject);
+    procedure yearcbxChange(Sender: TObject);
+    procedure quarteredChange(Sender: TObject);
   private
     selected:integer;
-    procedure getnomencls;
     procedure getregions;
     procedure fill;
   public
@@ -53,26 +61,6 @@ uses
   util;
 
 {$R *.dfm}
-
-procedure treport_okved.getnomencls;
-var
-  i:integer;
-begin
-  nomencl.items.clear;
-  dm.query.sql.text:='SELECT nomencl'+#13+
-                       'FROM subcontract'+#13+
-                       'WHERE nomencl IS NOT NULL'+#13+
-                       'GROUP BY nomencl';
-  dm.query.open;
-  dm.query.first;
-  for i:=0 to dm.query.recordcount-1 do
-    begin
-      nomencl.items.add(trim(dm.query.fieldbyname('nomencl').asstring));
-      dm.query.next;
-    end;
-  dm.query.close;
-  nomencl.items.strings[0]:='*';
-end;
 
 procedure treport_okved.getregions;
 var
@@ -122,10 +110,8 @@ begin
     dm.query.sql.text:=dm.query.sql.text+'AND ('+contract.region.name+'='+
                        inttostr(regions.cregion[regioncbx.itemindex-1].id)+')'+#13;
   dm.query.sql.text:=dm.query.sql.text+
-                     'AND ('+subcontract.date.name+'>='+
-                     dateornull(startpick.date)+')'+#13+
-                     'AND ('+subcontract.date.name+'<'+
-                     dateornull(endpick.date)+')'+#13+
+                     'AND YEAR('+subcontract.date.name+')='+yearcbx.text+#13+
+                     'AND DATEPART(quarter,'+subcontract.date.name+')='+quartered.text+#13+
                      'AND ('+subcontract.okved.name+'<>'+quotedstr('')+
                      'AND ('+subcontract.skip.name+'<>1)'+')'+#13+
                      'GROUP BY '+commstr([region.name.name,sizer.name.name,
@@ -154,6 +140,40 @@ begin
   status.panels.items[3].text:=floattostr(price);
 end;
 
+procedure treport_okved.formcreate;
+var
+  i:integer;
+begin
+  dm.query.sql.text:='SELECT YEAR('+subcontract.date.name+') '+
+                     'AS '+subcontract.date.column+#13+
+                     'FROM '+subcontract.table+#13+
+                     'WHERE ('+subcontract.date.name+' IS NOT NULL)'+#13+
+                     'GROUP BY YEAR('+subcontract.date.name+')'+#13+
+                     'ORDER BY YEAR('+subcontract.date.name+')';
+  dm.query.open;
+  for i:=0 to dm.query.recordcount-1 do
+    begin
+      yearcbx.items.add(dm.query.fieldbyname(subcontract.date.column).value);
+      dm.query.next;
+    end;
+  nomencl.items.clear;
+  dm.query.sql.text:='SELECT '+subcontract.okved.name+#13+
+                     'FROM '+subcontract.table+#13+
+                     'WHERE '+subcontract.okved.name+' IS NOT NULL'+#13+
+                     'GROUP BY '+subcontract.okved.name;
+  dm.query.open;
+  dm.query.first;
+  for i:=0 to dm.query.recordcount-1 do
+    begin
+      nomencl.items.add(trim(dm.query.fieldbyname(subcontract.okved.column).asstring));
+      dm.query.next;
+    end;
+  nomencl.items.strings[0]:='*';
+  yearcbx.text:=formatdatetime('yyyy',now);
+  quarterud.position:=quarter(now);
+
+end;
+
 procedure treport_okved.FormShow(Sender: TObject);
 var
   month:word;
@@ -162,7 +182,6 @@ begin
   decodedate(now,temp,month,temp);
   endpick.date:=encodedate(currentyear,month,1);
   startpick.datetime:=incmonth(endpick.date,-3);
-  getnomencls;
   getregions;
   nomencl.itemindex:=0;
   regioncbx.itemindex:=0;
@@ -179,7 +198,6 @@ begin
   decodedate(now,temp,month,temp);
   report.endpick.date:=encodedate(currentyear,month,1);
   report.startpick.datetime:=incmonth(report.endpick.date,-3);
-  report.getnomencls;
   report.getregions;
   report.nomencl.itemindex:=0;
   report.regioncbx.itemindex:=0;
@@ -198,12 +216,11 @@ begin
   report.show;
   report.startpick.date:=startd;
   report.endpick.date:=endd;
-  report.getnomencls;
   report.getregions;
   for i:=0 to report.nomencl.items.count-1 do
     if report.nomencl.items.strings[i]=nomencl then
       report.nomencl.itemindex:=i;
-  report.search.click;
+//  report.search.click;
 end;
 
 procedure treport_okved.nomenclKeyPress(Sender: TObject; var Key: Char);
@@ -234,19 +251,20 @@ begin
     selected:=arow;
 end;
 
-procedure treport_okved.searchClick;
+procedure treport_okved.quarterudchangingex;
+begin
+  if newvalue in [1..4] then
+    quartered.text:=inttostr(newvalue);
+end;
+
+procedure treport_okved.yearcbxchange;
 begin
   fill;
 end;
 
-procedure treport_okved.endpickChange;
+procedure treport_okved.quarteredchange;
 begin
   fill;
-end;
-
-procedure treport_okved.startpickChange;
-begin
-//  fill;
 end;
 
 procedure treport_okved.regioncbxChange;
@@ -257,6 +275,11 @@ end;
 procedure treport_okved.nomenclChange;
 begin
   fill;
+end;
+
+procedure treport_okved.exitclick;
+begin
+  close;
 end;
 
 end.
