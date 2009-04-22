@@ -18,6 +18,7 @@ object report_okved: Treport_okved
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -25,20 +26,24 @@ object report_okved: Treport_okved
     Left = 0
     Top = 0
     Width = 792
-    Height = 64
+    Height = 52
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 0
     object nomenclbox: TGroupBox
-      Left = 206
-      Top = 8
+      Left = 129
+      Top = 1
       Width = 89
-      Height = 49
+      Height = 50
+      Align = alLeft
       Caption = #1054#1050#1042#1069#1044
       TabOrder = 0
+      ExplicitLeft = 206
+      ExplicitTop = 8
+      ExplicitHeight = 49
       object nomencl: TComboBox
-        Left = 8
-        Top = 16
+        Left = 10
+        Top = 19
         Width = 73
         Height = 21
         DropDownCount = 20
@@ -49,15 +54,19 @@ object report_okved: Treport_okved
       end
     end
     object regionbox: TGroupBox
-      Left = 293
-      Top = 8
+      Left = 218
+      Top = 1
       Width = 193
-      Height = 49
+      Height = 50
+      Align = alLeft
       Caption = #1055#1041#1057
       TabOrder = 1
+      ExplicitLeft = 293
+      ExplicitTop = 8
+      ExplicitHeight = 49
       object regioncbx: TComboBox
         Left = 8
-        Top = 16
+        Top = 19
         Width = 177
         Height = 21
         DropDownCount = 20
@@ -66,33 +75,13 @@ object report_okved: Treport_okved
         OnChange = regioncbxChange
       end
     end
-    object search: TBitBtn
-      Left = 486
-      Top = 13
-      Width = 89
-      Height = 44
-      Caption = #1055#1086#1080#1089#1082
-      DoubleBuffered = True
-      Glyph.Data = {
-        EE000000424DEE000000000000007600000028000000100000000F0000000100
-        0400000000007800000000000000000000001000000000000000000000000000
-        8000008000000080800080000000800080008080000080808000C0C0C0000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
-        FFFF00000FFFFF00000F0F000FFFFF0F000F0F000FFFFF0F000F0000000F0000
-        000F00F000000F00000F00F000F00F00000F00F000F00F00000FF00000000000
-        00FFFF0F000F0F000FFFFF00000F00000FFFFFF000FFF000FFFFFFF0F0FFF0F0
-        FFFFFFF000FFF000FFFFFFFFFFFFFFFFFFFF}
-      ParentDoubleBuffered = False
-      TabOrder = 2
-      OnClick = searchClick
-    end
     object startbox: TGroupBox
       Left = 8
-      Top = 8
+      Top = 66
       Width = 105
       Height = 49
       Caption = #1053#1072#1095#1072#1083#1086' '#1087#1077#1088#1080#1086#1076#1072':'
-      TabOrder = 3
+      TabOrder = 2
       object startpick: TDateTimePicker
         Left = 7
         Top = 16
@@ -101,16 +90,15 @@ object report_okved: Treport_okved
         Date = 39814.363207465280000000
         Time = 39814.363207465280000000
         TabOrder = 0
-        OnChange = startpickChange
       end
     end
     object endbox: TGroupBox
       Left = 111
-      Top = 8
+      Top = 66
       Width = 97
       Height = 49
       Caption = #1050#1086#1085#1077#1094' '#1087#1077#1088#1080#1086#1076#1072':'
-      TabOrder = 4
+      TabOrder = 3
       object endpick: TDateTimePicker
         Left = 8
         Top = 16
@@ -119,17 +107,82 @@ object report_okved: Treport_okved
         Date = 39903.371019236110000000
         Time = 39903.371019236110000000
         TabOrder = 0
-        OnChange = endpickChange
       end
     end
-    object Button1: TButton
-      Left = 576
-      Top = 13
-      Width = 89
-      Height = 44
-      Caption = #1054#1090#1095#1105#1090
+    object GroupBox1: TGroupBox
+      Left = 1
+      Top = 1
+      Width = 64
+      Height = 50
+      Align = alLeft
+      Caption = #1043#1086#1076
+      TabOrder = 4
+      ExplicitHeight = 62
+      object yearcbx: TComboBox
+        Left = 4
+        Top = 19
+        Width = 54
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 0
+        OnChange = yearcbxChange
+      end
+    end
+    object GroupBox2: TGroupBox
+      Left = 65
+      Top = 1
+      Width = 64
+      Height = 50
+      Align = alLeft
+      Caption = #1050#1074#1072#1088#1090#1072#1083
       TabOrder = 5
-      OnClick = Button1Click
+      ExplicitHeight = 62
+      object quarterud: TUpDown
+        Left = 39
+        Top = 17
+        Width = 17
+        Height = 25
+        Min = 1
+        Max = 4
+        Position = 1
+        TabOrder = 0
+        OnChangingEx = quarterudChangingEx
+      end
+      object quartered: TEdit
+        Left = 6
+        Top = 19
+        Width = 35
+        Height = 21
+        ReadOnly = True
+        TabOrder = 1
+        OnChange = quarteredChange
+      end
+    end
+    object btnpanel: TPanel
+      Left = 608
+      Top = 1
+      Width = 183
+      Height = 50
+      Align = alRight
+      BevelInner = bvLowered
+      TabOrder = 6
+      object exit: TButton
+        Left = 96
+        Top = 13
+        Width = 75
+        Height = 25
+        Caption = #1047#1072#1082#1088#1099#1090#1100
+        TabOrder = 0
+        OnClick = exitClick
+      end
+      object print: TButton
+        Left = 15
+        Top = 14
+        Width = 75
+        Height = 25
+        Caption = #1055#1077#1095#1072#1090#1100
+        TabOrder = 1
+      end
     end
   end
   object status: TStatusBar
@@ -157,9 +210,9 @@ object report_okved: Treport_okved
   end
   object grid: TStringGrid
     Left = 0
-    Top = 64
+    Top = 52
     Width = 792
-    Height = 490
+    Height = 502
     Align = alClient
     ColCount = 4
     DefaultColWidth = -1
@@ -170,5 +223,7 @@ object report_okved: Treport_okved
     TabOrder = 2
     OnDblClick = gridDblClick
     OnSelectCell = gridSelectCell
+    ExplicitLeft = 8
+    ExplicitTop = 57
   end
 end

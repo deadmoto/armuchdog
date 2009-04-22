@@ -42,8 +42,8 @@ var
 begin
   grid.colwidths[0]:=8*5;
   grid.colwidths[1]:=grid.width-(grid.colwidths[0]+24);
-  grid.rows[0].strings[0]:='Номер';
-  grid.rows[0].strings[1]:='Наименование';
+  grid.rows[0].strings[0]:='РќРѕРјРµСЂ';
+  grid.rows[0].strings[1]:='РќР°РёРјРµРЅРѕРІР°РЅРёРµ';
   for i:=0 to length(cregion)-1 do
     begin
       self.grid.rowcount:=i+2;

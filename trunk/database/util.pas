@@ -64,7 +64,7 @@ var
   year,month,day:word;
 begin
   decodedate(date,year,month,day);
-  result:=month div 4;
+  result:=(month div 4)+1;
 end;
 
 function year;
