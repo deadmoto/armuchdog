@@ -81,7 +81,7 @@ begin
                      'INNER JOIN '+region.table+' ON '+contract.region.name+'='+region.id.name+#13+
                      'INNER JOIN '+provider.table+' ON '+contract.provider.name+'='+provider.id.name+#13+
                      'WHERE year('+subcontract.date.name+')='+year.text+#13+
-                     'AND datepart(q,'+contract.datecnt.name+')='+quarter.text+#13;
+                     'AND datepart(q,'+subcontract.date.name+')='+quarter.text+#13;
   if pbs.itemindex>0 then
     dm.query.sql.text:=dm.query.sql.text+
                       'AND '+contract.region.name+'='+inttostr(regions.cregion[pbs.itemindex-1].id)+#13;
@@ -100,7 +100,7 @@ begin
                                            provider.name.name]);
   dm.query.open;
   status.panels[1].text:=inttostr(dm.query.recordcount);
-  grid.rowcount:=dm.query.recordcount;
+  grid.rowcount:=dm.query.recordcount+1;
   grid.cells[0,0]:=contract.id.caption;
   grid.cells[1,0]:=contract.cnt.caption;
   grid.cells[2,0]:=contract.datecnt.caption;

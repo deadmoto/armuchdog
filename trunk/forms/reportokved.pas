@@ -16,10 +16,6 @@ type
     regioncbx: TComboBox;
     panel: TPanel;
     status: TStatusBar;
-    startpick: TDateTimePicker;
-    startbox: TGroupBox;
-    endbox: TGroupBox;
-    endpick: TDateTimePicker;
     grid: TStringGrid;
     GroupBox1: TGroupBox;
     yearcbx: TComboBox;
@@ -72,17 +68,16 @@ begin
     begin
       cells[0,0]:=subcontract.okved.caption;
       cells[1,0]:=sizer.name.caption;
-      cells[2,0]:=region.name.caption;
-      cells[3,0]:=subcontract.price.caption;
-      cells[4,0]:='Остаток';
+      cells[2,0]:=subcontract.price.caption;
+      cells[3,0]:='Остаток';
       colwidths[0]:=subcontract.okved.width;
-      colwidths[2]:=region.name.width;
+      colwidths[2]:=subcontract.price.width;
       colwidths[3]:=subcontract.price.width;
-      colwidths[4]:=subcontract.price.width;
-      colwidths[1]:=width-(colwidths[0]+colwidths[2]+colwidths[3]+colwidths[4]+32);
+      colwidths[1]:=width-(colwidths[0]+colwidths[2]+colwidths[3]+32);
     end;
   dm.query.sql.text:='SELECT '+commstr([subcontract.okved.name,sizer.name.name,
-                                        region.name.name,sum(subcontract.price)])+#13+
+                                        sum(subcontract.price),
+                                        lim(subcontract.price)])+#13+
                      'FROM '+subcontract.table+#13+
                      'INNER JOIN '+contract.table+
                      ' ON '+subcontract.id.name+'='+contract.id.name+#13+
@@ -100,9 +95,8 @@ begin
                      'AND DATEPART(quarter,'+subcontract.date.name+')='+quartered.text+#13+
                      'AND ('+subcontract.okved.name+'<>'+quotedstr('')+
                      'AND ('+subcontract.skip.name+'<>1)'+')'+#13+
-                     'GROUP BY '+commstr([region.name.name,sizer.name.name,
-                                          subcontract.okved.name])+#13+
-                     'ORDER BY '+commstr([region.name.name,subcontract.okved.name]);
+                     'GROUP BY '+commstr([subcontract.okved.name,sizer.name.name])+#13+
+                     'ORDER BY '+commstr([subcontract.okved.name,sizer.name.name]);
   dm.query.open;
   grid.rowcount:=max(dm.query.recordcount+1,2);
   status.panels.items[1].text:=inttostr(dm.query.recordcount);
@@ -115,9 +109,8 @@ begin
           begin
             grid.cells[0,i+1]:=fieldbyname(subcontract.okved.column).value;
             grid.cells[1,i+1]:=fieldbyname(sizer.name.column).value;
-            grid.cells[2,i+1]:=fieldbyname(region.name.column).value;
-            grid.cells[3,i+1]:=fieldbyname(subcontract.price.column).value;
-            grid.cells[4,i+1]:='Неизвестно';
+            grid.cells[2,i+1]:=fieldbyname(subcontract.price.column).value;
+            grid.cells[3,i+1]:=fieldbyname('limit').value;
             price:=price+fieldbyname(subcontract.price.column).value;
             dm.query.next;
           end;
@@ -166,19 +159,9 @@ end;
 
 procedure showreport;
 var
-  month:word;
-  temp:word;
   report:tsizerrpt;
 begin
   report:=tsizerrpt.create(application.owner);
-  decodedate(now,temp,month,temp);
-  report.endpick.date:=encodedate(currentyear,month,1);
-  report.startpick.datetime:=incmonth(report.endpick.date,-3);
-  report.nomencl.itemindex:=0;
-  report.regioncbx.itemindex:=0;
-
-  report.startpick.OnChange:=report.regioncbx.OnChange;
-
   report.showmodal;
 end;
 
@@ -189,8 +172,6 @@ var
 begin
   report:=tsizerrpt.create(application.owner);
   report.show;
-  report.startpick.date:=startd;
-  report.endpick.date:=endd;
   for i:=0 to report.nomencl.items.count-1 do
     if report.nomencl.items.strings[i]=nomencl then
       report.nomencl.itemindex:=i;
