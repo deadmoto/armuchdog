@@ -68,40 +68,6 @@ object sizerrpt: Tsizerrpt
         OnChange = regioncbxChange
       end
     end
-    object startbox: TGroupBox
-      Left = 8
-      Top = 66
-      Width = 105
-      Height = 49
-      Caption = #1053#1072#1095#1072#1083#1086' '#1087#1077#1088#1080#1086#1076#1072':'
-      TabOrder = 2
-      object startpick: TDateTimePicker
-        Left = 7
-        Top = 16
-        Width = 90
-        Height = 21
-        Date = 39814.363207465280000000
-        Time = 39814.363207465280000000
-        TabOrder = 0
-      end
-    end
-    object endbox: TGroupBox
-      Left = 111
-      Top = 66
-      Width = 97
-      Height = 49
-      Caption = #1050#1086#1085#1077#1094' '#1087#1077#1088#1080#1086#1076#1072':'
-      TabOrder = 3
-      object endpick: TDateTimePicker
-        Left = 8
-        Top = 16
-        Width = 81
-        Height = 21
-        Date = 39903.371019236110000000
-        Time = 39903.371019236110000000
-        TabOrder = 0
-      end
-    end
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
@@ -109,7 +75,7 @@ object sizerrpt: Tsizerrpt
       Height = 50
       Align = alLeft
       Caption = #1043#1086#1076
-      TabOrder = 4
+      TabOrder = 2
       object yearcbx: TComboBox
         Left = 4
         Top = 19
@@ -127,7 +93,7 @@ object sizerrpt: Tsizerrpt
       Height = 50
       Align = alLeft
       Caption = #1050#1074#1072#1088#1090#1072#1083
-      TabOrder = 5
+      TabOrder = 3
       object quarterud: TUpDown
         Left = 39
         Top = 17
@@ -156,7 +122,7 @@ object sizerrpt: Tsizerrpt
       Height = 50
       Align = alRight
       BevelInner = bvLowered
-      TabOrder = 6
+      TabOrder = 4
       object exit: TButton
         Left = 176
         Top = 13
@@ -215,6 +181,7 @@ object sizerrpt: Tsizerrpt
     Width = 792
     Height = 502
     Align = alClient
+    ColCount = 4
     DefaultColWidth = -1
     DefaultRowHeight = 16
     FixedCols = 0

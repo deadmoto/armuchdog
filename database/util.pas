@@ -22,6 +22,7 @@ function starorstr(text:string):string;
 function ovp(s:string):string;
 function commstr(a:array of string):string;
 function sum(field:tfield):string;
+function lim(field:tfield):string;
 procedure makelink;
 
 implementation
@@ -106,6 +107,11 @@ end;
 function sum;
 begin
   result:='SUM('+field.name+') as '+field.column;
+end;
+
+function lim;
+begin
+  result:='dbo.LIMIT('+inttostr(contractlimit)+',SUM('+field.column+')) as limit';
 end;
 
 procedure makelink;
