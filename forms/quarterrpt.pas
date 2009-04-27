@@ -3,8 +3,19 @@ unit quarterrpt;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Grids, ComCtrls;
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  StdCtrls,
+  ExtCtrls,
+  Grids,
+  ComCtrls;
 
 procedure showreport;
 
@@ -26,7 +37,6 @@ type
     procedure pbsChange(Sender: TObject);
     procedure registeredClick(Sender: TObject);
     procedure printClick(Sender: TObject);
-    procedure FormResize(Sender: TObject);
     procedure gridDblClick(Sender: TObject);
     procedure gridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
@@ -35,7 +45,6 @@ type
   public
     selected:integer;
     function getfreewidth(index:integer):integer;
-    procedure setcolsizes;
     procedure fill;
   end;
 
@@ -50,6 +59,21 @@ uses
   util;
 
 {$R *.dfm}
+
+procedure treportquarter.gridselectcell;
+begin
+  selected:=arow;
+end;
+
+function treportquarter.getfreewidth;
+var
+  i:integer;
+begin
+  result:=grid.width-28;
+  for i:=0 to grid.colcount-1 do
+    if i<>index then
+      result:=result-grid.colwidths[i];
+end;
 
 procedure showreport;
 var
@@ -70,6 +94,25 @@ var
   price:real;
 begin
   price:=0;
+  with grid do
+    begin
+      cells[0,0]:=contract.id.caption;
+      cells[1,0]:=contract.cnt.caption;
+      cells[2,0]:=contract.datecnt.caption;
+      cells[3,0]:=contract.reg.caption;
+      cells[4,0]:=contract.datereg.caption;
+      cells[5,0]:=region.name.caption;
+      cells[6,0]:=provider.name.caption;
+      cells[7,0]:=subcontract.price.caption;
+      colwidths[0]:=contract.id.width;
+      colwidths[1]:=contract.cnt.width;
+      colwidths[2]:=contract.datecnt.width;
+      colwidths[3]:=contract.reg.width;
+      colwidths[4]:=contract.datereg.width;
+      colwidths[5]:=region.name.width;
+      colwidths[7]:=subcontract.price.width;
+      colwidths[6]:=getfreewidth(6);
+    end;
   dm.query.sql.text:='SELECT '+commstr([contract.id.name,contract.cnt.name,
                                         contract.reg.name,contract.datecnt.name,
                                         contract.datereg.name,region.name.name,
@@ -99,17 +142,8 @@ begin
                                            contract.datereg.name,region.name.name,
                                            provider.name.name]);
   dm.query.open;
-  status.panels[1].text:=inttostr(dm.query.recordcount);
   grid.rowcount:=dm.query.recordcount+1;
-  grid.cells[0,0]:=contract.id.caption;
-  grid.cells[1,0]:=contract.cnt.caption;
-  grid.cells[2,0]:=contract.datecnt.caption;
-  grid.cells[3,0]:=contract.reg.caption;
-  grid.cells[4,0]:=contract.datereg.caption;
-  grid.cells[5,0]:=region.name.caption;
-  grid.cells[6,0]:=provider.name.caption;
-  grid.cells[7,0]:=subcontract.price.caption;
-  setcolsizes;
+  status.panels[1].text:=inttostr(dm.query.recordcount);
   for i:=0 to dm.query.recordcount-1 do
     begin
       grid.cells[0,i+1]:=dm.query.fieldbyname(contract.id.column).asstring;
@@ -132,50 +166,32 @@ begin
   status.panels.items[3].text:=floattostr(price);
 end;
 
-procedure treportquarter.FormResize(Sender: TObject);
-begin
-  setcolsizes;
-end;
-
-function treportquarter.getfreewidth;
-var
-  i:integer;
-begin
-  result:=grid.width-28;
-  for i:=0 to grid.colcount-1 do
-    if i<>index then
-      result:=result-grid.colwidths[i];
-end;
-
-procedure treportquarter.gridDblClick(Sender: TObject);
+procedure treportquarter.griddblclick;
 begin
   contractform.edit(strtoint(grid.cells[0,selected]));
 end;
 
-procedure treportquarter.gridSelectCell(Sender: TObject; ACol, ARow: Integer;
-  var CanSelect: Boolean);
-begin
-  selected:=arow;
-end;
-
-procedure treportquarter.setcolsizes;
-begin
-  grid.colwidths[0]:=contract.id.width;
-  grid.colwidths[1]:=contract.cnt.width;
-  grid.colwidths[2]:=contract.datecnt.width;
-  grid.colwidths[3]:=contract.reg.width;
-  grid.colwidths[4]:=contract.datereg.width;
-  grid.colwidths[5]:=region.name.width;
-  grid.colwidths[7]:=subcontract.price.width;
-  grid.colwidths[6]:=getfreewidth(6);
-end;
-
-procedure treportquarter.pbsChange(Sender: TObject);
+procedure treportquarter.pbschange;
 begin
   fill;
 end;
 
-procedure treportquarter.printClick(Sender: TObject);
+procedure treportquarter.yearchange;
+begin
+  fill;
+end;
+
+procedure treportquarter.quarterchange;
+begin
+  fill;
+end;
+
+procedure treportquarter.registeredclick;
+begin
+  fill;
+end;
+
+procedure treportquarter.printclick;
 begin
   dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\quarter.fr3');
   dm.report.variables.variables['quarter']:=quarter.text;
@@ -184,21 +200,6 @@ begin
   dm.report.variables.variables['cnt']:=contract.cnt.column;
   dm.report.variables.variables['price']:=subcontract.price.column;
   dm.report.showreport;
-end;
-
-procedure treportquarter.yearChange(Sender: TObject);
-begin
-  fill;
-end;
-
-procedure treportquarter.quarterChange(Sender: TObject);
-begin
-  fill;
-end;
-
-procedure treportquarter.registeredClick(Sender: TObject);
-begin
-  fill;
 end;
 
 end.
