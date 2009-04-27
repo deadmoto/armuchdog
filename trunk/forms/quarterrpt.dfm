@@ -1,10 +1,10 @@
 object reportquarter: Treportquarter
   Left = 0
   Top = 0
-  BorderStyle = bsSingle
+  BorderStyle = bsDialog
   Caption = #1050#1074#1072#1088#1090#1072#1083#1100#1085#1099#1081' '#1086#1090#1095#1105#1090
-  ClientHeight = 498
-  ClientWidth = 965
+  ClientHeight = 568
+  ClientWidth = 794
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,16 +14,16 @@ object reportquarter: Treportquarter
   OldCreateOrder = False
   Position = poDesktopCenter
   WindowState = wsMaximized
-  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object panel: TPanel
     Left = 0
     Top = 0
-    Width = 965
+    Width = 794
     Height = 45
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 965
     object registered: TCheckBox
       Left = 407
       Top = 18
@@ -49,7 +49,7 @@ object reportquarter: Treportquarter
         Width = 203
         Height = 21
         DropDownCount = 40
-        ItemHeight = 0
+        ItemHeight = 13
         ItemIndex = 0
         TabOrder = 0
         Text = '*'
@@ -80,7 +80,7 @@ object reportquarter: Treportquarter
         Top = 15
         Width = 78
         Height = 21
-        ItemHeight = 0
+        ItemHeight = 13
         ItemIndex = 0
         TabOrder = 0
         Text = '2009'
@@ -104,7 +104,7 @@ object reportquarter: Treportquarter
         Width = 75
         Height = 21
         DropDownCount = 4
-        ItemHeight = 0
+        ItemHeight = 13
         ItemIndex = 0
         TabOrder = 0
         Text = '1'
@@ -120,8 +120,8 @@ object reportquarter: Treportquarter
   object grid: TStringGrid
     Left = 0
     Top = 45
-    Width = 965
-    Height = 434
+    Width = 794
+    Height = 504
     Align = alClient
     ColCount = 8
     DefaultRowHeight = 16
@@ -130,11 +130,13 @@ object reportquarter: Treportquarter
     TabOrder = 1
     OnDblClick = gridDblClick
     OnSelectCell = gridSelectCell
+    ExplicitWidth = 965
+    ExplicitHeight = 434
   end
   object status: TStatusBar
     Left = 0
-    Top = 479
-    Width = 965
+    Top = 549
+    Width = 794
     Height = 19
     Panels = <
       item
@@ -154,5 +156,7 @@ object reportquarter: Treportquarter
         Text = '0'
         Width = 50
       end>
+    ExplicitTop = 479
+    ExplicitWidth = 965
   end
 end
