@@ -38,8 +38,8 @@ var
   sizer:tsizer;
 begin
   main:=tokveded.create(application.owner);
-  main.caption:='Добавление статьи КОСГУ';
-  main.ok.caption:='Добавить';
+  main.caption:='Р”РѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°С‚СЊРё РљРћРЎР“РЈ';
+  main.ok.caption:='Р”РѕР±Р°РІРёС‚СЊ';
   if main.showmodal=mrok then
     begin
       sizer.id:=main.okved.text;
@@ -53,8 +53,8 @@ var
   main:tokveded;
 begin
   main:=tokveded.create(application.owner);
-  main.caption:='Изменение статьи КОСГУ';
-  main.ok.caption:='Изменить';
+  main.caption:='РР·РјРµРЅРµРЅРёРµ СЃС‚Р°С‚СЊРё РљРћРЎР“РЈ';
+  main.ok.caption:='РР·РјРµРЅРёС‚СЊ';
   main.okved.text:=sizer.id;
   main.name.text:=sizer.name;
   if main.showmodal=mrok then
@@ -67,7 +67,7 @@ end;
 
 procedure tokveded.okvedKeyPress(Sender: TObject; var Key: Char);
 begin
-  if not (key in ['0'..'9',#8,'.']) then
+  if not charinset(key,['0'..'9',#8,'.']) then
     key:=chr(0);
 end;
 
