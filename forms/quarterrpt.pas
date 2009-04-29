@@ -99,7 +99,7 @@ begin
       cells[0,0]:=contract.id.caption;
       cells[1,0]:=contract.cnt.caption;
       cells[2,0]:=contract.datecnt.caption;
-      cells[3,0]:=contract.reg.caption;
+      cells[3,0]:=contract.registration.caption;
       cells[4,0]:=contract.datereg.caption;
       cells[5,0]:=region.name.caption;
       cells[6,0]:=provider.name.caption;
@@ -107,14 +107,15 @@ begin
       colwidths[0]:=contract.id.width;
       colwidths[1]:=contract.cnt.width;
       colwidths[2]:=contract.datecnt.width;
-      colwidths[3]:=contract.reg.width;
+      colwidths[3]:=contract.registration.width;
       colwidths[4]:=contract.datereg.width;
       colwidths[5]:=region.name.width;
       colwidths[7]:=subcontract.price.width;
       colwidths[6]:=getfreewidth(6);
     end;
   dm.query.sql.text:='SELECT '+commstr([contract.id.name,contract.cnt.name,
-                                        contract.reg.name,contract.datecnt.name,
+                                        contract.registration.name,
+                                        contract.datecnt.name,
                                         contract.datereg.name,region.name.name,
                                         provider.name.name])+
                                         ',SUM('+subcontract.price.name+') AS '+
@@ -131,14 +132,15 @@ begin
   if registered.checked then
     dm.query.sql.text:=dm.query.sql.text+
                       'AND '+contract.datereg.name+' IS NOT NULL'+#13+
-                      'AND '+contract.reg.name+' IS NOT NULL'+#13
+                      'AND '+contract.registration.name+' IS NOT NULL'+#13
   else
     dm.query.sql.text:=dm.query.sql.text+
                       'AND ('+contract.datereg.name+' IS NULL'+#13+
-                      'OR '+contract.reg.name+' IS NULL)'+#13;
+                      'OR '+contract.registration.name+' IS NULL)'+#13;
   dm.query.sql.text:=dm.query.sql.text+
                       'GROUP BY '+commstr([contract.id.name,contract.cnt.name,
-                                           contract.reg.name,contract.datecnt.name,
+                                           contract.registration.name,
+                                           contract.datecnt.name,
                                            contract.datereg.name,region.name.name,
                                            provider.name.name]);
   dm.query.open;
@@ -149,8 +151,8 @@ begin
       grid.cells[0,i+1]:=dm.query.fieldbyname(contract.id.column).asstring;
       grid.cells[1,i+1]:=dm.query.fieldbyname(contract.cnt.column).asstring;
       grid.cells[2,i+1]:=dm.query.fieldbyname(contract.datecnt.column).asstring;
-      if (dm.query.fieldbyname(contract.reg.column).value<>0) then
-        grid.cells[3,i+1]:=dm.query.fieldbyname(contract.reg.column).asstring
+      if (dm.query.fieldbyname(contract.registration.column).value<>0) then
+        grid.cells[3,i+1]:=dm.query.fieldbyname(contract.registration.column).asstring
       else
         grid.cells[3,i+1]:='Нет';
       if (dm.query.fieldbyname(contract.datereg.column).value<>null) then

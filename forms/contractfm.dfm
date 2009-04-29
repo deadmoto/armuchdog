@@ -81,7 +81,6 @@ object contractform: Tcontractform
         Enabled = False
         TabOrder = 0
         OnChange = reg_nChange
-        OnKeyPress = reg_nKeyPress
       end
     end
     object GroupBox5: TGroupBox

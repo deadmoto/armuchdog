@@ -113,7 +113,7 @@ begin
   grid.colcount:=10;
   grid.rowcount:=1;
   grid.colwidths[0]:=contract.id.width;
-  grid.colwidths[1]:=contract.reg.width;
+  grid.colwidths[1]:=contract.registration.width;
   grid.colwidths[2]:=contract.cnt.width;
   grid.colwidths[3]:=contract.datecnt.width;
   grid.colwidths[4]:=contract.datelim.width;
@@ -126,7 +126,7 @@ begin
     if i<>8 then
       grid.colwidths[8]:=grid.colwidths[8]-grid.colwidths[i];
   grid.cells[0,0]:=contract.id.caption;
-  grid.cells[1,0]:=contract.reg.caption;
+  grid.cells[1,0]:=contract.registration.caption;
   grid.cells[2,0]:=contract.cnt.caption;
   grid.cells[3,0]:=contract.datecnt.caption;
   grid.cells[4,0]:=contract.datelim.caption;
@@ -135,15 +135,17 @@ begin
   grid.cells[7,0]:=contract.region.caption;
   grid.cells[8,0]:=contract.provider.caption;
   grid.cells[9,0]:=subcontract.price.caption;
-  dm.query.sql.text:='SELECT '+commstr([contract.id.name,contract.reg.name,contract.cnt.name,
+  dm.query.sql.text:='SELECT '+commstr([contract.id.name,contract.registration.name,contract.cnt.name,
                                         contract.datecnt.name,contract.datelim.name,contract.datercv.name,
                                         contract.datereg.name,contract.region.name,contract.provider.name,
                                         'SUM('+subcontract.price.name+') AS '+subcontract.price.column])+#13+
                      'FROM ReestrDog'+#13+
                      'INNER JOIN subcontract ON subcontract.id = ReestrDog.REGN'+#13+
                      'WHERE (ReestrDog.REGN LIKE '+quotedstr('%'+number.text+'%')+' '+
-                     'OR ReestrDog.REG_N LIKE '+quotedstr('%'+number.text+'%')+' '+
-                     'OR ReestrDog.N_DOG LIKE '+quotedstr('%'+number.text+'%')+')'+#13;
+                     'OR '+contract.registration.name+
+                     ' LIKE '+quotedstr('%'+number.text+'%')+' '+
+                     'OR ReestrDog.N_DOG'+
+                     ' LIKE '+quotedstr('%'+number.text+'%')+')'+#13;
   if ipbs>0 then
     dm.query.sql.text:=dm.query.sql.text+
                          'AND ReestrDog.FLDID='+inttostr(ipbs)+#13;
@@ -157,16 +159,22 @@ begin
     dm.query.sql.text:=dm.query.sql.text+
                          'AND ReestrDog.DATA_DOG<='+dateornull(finishd)+#13;
   dm.query.sql.text:=dm.query.sql.text+
-                       'GROUP BY ReestrDog.REGN,ReestrDog.REG_N,ReestrDog.N_DOG,'+
-                       'ReestrDog.DATA_DOG,ReestrDog.DATA_SROK,ReestrDog.DATA_POST,'+
-                       'ReestrDog.DATA_REG,ReestrDog.FLDID,ReestrDog.ID_SUPPLIER';
+                     'GROUP BY '+commstr([contract.id.name,
+                                          contract.registration.name,
+                                          contract.cnt.name,
+                                          contract.datecnt.name,
+                                          contract.datelim.name,
+                                          contract.datercv.name,
+                                          contract.datereg.name,
+                                          contract.region.name,
+                                          contract.provider.name]);
   dm.query.open;
   grid.rowcount:=dm.query.recordcount+1;
   for i:=0 to dm.query.recordcount-1 do
     begin
       j:=0;
       grid.cells[j,i+1]:=dm.query.fieldbyname('regn').value;inc(j);
-      grid.cells[j,i+1]:=dm.query.fieldbyname('reg_n').asstring;inc(j);
+      grid.cells[j,i+1]:=dm.query.fieldbyname(contract.registration.column).asstring;inc(j);
       grid.cells[j,i+1]:=dm.query.fieldbyname('n_dog').asstring;inc(j);
       grid.cells[j,i+1]:=dm.query.fieldbyname('data_dog').asstring;inc(j);
       grid.cells[j,i+1]:=dm.query.fieldbyname('data_srok').asstring;inc(j);
