@@ -3,10 +3,9 @@ object dm: Tdm
   Height = 371
   Width = 543
   object sqlsub: TADOConnection
-    Connected = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Password="";Persist Security Info=True;User ' +
-      'ID=sa;Initial Catalog=Subsidy;Data Source=10.250.108.16'
+      'ID=sa;Initial Catalog=Contracts;Data Source=server'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 8

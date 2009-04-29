@@ -60,7 +60,6 @@ type
     procedure btnregionClick(Sender: TObject);
     procedure reg_nChange(Sender: TObject);
     procedure n_dogChange(Sender: TObject);
-    procedure reg_nKeyPress(Sender: TObject; var Key: Char);
     procedure data_srokChange(Sender: TObject);
     procedure data_regChange(Sender: TObject);
     procedure data_dogChange(Sender: TObject);
@@ -190,7 +189,7 @@ begin
   self.contract:=contracts.fetch(regn);
   self.regn.text:=inttostr(contract.regn);
   self.fldid.text:=regions.byid(contract.region);
-  self.reg_n.text:=inttostr(contract.reg_n);
+  self.reg_n.text:=contract.registration;
   self.n_dog.text:=contract.n_dog;
   provider.text:=providers.byid(contract.id_supplier);
   if contract.data_reg<>0 then
@@ -242,18 +241,12 @@ end;
 
 procedure tcontractform.reg_nChange(Sender: TObject);
 begin
-  trystrtoint(self.reg_n.text,self.contract.reg_n);
+  contract.registration:=reg_n.text;
 end;
 
 procedure tcontractform.n_dogChange(Sender: TObject);
 begin
-  self.contract.n_dog:=self.n_dog.text;
-end;
-
-procedure tcontractform.reg_nKeyPress(Sender: TObject; var Key: Char);
-begin
-  if not charinset(key,['0'..'9',#8]) then
-    key:=chr(0);
+  contract.n_dog:=n_dog.text;
 end;
 
 procedure tcontractform.data_dogChange(Sender: TObject);

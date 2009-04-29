@@ -24,6 +24,14 @@ type
   end;
 
 type
+  ttable=packed record
+  strict private
+    table:string;
+  public
+    columns:array of tfield;
+  end;
+
+type
 {*******************************************************************************
 Декларация служебной структуры TContract. table - содержит имя таблицы
 (применяется потомками), id - внутренний номер договора, cnt - номер договора,
@@ -36,7 +44,7 @@ reg - регистрационный номер договора, datecnt - да
     table:string;
     id:tfield;
     cnt:tfield;
-    reg:tfield;
+    registration:tfield;
     datecnt:tfield;
     datelim:tfield;
     datercv:tfield;
@@ -118,7 +126,7 @@ const
       table:'reestrdog';
       id:(table:@contract.table;column:'regn';caption:'№';width:8*8);
       cnt:(table:@contract.table;column:'n_dog';caption:'Номер дог.';width:8*8);
-      reg:(table:@contract.table;column:'reg_n';caption:'Рег. номер';width:8*8);
+      registration:(table:@contract.table;column:'registration';caption:'Рег. номер';width:8*8);
       datecnt:(table:@contract.table;column:'data_dog';caption:'Дата договора';width:8*10);
       datelim:(table:@contract.table;column:'data_srok';caption:'Срок договора';width:8*10);
       datercv:(table:@contract.table;column:'data_post';caption:'Поступил';width:8*10);
