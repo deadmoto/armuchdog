@@ -9,7 +9,7 @@ object sizerrpt: Tsizerrpt
   Color = clBtnFace
   Constraints.MaxHeight = 605
   Constraints.MaxWidth = 800
-  Constraints.MinHeight = 600
+  Constraints.MinHeight = 598
   Constraints.MinWidth = 798
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

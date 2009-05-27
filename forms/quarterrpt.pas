@@ -1,4 +1,4 @@
-unit quarterrpt;
+﻿unit quarterrpt;
 
 interface
 
@@ -113,37 +113,43 @@ begin
       colwidths[7]:=subcontract.price.width;
       colwidths[6]:=getfreewidth(6);
     end;
-  dm.query.sql.text:='SELECT '+commstr([contract.id.name,contract.cnt.name,
-                                        contract.registration.name,
-                                        contract.datecnt.name,
-                                        contract.datereg.name,region.name.name,
-                                        provider.name.name])+
-                                        ',SUM('+subcontract.price.name+') AS '+
-                                        subcontract.price.column+#13+
-                     'FROM '+contract.table+#13+
-                     'INNER JOIN '+subcontract.table+' ON '+contract.id.name+'='+subcontract.id.name+#13+
-                     'INNER JOIN '+region.table+' ON '+contract.region.name+'='+region.id.name+#13+
-                     'INNER JOIN '+provider.table+' ON '+contract.provider.name+'='+provider.id.name+#13+
-                     'WHERE year('+subcontract.date.name+')='+year.text+#13+
-                     'AND datepart(q,'+subcontract.date.name+')='+quarter.text+#13;
-  if pbs.itemindex>0 then
+  try
+    dm.query.sql.text:='SELECT '+commstr([contract.id.name,contract.cnt.name,
+                                          contract.registration.name,
+                                          contract.datecnt.name,
+                                          contract.datereg.name,region.name.name,
+                                          provider.name.name])+
+                                          ',SUM('+subcontract.price.name+') AS '+
+                                          subcontract.price.column+#13+
+                       'FROM '+contract.table+#13+
+                       'INNER JOIN '+subcontract.table+' ON '+contract.id.name+'='+subcontract.id.name+#13+
+                       'INNER JOIN '+region.table+' ON '+contract.region.name+'='+region.id.name+#13+
+                       'INNER JOIN '+provider.table+' ON '+contract.provider.name+'='+provider.id.name+#13+
+                       'WHERE year('+subcontract.date.name+')='+year.text+#13+
+                       'AND datepart(q,'+subcontract.date.name+')='+quarter.text+#13;
+    if pbs.itemindex>0 then
+      dm.query.sql.text:=dm.query.sql.text+
+                        'AND '+contract.region.name+'='+inttostr(regions.cregion[pbs.itemindex-1].id)+#13;
+    if registered.checked then
+      dm.query.sql.text:=dm.query.sql.text+
+                        'AND '+contract.datereg.name+' IS NOT NULL'+#13+
+                        'AND '+contract.registration.name+' IS NOT NULL'+#13+
+                        'AND '+contract.registration.name+'<>0'+#13
+    else
+      dm.query.sql.text:=dm.query.sql.text+
+                        'AND ('+contract.datereg.name+' IS NULL'+#13+
+                        'OR '+contract.registration.name+' IS NULL'+#13+
+                        'OR '+contract.registration.name+'=0)'+#13;
     dm.query.sql.text:=dm.query.sql.text+
-                      'AND '+contract.region.name+'='+inttostr(regions.cregion[pbs.itemindex-1].id)+#13;
-  if registered.checked then
-    dm.query.sql.text:=dm.query.sql.text+
-                      'AND '+contract.datereg.name+' IS NOT NULL'+#13+
-                      'AND '+contract.registration.name+' IS NOT NULL'+#13
-  else
-    dm.query.sql.text:=dm.query.sql.text+
-                      'AND ('+contract.datereg.name+' IS NULL'+#13+
-                      'OR '+contract.registration.name+' IS NULL)'+#13;
-  dm.query.sql.text:=dm.query.sql.text+
-                      'GROUP BY '+commstr([contract.id.name,contract.cnt.name,
-                                           contract.registration.name,
-                                           contract.datecnt.name,
-                                           contract.datereg.name,region.name.name,
-                                           provider.name.name]);
-  dm.query.open;
+                        'GROUP BY '+commstr([contract.id.name,contract.cnt.name,
+                                             contract.registration.name,
+                                             contract.datecnt.name,
+                                             contract.datereg.name,region.name.name,
+                                             provider.name.name]);
+    dm.query.open;
+  except
+    messagebox(0,pchar(dm.query.sql.text),'',mb_ok);
+  end;
   grid.rowcount:=dm.query.recordcount+1;
   status.panels[1].text:=inttostr(dm.query.recordcount);
   for i:=0 to dm.query.recordcount-1 do
@@ -151,7 +157,7 @@ begin
       grid.cells[0,i+1]:=dm.query.fieldbyname(contract.id.column).asstring;
       grid.cells[1,i+1]:=dm.query.fieldbyname(contract.cnt.column).asstring;
       grid.cells[2,i+1]:=dm.query.fieldbyname(contract.datecnt.column).asstring;
-      if (dm.query.fieldbyname(contract.registration.column).value<>0) then
+      if (dm.query.fieldbyname(contract.registration.column).value<>null) then
         grid.cells[3,i+1]:=dm.query.fieldbyname(contract.registration.column).asstring
       else
         grid.cells[3,i+1]:='Нет';

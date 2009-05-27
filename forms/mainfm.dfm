@@ -6,7 +6,7 @@ object main: Tmain
   ClientHeight = 737
   ClientWidth = 1018
   Color = clBtnFace
-  Constraints.MinHeight = 768
+  Constraints.MinHeight = 762
   Constraints.MinWidth = 1024
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -84,7 +84,7 @@ object main: Tmain
       Top = 1
       Width = 924
       Height = 71
-      ActivePage = filters
+      ActivePage = TabSheet3
       Align = alClient
       TabOrder = 0
       object filters: TTabSheet

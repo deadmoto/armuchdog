@@ -1,4 +1,4 @@
-unit mainfm;
+﻿unit mainfm;
 
 interface
 
@@ -353,4 +353,3 @@ begin
 end;
 
 end.
-
