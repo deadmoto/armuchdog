@@ -1,4 +1,4 @@
-unit regions;
+﻿unit regions;
 
 interface
 
@@ -23,6 +23,7 @@ var
 implementation
 
 uses
+  datamodel,
   datamodule,
   util;
 
@@ -32,7 +33,7 @@ var
 begin
   setlength(cregion,0);
   try
-    dm.query.sql.text:='SELECT * FROM RegionIDDog';
+    dm.query.sql.text:='SELECT * FROM '+region.table;
     dm.query.open;
     dm.query.first;
     for i:=0 to dm.query.recordcount-1 do

@@ -1,4 +1,4 @@
-unit contractfm;
+﻿unit contractfm;
 
 interface
 
@@ -109,6 +109,7 @@ var
   i,j:integer;
   limit:real;
 begin
+  limit:=default(real);
   result:=true;
   for i:=0 to length(contract.subcontract)-1 do
     if length(contract.subcontract[i].nomencl)>0 then

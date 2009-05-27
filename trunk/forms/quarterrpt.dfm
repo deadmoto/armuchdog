@@ -13,7 +13,6 @@ object reportquarter: Treportquarter
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
-  WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 13
   object panel: TPanel
@@ -23,7 +22,6 @@ object reportquarter: Treportquarter
     Height = 45
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 965
     object registered: TCheckBox
       Left = 407
       Top = 18
@@ -130,8 +128,6 @@ object reportquarter: Treportquarter
     TabOrder = 1
     OnDblClick = gridDblClick
     OnSelectCell = gridSelectCell
-    ExplicitWidth = 965
-    ExplicitHeight = 434
   end
   object status: TStatusBar
     Left = 0
@@ -156,7 +152,5 @@ object reportquarter: Treportquarter
         Text = '0'
         Width = 50
       end>
-    ExplicitTop = 479
-    ExplicitWidth = 965
   end
 end

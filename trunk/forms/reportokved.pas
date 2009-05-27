@@ -1,4 +1,4 @@
-unit reportokved;
+﻿unit reportokved;
 
 interface
 
@@ -63,41 +63,45 @@ var
   i:integer;
   price:real;
 begin
-  price:=0;
-  with grid do
-    begin
-      cells[0,0]:=subcontract.okved.caption;
-      cells[1,0]:=sizer.name.caption;
-      cells[2,0]:=subcontract.price.caption;
-      cells[3,0]:='Остаток';
-      colwidths[0]:=subcontract.okved.width;
-      colwidths[2]:=subcontract.price.width;
-      colwidths[3]:=subcontract.price.width;
-      colwidths[1]:=width-(colwidths[0]+colwidths[2]+colwidths[3]+32);
-    end;
-  dm.query.sql.text:='SELECT '+commstr([subcontract.okved.name,sizer.name.name,
-                                        sum(subcontract.price),
-                                        lim(subcontract.price)])+#13+
-                     'FROM '+subcontract.table+#13+
-                     'INNER JOIN '+contract.table+
-                     ' ON '+subcontract.id.name+'='+contract.id.name+#13+
-                     'INNER JOIN '+sizer.table+
-                     ' ON '+subcontract.okved.name+'='+sizer.id.name+#13+
-                     'INNER JOIN '+region.table+
-                     ' ON '+contract.region.name+'='+region.id.name+#13+
-                     'WHERE ('+subcontract.okved.name+' LIKE '+
-                     quotedstr('%'+starorstr(nomencl.text)+'%')+')'+#13;
-  if regioncbx.itemindex>0 then
-    dm.query.sql.text:=dm.query.sql.text+'AND ('+contract.region.name+'='+
-                       inttostr(regions.cregion[regioncbx.itemindex-1].id)+')'+#13;
-  dm.query.sql.text:=dm.query.sql.text+
-                     'AND YEAR('+subcontract.date.name+')='+yearcbx.text+#13+
-                     'AND DATEPART(quarter,'+subcontract.date.name+')='+quartered.text+#13+
-                     'AND ('+subcontract.okved.name+'<>'+quotedstr('')+
-                     'AND ('+subcontract.skip.name+'<>1)'+')'+#13+
-                     'GROUP BY '+commstr([subcontract.okved.name,sizer.name.name])+#13+
-                     'ORDER BY '+commstr([subcontract.okved.name,sizer.name.name]);
-  dm.query.open;
+  price:=default(real);
+  try
+    with grid do
+      begin
+        cells[0,0]:=subcontract.okved.caption;
+        cells[1,0]:=sizer.name.caption;
+        cells[2,0]:=subcontract.price.caption;
+        cells[3,0]:='Остаток';
+        colwidths[0]:=subcontract.okved.width;
+        colwidths[2]:=subcontract.price.width;
+        colwidths[3]:=subcontract.price.width;
+        colwidths[1]:=width-(colwidths[0]+colwidths[2]+colwidths[3]+32);
+      end;
+    dm.query.sql.text:='SELECT '+commstr([subcontract.okved.name,sizer.name.name,
+                                          sum(subcontract.price),
+                                          lim(subcontract.price)])+#13+
+                       'FROM '+subcontract.table+#13+
+                       'INNER JOIN '+contract.table+
+                       ' ON '+subcontract.id.name+'='+contract.id.name+#13+
+                       'INNER JOIN '+sizer.table+
+                       ' ON '+subcontract.okved.name+'='+sizer.id.name+#13+
+                       'INNER JOIN '+region.table+
+                       ' ON '+contract.region.name+'='+region.id.name+#13+
+                       'WHERE ('+subcontract.okved.name+' LIKE '+
+                       quotedstr('%'+starorstr(nomencl.text)+'%')+')'+#13;
+    if regioncbx.itemindex>0 then
+      dm.query.sql.text:=dm.query.sql.text+'AND ('+contract.region.name+'='+
+                         inttostr(regions.cregion[regioncbx.itemindex-1].id)+')'+#13;
+    dm.query.sql.text:=dm.query.sql.text+
+                       'AND YEAR('+subcontract.date.name+')='+yearcbx.text+#13+
+                       'AND DATEPART(quarter,'+subcontract.date.name+')='+quartered.text+#13+
+                       'AND ('+subcontract.okved.name+'<>'+quotedstr('')+
+                       'AND ('+subcontract.skip.name+'<>1)'+')'+#13+
+                       'GROUP BY '+commstr([subcontract.okved.name,sizer.name.name])+#13+
+                       'ORDER BY '+commstr([subcontract.okved.name,sizer.name.name]);
+    dm.query.open;
+  except
+    messagebox(0,pchar(dm.query.sql.text),'',mb_ok);
+  end;
   grid.rowcount:=max(dm.query.recordcount+1,2);
   status.panels.items[1].text:=inttostr(dm.query.recordcount);
   if dm.query.recordcount>0 then
@@ -212,7 +216,7 @@ begin
     quartered.text:=inttostr(newvalue);
 end;
 
-procedure tsizerrpt.nomenclKeyPress(Sender: TObject; var Key: Char);
+procedure tsizerrpt.nomenclkeypress;
 begin
   key:=chr(vk_cancel);
 end;

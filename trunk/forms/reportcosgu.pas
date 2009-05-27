@@ -1,4 +1,4 @@
-unit reportcosgu;
+﻿unit reportcosgu;
 
 interface
 
@@ -76,10 +76,14 @@ procedure getpbs;
 var
   i:integer;
 begin
-  report_cosgu.pbs.items.clear;
-  report_cosgu.pbs.items.add('*');
-  dm.query.sql.text:='SELECT * FROM RegionID';
-  dm.query.open;
+  try
+    report_cosgu.pbs.items.clear;
+    report_cosgu.pbs.items.add('*');
+    dm.query.sql.text:='SELECT * FROM '+region.table;
+    dm.query.open;
+  except
+    messagebox(0,pchar(dm.query.sql.text),'',mb_ok);
+  end;
   dm.query.first;
   for i:=0 to dm.query.recordcount-1 do
     begin
@@ -94,31 +98,35 @@ var
   i:integer;
   price:real;
 begin
-  dm.query.sql.text:='SELECT '+commstr([subcontract.id.name,subcontract.cosgu.name,
-                                        cosgu.name.name,region.name.name,provider.name.name,
-                                        subcontract.price.name])+#13+
-                     'FROM '+subcontract.table+#13+
-                     'INNER JOIN '+cosgu.table+
-                     ' ON '+subcontract.cosgu.name+'='+cosgu.id.name+#13+
-                     'INNER JOIN '+contract.table+
-                     ' ON '+contract.id.name+'='+subcontract.id.name+#13+
-                     'INNER JOIN '+region.table+
-                     ' ON '+contract.region.name+'='+region.id.name+#13+
-                     'INNER JOIN '+provider.table+
-                     ' ON '+contract.provider.name+'='+provider.id.name+#13+
-                     'WHERE ('+subcontract.cosgu.name+
-                     ' LIKE '+quotedstr('%'+starorstr(cosguselect.text)+'%')+')';
-  if pbs.itemindex>0 then
+  try
+    dm.query.sql.text:='SELECT '+commstr([subcontract.id.name,subcontract.cosgu.name,
+                                          cosgu.name.name,region.name.name,provider.name.name,
+                                          subcontract.price.name])+#13+
+                       'FROM '+subcontract.table+#13+
+                       'INNER JOIN '+cosgu.table+
+                       ' ON '+subcontract.cosgu.name+'='+cosgu.id.name+#13+
+                       'INNER JOIN '+contract.table+
+                       ' ON '+contract.id.name+'='+subcontract.id.name+#13+
+                       'INNER JOIN '+region.table+
+                       ' ON '+contract.region.name+'='+region.id.name+#13+
+                       'INNER JOIN '+provider.table+
+                       ' ON '+contract.provider.name+'='+provider.id.name+#13+
+                       'WHERE ('+subcontract.cosgu.name+
+                       ' LIKE '+quotedstr('%'+starorstr(cosguselect.text)+'%')+')';
+    if pbs.itemindex>0 then
+      dm.query.sql.text:=dm.query.sql.text+
+                         'AND ('+region.name.name+
+                         '='+quotedstr(pbs.text)+')';
     dm.query.sql.text:=dm.query.sql.text+
-                       'AND ('+region.name.name+
-                       '='+quotedstr(pbs.text)+')';
-  dm.query.sql.text:=dm.query.sql.text+
-                     'AND ('+subcontract.date.name+'>='+dateornull(startpick.date)+')'+
-                     'AND ('+subcontract.date.name+'<'+dateornull(endpick.date)+')'+
-                     'AND ('+subcontract.cosgu.name+'<>'+quotedstr('')+')'+#13+
-                     'ORDER BY '+commstr([subcontract.cosgu.name,region.name.name]);
-  grid.datasource.dataset:=dm.query;
-  dm.query.open;
+                       'AND ('+subcontract.date.name+'>='+dateornull(startpick.date)+')'+
+                       'AND ('+subcontract.date.name+'<'+dateornull(endpick.date)+')'+
+                       'AND ('+subcontract.cosgu.name+'<>'+quotedstr('')+')'+#13+
+                       'ORDER BY '+commstr([subcontract.cosgu.name,region.name.name]);
+    grid.datasource.dataset:=dm.query;
+    dm.query.open;
+  except
+    messagebox(0,pchar(dm.query.sql.text),'',mb_ok);
+  end;
   status.panels.items[1].text:=inttostr(dm.query.recordcount);
   dm.query.fieldbyname('code').visible:=false;
   grid.columns.items[0].width:=8*9;

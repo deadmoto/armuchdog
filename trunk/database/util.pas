@@ -1,4 +1,4 @@
-unit util;
+﻿unit util;
 
 interface
 
@@ -111,7 +111,7 @@ end;
 
 function lim;
 begin
-  result:='dbo.LIMIT('+inttostr(contractlimit)+',SUM('+field.column+')) as limit';
+  result:='('+inttostr(contractlimit)+'-SUM('+field.column+')) as limit';
 end;
 
 procedure makelink;
