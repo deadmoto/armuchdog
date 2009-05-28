@@ -1,4 +1,4 @@
-unit providerdlg;
+﻿unit providerdlg;
 
 interface
 
