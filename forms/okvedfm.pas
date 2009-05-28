@@ -1,4 +1,4 @@
-unit okvedfm;
+ï»¿unit okvedfm;
 
 interface
 
@@ -87,7 +87,7 @@ end;
 
 procedure tokved.delClick(Sender: TObject);
 begin
-  if messagebox(handle,pchar('Óäàëèòü ÎÊÂİÄ '+asizer[selected-1].id+'?'),'Âíèìàíèå!',mb_yesno)=id_yes then
+  if messagebox(handle,pchar('Ô¤á¬¨óº¡Ë‚Ş„ '+asizer[selected-1].id+'?'),'Ã­é­ î©¥!',mb_yesno)=id_yes then
     begin
       sizers.delete(asizer[selected-1]);
       fill;
@@ -106,3 +106,4 @@ begin
 end;
 
 end.
+
