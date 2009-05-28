@@ -84,7 +84,7 @@ object main: Tmain
       Top = 1
       Width = 924
       Height = 71
-      ActivePage = TabSheet3
+      ActivePage = filters
       Align = alClient
       TabOrder = 0
       object filters: TTabSheet
