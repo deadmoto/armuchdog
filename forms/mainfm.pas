@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, shellapi, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, StdCtrls, Grids, ComCtrls, XPMan, Mask;
+  Dialogs, ExtCtrls, StdCtrls, Grids, ComCtrls, Mask;
 
 type
   tmain = class(TForm)
@@ -40,6 +40,7 @@ type
     start: TMaskEdit;
     finish: TMaskEdit;
     Button1: TButton;
+    stricted: TCheckBox;
     procedure exitClick(Sender: TObject);
     procedure allClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -64,6 +65,7 @@ type
     procedure FormResize(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure strictedClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -140,12 +142,20 @@ begin
                                         contract.datereg.name,contract.region.name,contract.provider.name,
                                         'SUM('+subcontract.price.name+') AS '+subcontract.price.column])+#13+
                      'FROM ReestrDog'+#13+
-                     'INNER JOIN subcontract ON subcontract.id = ReestrDog.REGN'+#13+
-                     'WHERE (ReestrDog.REGN LIKE '+quotedstr('%'+number.text+'%')+' '+
-                     'OR '+contract.registration.name+
-                     ' LIKE '+quotedstr('%'+number.text+'%')+' '+
-                     'OR ReestrDog.N_DOG'+
-                     ' LIKE '+quotedstr('%'+number.text+'%')+')'+#13;
+                     'INNER JOIN subcontract ON subcontract.id = ReestrDog.REGN';
+  if stricted.checked then
+    dm.query.sql.text:=dm.query.sql.text+#13+
+                       'WHERE ('+contract.registration.name+
+                       '='+quotedstr(number.text)+' '+
+                       'OR '+contract.cnt.name+
+                       '='+quotedstr(number.text)+')'+#13
+  else
+    dm.query.sql.text:=dm.query.sql.text+#13+
+                       'WHERE ('+contract.id.name+' LIKE '+quotedstr('%'+number.text+'%')+' '+
+                       'OR '+contract.registration.name+
+                       ' LIKE '+quotedstr('%'+number.text+'%')+' '+
+                       'OR '+contract.cnt.name+
+                       ' LIKE '+quotedstr('%'+number.text+'%')+')'+#13;
   if ipbs>0 then
     dm.query.sql.text:=dm.query.sql.text+
                          'AND ReestrDog.FLDID='+inttostr(ipbs)+#13;
@@ -201,6 +211,7 @@ begin
   ipbs:=-1;
   start.text:='__.__.____';
   finish.text:='__.__.____';
+  stricted.checked:=false;
   fill;
   status.panels.items[1].text:=inttostr(grid.rowcount-1);
 end;
@@ -226,7 +237,12 @@ begin
   fill;
 end;
 
-procedure tmain.numberChange(Sender: TObject);
+procedure tmain.numberchange;
+begin
+  fill;
+end;
+
+procedure tmain.strictedclick;
 begin
   fill;
 end;
