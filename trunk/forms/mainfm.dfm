@@ -100,7 +100,7 @@ object main: Tmain
           OnClick = allClick
         end
         object pbsbox: TGroupBox
-          Left = 217
+          Left = 232
           Top = 0
           Width = 152
           Height = 41
@@ -119,7 +119,7 @@ object main: Tmain
         object numberbox: TGroupBox
           Left = 80
           Top = 0
-          Width = 137
+          Width = 154
           Height = 41
           Caption = #1053#1086#1084#1077#1088' '#1076#1086#1075#1086#1074#1086#1088#1072
           TabOrder = 2
@@ -131,9 +131,17 @@ object main: Tmain
             TabOrder = 0
             OnChange = numberChange
           end
+          object stricted: TCheckBox
+            Left = 134
+            Top = 18
+            Width = 17
+            Height = 17
+            TabOrder = 1
+            OnClick = strictedClick
+          end
         end
         object providerbox: TGroupBox
-          Left = 369
+          Left = 382
           Top = 0
           Width = 296
           Height = 41
@@ -150,7 +158,7 @@ object main: Tmain
           end
         end
         object startbox: TGroupBox
-          Left = 665
+          Left = 676
           Top = 0
           Width = 81
           Height = 41
@@ -175,7 +183,7 @@ object main: Tmain
           end
         end
         object finishbox: TGroupBox
-          Left = 746
+          Left = 755
           Top = 0
           Width = 81
           Height = 41
