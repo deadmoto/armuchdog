@@ -1,4 +1,4 @@
-unit sizers;
+﻿unit sizers;
 
 interface
 
@@ -59,10 +59,10 @@ begin
   setlength(asizer,0);
   try
     dm.query.sql.text:='SELECT * FROM NomenclDog'+#13+
-                         'WHERE '+column+' LIKE '+quotedstr('%'+filter+'%');
+                       'WHERE '+column+' LIKE '+quotedstr('%'+filter+'%');
     dm.query.open;
     dm.query.first;
-    for i:=0 to dm.query.recordcount-1 do
+    for i:=0 to dm.query.recordcount do
       begin
         setlength(asizer,length(asizer)+1);
         asizer[i].id:=trim(dm.query.fieldbyname('id_nomencl').value);

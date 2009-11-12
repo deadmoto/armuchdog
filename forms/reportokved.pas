@@ -144,7 +144,8 @@ begin
   dm.query.sql.text:='SELECT '+subcontract.okved.name+#13+
                      'FROM '+subcontract.table+#13+
                      'WHERE '+subcontract.okved.name+' IS NOT NULL'+#13+
-                     'GROUP BY '+subcontract.okved.name;
+                     'GROUP BY '+subcontract.okved.name+#13+
+                     'ORDER BY '+subcontract.okved.name;
   dm.query.open;
   dm.query.first;
   for i:=0 to dm.query.recordcount-1 do
@@ -158,6 +159,8 @@ begin
   nomencl.items.strings[0]:='*';
   yearcbx.text:=formatdatetime('yyyy',now);
   quarterud.position:=quarter(now);
+  nomencl.text:='*';
+  regioncbx.text:='*';
   fill;
 end;
 
@@ -183,10 +186,10 @@ end;
 
 procedure tsizerrpt.printclick;
 begin
-  if nomencl.itemindex=0 then
-    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_by_pbs.fr3')
-  else
-    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_by_okved.fr3');
+//  if nomencl.itemindex=0 then
+    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_by_pbs.fr3');
+//  else
+//    dm.report.loadfromfile(extractfilepath(paramstr(0))+'reports\okved_by_okved.fr3');
   dm.report.variables.variables['year']:=yearcbx.text;
   dm.report.variables.variables['quarter']:=quartered.text;
   dm.report.showreport;
@@ -238,6 +241,7 @@ end;
 
 procedure tsizerrpt.nomenclChange;
 begin
+  print.enabled:=nomencl.itemindex=0;
   fill;
 end;
 
