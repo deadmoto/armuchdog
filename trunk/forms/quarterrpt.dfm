@@ -47,7 +47,6 @@ object reportquarter: Treportquarter
         Width = 203
         Height = 21
         DropDownCount = 40
-        ItemHeight = 13
         ItemIndex = 0
         TabOrder = 0
         Text = '*'
@@ -78,7 +77,6 @@ object reportquarter: Treportquarter
         Top = 15
         Width = 78
         Height = 21
-        ItemHeight = 13
         ItemIndex = 0
         TabOrder = 0
         Text = '2009'
@@ -102,7 +100,6 @@ object reportquarter: Treportquarter
         Width = 75
         Height = 21
         DropDownCount = 4
-        ItemHeight = 13
         ItemIndex = 0
         TabOrder = 0
         Text = '1'

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Grids;
+  Dialogs, StdCtrls,math, Grids;
 
 type
   tnomenclselect = class(TForm)
@@ -50,7 +50,7 @@ begin
   self.nomenclgrid.rows[0].strings[1]:='Наименование';
   for i:=0 to length(sizers.asizer)-1 do
     begin
-      self.nomenclgrid.rowcount:=i+1;
+      self.nomenclgrid.rowcount:=max(i+1,2);
       self.nomenclgrid.rows[i+1].strings[0]:=sizers.asizer[i].id;
       self.nomenclgrid.rows[i+1].strings[1]:=sizers.asizer[i].name;
     end;
