@@ -17,13 +17,14 @@ namespace Contracts.NET
         {
             foreach (SQLContract Contract in Tables.Contracts)
             {
-                object[] Row = new object[8];
-                Row[0] = Contract.REGN;
-                Row[1] = Contract.registration;
-                Row[2] = Contract.N_DOG;
-                Row[3] = Contract.DATA_REG.ToShortDateString();
-                Row[4] = Contract.DATA_DOG.ToShortDateString();
+                object[] Row = new object[9];
+                Row[0] = Contract.Id;
+                Row[1] = Contract.RegNum;
+                Row[2] = Contract.ConNum;
+                Row[3] = Contract.RegDate.ToShortDateString();
+                Row[4] = Contract.ConDate.ToShortDateString();
                 Row[7] = Contract.Region.Name;
+                Row[8] = Contract.Provider.Name;
                 MainGrid.Rows.Add(Row);
             }
         }

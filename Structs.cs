@@ -10,18 +10,23 @@ namespace Contracts.NET
         public string Name;
     }
 
+    public struct SQLProvider
+    {
+        public int Id;
+        public string Name;
+    }
+
     public struct SQLContract
     {
-        public long REGN;
-        public string registration;
-        public string N_DOG;
-        public DateTime DATA_REG;
+        public long Id;
+        public string RegNum;
+        public string ConNum;
+        public DateTime RegDate;
         public DateTime DATA_POST;
         public SQLRegion Region;
-        public DateTime DATA_DOG;
-        public DateTime DATA_SROK;
-        public int ID_SUPPLIER;
-        public string ID_NOMENCL;
-        public float SUM_DOG;
+        public DateTime ConDate;
+        public DateTime ExpDate;
+        public SQLProvider Provider;
+        public float Sum;
     }
 }
