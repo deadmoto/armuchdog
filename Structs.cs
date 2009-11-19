@@ -22,7 +22,7 @@ namespace Contracts.NET
         public string RegNum;
         public string ConNum;
         public DateTime RegDate;
-        public DateTime DATA_POST;
+        public DateTime RecDate;
         public SQLRegion Region;
         public DateTime ConDate;
         public DateTime ExpDate;
