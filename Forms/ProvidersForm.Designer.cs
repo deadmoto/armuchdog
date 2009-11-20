@@ -83,12 +83,13 @@ namespace Contracts.NET
             this.InsertMenuItem.Name = "InsertMenuItem";
             this.InsertMenuItem.Size = new System.Drawing.Size(152, 22);
             this.InsertMenuItem.Text = "Создать";
+            this.InsertMenuItem.Click += new System.EventHandler(this.InsertMenuItem_Click);
             // 
             // UpdateMenuItem
             // 
             this.UpdateMenuItem.Name = "UpdateMenuItem";
             this.UpdateMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.UpdateMenuItem.Text = "Обновить";
+            this.UpdateMenuItem.Text = "Изменить";
             // 
             // DeleteMenuItem
             // 

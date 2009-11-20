@@ -39,11 +39,11 @@ namespace Contracts.NET
 
         public void GetStatistics()
         {
-            SqlDataReader Reader = SQLServer.SQLExecute("SELECT Count(REGN) as ContractsTotalCount FROM ReestrDog");
+            SqlDataReader Reader = SQLServer.SQLOpen("SELECT Count(REGN) as ContractsTotalCount FROM ReestrDog");
             Reader.Read();
             ContractsTotalCount = Reader.GetInt32(Reader.GetOrdinal("ContractsTotalCount"));
             Reader.Close();
-            Reader = SQLServer.SQLExecute("SELECT SUM(price) AS ContractsTotalSum FROM subcontract");
+            Reader = SQLServer.SQLOpen("SELECT SUM(price) AS ContractsTotalSum FROM subcontract");
             Reader.Read();
             ContractsTotalSum = Reader.GetDouble(Reader.GetOrdinal("ContractsTotalSum"));
         }
@@ -51,7 +51,7 @@ namespace Contracts.NET
         public void GetRegions()
         {
             Regions = new List<SQLRegion>();
-            SqlDataReader Reader = SQLServer.SQLExecute("SELECT * FROM Region");
+            SqlDataReader Reader = SQLServer.SQLOpen("SELECT * FROM Region");
             while (Reader.Read())
             {
                 SQLRegion Region = new SQLRegion();
@@ -66,7 +66,7 @@ namespace Contracts.NET
         public void GetProviders()
         {
             Providers = new List<SQLProvider>();
-            SqlDataReader Reader = SQLServer.SQLExecute("SELECT * FROM SupplierDog");
+            SqlDataReader Reader = SQLServer.SQLOpen("SELECT * FROM SupplierDog");
             while (Reader.Read())
             {
                 SQLProvider Provider = new SQLProvider();
@@ -82,7 +82,7 @@ namespace Contracts.NET
         {
             double FilterSum = 0;
             Contracts = new List<SQLContract>();
-            SqlDataReader Reader = SQLServer.SQLExecute("SELECT * FROM ReestrDog");
+            SqlDataReader Reader = SQLServer.SQLOpen("SELECT * FROM ReestrDog");
             while (Reader.Read())
             {
                 SQLContract Contract = new SQLContract();
@@ -119,6 +119,12 @@ namespace Contracts.NET
             ContractsFilterCount = Contracts.Count;
             ContractsFilterSum = FilterSum;
             Reader.Close();
+        }
+
+        public void AddProvider(string Name)
+        {
+            SQLServer.SQLExecute("INSERT INTO SupplierDog (SUPPLIER) VALUES ('" + Name.ToString() + "')");
+            GetProviders();
         }
 
         public SQLTables()
