@@ -11,11 +11,9 @@ namespace Contracts.NET
 {
     public partial class MainForm : Form
     {
-        private SQLTables Tables;
-
         private void FillMainGrid()
         {
-            foreach (SQLContract Contract in Tables.Contracts)
+            foreach (SQLContract Contract in Core.Tables.Contracts)
             {
                 object[] Row = new object[9];
                 Row[MainGrid.Columns["ColumnId"].DisplayIndex] = Contract.Id;
@@ -42,17 +40,16 @@ namespace Contracts.NET
                 Row[MainGrid.Columns["ColumnProvider"].DisplayIndex] = Contract.Provider.Name;
                 MainGrid.Rows.Add(Row);
             }
-            Tables.GetStatistics();
-            StatusTotalCount.Text = Tables.ContractsTotalCount.ToString();
-            StatusTotalSum.Text = Tables.ContractsTotalSum.ToString();
-            StatusFilterCount.Text = Tables.ContractsFilterCount.ToString();
-            StatusFilterSum.Text = Tables.ContractsFilterSum.ToString();
+            Core.Tables.GetStatistics();
+            StatusTotalCount.Text = Core.Tables.ContractsTotalCount.ToString();
+            StatusTotalSum.Text = Core.Tables.ContractsTotalSum.ToString();
+            StatusFilterCount.Text = Core.Tables.ContractsFilterCount.ToString();
+            StatusFilterSum.Text = Core.Tables.ContractsFilterSum.ToString();
         }
 
         public MainForm()
         {
             InitializeComponent();
-            Tables = new SQLTables();
         }
 
         private void ExitMenuItemClick(object sender, EventArgs e)
@@ -67,8 +64,8 @@ namespace Contracts.NET
 
         private void ProvidersMenuItemClick(object sender, EventArgs e)
         {
-            ProvidersForm Form = new ProvidersForm(Tables);
-            Form.Show();
+            ProvidersForm Form = new ProvidersForm();
+            Form.ShowDialog();
         }
     }
 }
