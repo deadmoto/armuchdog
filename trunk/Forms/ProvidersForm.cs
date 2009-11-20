@@ -1,9 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Contracts.NET
@@ -12,6 +7,7 @@ namespace Contracts.NET
     {
         private void FillProvidersForm()
         {
+            ProvidersGrid.Rows.Clear();
             foreach (SQLProvider Provider in Core.Tables.Providers)
             {
                 object[] Row = new object[2];
@@ -26,14 +22,24 @@ namespace Contracts.NET
             InitializeComponent();
         }
 
+        private void ProvidersFormLoad(object sender, EventArgs e)
+        {
+            FillProvidersForm();
+        }
+
         private void CloseMenuItemClick(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void ProvidersFormLoad(object sender, EventArgs e)
+        private void InsertMenuItem_Click(object sender, EventArgs e)
         {
-            FillProvidersForm();
+            string Name = InputBox.Show(Text, "Введите наименование", string.Empty);
+            if (!(Name == string.Empty))
+            {
+                Core.Tables.AddProvider(Name);
+                FillProvidersForm();
+            }
         }
     }
 }
