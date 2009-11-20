@@ -42,6 +42,8 @@
     <Compile Include="Forms\ProvidersForm.Designer.cs">
       <DependentUpon>ProvidersForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InputBox.cs">
+    </Compile>
     <Compile Include="SQLServer.cs" />
     <Compile Include="Tables.cs" />
     <Compile Include="Structs.cs" />

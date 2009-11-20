@@ -10,11 +10,9 @@ namespace Contracts.NET
 {
     public partial class ProvidersForm : Form
     {
-        private SQLTables Tables;
-
         private void FillProvidersForm()
         {
-            foreach (SQLProvider Provider in Tables.Providers)
+            foreach (SQLProvider Provider in Core.Tables.Providers)
             {
                 object[] Row = new object[2];
                 Row[ProvidersGrid.Columns["ColumnId"].DisplayIndex] = Provider.Id.ToString();
@@ -23,9 +21,8 @@ namespace Contracts.NET
             }
         }
 
-        public ProvidersForm(SQLTables Tables)
+        public ProvidersForm()
         {
-            this.Tables = Tables;
             InitializeComponent();
         }
 
