@@ -71,7 +71,7 @@ namespace Contracts.NET
             ((System.ComponentModel.ISupportInitialize)(this.MainGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // ProvidersMenu
+            // MainMenu
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu,
@@ -79,7 +79,7 @@ namespace Contracts.NET
             this.EditorsMenu,
             this.отчётыToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
-            this.MainMenu.Name = "ProvidersMenu";
+            this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(807, 24);
             this.MainMenu.TabIndex = 1;
             this.MainMenu.Text = "ProvidersMenu";
@@ -274,10 +274,9 @@ namespace Contracts.NET
             // 
             this.MainGrid.AllowUserToAddRows = false;
             this.MainGrid.AllowUserToDeleteRows = false;
-            this.MainGrid.AllowUserToOrderColumns = true;
             this.MainGrid.AllowUserToResizeColumns = false;
             this.MainGrid.AllowUserToResizeRows = false;
-            this.MainGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            this.MainGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.MainGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.MainGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnRegion,
@@ -299,63 +298,72 @@ namespace Contracts.NET
             this.MainGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.MainGrid.Size = new System.Drawing.Size(807, 364);
             this.MainGrid.TabIndex = 4;
+            this.MainGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MainGrid_CellContentClick);
             // 
             // ColumnRegion
             // 
             this.ColumnRegion.HeaderText = "Район";
             this.ColumnRegion.Name = "ColumnRegion";
             this.ColumnRegion.ReadOnly = true;
-            this.ColumnRegion.Width = 5;
+            this.ColumnRegion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnRegion.Width = 44;
             // 
             // ColumnId
             // 
             this.ColumnId.HeaderText = "Внутренний номер";
             this.ColumnId.Name = "ColumnId";
             this.ColumnId.ReadOnly = true;
+            this.ColumnId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ColumnId.Visible = false;
-            this.ColumnId.Width = 5;
+            this.ColumnId.Width = 107;
             // 
             // ColumnRegNum
             // 
             this.ColumnRegNum.HeaderText = "Регистр. номер";
             this.ColumnRegNum.Name = "ColumnRegNum";
             this.ColumnRegNum.ReadOnly = true;
-            this.ColumnRegNum.Width = 5;
+            this.ColumnRegNum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnRegNum.Width = 83;
             // 
             // ColumnConNum
             // 
             this.ColumnConNum.HeaderText = "Номер договора";
             this.ColumnConNum.Name = "ColumnConNum";
             this.ColumnConNum.ReadOnly = true;
-            this.ColumnConNum.Width = 5;
+            this.ColumnConNum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnConNum.Width = 87;
             // 
             // ColumnRecDate
             // 
             this.ColumnRecDate.HeaderText = "Дата поступ.";
             this.ColumnRecDate.Name = "ColumnRecDate";
             this.ColumnRecDate.ReadOnly = true;
-            this.ColumnRecDate.Width = 5;
+            this.ColumnRecDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnRecDate.Width = 71;
             // 
             // ColumnRegDate
             // 
             this.ColumnRegDate.HeaderText = "Дата регистр.";
             this.ColumnRegDate.Name = "ColumnRegDate";
             this.ColumnRegDate.ReadOnly = true;
-            this.ColumnRegDate.Width = 5;
+            this.ColumnRegDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnRegDate.Width = 77;
             // 
             // ColumnConDate
             // 
             this.ColumnConDate.HeaderText = "Дата договора";
             this.ColumnConDate.Name = "ColumnConDate";
             this.ColumnConDate.ReadOnly = true;
-            this.ColumnConDate.Width = 5;
+            this.ColumnConDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnConDate.Width = 80;
             // 
             // ColumnExpDate
             // 
             this.ColumnExpDate.HeaderText = "Срок договора";
             this.ColumnExpDate.Name = "ColumnExpDate";
             this.ColumnExpDate.ReadOnly = true;
-            this.ColumnExpDate.Width = 5;
+            this.ColumnExpDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColumnExpDate.Width = 79;
             // 
             // ColumnProvider
             // 
@@ -363,13 +371,15 @@ namespace Contracts.NET
             this.ColumnProvider.HeaderText = "Поставщик";
             this.ColumnProvider.Name = "ColumnProvider";
             this.ColumnProvider.ReadOnly = true;
+            this.ColumnProvider.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Column10
             // 
             this.Column10.HeaderText = "Сумма";
             this.Column10.Name = "Column10";
             this.Column10.ReadOnly = true;
-            this.Column10.Width = 5;
+            this.Column10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column10.Width = 47;
             // 
             // MainForm
             // 
