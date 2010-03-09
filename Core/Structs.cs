@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Contracts.NET
 {
-    public struct SQLRegion
+    public struct Region
     {
         public short Id;
         public string Name;
@@ -23,7 +23,7 @@ namespace Contracts.NET
         public string ConNum;
         public DateTime RegDate;
         public DateTime RecDate;
-        public SQLRegion Region;
+        public Region Region;
         public DateTime ConDate;
         public DateTime ExpDate;
         public SQLProvider Provider;

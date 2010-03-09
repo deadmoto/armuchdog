@@ -6,23 +6,23 @@ namespace Contracts.NET
     public class SQLTables
     {
         public List<SQLContract> Contracts;
-        public List<SQLRegion> Regions;
+        public List<Region> Regions;
         public List<SQLProvider> Providers;
         public int ContractsTotalCount;
         public int ContractsFilterCount;
         public double ContractsTotalSum;
         public double ContractsFilterSum;
 
-        private SQLRegion FindRegion(short Id)
+        private Region FindRegion(short Id)
         {
-            foreach (SQLRegion Region in Regions)
+            foreach (Region Region in Regions)
             {
                 if (Region.Id == Id)
                 {
                     return Region;
                 }
             }
-            return new SQLRegion();
+            return new Region();
         }
 
         private SQLProvider FindProvider(int Id)
@@ -39,22 +39,22 @@ namespace Contracts.NET
 
         public void GetStatistics()
         {
-            SqlDataReader Reader = SQLServer.SQLOpen("SELECT Count(REGN) as ContractsTotalCount FROM ReestrDog");
+            SqlDataReader Reader = Connection.OpenSQL("SELECT Count(REGN) as ContractsTotalCount FROM ReestrDog");
             Reader.Read();
             ContractsTotalCount = Reader.GetInt32(Reader.GetOrdinal("ContractsTotalCount"));
             Reader.Close();
-            Reader = SQLServer.SQLOpen("SELECT SUM(price) AS ContractsTotalSum FROM subcontract");
+            Reader = Connection.OpenSQL("SELECT SUM(price) AS ContractsTotalSum FROM subcontract");
             Reader.Read();
             ContractsTotalSum = Reader.GetDouble(Reader.GetOrdinal("ContractsTotalSum"));
         }
 
         public void GetRegions()
         {
-            Regions = new List<SQLRegion>();
-            SqlDataReader Reader = SQLServer.SQLOpen("SELECT * FROM Region");
+            Regions = new List<Region>();
+            SqlDataReader Reader = Connection.OpenSQL("SELECT * FROM Region");
             while (Reader.Read())
             {
-                SQLRegion Region = new SQLRegion();
+                Region Region = new Region();
                 Region.Id = Reader.GetByte(Reader.GetOrdinal("FLDID"));
                 Region.Name = Reader.GetString(Reader.GetOrdinal("FLDNAME")).Trim();
                 Regions.Add(Region);
@@ -66,7 +66,7 @@ namespace Contracts.NET
         public void GetProviders()
         {
             Providers = new List<SQLProvider>();
-            SqlDataReader Reader = SQLServer.SQLOpen("SELECT * FROM SupplierDog");
+            SqlDataReader Reader = Connection.OpenSQL("SELECT * FROM SupplierDog");
             while (Reader.Read())
             {
                 SQLProvider Provider = new SQLProvider();
@@ -82,7 +82,7 @@ namespace Contracts.NET
         {
             double FilterSum = 0;
             Contracts = new List<SQLContract>();
-            SqlDataReader Reader = SQLServer.SQLOpen("SELECT * FROM ReestrDog");
+            SqlDataReader Reader = Connection.OpenSQL("SELECT * FROM ReestrDog");
             while (Reader.Read())
             {
                 SQLContract Contract = new SQLContract();
@@ -123,7 +123,7 @@ namespace Contracts.NET
 
         public void AddProvider(string Name)
         {
-            SQLServer.SQLExecute("INSERT INTO SupplierDog (SUPPLIER) VALUES ('" + Name.ToString() + "')");
+            Connection.ExecSQL("INSERT INTO SupplierDog (SUPPLIER) VALUES ('" + Name.ToString() + "')");
             GetProviders();
         }
 
