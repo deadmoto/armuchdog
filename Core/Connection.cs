@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 namespace Contracts.NET
 {
     /// <summary>
-    /// Provides connection to SQL Server
+    /// Provides connection to Query Server
     /// </summary>
     static class Connection
     {
@@ -13,7 +13,7 @@ namespace Contracts.NET
         private static string InitialCatalog = "Contracts";
 
         /// <summary>
-        /// Returns connection string to SQL Server
+        /// Returns connection string to Query Server
         /// </summary>
         private static string ConnectionString
         {
@@ -28,19 +28,19 @@ namespace Contracts.NET
             }
         }
 
-        public static void ExecSQL(string SQLText)
+        public static void ExecSQL(string Query)
         {
-            SqlConnection SQLConnection = new SqlConnection(ConnectionString);
-            SQLConnection.Open();
-            SqlCommand SQLCommand = new SqlCommand(SQLText, SQLConnection);
+            SqlConnection Connection = new SqlConnection(ConnectionString);
+            Connection.Open();
+            SqlCommand SQLCommand = new SqlCommand(Query, Connection);
             SQLCommand.ExecuteNonQuery();
         }
 
-        public static SqlDataReader OpenSQL(string SQLText)
+        public static SqlDataReader OpenSQL(string Query)
         {
-            SqlConnection SQLConnection = new SqlConnection(ConnectionString);
-            SQLConnection.Open();
-            SqlCommand SQLCommand = new SqlCommand(SQLText, SQLConnection);
+            SqlConnection Connection = new SqlConnection(ConnectionString);
+            Connection.Open();
+            SqlCommand SQLCommand = new SqlCommand(Query, Connection);
             return SQLCommand.ExecuteReader();
         }
     }
