@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Contracts.NET
 {
-    static class Core
+    static class Program
     {
         public static SQLTables Tables;
 

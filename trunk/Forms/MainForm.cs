@@ -7,7 +7,7 @@ namespace Contracts.NET
     {
         private void FillMainGrid()
         {
-            foreach (SQLContract Contract in Core.Tables.Contracts)
+            foreach (SQLContract Contract in Program.Tables.Contracts)
             {
                 object[] Row = new object[9];
                 Row[MainGrid.Columns["ColumnId"].DisplayIndex] = Contract.Id;
@@ -34,11 +34,11 @@ namespace Contracts.NET
                 Row[MainGrid.Columns["ColumnProvider"].DisplayIndex] = Contract.Provider.Name;
                 MainGrid.Rows.Add(Row);
             }
-            Core.Tables.GetStatistics();
-            StatusTotalCount.Text = Core.Tables.ContractsTotalCount.ToString();
-            StatusTotalSum.Text = Core.Tables.ContractsTotalSum.ToString();
-            StatusFilterCount.Text = Core.Tables.ContractsFilterCount.ToString();
-            StatusFilterSum.Text = Core.Tables.ContractsFilterSum.ToString();
+            Program.Tables.GetStatistics();
+            StatusTotalCount.Text = Program.Tables.ContractsTotalCount.ToString();
+            StatusTotalSum.Text = Program.Tables.ContractsTotalSum.ToString();
+            StatusFilterCount.Text = Program.Tables.ContractsFilterCount.ToString();
+            StatusFilterSum.Text = Program.Tables.ContractsFilterSum.ToString();
         }
 
         public MainForm()
