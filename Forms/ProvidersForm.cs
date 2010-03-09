@@ -8,7 +8,7 @@ namespace Contracts.NET
         private void FillProvidersForm()
         {
             ProvidersGrid.Rows.Clear();
-            foreach (SQLProvider Provider in Core.Tables.Providers)
+            foreach (SQLProvider Provider in Program.Tables.Providers)
             {
                 object[] Row = new object[2];
                 Row[ProvidersGrid.Columns["ColumnId"].DisplayIndex] = Provider.Id.ToString();
@@ -37,7 +37,7 @@ namespace Contracts.NET
             string Name = InputBox.Show(Text, "Введите наименование", string.Empty);
             if (!(Name == string.Empty))
             {
-                Core.Tables.AddProvider(Name);
+                Program.Tables.AddProvider(Name);
                 FillProvidersForm();
             }
         }

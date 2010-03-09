@@ -29,6 +29,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <StartupObject>Contracts.NET.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,7 +63,7 @@
     <Compile Include="Forms\ProvidersForm.Designer.cs">
       <DependentUpon>ProvidersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="InputBox.cs">
+    <Compile Include="Forms\InputBox.cs">
     </Compile>
     <Compile Include="Core\SQLServer.cs" />
     <Compile Include="Core\Tables.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core.cs" />
+    <Compile Include="Program.cs" />
     <EmbeddedResource Include="Forms\ProvidersForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProvidersForm.cs</DependentUpon>
