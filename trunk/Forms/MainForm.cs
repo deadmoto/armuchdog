@@ -1,10 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Data.OleDb;
 using System.Windows.Forms;
 
 namespace Contracts.NET
@@ -66,6 +60,11 @@ namespace Contracts.NET
         {
             ProvidersForm Form = new ProvidersForm();
             Form.ShowDialog();
+        }
+
+        private void MainGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
