@@ -3,21 +3,21 @@ using System.Windows.Forms;
 
 namespace Contracts.NET
 {
-    public partial class ProvidersForm : Form
+    public partial class SupplierForm : Form
     {
         private void FillProvidersForm()
         {
-            ProvidersGrid.Rows.Clear();
-            foreach (SQLProvider Provider in Program.Tables.Providers)
+            SupplierGrid.Rows.Clear();
+            foreach (Provider Provider in Program.Tables.Providers)
             {
                 object[] Row = new object[2];
-                Row[ProvidersGrid.Columns["ColumnId"].DisplayIndex] = Provider.Id.ToString();
-                Row[ProvidersGrid.Columns["ColumnName"].DisplayIndex] = Provider.Name.ToString();
-                ProvidersGrid.Rows.Add(Row);
+                Row[0] = Provider.Id.ToString();
+                Row[1] = Provider.Name.ToString();
+                SupplierGrid.Rows.Add(Row);
             }
         }
 
-        public ProvidersForm()
+        public SupplierForm()
         {
             InitializeComponent();
         }
@@ -25,11 +25,6 @@ namespace Contracts.NET
         private void ProvidersFormLoad(object sender, EventArgs e)
         {
             FillProvidersForm();
-        }
-
-        private void CloseMenuItemClick(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void InsertMenuItem_Click(object sender, EventArgs e)
@@ -40,6 +35,11 @@ namespace Contracts.NET
                 Program.Tables.AddProvider(Name);
                 FillProvidersForm();
             }
+        }
+
+        private void CloseMenuItemClick(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

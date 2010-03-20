@@ -57,11 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\ProvidersForm.cs">
+    <Compile Include="Core\Database.cs" />
+    <Compile Include="Forms\SupplierForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ProvidersForm.Designer.cs">
-      <DependentUpon>ProvidersForm.cs</DependentUpon>
+    <Compile Include="Forms\SupplierForm.Designer.cs">
+      <DependentUpon>SupplierForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InputBox.cs">
     </Compile>
@@ -75,9 +76,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <EmbeddedResource Include="Forms\ProvidersForm.resx">
+    <EmbeddedResource Include="Forms\SupplierForm.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>ProvidersForm.cs</DependentUpon>
+      <DependentUpon>SupplierForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>

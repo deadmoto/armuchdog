@@ -269,6 +269,7 @@ namespace Contracts.NET
             this.FilterPanel.Name = "FilterPanel";
             this.FilterPanel.Size = new System.Drawing.Size(807, 50);
             this.FilterPanel.TabIndex = 3;
+            this.FilterPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.FilterPanel_Paint);
             // 
             // MainGrid
             // 
@@ -298,7 +299,6 @@ namespace Contracts.NET
             this.MainGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.MainGrid.Size = new System.Drawing.Size(807, 364);
             this.MainGrid.TabIndex = 4;
-            this.MainGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MainGrid_CellContentClick);
             // 
             // ColumnRegion
             // 

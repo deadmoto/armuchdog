@@ -5,36 +5,23 @@ namespace Contracts.NET
 {
     public class SQLTables
     {
-        public List<SQLContract> Contracts;
-        public List<Region> Regions;
-        public List<SQLProvider> Providers;
+        public List<Contract> Contracts;
+        public List<Provider> Providers;
         public int ContractsTotalCount;
         public int ContractsFilterCount;
         public double ContractsTotalSum;
         public double ContractsFilterSum;
 
-        private Region FindRegion(short Id)
+        private Provider FindProvider(int Id)
         {
-            foreach (Region Region in Regions)
-            {
-                if (Region.Id == Id)
-                {
-                    return Region;
-                }
-            }
-            return new Region();
-        }
-
-        private SQLProvider FindProvider(int Id)
-        {
-            foreach (SQLProvider Provider in Providers)
+            foreach (Provider Provider in Providers)
             {
                 if (Provider.Id == Id)
                 {
                     return Provider;
                 }
             }
-            return new SQLProvider();
+            return new Provider();
         }
 
         public void GetStatistics()
@@ -48,28 +35,13 @@ namespace Contracts.NET
             ContractsTotalSum = Reader.GetDouble(Reader.GetOrdinal("ContractsTotalSum"));
         }
 
-        public void GetRegions()
-        {
-            Regions = new List<Region>();
-            SqlDataReader Reader = Connection.OpenSQL("SELECT * FROM Region");
-            while (Reader.Read())
-            {
-                Region Region = new Region();
-                Region.Id = Reader.GetByte(Reader.GetOrdinal("FLDID"));
-                Region.Name = Reader.GetString(Reader.GetOrdinal("FLDNAME")).Trim();
-                Regions.Add(Region);
-            }
-            Reader.Close();
-            Reader.Dispose();
-        }
-
         public void GetProviders()
         {
-            Providers = new List<SQLProvider>();
+            Providers = new List<Provider>();
             SqlDataReader Reader = Connection.OpenSQL("SELECT * FROM SupplierDog");
             while (Reader.Read())
             {
-                SQLProvider Provider = new SQLProvider();
+                Provider Provider = new Provider();
                 Provider.Id = Reader.GetInt32(Reader.GetOrdinal("ID_SUPPLIER"));
                 Provider.Name = Reader.GetString(Reader.GetOrdinal("SUPPLIER")).Trim();
                 Providers.Add(Provider);
@@ -81,11 +53,11 @@ namespace Contracts.NET
         public void GetContracts()
         {
             double FilterSum = 0;
-            Contracts = new List<SQLContract>();
+            Contracts = new List<Contract>();
             SqlDataReader Reader = Connection.OpenSQL("SELECT * FROM ReestrDog");
             while (Reader.Read())
             {
-                SQLContract Contract = new SQLContract();
+                Contract Contract = new Contract();
                 Contract.Id = Reader.GetInt64(Reader.GetOrdinal("REGN"));
                 Contract.RegNum = Reader.GetString(Reader.GetOrdinal("registration"));
                 Contract.ConNum = Reader.GetString(Reader.GetOrdinal("N_DOG"));
@@ -105,7 +77,7 @@ namespace Contracts.NET
                 {
                     Contract.RegDate = Reader.GetDateTime(Reader.GetOrdinal("DATA_REG"));
                 }
-                Contract.Region = FindRegion(Reader.GetByte(Reader.GetOrdinal("FLDID")));
+                Contract.Region = Reader.GetByte(Reader.GetOrdinal("FLDID"));
                 if (!Reader.IsDBNull(Reader.GetOrdinal("ID_SUPPLIER")))
                 {
                     Contract.Provider = FindProvider(Reader.GetInt32(Reader.GetOrdinal("ID_SUPPLIER")));
@@ -130,7 +102,6 @@ namespace Contracts.NET
         public SQLTables()
         {
             GetStatistics();
-            GetRegions();
             GetProviders();
             GetContracts();
         }
