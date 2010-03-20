@@ -7,7 +7,7 @@ namespace Contracts.NET
     {
         private void FillMainGrid()
         {
-            foreach (SQLContract Contract in Program.Tables.Contracts)
+            foreach (Contract Contract in Program.Tables.Contracts)
             {
                 object[] Row = new object[9];
                 Row[MainGrid.Columns["ColumnId"].DisplayIndex] = Contract.Id;
@@ -30,7 +30,7 @@ namespace Contracts.NET
                     Row[MainGrid.Columns["ColumnExpDate"].DisplayIndex] = Contract.ExpDate.ToShortDateString();
                 }
                 Row[MainGrid.Columns["ColumnConDate"].DisplayIndex] = Contract.ConDate.ToShortDateString();
-                Row[MainGrid.Columns["ColumnRegion"].DisplayIndex] = Contract.Region.Name;
+                Row[MainGrid.Columns["ColumnRegion"].DisplayIndex] = Database.RegionList[Contract.Region].Name;
                 Row[MainGrid.Columns["ColumnProvider"].DisplayIndex] = Contract.Provider.Name;
                 MainGrid.Rows.Add(Row);
             }
@@ -58,13 +58,13 @@ namespace Contracts.NET
 
         private void ProvidersMenuItemClick(object sender, EventArgs e)
         {
-            ProvidersForm Form = new ProvidersForm();
+            SupplierForm Form = new SupplierForm();
             Form.ShowDialog();
         }
 
-        private void MainGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void FilterPanel_Paint(object sender, PaintEventArgs e)
         {
-
+            Program.Tables = new SQLTables();
         }
     }
 }

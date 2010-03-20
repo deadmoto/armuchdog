@@ -9,7 +9,7 @@ namespace Contracts.NET
     {
         private static string DataSource = "(local)";
         private static string UserID = "sa";
-        private static string Password = "5208";
+        private static string Password = "sa";
         private static string InitialCatalog = "Contracts";
 
         /// <summary>
