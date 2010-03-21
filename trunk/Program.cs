@@ -1,16 +1,18 @@
 using System;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Contracts.NET
 {
     static class Program
     {
-        public static SQLTables Tables;
-
         [STAThread]
         static void Main()
         {
-            Tables = new SQLTables();
+            Branch.Retrieve();
+            Supplier.Retrieve();
+            Contract.Retrieve();
+            Detail.Retrieve();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
