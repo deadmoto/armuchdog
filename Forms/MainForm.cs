@@ -7,38 +7,26 @@ namespace Contracts.NET
     {
         private void FillMainGrid()
         {
-            foreach (Contract Contract in Program.Tables.Contracts)
+            foreach (ContractData contract in Contract.ContractList)
             {
-                object[] Row = new object[9];
-                Row[MainGrid.Columns["ColumnId"].DisplayIndex] = Contract.Id;
-                Row[MainGrid.Columns["ColumnRegNum"].DisplayIndex] = Contract.RegNum;
-                Row[MainGrid.Columns["ColumnConNum"].DisplayIndex] = Contract.ConNum;
-                if (!(Contract.RecDate == DateTime.MinValue))
-                {
-                    Row[MainGrid.Columns["ColumnRecDate"].DisplayIndex] = Contract.RecDate.ToShortDateString();
-                }
-                if (!(Contract.RegDate == DateTime.MinValue))
-                {
-                    Row[MainGrid.Columns["ColumnRegDate"].DisplayIndex] = Contract.RegDate.ToShortDateString();
-                }
-                if (!(Contract.ConDate == DateTime.MinValue))
-                {
-                    Row[MainGrid.Columns["ColumnConDate"].DisplayIndex] = Contract.ConDate.ToShortDateString();
-                }
-                if (!(Contract.ExpDate == DateTime.MinValue))
-                {
-                    Row[MainGrid.Columns["ColumnExpDate"].DisplayIndex] = Contract.ExpDate.ToShortDateString();
-                }
-                Row[MainGrid.Columns["ColumnConDate"].DisplayIndex] = Contract.ConDate.ToShortDateString();
-                Row[MainGrid.Columns["ColumnRegion"].DisplayIndex] = Database.RegionList[Contract.Region].Name;
-                Row[MainGrid.Columns["ColumnProvider"].DisplayIndex] = Contract.Provider.Name;
+                object[] Row = new object[10];
+                Row[0] = contract.Branch.Name;
+                Row[1] = contract.Id;
+                Row[2] = contract.RegistrationNumber;
+                Row[3] = contract.ContractNumber;
+                if (!(contract.RecDate == DateTime.MinValue)) { Row[4] = contract.RecDate.ToShortDateString(); }
+                if (!(contract.RegDate == DateTime.MinValue)) { Row[5] = contract.RegDate.ToShortDateString(); }
+                if (!(contract.ConDate == DateTime.MinValue)) { Row[6] = contract.ConDate.ToShortDateString(); }
+                if (!(contract.ExpDate == DateTime.MinValue)) { Row[7] = contract.ExpDate.ToShortDateString(); }
+                Row[8] = contract.Supplier.Name;
+                Row[9] = contract.Sum;
                 MainGrid.Rows.Add(Row);
             }
-            Program.Tables.GetStatistics();
-            StatusTotalCount.Text = Program.Tables.ContractsTotalCount.ToString();
-            StatusTotalSum.Text = Program.Tables.ContractsTotalSum.ToString();
-            StatusFilterCount.Text = Program.Tables.ContractsFilterCount.ToString();
-            StatusFilterSum.Text = Program.Tables.ContractsFilterSum.ToString();
+            //Program.Tables.GetStatistics();
+            StatusTotalCount.Text = Contract.ContractList.Count.ToString();
+            //StatusTotalSum.Text = Program.Tables.ContractsTotalSum.ToString();
+            //StatusFilterCount.Text = Program.Tables.ContractsFilterCount.ToString();
+            //StatusFilterSum.Text = Program.Tables.ContractsFilterSum.ToString();
         }
 
         public MainForm()
@@ -60,11 +48,6 @@ namespace Contracts.NET
         {
             SupplierForm Form = new SupplierForm();
             Form.ShowDialog();
-        }
-
-        private void FilterPanel_Paint(object sender, PaintEventArgs e)
-        {
-            Program.Tables = new SQLTables();
         }
     }
 }

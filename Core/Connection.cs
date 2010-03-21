@@ -28,12 +28,12 @@ namespace Contracts.NET
             }
         }
 
-        public static void ExecSQL(string Query)
+        public static SqlCommand GetCommand(string Query)
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
             Connection.Open();
-            SqlCommand SQLCommand = new SqlCommand(Query, Connection);
-            SQLCommand.ExecuteNonQuery();
+            SqlCommand Command = new SqlCommand(Query, Connection);
+            return Command;
         }
 
         public static SqlDataReader OpenSQL(string Query)

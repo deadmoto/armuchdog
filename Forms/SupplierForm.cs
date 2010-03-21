@@ -1,30 +1,31 @@
 using System;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Contracts.NET
 {
     public partial class SupplierForm : Form
     {
-        private void FillProvidersForm()
-        {
-            SupplierGrid.Rows.Clear();
-            foreach (Provider Provider in Program.Tables.Providers)
-            {
-                object[] Row = new object[2];
-                Row[0] = Provider.Id.ToString();
-                Row[1] = Provider.Name.ToString();
-                SupplierGrid.Rows.Add(Row);
-            }
-        }
-
         public SupplierForm()
         {
             InitializeComponent();
         }
 
-        private void ProvidersFormLoad(object sender, EventArgs e)
+        private void SupplierFromFill()
         {
-            FillProvidersForm();
+            SupplierGrid.Rows.Clear();
+            foreach (SupplierData supplier in Supplier.SupplierList)
+            {
+                object[] Row = new object[2];
+                Row[0] = supplier.Id.ToString();
+                Row[1] = supplier.Name.ToString();
+                SupplierGrid.Rows.Add(Row);
+            }
+        }
+
+        private void SupplierFormLoad(object sender, EventArgs e)
+        {
+            SupplierFromFill();
         }
 
         private void InsertMenuItem_Click(object sender, EventArgs e)
@@ -32,8 +33,7 @@ namespace Contracts.NET
             string Name = InputBox.Show(Text, "Введите наименование", string.Empty);
             if (!(Name == string.Empty))
             {
-                Program.Tables.AddProvider(Name);
-                FillProvidersForm();
+                SupplierFromFill();
             }
         }
 

@@ -117,12 +117,13 @@ namespace Contracts.NET
             this.ClientSize = new System.Drawing.Size(624, 442);
             this.Controls.Add(this.SupplierGrid);
             this.Controls.Add(this.SupplierMenu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SupplierForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справочник поставщиков";
-            this.Load += new System.EventHandler(this.ProvidersFormLoad);
+            this.Load += new System.EventHandler(this.SupplierFormLoad);
             this.SupplierMenu.ResumeLayout(false);
             this.SupplierMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SupplierGrid)).EndInit();

@@ -57,7 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Database.cs" />
+    <Compile Include="Core\Branch.cs" />
+    <Compile Include="Core\Contract.cs" />
+    <Compile Include="Core\Detail.cs" />
+    <Compile Include="Core\Supplier.cs" />
     <Compile Include="Forms\SupplierForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,8 +70,6 @@
     <Compile Include="Forms\InputBox.cs">
     </Compile>
     <Compile Include="Core\Connection.cs" />
-    <Compile Include="Core\Tables.cs" />
-    <Compile Include="Core\Structs.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
