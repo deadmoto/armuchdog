@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace Contracts.NET
 {
     /// <summary>
-    /// Represents contract data
+    /// Represents Item data
     /// </summary>
     public struct ContractData
     {
@@ -18,26 +19,59 @@ namespace Contracts.NET
         public DateTime ConDate;
         public DateTime ExpDate;
         public SupplierData Supplier;
-        public float Sum;
+        public List<DetailData> DetailList;
+
+        /// <summary>
+        /// Returns total price of Item 
+        /// </summary>
+        public double Price()
+        {
+            double Result = new double();
+            foreach (DetailData Detail in DetailList) { Result += Detail.Price; }
+            return Result;
+        }
+
+        /// <summary>
+        /// Returns Item attributes as object array
+        /// </summary>
+        public object[] ToArray()
+        {
+            object[] Result = new object[10];
+            Result[0] = Branch.Name;
+            Result[1] = Id;
+            Result[2] = RegistrationNumber;
+            Result[3] = ContractNumber;
+            if (!(RecDate == DateTime.MinValue)) { Result[4] = RecDate.ToShortDateString(); }
+            if (!(RegDate == DateTime.MinValue)) { Result[5] = RegDate.ToShortDateString(); }
+            if (!(ConDate == DateTime.MinValue)) { Result[6] = ConDate.ToShortDateString(); }
+            if (!(ExpDate == DateTime.MinValue)) { Result[7] = ExpDate.ToShortDateString(); }
+            Result[8] = Supplier.Name;
+            Result[9] = Price();
+            return Result;
+        }
     }
 
     /// <summary>
-    /// Provides access to contract list
+    /// Provides access to Item list
     /// </summary>
     static class Contract
     {
         public static List<ContractData> ContractList = new List<ContractData>();
 
         /// <summary>
-        /// Returns contract by Id
+        /// Returns Item by Id
         /// </summary>
         public static ContractData Find(long Id)
         {
             return ContractList.Find(delegate(ContractData Contract) { return Contract.Id == Id; });
         }
 
+        public static void Fill()
+        {
+        }
+
         /// <summary>
-        /// Retrieves contract list from database
+        /// Retrieves Item list from database
         /// </summary>
         public static void Retrieve()
         {
@@ -71,6 +105,7 @@ namespace Contracts.NET
                 {
                     Contract.Supplier = Supplier.Find(Reader.GetInt32(Reader.GetOrdinal("ID_SUPPLIER")));
                 }
+                Contract.DetailList = Detail.FindAll(Contract.Id);
                 ContractList.Add(Contract);
             }
         }

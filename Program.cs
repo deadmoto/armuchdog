@@ -11,8 +11,8 @@ namespace Contracts.NET
         {
             Branch.Retrieve();
             Supplier.Retrieve();
-            Contract.Retrieve();
             Detail.Retrieve();
+            Contract.Retrieve();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
