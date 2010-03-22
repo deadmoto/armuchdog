@@ -5,25 +5,33 @@ using System.Data.SqlClient;
 namespace Contracts.NET
 {
     /// <summary>
-    /// Represents contract detail data
+    /// Represents Item detail data
     /// </summary>
     public struct DetailData
     {
-       public long Id;
-       public string Classification;
-       public string Opcode;
-       public DateTime SubDate;
-       public double Price;
-       public bool Report;
-       public string Comment;
+        public long Id;
+        public string Classification;
+        public string Opcode;
+        public DateTime SubDate;
+        public double Price;
+        public bool Report;
+        public string Comment;
     }
 
     /// <summary>
-    /// Provides contract detail list
+    /// Provides Item detail list
     /// </summary>
     static class Detail
     {
         public static List<DetailData> DetailList = new List<DetailData>();
+
+        /// <summary>
+        /// Returns Item detail list by Id
+        /// </summary>
+        public static List<DetailData> FindAll(long Id)
+        {
+            return DetailList.FindAll(delegate(DetailData Detail) { return Detail.Id == Id; });
+        }
 
         /// <summary>
         /// Retrieves contracts detail list from database

@@ -28,6 +28,8 @@ namespace Contracts.NET
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,7 +82,7 @@ namespace Contracts.NET
             this.îò÷¸òûToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(807, 24);
+            this.MainMenu.Size = new System.Drawing.Size(784, 24);
             this.MainMenu.TabIndex = 1;
             this.MainMenu.Text = "ProvidersMenu";
             // 
@@ -97,7 +99,6 @@ namespace Contracts.NET
             this.ExitMenuItem.Name = "ExitMenuItem";
             this.ExitMenuItem.Size = new System.Drawing.Size(108, 22);
             this.ExitMenuItem.Text = "Âûõîä";
-            this.ExitMenuItem.Click += new System.EventHandler(this.ExitMenuItemClick);
             // 
             // äîãîâîðToolStripMenuItem
             // 
@@ -149,7 +150,6 @@ namespace Contracts.NET
             this.ProvidersMenuItem.Name = "ProvidersMenuItem";
             this.ProvidersMenuItem.Size = new System.Drawing.Size(219, 22);
             this.ProvidersMenuItem.Text = "Ñïðàâî÷íèê ïîñòàâùèêîâ";
-            this.ProvidersMenuItem.Click += new System.EventHandler(this.ProvidersMenuItemClick);
             // 
             // ñïðàâî÷íèêÎÊÂÝÄToolStripMenuItem
             // 
@@ -209,9 +209,9 @@ namespace Contracts.NET
             this.StatusTotalSum,
             this.StatusFilterSumStatic,
             this.StatusFilterSum});
-            this.MainStatus.Location = new System.Drawing.Point(0, 438);
+            this.MainStatus.Location = new System.Drawing.Point(0, 540);
             this.MainStatus.Name = "MainStatus";
-            this.MainStatus.Size = new System.Drawing.Size(807, 22);
+            this.MainStatus.Size = new System.Drawing.Size(784, 22);
             this.MainStatus.TabIndex = 2;
             // 
             // StatusTotalCountStatic
@@ -267,7 +267,7 @@ namespace Contracts.NET
             this.FilterPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.FilterPanel.Location = new System.Drawing.Point(0, 24);
             this.FilterPanel.Name = "FilterPanel";
-            this.FilterPanel.Size = new System.Drawing.Size(807, 50);
+            this.FilterPanel.Size = new System.Drawing.Size(784, 50);
             this.FilterPanel.TabIndex = 3;
             // 
             // MainGrid
@@ -276,7 +276,8 @@ namespace Contracts.NET
             this.MainGrid.AllowUserToDeleteRows = false;
             this.MainGrid.AllowUserToResizeColumns = false;
             this.MainGrid.AllowUserToResizeRows = false;
-            this.MainGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.MainGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            this.MainGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.MainGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.MainGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnRegion,
@@ -296,7 +297,7 @@ namespace Contracts.NET
             this.MainGrid.ReadOnly = true;
             this.MainGrid.RowHeadersVisible = false;
             this.MainGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.MainGrid.Size = new System.Drawing.Size(807, 364);
+            this.MainGrid.Size = new System.Drawing.Size(784, 466);
             this.MainGrid.TabIndex = 4;
             // 
             // ColumnRegion
@@ -305,7 +306,7 @@ namespace Contracts.NET
             this.ColumnRegion.Name = "ColumnRegion";
             this.ColumnRegion.ReadOnly = true;
             this.ColumnRegion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnRegion.Width = 44;
+            this.ColumnRegion.Width = 5;
             // 
             // ColumnId
             // 
@@ -314,7 +315,7 @@ namespace Contracts.NET
             this.ColumnId.ReadOnly = true;
             this.ColumnId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ColumnId.Visible = false;
-            this.ColumnId.Width = 107;
+            this.ColumnId.Width = 5;
             // 
             // ColumnRegNum
             // 
@@ -322,7 +323,7 @@ namespace Contracts.NET
             this.ColumnRegNum.Name = "ColumnRegNum";
             this.ColumnRegNum.ReadOnly = true;
             this.ColumnRegNum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnRegNum.Width = 83;
+            this.ColumnRegNum.Width = 5;
             // 
             // ColumnConNum
             // 
@@ -330,7 +331,7 @@ namespace Contracts.NET
             this.ColumnConNum.Name = "ColumnConNum";
             this.ColumnConNum.ReadOnly = true;
             this.ColumnConNum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnConNum.Width = 87;
+            this.ColumnConNum.Width = 5;
             // 
             // ColumnRecDate
             // 
@@ -338,15 +339,15 @@ namespace Contracts.NET
             this.ColumnRecDate.Name = "ColumnRecDate";
             this.ColumnRecDate.ReadOnly = true;
             this.ColumnRecDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnRecDate.Width = 71;
+            this.ColumnRecDate.Width = 5;
             // 
             // ColumnRegDate
             // 
-            this.ColumnRegDate.HeaderText = "Äàòà ðåãèñòð.";
+            this.ColumnRegDate.HeaderText = "Äàòà ðåãèñò.";
             this.ColumnRegDate.Name = "ColumnRegDate";
             this.ColumnRegDate.ReadOnly = true;
             this.ColumnRegDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnRegDate.Width = 77;
+            this.ColumnRegDate.Width = 5;
             // 
             // ColumnConDate
             // 
@@ -354,7 +355,7 @@ namespace Contracts.NET
             this.ColumnConDate.Name = "ColumnConDate";
             this.ColumnConDate.ReadOnly = true;
             this.ColumnConDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnConDate.Width = 80;
+            this.ColumnConDate.Width = 5;
             // 
             // ColumnExpDate
             // 
@@ -362,11 +363,13 @@ namespace Contracts.NET
             this.ColumnExpDate.Name = "ColumnExpDate";
             this.ColumnExpDate.ReadOnly = true;
             this.ColumnExpDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColumnExpDate.Width = 79;
+            this.ColumnExpDate.Width = 5;
             // 
             // ColumnProvider
             // 
             this.ColumnProvider.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnProvider.DefaultCellStyle = dataGridViewCellStyle1;
             this.ColumnProvider.HeaderText = "Ïîñòàâùèê";
             this.ColumnProvider.Name = "ColumnProvider";
             this.ColumnProvider.ReadOnly = true;
@@ -374,17 +377,21 @@ namespace Contracts.NET
             // 
             // Column10
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Column10.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column10.HeaderText = "Ñóììà";
             this.Column10.Name = "Column10";
             this.Column10.ReadOnly = true;
             this.Column10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column10.Width = 47;
+            this.Column10.Width = 5;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 460);
+            this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.MainGrid);
             this.Controls.Add(this.FilterPanel);
             this.Controls.Add(this.MainStatus);
@@ -394,7 +401,6 @@ namespace Contracts.NET
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Contracts.NET";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.MainFormLoad);
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
             this.MainStatus.ResumeLayout(false);
