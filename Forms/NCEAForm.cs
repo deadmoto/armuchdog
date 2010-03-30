@@ -15,11 +15,11 @@ namespace Contracts.NET
         private void NCEAFormFill()
         {
             NCEAGrid.Rows.Clear();
-            foreach (NCEAData ncea in NCEA.NCEAList)
+            foreach (NCEAData Item in NCEA.NCEAList)
             {
                 object[] Row = new object[2];
-                Row[0] = ncea.Id.ToString();
-                Row[1] = ncea.Name.ToString();
+                Row[0] = Item.Id.ToString();
+                Row[1] = Item.Name.ToString();
                 NCEAGrid.Rows.Add(Row);
             }
         }
