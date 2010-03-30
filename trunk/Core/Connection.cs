@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 namespace Contracts.NET
 {
     /// <summary>
-    /// Provides connection to Query Server
+    /// Provides connection to SQL Server
     /// </summary>
     static class Connection
     {
@@ -13,7 +13,7 @@ namespace Contracts.NET
         private static string InitialCatalog = "Contracts";
 
         /// <summary>
-        /// Returns connection string to Query Server
+        /// Returns connection string to SQL Server
         /// </summary>
         private static string ConnectionString
         {

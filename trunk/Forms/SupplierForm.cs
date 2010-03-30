@@ -9,6 +9,7 @@ namespace Contracts.NET
         public SupplierForm()
         {
             InitializeComponent();
+            Load += new EventHandler(delegate { SupplierFromFill(); });
         }
 
         private void SupplierFromFill()
@@ -21,11 +22,6 @@ namespace Contracts.NET
                 Row[1] = supplier.Name.ToString();
                 SupplierGrid.Rows.Add(Row);
             }
-        }
-
-        private void SupplierFormLoad(object sender, EventArgs e)
-        {
-            SupplierFromFill();
         }
 
         private void InsertMenuItem_Click(object sender, EventArgs e)

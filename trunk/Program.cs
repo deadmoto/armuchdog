@@ -10,6 +10,7 @@ namespace Contracts.NET
         static void Main()
         {
             Branch.Retrieve();
+            NCEA.Retrieve();
             Supplier.Retrieve();
             Detail.Retrieve();
             Contract.Retrieve();

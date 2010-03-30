@@ -14,6 +14,7 @@ namespace Contracts.NET
             InitializeComponent();
             Load += new EventHandler(delegate { FillMainGrid(); });
             ProvidersMenuItem.Click += new EventHandler(delegate { new SupplierForm().ShowDialog(); });
+            ñïğàâî÷íèêÎÊÂİÄToolStripMenuItem.Click += new EventHandler(delegate { new NCEAForm().ShowDialog();});
             ExitMenuItem.Click += new EventHandler(delegate { Application.Exit(); });
         }
 
