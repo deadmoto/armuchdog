@@ -112,19 +112,20 @@ namespace Contracts.NET
             // äîáàâèòüToolStripMenuItem
             // 
             this.äîáàâèòüToolStripMenuItem.Name = "äîáàâèòüToolStripMenuItem";
-            this.äîáàâèòüToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.äîáàâèòüToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.äîáàâèòüToolStripMenuItem.Text = "Äîáàâèòü";
             // 
             // èçìåíèòüToolStripMenuItem
             // 
             this.èçìåíèòüToolStripMenuItem.Name = "èçìåíèòüToolStripMenuItem";
-            this.èçìåíèòüToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.èçìåíèòüToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.èçìåíèòüToolStripMenuItem.Text = "Èçìåíèòü";
+            this.èçìåíèòüToolStripMenuItem.Click += new System.EventHandler(this.èçìåíèòüToolStripMenuItem_Click);
             // 
             // óäàëèòüToolStripMenuItem
             // 
             this.óäàëèòüToolStripMenuItem.Name = "óäàëèòüToolStripMenuItem";
-            this.óäàëèòüToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.óäàëèòüToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.óäàëèòüToolStripMenuItem.Text = "Óäàëèòü";
             // 
             // EditorsMenu
