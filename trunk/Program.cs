@@ -11,6 +11,7 @@ namespace Contracts.NET
         {
             Branch.Retrieve();
             NCEA.Retrieve();
+            TCGO.Retrieve();
             Supplier.Retrieve();
             Detail.Retrieve();
             Contract.Retrieve();
