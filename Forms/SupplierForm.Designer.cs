@@ -28,6 +28,7 @@ namespace Contracts.NET
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.SupplierMenu = new System.Windows.Forms.MenuStrip();
             this.FileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +46,7 @@ namespace Contracts.NET
             this.FileMenuItem});
             this.SupplierMenu.Location = new System.Drawing.Point(0, 0);
             this.SupplierMenu.Name = "SupplierMenu";
-            this.SupplierMenu.Size = new System.Drawing.Size(624, 24);
+            this.SupplierMenu.Size = new System.Drawing.Size(634, 24);
             this.SupplierMenu.TabIndex = 0;
             // 
             // FileMenuItem
@@ -54,19 +55,19 @@ namespace Contracts.NET
             this.CreateMenuItem,
             this.CloseMenuItem});
             this.FileMenuItem.Name = "FileMenuItem";
-            this.FileMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.FileMenuItem.Size = new System.Drawing.Size(45, 20);
             this.FileMenuItem.Text = "Файл";
             // 
             // CreateMenuItem
             // 
             this.CreateMenuItem.Name = "CreateMenuItem";
-            this.CreateMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.CreateMenuItem.Size = new System.Drawing.Size(129, 22);
             this.CreateMenuItem.Text = "Создать";
             // 
             // CloseMenuItem
             // 
             this.CloseMenuItem.Name = "CloseMenuItem";
-            this.CloseMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.CloseMenuItem.Size = new System.Drawing.Size(129, 22);
             this.CloseMenuItem.Text = "Закрыть";
             this.CloseMenuItem.Click += new System.EventHandler(this.CloseMenuItemClick);
             // 
@@ -76,20 +77,27 @@ namespace Contracts.NET
             this.SupplierGrid.AllowUserToDeleteRows = false;
             this.SupplierGrid.AllowUserToResizeColumns = false;
             this.SupplierGrid.AllowUserToResizeRows = false;
-            this.SupplierGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.SupplierGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.SupplierGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SupplierGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnId,
             this.ColumnName});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SupplierGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.SupplierGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SupplierGrid.Location = new System.Drawing.Point(0, 24);
             this.SupplierGrid.MultiSelect = false;
             this.SupplierGrid.Name = "SupplierGrid";
             this.SupplierGrid.ReadOnly = true;
             this.SupplierGrid.RowHeadersVisible = false;
-            this.SupplierGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.SupplierGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.SupplierGrid.Size = new System.Drawing.Size(624, 418);
+            this.SupplierGrid.Size = new System.Drawing.Size(634, 431);
             this.SupplierGrid.TabIndex = 1;
             // 
             // ColumnId
@@ -114,7 +122,7 @@ namespace Contracts.NET
             // SupplierForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(624, 442);
+            this.ClientSize = new System.Drawing.Size(634, 455);
             this.Controls.Add(this.SupplierGrid);
             this.Controls.Add(this.SupplierMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -123,7 +131,6 @@ namespace Contracts.NET
             this.Name = "SupplierForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справочник поставщиков";
-            this.Load += new System.EventHandler(this.SupplierFormLoad);
             this.SupplierMenu.ResumeLayout(false);
             this.SupplierMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SupplierGrid)).EndInit();

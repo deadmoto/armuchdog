@@ -56,7 +56,6 @@ namespace Contracts.NET
             this.StatusTotalSum = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusFilterSumStatic = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusFilterSum = new System.Windows.Forms.ToolStripStatusLabel();
-            this.FilterPanel = new System.Windows.Forms.Panel();
             this.MainGrid = new System.Windows.Forms.DataGridView();
             this.ColumnRegion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,13 +90,13 @@ namespace Contracts.NET
             this.FileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExitMenuItem});
             this.FileMenu.Name = "FileMenu";
-            this.FileMenu.Size = new System.Drawing.Size(48, 20);
+            this.FileMenu.Size = new System.Drawing.Size(45, 20);
             this.FileMenu.Text = "Ôàéë";
             // 
             // ExitMenuItem
             // 
             this.ExitMenuItem.Name = "ExitMenuItem";
-            this.ExitMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.ExitMenuItem.Size = new System.Drawing.Size(118, 22);
             this.ExitMenuItem.Text = "Âûõîä";
             // 
             // äîãîâîğToolStripMenuItem
@@ -107,25 +106,25 @@ namespace Contracts.NET
             this.èçìåíèòüToolStripMenuItem,
             this.óäàëèòüToolStripMenuItem});
             this.äîãîâîğToolStripMenuItem.Name = "äîãîâîğToolStripMenuItem";
-            this.äîãîâîğToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.äîãîâîğToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.äîãîâîğToolStripMenuItem.Text = "Äîãîâîğà";
             // 
             // äîáàâèòüToolStripMenuItem
             // 
             this.äîáàâèòüToolStripMenuItem.Name = "äîáàâèòüToolStripMenuItem";
-            this.äîáàâèòüToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.äîáàâèòüToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.äîáàâèòüToolStripMenuItem.Text = "Äîáàâèòü";
             // 
             // èçìåíèòüToolStripMenuItem
             // 
             this.èçìåíèòüToolStripMenuItem.Name = "èçìåíèòüToolStripMenuItem";
-            this.èçìåíèòüToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.èçìåíèòüToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.èçìåíèòüToolStripMenuItem.Text = "Èçìåíèòü";
             // 
             // óäàëèòüToolStripMenuItem
             // 
             this.óäàëèòüToolStripMenuItem.Name = "óäàëèòüToolStripMenuItem";
-            this.óäàëèòüToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.óäàëèòüToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.óäàëèòüToolStripMenuItem.Text = "Óäàëèòü";
             // 
             // EditorsMenu
@@ -136,31 +135,31 @@ namespace Contracts.NET
             this.ñïğàâî÷íèêÎÊÂİÄToolStripMenuItem,
             this.ñïğàâî÷íèêÊÎÑÃÓToolStripMenuItem});
             this.EditorsMenu.Name = "EditorsMenu";
-            this.EditorsMenu.Size = new System.Drawing.Size(94, 20);
+            this.EditorsMenu.Size = new System.Drawing.Size(86, 20);
             this.EditorsMenu.Text = "Ñïğàâî÷íèêè";
             // 
             // ñïğàâî÷íèêĞàéîíîâToolStripMenuItem
             // 
             this.ñïğàâî÷íèêĞàéîíîâToolStripMenuItem.Name = "ñïğàâî÷íèêĞàéîíîâToolStripMenuItem";
-            this.ñïğàâî÷íèêĞàéîíîâToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ñïğàâî÷íèêĞàéîíîâToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.ñïğàâî÷íèêĞàéîíîâToolStripMenuItem.Text = "Ñïğàâî÷íèê ğàéîíîâ";
             // 
             // ProvidersMenuItem
             // 
             this.ProvidersMenuItem.Name = "ProvidersMenuItem";
-            this.ProvidersMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ProvidersMenuItem.Size = new System.Drawing.Size(217, 22);
             this.ProvidersMenuItem.Text = "Ñïğàâî÷íèê ïîñòàâùèêîâ";
             // 
             // ñïğàâî÷íèêÎÊÂİÄToolStripMenuItem
             // 
             this.ñïğàâî÷íèêÎÊÂİÄToolStripMenuItem.Name = "ñïğàâî÷íèêÎÊÂİÄToolStripMenuItem";
-            this.ñïğàâî÷íèêÎÊÂİÄToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ñïğàâî÷íèêÎÊÂİÄToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.ñïğàâî÷íèêÎÊÂİÄToolStripMenuItem.Text = "Ñïğàâî÷íèê ÎÊÂİÄ";
             // 
             // ñïğàâî÷íèêÊÎÑÃÓToolStripMenuItem
             // 
             this.ñïğàâî÷íèêÊÎÑÃÓToolStripMenuItem.Name = "ñïğàâî÷íèêÊÎÑÃÓToolStripMenuItem";
-            this.ñïğàâî÷íèêÊÎÑÃÓToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ñïğàâî÷íèêÊÎÑÃÓToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.ñïğàâî÷íèêÊÎÑÃÓToolStripMenuItem.Text = "Ñïğàâî÷íèê ÊÎÑÃÓ";
             // 
             // îò÷¸òûToolStripMenuItem
@@ -171,31 +170,31 @@ namespace Contracts.NET
             this.îò÷¸òÏîÊÎÑÃÓToolStripMenuItem,
             this.îò÷¸òÇàÊâàğòàëToolStripMenuItem});
             this.îò÷¸òûToolStripMenuItem.Name = "îò÷¸òûToolStripMenuItem";
-            this.îò÷¸òûToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.îò÷¸òûToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.îò÷¸òûToolStripMenuItem.Text = "Îò÷¸òû";
             // 
             // ñóììàğíûéToolStripMenuItem
             // 
             this.ñóììàğíûéToolStripMenuItem.Name = "ñóììàğíûéToolStripMenuItem";
-            this.ñóììàğíûéToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.ñóììàğíûéToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.ñóììàğíûéToolStripMenuItem.Text = "Ñóììàğíûé îò÷¸ò";
             // 
             // îò÷ToolStripMenuItem
             // 
             this.îò÷ToolStripMenuItem.Name = "îò÷ToolStripMenuItem";
-            this.îò÷ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.îò÷ToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.îò÷ToolStripMenuItem.Text = "Îò÷¸ò ïî ÎÊÂİÄ";
             // 
             // îò÷¸òÏîÊÎÑÃÓToolStripMenuItem
             // 
             this.îò÷¸òÏîÊÎÑÃÓToolStripMenuItem.Name = "îò÷¸òÏîÊÎÑÃÓToolStripMenuItem";
-            this.îò÷¸òÏîÊÎÑÃÓToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.îò÷¸òÏîÊÎÑÃÓToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.îò÷¸òÏîÊÎÑÃÓToolStripMenuItem.Text = "Îò÷¸ò ïî ÊÎÑÃÓ";
             // 
             // îò÷¸òÇàÊâàğòàëToolStripMenuItem
             // 
             this.îò÷¸òÇàÊâàğòàëToolStripMenuItem.Name = "îò÷¸òÇàÊâàğòàëToolStripMenuItem";
-            this.îò÷¸òÇàÊâàğòàëToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.îò÷¸òÇàÊâàğòàëToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.îò÷¸òÇàÊâàğòàëToolStripMenuItem.Text = "Îò÷¸ò çà êâàğòàë";
             // 
             // MainStatus
@@ -217,7 +216,7 @@ namespace Contracts.NET
             // StatusTotalCountStatic
             // 
             this.StatusTotalCountStatic.Name = "StatusTotalCountStatic";
-            this.StatusTotalCountStatic.Size = new System.Drawing.Size(102, 17);
+            this.StatusTotalCountStatic.Size = new System.Drawing.Size(96, 17);
             this.StatusTotalCountStatic.Text = "Âñåãî äîãîâîğîâ:";
             // 
             // StatusTotalCount
@@ -229,7 +228,7 @@ namespace Contracts.NET
             // StatusFilterCountStatic
             // 
             this.StatusFilterCountStatic.Name = "StatusFilterCountStatic";
-            this.StatusFilterCountStatic.Size = new System.Drawing.Size(67, 17);
+            this.StatusFilterCountStatic.Size = new System.Drawing.Size(64, 17);
             this.StatusFilterCountStatic.Text = "Â ôèëüòğå:";
             // 
             // StatusFilterCount
@@ -241,7 +240,7 @@ namespace Contracts.NET
             // StatusTotalSumStatic
             // 
             this.StatusTotalSumStatic.Name = "StatusTotalSumStatic";
-            this.StatusTotalSumStatic.Size = new System.Drawing.Size(88, 17);
+            this.StatusTotalSumStatic.Size = new System.Drawing.Size(78, 17);
             this.StatusTotalSumStatic.Text = "Îáùàÿ ñóììà:";
             // 
             // StatusTotalSum
@@ -253,7 +252,7 @@ namespace Contracts.NET
             // StatusFilterSumStatic
             // 
             this.StatusFilterSumStatic.Name = "StatusFilterSumStatic";
-            this.StatusFilterSumStatic.Size = new System.Drawing.Size(67, 17);
+            this.StatusFilterSumStatic.Size = new System.Drawing.Size(64, 17);
             this.StatusFilterSumStatic.Text = "Â ôèëüòğå:";
             // 
             // StatusFilterSum
@@ -261,14 +260,6 @@ namespace Contracts.NET
             this.StatusFilterSum.Name = "StatusFilterSum";
             this.StatusFilterSum.Size = new System.Drawing.Size(13, 17);
             this.StatusFilterSum.Text = "0";
-            // 
-            // FilterPanel
-            // 
-            this.FilterPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.FilterPanel.Location = new System.Drawing.Point(0, 24);
-            this.FilterPanel.Name = "FilterPanel";
-            this.FilterPanel.Size = new System.Drawing.Size(784, 50);
-            this.FilterPanel.TabIndex = 3;
             // 
             // MainGrid
             // 
@@ -291,13 +282,13 @@ namespace Contracts.NET
             this.ColumnProvider,
             this.Column10});
             this.MainGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainGrid.Location = new System.Drawing.Point(0, 74);
+            this.MainGrid.Location = new System.Drawing.Point(0, 24);
             this.MainGrid.MultiSelect = false;
             this.MainGrid.Name = "MainGrid";
             this.MainGrid.ReadOnly = true;
             this.MainGrid.RowHeadersVisible = false;
             this.MainGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.MainGrid.Size = new System.Drawing.Size(784, 466);
+            this.MainGrid.Size = new System.Drawing.Size(784, 516);
             this.MainGrid.TabIndex = 4;
             // 
             // ColumnRegion
@@ -393,7 +384,6 @@ namespace Contracts.NET
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.MainGrid);
-            this.Controls.Add(this.FilterPanel);
             this.Controls.Add(this.MainStatus);
             this.Controls.Add(this.MainMenu);
             this.MainMenuStrip = this.MainMenu;
@@ -425,7 +415,6 @@ namespace Contracts.NET
         private System.Windows.Forms.ToolStripStatusLabel StatusTotalSum;
         private System.Windows.Forms.ToolStripStatusLabel StatusFilterSumStatic;
         private System.Windows.Forms.ToolStripStatusLabel StatusFilterSum;
-        private System.Windows.Forms.Panel FilterPanel;
         private System.Windows.Forms.DataGridView MainGrid;
         private System.Windows.Forms.ToolStripMenuItem äîãîâîğToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem äîáàâèòüToolStripMenuItem;

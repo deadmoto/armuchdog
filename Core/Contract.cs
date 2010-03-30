@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
@@ -76,7 +75,7 @@ namespace Contracts.NET
         public static void Retrieve()
         {
             ContractList.Clear();
-            SqlCommand Command = Connection.GetCommand("SELECT * FROM ReestrDog");
+            SqlCommand Command = Connection.GetCommand("SELECT TOP 100 * FROM ReestrDog");
             SqlDataReader Reader = Command.ExecuteReader();
             while (Reader.Read())
             {
