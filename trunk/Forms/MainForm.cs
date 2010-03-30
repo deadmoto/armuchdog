@@ -25,5 +25,10 @@ namespace Contracts.NET
             foreach (ContractData Item in Contract.ContractList) { MainGrid.Rows.Add(Item.ToArray()); }
             StatusTotalCount.Text = Contract.ContractList.Count.ToString();
         }
+
+        private void èçìåíèòüToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ContractForm().ShowDialog(Contract.ContractList[0]);
+        }
     }
 }

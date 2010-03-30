@@ -8,6 +8,7 @@ namespace Contracts.NET
         public string Id;
         public string Name;
     }
+
     static class TCGO
     {
         public static List<TCGOData> TCGOList = new List<TCGOData>();

@@ -65,10 +65,6 @@ namespace Contracts.NET
             return ContractList.Find(delegate(ContractData Contract) { return Contract.Id == Id; });
         }
 
-        public static void Fill()
-        {
-        }
-
         /// <summary>
         /// Retrieves Item list from database
         /// </summary>
