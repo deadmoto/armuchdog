@@ -12,11 +12,11 @@ namespace Contracts.NET
         public long Id;
         public string RegistrationNumber;
         public string ContractNumber;
-        public DateTime RegDate;
-        public DateTime RecDate;
+        public DateTime Registered;
+        public DateTime Recieved;
         public BranchData Branch;
-        public DateTime ConDate;
-        public DateTime ExpDate;
+        public DateTime ValidFrom;
+        public DateTime ValidTo;
         public SupplierData Supplier;
         public List<DetailData> DetailList;
 
@@ -40,10 +40,10 @@ namespace Contracts.NET
             Result[1] = Id;
             Result[2] = RegistrationNumber;
             Result[3] = ContractNumber;
-            if (!(RecDate == DateTime.MinValue)) { Result[4] = RecDate.ToShortDateString(); }
-            if (!(RegDate == DateTime.MinValue)) { Result[5] = RegDate.ToShortDateString(); }
-            if (!(ConDate == DateTime.MinValue)) { Result[6] = ConDate.ToShortDateString(); }
-            if (!(ExpDate == DateTime.MinValue)) { Result[7] = ExpDate.ToShortDateString(); }
+            if (!(Recieved == DateTime.MinValue)) { Result[4] = Recieved.ToShortDateString(); }
+            if (!(Registered == DateTime.MinValue)) { Result[5] = Registered.ToShortDateString(); }
+            if (!(ValidFrom == DateTime.MinValue)) { Result[6] = ValidFrom.ToShortDateString(); }
+            if (!(ValidTo == DateTime.MinValue)) { Result[7] = ValidTo.ToShortDateString(); }
             Result[8] = Supplier.Name;
             Result[9] = Price();
             return Result;
@@ -77,23 +77,23 @@ namespace Contracts.NET
             {
                 ContractData Contract = new ContractData();
                 Contract.Id = Reader.GetInt64(Reader.GetOrdinal("REGN"));
-                Contract.RegistrationNumber = Reader.GetString(Reader.GetOrdinal("registration"));
-                Contract.ContractNumber = Reader.GetString(Reader.GetOrdinal("N_DOG"));
+                Contract.RegistrationNumber = Reader.GetString(Reader.GetOrdinal("registration")).Trim();
+                Contract.ContractNumber = Reader.GetString(Reader.GetOrdinal("N_DOG")).Trim();
                 if (!Reader.IsDBNull(Reader.GetOrdinal("DATA_DOG")))
                 {
-                    Contract.ConDate = Reader.GetDateTime(Reader.GetOrdinal("DATA_DOG"));
+                    Contract.ValidFrom = Reader.GetDateTime(Reader.GetOrdinal("DATA_DOG"));
                 }
                 if (!Reader.IsDBNull(Reader.GetOrdinal("DATA_SROK")))
                 {
-                    Contract.ExpDate = Reader.GetDateTime(Reader.GetOrdinal("DATA_SROK"));
+                    Contract.ValidTo = Reader.GetDateTime(Reader.GetOrdinal("DATA_SROK"));
                 }
                 if (!Reader.IsDBNull(Reader.GetOrdinal("DATA_POST")))
                 {
-                    Contract.RecDate = Reader.GetDateTime(Reader.GetOrdinal("DATA_POST"));
+                    Contract.Recieved = Reader.GetDateTime(Reader.GetOrdinal("DATA_POST"));
                 }
                 if (!Reader.IsDBNull(Reader.GetOrdinal("DATA_REG")))
                 {
-                    Contract.RegDate = Reader.GetDateTime(Reader.GetOrdinal("DATA_REG"));
+                    Contract.Registered = Reader.GetDateTime(Reader.GetOrdinal("DATA_REG"));
                 }
                 Contract.Branch = Branch.Find(Reader.GetByte(Reader.GetOrdinal("FLDID")));
                 if (!Reader.IsDBNull(Reader.GetOrdinal("ID_SUPPLIER")))
