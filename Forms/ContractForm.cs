@@ -17,14 +17,25 @@ namespace Contracts.NET
 
         public void ShowDialog(ContractData Contract)
         {
-            linkLabel1.Text = Contract.Branch.Name;
-            linkLabel2.Text = Contract.Supplier.Name;
+            Branch.Text = Contract.Branch.Name;
+            textBox3.Text = Contract.Supplier.Name;
+            textBox1.Text = Contract.RegistrationNumber;
+            textBox2.Text = Contract.ContractNumber;
+            if (Contract.Recieved != DateTime.MinValue) { Recieved.Text = Contract.Recieved.ToShortDateString(); }
+            if (Contract.Registered != DateTime.MinValue) { Registered.Text = Contract.Registered.ToShortDateString(); }
+            if (Contract.ValidFrom != DateTime.MinValue) { ValidFrom.Text = Contract.ValidFrom.ToShortDateString(); }
+            if (Contract.ValidTo != DateTime.MinValue) { ValidTo.Text = Contract.ValidTo.ToShortDateString(); }
             ShowDialog();
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             new SupplierForm().ShowDialog();
+        }
+
+        private void groupBox8_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

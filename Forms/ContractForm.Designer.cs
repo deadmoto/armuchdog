@@ -29,57 +29,141 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.Branch = new System.Windows.Forms.TextBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.ValidFrom = new System.Windows.Forms.MaskedTextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.maskedTextBox3 = new System.Windows.Forms.MaskedTextBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
+            this.ValidTo = new System.Windows.Forms.MaskedTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
+            this.Registered = new System.Windows.Forms.MaskedTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.Recieved = new System.Windows.Forms.MaskedTextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.groupBox8);
-            this.panel1.Controls.Add(this.groupBox5);
-            this.panel1.Controls.Add(this.groupBox7);
-            this.panel1.Controls.Add(this.groupBox6);
-            this.panel1.Controls.Add(this.groupBox4);
-            this.panel1.Controls.Add(this.groupBox3);
-            this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.groupBox9);
+            this.panel1.Controls.Add(this.groupBox10);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(309, 575);
+            this.panel1.Size = new System.Drawing.Size(316, 575);
             this.panel1.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(316, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(478, 575);
+            this.panel2.TabIndex = 2;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.groupBox8);
+            this.groupBox10.Controls.Add(this.groupBox1);
+            this.groupBox10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox10.Location = new System.Drawing.Point(0, 0);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(316, 186);
+            this.groupBox10.TabIndex = 10;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Данные договора:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.Branch);
+            this.groupBox1.Location = new System.Drawing.Point(6, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(304, 40);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Наименование района:";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(226, 11);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // Branch
+            // 
+            this.Branch.Location = new System.Drawing.Point(3, 14);
+            this.Branch.Name = "Branch";
+            this.Branch.Size = new System.Drawing.Size(217, 20);
+            this.Branch.TabIndex = 0;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.groupBox5);
+            this.groupBox9.Controls.Add(this.groupBox7);
+            this.groupBox9.Controls.Add(this.groupBox6);
+            this.groupBox9.Controls.Add(this.groupBox4);
+            this.groupBox9.Controls.Add(this.groupBox3);
+            this.groupBox9.Controls.Add(this.groupBox2);
+            this.groupBox9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox9.Location = new System.Drawing.Point(0, 186);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(316, 149);
+            this.groupBox9.TabIndex = 11;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Реквизиты:";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.ValidFrom);
+            this.groupBox5.Location = new System.Drawing.Point(160, 61);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(150, 40);
+            this.groupBox5.TabIndex = 10;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Дата договора:";
+            // 
+            // ValidFrom
+            // 
+            this.ValidFrom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ValidFrom.Location = new System.Drawing.Point(3, 16);
+            this.ValidFrom.Mask = "00/00/0000";
+            this.ValidFrom.Name = "ValidFrom";
+            this.ValidFrom.Size = new System.Drawing.Size(144, 20);
+            this.ValidFrom.TabIndex = 1;
+            this.ValidFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ValidFrom.ValidatingType = typeof(System.DateTime);
             // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.textBox2);
-            this.groupBox7.Location = new System.Drawing.Point(157, 95);
+            this.groupBox7.Location = new System.Drawing.Point(160, 19);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(150, 40);
-            this.groupBox7.TabIndex = 7;
+            this.groupBox7.TabIndex = 13;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Номер договора:";
             // 
@@ -90,14 +174,15 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(144, 20);
             this.textBox2.TabIndex = 0;
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.textBox1);
-            this.groupBox6.Location = new System.Drawing.Point(3, 95);
+            this.groupBox6.Location = new System.Drawing.Point(6, 19);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(152, 40);
-            this.groupBox6.TabIndex = 6;
+            this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Регистрационный номер:";
             // 
@@ -108,148 +193,105 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(146, 20);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.maskedTextBox3);
-            this.groupBox4.Location = new System.Drawing.Point(157, 179);
+            this.groupBox4.Controls.Add(this.ValidTo);
+            this.groupBox4.Location = new System.Drawing.Point(160, 103);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(150, 40);
-            this.groupBox4.TabIndex = 5;
+            this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Срок договора:";
             // 
-            // maskedTextBox3
+            // ValidTo
             // 
-            this.maskedTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.maskedTextBox3.Location = new System.Drawing.Point(3, 16);
-            this.maskedTextBox3.Mask = "00/00/0000";
-            this.maskedTextBox3.Name = "maskedTextBox3";
-            this.maskedTextBox3.Size = new System.Drawing.Size(144, 20);
-            this.maskedTextBox3.TabIndex = 1;
-            this.maskedTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.maskedTextBox3.ValidatingType = typeof(System.DateTime);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.maskedTextBox4);
-            this.groupBox5.Location = new System.Drawing.Point(157, 137);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(150, 40);
-            this.groupBox5.TabIndex = 4;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Дата договора:";
-            // 
-            // maskedTextBox4
-            // 
-            this.maskedTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.maskedTextBox4.Location = new System.Drawing.Point(3, 16);
-            this.maskedTextBox4.Mask = "00/00/0000";
-            this.maskedTextBox4.Name = "maskedTextBox4";
-            this.maskedTextBox4.Size = new System.Drawing.Size(144, 20);
-            this.maskedTextBox4.TabIndex = 1;
-            this.maskedTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.maskedTextBox4.ValidatingType = typeof(System.DateTime);
+            this.ValidTo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ValidTo.Location = new System.Drawing.Point(3, 16);
+            this.ValidTo.Mask = "00/00/0000";
+            this.ValidTo.Name = "ValidTo";
+            this.ValidTo.Size = new System.Drawing.Size(144, 20);
+            this.ValidTo.TabIndex = 1;
+            this.ValidTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ValidTo.ValidatingType = typeof(System.DateTime);
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.maskedTextBox2);
-            this.groupBox3.Location = new System.Drawing.Point(3, 179);
+            this.groupBox3.Controls.Add(this.Registered);
+            this.groupBox3.Location = new System.Drawing.Point(6, 103);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(152, 40);
-            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Дата регистрации:";
             // 
-            // maskedTextBox2
+            // Registered
             // 
-            this.maskedTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.maskedTextBox2.Location = new System.Drawing.Point(3, 16);
-            this.maskedTextBox2.Mask = "00/00/0000";
-            this.maskedTextBox2.Name = "maskedTextBox2";
-            this.maskedTextBox2.Size = new System.Drawing.Size(146, 20);
-            this.maskedTextBox2.TabIndex = 1;
-            this.maskedTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.maskedTextBox2.ValidatingType = typeof(System.DateTime);
+            this.Registered.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Registered.Location = new System.Drawing.Point(3, 16);
+            this.Registered.Mask = "00/00/0000";
+            this.Registered.Name = "Registered";
+            this.Registered.Size = new System.Drawing.Size(146, 20);
+            this.Registered.TabIndex = 1;
+            this.Registered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Registered.ValidatingType = typeof(System.DateTime);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.maskedTextBox1);
-            this.groupBox2.Location = new System.Drawing.Point(3, 137);
+            this.groupBox2.Controls.Add(this.Recieved);
+            this.groupBox2.Location = new System.Drawing.Point(6, 61);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(152, 40);
-            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Дата поступления:";
             // 
-            // maskedTextBox1
+            // Recieved
             // 
-            this.maskedTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.maskedTextBox1.Location = new System.Drawing.Point(3, 16);
-            this.maskedTextBox1.Mask = "00/00/0000";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(146, 20);
-            this.maskedTextBox1.TabIndex = 1;
-            this.maskedTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.maskedTextBox1.ValidatingType = typeof(System.DateTime);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.linkLabel1);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(304, 40);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Наименование района:";
-            // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(309, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(485, 575);
-            this.panel2.TabIndex = 2;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.linkLabel1.Location = new System.Drawing.Point(3, 16);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(55, 13);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "linkLabel1";
+            this.Recieved.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Recieved.Location = new System.Drawing.Point(3, 16);
+            this.Recieved.Mask = "00/00/0000";
+            this.Recieved.Name = "Recieved";
+            this.Recieved.Size = new System.Drawing.Size(146, 20);
+            this.Recieved.TabIndex = 1;
+            this.Recieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Recieved.ValidatingType = typeof(System.DateTime);
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.linkLabel2);
-            this.groupBox8.Location = new System.Drawing.Point(3, 49);
+            this.groupBox8.Controls.Add(this.button1);
+            this.groupBox8.Controls.Add(this.textBox3);
+            this.groupBox8.Location = new System.Drawing.Point(6, 59);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(304, 40);
-            this.groupBox8.TabIndex = 8;
+            this.groupBox8.Size = new System.Drawing.Size(304, 121);
+            this.groupBox8.TabIndex = 10;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Контрагент:";
             // 
-            // linkLabel2
+            // button1
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.linkLabel2.Location = new System.Drawing.Point(3, 16);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(55, 13);
-            this.linkLabel2.TabIndex = 0;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "linkLabel2";
-            this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            this.button1.Location = new System.Drawing.Point(223, 92);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox3.Location = new System.Drawing.Point(3, 16);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(298, 70);
+            this.textBox3.TabIndex = 0;
             // 
             // ContractForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 573);
+            this.ClientSize = new System.Drawing.Size(794, 575);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -258,20 +300,22 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ContractForm";
             this.panel1.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
@@ -281,22 +325,26 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox2;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox3;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox Branch;
+        private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox4;
+        private System.Windows.Forms.MaskedTextBox ValidFrom;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.MaskedTextBox ValidTo;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.MaskedTextBox Registered;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.MaskedTextBox Recieved;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }

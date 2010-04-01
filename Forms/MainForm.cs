@@ -14,8 +14,9 @@ namespace Contracts.NET
             InitializeComponent();
             Load += new EventHandler(delegate { FillMainGrid(); });
             ProvidersMenuItem.Click += new EventHandler(delegate { new SupplierForm().ShowDialog(); });
-            ñïğàâî÷íèêÎÊÂİÄToolStripMenuItem.Click += new EventHandler(delegate { new NCEAForm().ShowDialog();});
+            ñïğàâî÷íèêÎÊÂİÄToolStripMenuItem.Click += new EventHandler(delegate { new NCEAForm().ShowDialog(); });
             ñïğàâî÷íèêÊÎÑÃÓToolStripMenuItem.Click += new EventHandler(delegate { new TCGOForm().ShowDialog(); });
+            èçìåíèòüToolStripMenuItem.Click += new EventHandler(delegate { new ContractForm().ShowDialog(Contract.ContractList[MainGrid.SelectedRows[0].Index]); });
             ExitMenuItem.Click += new EventHandler(delegate { Application.Exit(); });
         }
 
@@ -28,7 +29,7 @@ namespace Contracts.NET
 
         private void èçìåíèòüToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ContractForm().ShowDialog(Contract.ContractList[0]);
+
         }
     }
 }
