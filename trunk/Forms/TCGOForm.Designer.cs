@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.TCGOGrid = new System.Windows.Forms.DataGridView();
-            this.Menu = new System.Windows.Forms.MenuStrip();
+            this.TCGOMenu = new System.Windows.Forms.MenuStrip();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CloseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.TCGOGrid)).BeginInit();
-            this.Menu.SuspendLayout();
+            this.TCGOMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // TCGOGrid
@@ -57,15 +57,15 @@
             this.TCGOGrid.Size = new System.Drawing.Size(634, 431);
             this.TCGOGrid.TabIndex = 0;
             // 
-            // Menu
+            // TCGOMenu
             // 
-            this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TCGOMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu});
-            this.Menu.Location = new System.Drawing.Point(0, 0);
-            this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(634, 24);
-            this.Menu.TabIndex = 1;
-            this.Menu.Text = "menuStrip1";
+            this.TCGOMenu.Location = new System.Drawing.Point(0, 0);
+            this.TCGOMenu.Name = "TCGOMenu";
+            this.TCGOMenu.Size = new System.Drawing.Size(634, 24);
+            this.TCGOMenu.TabIndex = 1;
+            this.TCGOMenu.Text = "menuStrip1";
             // 
             // FileMenu
             // 
@@ -104,16 +104,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 455);
             this.Controls.Add(this.TCGOGrid);
-            this.Controls.Add(this.Menu);
+            this.Controls.Add(this.TCGOMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.Menu;
+            this.MainMenuStrip = this.TCGOMenu;
             this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "TCGOForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справочник КОСГУ";
             ((System.ComponentModel.ISupportInitialize)(this.TCGOGrid)).EndInit();
-            this.Menu.ResumeLayout(false);
-            this.Menu.PerformLayout();
+            this.TCGOMenu.ResumeLayout(false);
+            this.TCGOMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,7 +122,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView TCGOGrid;
-        private System.Windows.Forms.MenuStrip Menu;
+        private System.Windows.Forms.MenuStrip TCGOMenu;
         private System.Windows.Forms.ToolStripMenuItem FileMenu;
         private System.Windows.Forms.ToolStripMenuItem CloseMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
