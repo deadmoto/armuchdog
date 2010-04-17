@@ -24,7 +24,7 @@ namespace Contracts.NET
             if (Contract.ValidFrom != DateTime.MinValue) { Text += " от " + Contract.ValidFrom.ToShortDateString(); }
             //
 
-            Branch.Text = Contract.Branch.Name;
+            Department.Text = Contract.Department.Name;
             textBox3.Text = Contract.Supplier.Name;
             textBox1.Text = Contract.RegistrationNumber;
             textBox2.Text = Contract.ContractNumber;
@@ -38,7 +38,13 @@ namespace Contracts.NET
             ShowDialog();
         }
 
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DepartmentData Test = new DepartmentForm().SelectDepartment();
+            Department.Text = Test.Name;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             new SupplierForm().ShowDialog();
         }

@@ -31,5 +31,10 @@ namespace Contracts.NET
         {
 
         }
+
+        private void справочникРайоновToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new DepartmentForm().ShowDialog();
+        }
     }
 }
