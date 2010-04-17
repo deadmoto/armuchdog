@@ -31,11 +31,11 @@
             this.NCEAGrid = new System.Windows.Forms.DataGridView();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Menu = new System.Windows.Forms.MenuStrip();
+            this.NCEAMenu = new System.Windows.Forms.MenuStrip();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CloseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.NCEAGrid)).BeginInit();
-            this.Menu.SuspendLayout();
+            this.NCEAMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // NCEAGrid
@@ -75,15 +75,15 @@
             this.ColumnName.ReadOnly = true;
             this.ColumnName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // Menu
+            // TCGOMenu
             // 
-            this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NCEAMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu});
-            this.Menu.Location = new System.Drawing.Point(0, 0);
-            this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(634, 24);
-            this.Menu.TabIndex = 1;
-            this.Menu.Text = "menuStrip1";
+            this.NCEAMenu.Location = new System.Drawing.Point(0, 0);
+            this.NCEAMenu.Name = "TCGOMenu";
+            this.NCEAMenu.Size = new System.Drawing.Size(634, 24);
+            this.NCEAMenu.TabIndex = 1;
+            this.NCEAMenu.Text = "menuStrip1";
             // 
             // FileMenu
             // 
@@ -105,16 +105,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 455);
             this.Controls.Add(this.NCEAGrid);
-            this.Controls.Add(this.Menu);
+            this.Controls.Add(this.NCEAMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.Menu;
+            this.MainMenuStrip = this.NCEAMenu;
             this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "NCEAForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справочник ОКВЭД";
             ((System.ComponentModel.ISupportInitialize)(this.NCEAGrid)).EndInit();
-            this.Menu.ResumeLayout(false);
-            this.Menu.PerformLayout();
+            this.NCEAMenu.ResumeLayout(false);
+            this.NCEAMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,7 +125,7 @@
         private System.Windows.Forms.DataGridView NCEAGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
-        private System.Windows.Forms.MenuStrip Menu;
+        private System.Windows.Forms.MenuStrip NCEAMenu;
         private System.Windows.Forms.ToolStripMenuItem FileMenu;
         private System.Windows.Forms.ToolStripMenuItem CloseMenuItem;
     }
