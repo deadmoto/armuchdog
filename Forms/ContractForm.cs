@@ -13,10 +13,17 @@ namespace Contracts.NET
         public ContractForm()
         {
             InitializeComponent();
+            CloseMenuItem.Click += new EventHandler(delegate { Close(); });
         }
 
         public void ShowDialog(ContractData Contract)
         {
+            // Setting form text
+            if (Contract.ContractNumber != string.Empty) { Text += " №" + Contract.ContractNumber; }
+            if (Contract.RegistrationNumber != string.Empty) { Text += " (" + Contract.RegistrationNumber + ')'; }
+            if (Contract.ValidFrom != DateTime.MinValue) { Text += " от " + Contract.ValidFrom.ToShortDateString(); }
+            //
+
             Branch.Text = Contract.Branch.Name;
             textBox3.Text = Contract.Supplier.Name;
             textBox1.Text = Contract.RegistrationNumber;
@@ -25,17 +32,15 @@ namespace Contracts.NET
             if (Contract.Registered != DateTime.MinValue) { Registered.Text = Contract.Registered.ToShortDateString(); }
             if (Contract.ValidFrom != DateTime.MinValue) { ValidFrom.Text = Contract.ValidFrom.ToShortDateString(); }
             if (Contract.ValidTo != DateTime.MinValue) { ValidTo.Text = Contract.ValidTo.ToShortDateString(); }
+
+            foreach (DetailData Detail in Contract.DetailList) { ContractDetailGridView.Rows.Add(Detail.ToArray()); }
+
             ShowDialog();
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             new SupplierForm().ShowDialog();
-        }
-
-        private void groupBox8_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }
