@@ -9,7 +9,7 @@ namespace Contracts.NET
         [STAThread]
         static void Main()
         {
-            Branch.Retrieve();
+            Department.Retrieve();
             NCEA.Retrieve();
             TCGO.Retrieve();
             Supplier.Retrieve();

@@ -14,7 +14,7 @@ namespace Contracts.NET
         public string ContractNumber;
         public DateTime Registered;
         public DateTime Recieved;
-        public BranchData Branch;
+        public DepartmentData Department;
         public DateTime ValidFrom;
         public DateTime ValidTo;
         public SupplierData Supplier;
@@ -36,7 +36,7 @@ namespace Contracts.NET
         public object[] ToArray()
         {
             object[] Result = new object[10];
-            Result[0] = Branch.Name;
+            Result[0] = Department.Name;
             Result[1] = Id;
             Result[2] = RegistrationNumber;
             Result[3] = ContractNumber;
@@ -95,7 +95,7 @@ namespace Contracts.NET
                 {
                     Contract.Registered = Reader.GetDateTime(Reader.GetOrdinal("DATA_REG"));
                 }
-                Contract.Branch = Branch.Find(Reader.GetByte(Reader.GetOrdinal("FLDID")));
+                Contract.Department = Department.Find(Reader.GetByte(Reader.GetOrdinal("FLDID")));
                 if (!Reader.IsDBNull(Reader.GetOrdinal("ID_SUPPLIER")))
                 {
                     Contract.Supplier = Supplier.Find(Reader.GetInt32(Reader.GetOrdinal("ID_SUPPLIER")));

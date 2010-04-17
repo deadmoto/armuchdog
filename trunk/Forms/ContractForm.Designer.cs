@@ -28,12 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ContractMenu = new System.Windows.Forms.MenuStrip();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CloseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.изменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContractDetailPanel = new System.Windows.Forms.Panel();
             this.ContractDetailGridView = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContractDataPanel = new System.Windows.Forms.Panel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -51,18 +60,9 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.ContractBranchBox = new System.Windows.Forms.GroupBox();
+            this.ContractDepartmentBox = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.Branch = new System.Windows.Forms.TextBox();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.изменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Department = new System.Windows.Forms.TextBox();
             this.ContractMenu.SuspendLayout();
             this.ContractDetailPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ContractDetailGridView)).BeginInit();
@@ -75,7 +75,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.ContractBranchBox.SuspendLayout();
+            this.ContractDepartmentBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ContractMenu
@@ -102,6 +102,34 @@
             this.CloseMenuItem.Size = new System.Drawing.Size(120, 22);
             this.CloseMenuItem.Text = "Закрыть";
             // 
+            // правкаToolStripMenuItem
+            // 
+            this.правкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьToolStripMenuItem,
+            this.изменитьToolStripMenuItem,
+            this.удалитьToolStripMenuItem});
+            this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
+            this.правкаToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.правкаToolStripMenuItem.Text = "Правка";
+            // 
+            // добавитьToolStripMenuItem
+            // 
+            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.добавитьToolStripMenuItem.Text = "Добавить";
+            // 
+            // изменитьToolStripMenuItem
+            // 
+            this.изменитьToolStripMenuItem.Name = "изменитьToolStripMenuItem";
+            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.изменитьToolStripMenuItem.Text = "Изменить";
+            // 
+            // удалитьToolStripMenuItem
+            // 
+            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.удалитьToolStripMenuItem.Text = "Удалить";
+            // 
             // ContractDetailPanel
             // 
             this.ContractDetailPanel.Controls.Add(this.ContractDetailGridView);
@@ -109,7 +137,7 @@
             this.ContractDetailPanel.Location = new System.Drawing.Point(317, 24);
             this.ContractDetailPanel.Name = "ContractDetailPanel";
             this.ContractDetailPanel.Size = new System.Drawing.Size(477, 551);
-            this.ContractDetailPanel.TabIndex = 4;
+            this.ContractDetailPanel.TabIndex = 0;
             // 
             // ContractDetailGridView
             // 
@@ -133,16 +161,63 @@
             this.ContractDetailGridView.Size = new System.Drawing.Size(477, 299);
             this.ContractDetailGridView.TabIndex = 0;
             // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column1.HeaderText = "Дата";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column1.Width = 39;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column4.HeaderText = "ОКВЭД";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column4.Width = 51;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column3.HeaderText = "КОСГУ";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column3.Width = 49;
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column5.HeaderText = "Комментарий";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column2.HeaderText = "Сумма";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column2.Width = 47;
+            // 
             // ContractDataPanel
             // 
             this.ContractDataPanel.Controls.Add(this.groupBox9);
             this.ContractDataPanel.Controls.Add(this.groupBox8);
-            this.ContractDataPanel.Controls.Add(this.ContractBranchBox);
+            this.ContractDataPanel.Controls.Add(this.ContractDepartmentBox);
             this.ContractDataPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.ContractDataPanel.Location = new System.Drawing.Point(0, 24);
             this.ContractDataPanel.Name = "ContractDataPanel";
             this.ContractDataPanel.Size = new System.Drawing.Size(317, 551);
-            this.ContractDataPanel.TabIndex = 3;
+            this.ContractDataPanel.TabIndex = 0;
             // 
             // groupBox9
             // 
@@ -156,7 +231,7 @@
             this.groupBox9.Location = new System.Drawing.Point(0, 150);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(317, 149);
-            this.groupBox9.TabIndex = 26;
+            this.groupBox9.TabIndex = 0;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Реквизиты:";
             // 
@@ -290,7 +365,7 @@
             this.groupBox8.Location = new System.Drawing.Point(0, 40);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(317, 110);
-            this.groupBox8.TabIndex = 25;
+            this.groupBox8.TabIndex = 0;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Контрагент:";
             // 
@@ -299,9 +374,10 @@
             this.button1.Location = new System.Drawing.Point(286, 83);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(24, 21);
-            this.button1.TabIndex = 29;
+            this.button1.TabIndex = 0;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox3
             // 
@@ -312,17 +388,17 @@
             this.textBox3.Size = new System.Drawing.Size(268, 85);
             this.textBox3.TabIndex = 0;
             // 
-            // ContractBranchBox
+            // ContractDepartmentBox
             // 
-            this.ContractBranchBox.Controls.Add(this.button2);
-            this.ContractBranchBox.Controls.Add(this.Branch);
-            this.ContractBranchBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ContractBranchBox.Location = new System.Drawing.Point(0, 0);
-            this.ContractBranchBox.Name = "ContractBranchBox";
-            this.ContractBranchBox.Size = new System.Drawing.Size(317, 40);
-            this.ContractBranchBox.TabIndex = 24;
-            this.ContractBranchBox.TabStop = false;
-            this.ContractBranchBox.Text = "Наименование района:";
+            this.ContractDepartmentBox.Controls.Add(this.button2);
+            this.ContractDepartmentBox.Controls.Add(this.Department);
+            this.ContractDepartmentBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ContractDepartmentBox.Location = new System.Drawing.Point(0, 0);
+            this.ContractDepartmentBox.Name = "ContractDepartmentBox";
+            this.ContractDepartmentBox.Size = new System.Drawing.Size(317, 40);
+            this.ContractDepartmentBox.TabIndex = 0;
+            this.ContractDepartmentBox.TabStop = false;
+            this.ContractDepartmentBox.Text = "Наименование района:";
             // 
             // button2
             // 
@@ -332,89 +408,15 @@
             this.button2.TabIndex = 28;
             this.button2.Text = "...";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Branch
+            // Department
             // 
-            this.Branch.Location = new System.Drawing.Point(9, 14);
-            this.Branch.Name = "Branch";
-            this.Branch.ReadOnly = true;
-            this.Branch.Size = new System.Drawing.Size(268, 20);
-            this.Branch.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column1.HeaderText = "Дата";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column1.Width = 39;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column4.HeaderText = "ОКВЭД";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column4.Width = 51;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column3.HeaderText = "КОСГУ";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column3.Width = 49;
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column5.HeaderText = "Комментарий";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column2.HeaderText = "Сумма";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column2.Width = 47;
-            // 
-            // правкаToolStripMenuItem
-            // 
-            this.правкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавитьToolStripMenuItem,
-            this.изменитьToolStripMenuItem,
-            this.удалитьToolStripMenuItem});
-            this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
-            this.правкаToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.правкаToolStripMenuItem.Text = "Правка";
-            // 
-            // добавитьToolStripMenuItem
-            // 
-            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.добавитьToolStripMenuItem.Text = "Добавить";
-            // 
-            // изменитьToolStripMenuItem
-            // 
-            this.изменитьToolStripMenuItem.Name = "изменитьToolStripMenuItem";
-            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.изменитьToolStripMenuItem.Text = "Изменить";
-            // 
-            // удалитьToolStripMenuItem
-            // 
-            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.удалитьToolStripMenuItem.Text = "Удалить";
+            this.Department.Location = new System.Drawing.Point(9, 14);
+            this.Department.Name = "Department";
+            this.Department.ReadOnly = true;
+            this.Department.Size = new System.Drawing.Size(268, 20);
+            this.Department.TabIndex = 0;
             // 
             // ContractForm
             // 
@@ -450,8 +452,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.ContractBranchBox.ResumeLayout(false);
-            this.ContractBranchBox.PerformLayout();
+            this.ContractDepartmentBox.ResumeLayout(false);
+            this.ContractDepartmentBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -481,9 +483,9 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.GroupBox ContractBranchBox;
+        private System.Windows.Forms.GroupBox ContractDepartmentBox;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox Branch;
+        private System.Windows.Forms.TextBox Department;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
