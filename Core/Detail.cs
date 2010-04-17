@@ -16,6 +16,20 @@ namespace Contracts.NET
         public double Price;
         public bool Report;
         public string Comment;
+
+        /// <summary>
+        /// Returns array of fields
+        /// </summary>
+        public object[] ToArray()
+        {
+            object[] Result = new object[5];
+            Result[0] = SubDate.ToShortDateString();
+            Result[1] = Classification;
+            Result[2] = Opcode;
+            Result[3] = Comment;
+            Result[4] = Price;
+            return Result;
+        }
     }
 
     /// <summary>
