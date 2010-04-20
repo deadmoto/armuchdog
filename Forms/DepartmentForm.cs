@@ -15,16 +15,16 @@ namespace Contracts.NET
         public DepartmentData SelectDepartment()
         {
             SelectMenuItem.Visible = true;
-            Grid.DoubleClick += new System.EventHandler(SelectMenuItemClick);
-            if (ShowDialog() == DialogResult.OK) { return Department.DepartmentList[Grid.SelectedRows[0].Index]; } else { return DefaultDepartment; }
+            DepartmentGrid.DoubleClick += new System.EventHandler(SelectMenuItemClick);
+            if (ShowDialog() == DialogResult.OK) { return Department.DepartmentList[DepartmentGrid.SelectedRows[0].Index]; } else { return DefaultDepartment; }
         }
 
         private void DepartmentFormLoad(object sender, System.EventArgs e)
         {
             foreach (DepartmentData Item in Department.DepartmentList)
             {
-                int Index = Grid.Rows.Add(Item.ToArray());
-                if (DefaultDepartment.Id == Item.Id) { Grid.Rows[Index].Selected = true; }
+                int Index = DepartmentGrid.Rows.Add(Item.ToArray());
+                if (DefaultDepartment.Id == Item.Id) { DepartmentGrid.Rows[Index].Selected = true; }
             }
         }
 
