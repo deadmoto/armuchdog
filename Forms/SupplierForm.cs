@@ -1,39 +1,41 @@
-using System;
 using System.Windows.Forms;
-using System.Threading;
 
 namespace Contracts.NET
 {
     public partial class SupplierForm : Form
     {
-        public SupplierForm()
+        private SupplierData DefaultSupplier;
+
+        public SupplierForm(SupplierData DefaultSupplier = new SupplierData())
         {
             InitializeComponent();
-            Load += new EventHandler(delegate { SupplierFromFill(); });
+            this.DefaultSupplier = DefaultSupplier;
         }
 
-        private void SupplierFromFill()
+        public SupplierData SelectSupplier()
         {
-            SupplierGrid.Rows.Clear();
-            foreach (SupplierData supplier in Supplier.SupplierList)
+            SelectMenuItem.Visible = true;
+            SupplierGrid.DoubleClick += new System.EventHandler(SelectMenuItemClick);
+            if (ShowDialog() == DialogResult.OK) { return Supplier.SupplierList[SupplierGrid.SelectedRows[0].Index]; } else { return DefaultSupplier; }
+        }
+
+        private void SupplierFormLoad(object sender, System.EventArgs e)
+        {
+            foreach (SupplierData Item in Supplier.SupplierList)
             {
-                object[] Row = new object[2];
-                Row[0] = supplier.Id.ToString();
-                Row[1] = supplier.Name.ToString();
-                SupplierGrid.Rows.Add(Row);
+                int Index = SupplierGrid.Rows.Add(Item.ToArray());
+                if (DefaultSupplier.Id == Item.Id) { SupplierGrid.Rows[Index].Selected = true; }
             }
         }
 
-        private void InsertMenuItem_Click(object sender, EventArgs e)
+
+        private void SelectMenuItemClick(object sender, System.EventArgs e)
         {
-            string Name = InputBox.Show(Text, "Введите наименование", string.Empty);
-            if (!(Name == string.Empty))
-            {
-                SupplierFromFill();
-            }
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
-        private void CloseMenuItemClick(object sender, EventArgs e)
+        private void CloseMenuItemClick(object sender, System.EventArgs e)
         {
             Close();
         }
