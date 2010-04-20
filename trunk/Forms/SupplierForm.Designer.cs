@@ -30,8 +30,8 @@ namespace Contracts.NET
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.SupplierMenu = new System.Windows.Forms.MenuStrip();
-            this.FileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CreateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CloseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SupplierGrid = new System.Windows.Forms.DataGridView();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,31 +43,33 @@ namespace Contracts.NET
             // SupplierMenu
             // 
             this.SupplierMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FileMenuItem});
+            this.FileMenu});
             this.SupplierMenu.Location = new System.Drawing.Point(0, 0);
             this.SupplierMenu.Name = "SupplierMenu";
             this.SupplierMenu.Size = new System.Drawing.Size(634, 24);
             this.SupplierMenu.TabIndex = 0;
             // 
-            // FileMenuItem
+            // FileMenu
             // 
-            this.FileMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CreateMenuItem,
+            this.FileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SelectMenuItem,
             this.CloseMenuItem});
-            this.FileMenuItem.Name = "FileMenuItem";
-            this.FileMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.FileMenuItem.Text = "Файл";
+            this.FileMenu.Name = "FileMenu";
+            this.FileMenu.Size = new System.Drawing.Size(48, 20);
+            this.FileMenu.Text = "Файл";
             // 
-            // CreateMenuItem
+            // SelectMenuItem
             // 
-            this.CreateMenuItem.Name = "CreateMenuItem";
-            this.CreateMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.CreateMenuItem.Text = "Создать";
+            this.SelectMenuItem.Name = "SelectMenuItem";
+            this.SelectMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.SelectMenuItem.Text = "Выбрать";
+            this.SelectMenuItem.Visible = false;
+            this.SelectMenuItem.Click += new System.EventHandler(this.SelectMenuItemClick);
             // 
             // CloseMenuItem
             // 
             this.CloseMenuItem.Name = "CloseMenuItem";
-            this.CloseMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.CloseMenuItem.Size = new System.Drawing.Size(152, 22);
             this.CloseMenuItem.Text = "Закрыть";
             this.CloseMenuItem.Click += new System.EventHandler(this.CloseMenuItemClick);
             // 
@@ -131,6 +133,7 @@ namespace Contracts.NET
             this.Name = "SupplierForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справочник поставщиков";
+            this.Load += new System.EventHandler(this.SupplierFormLoad);
             this.SupplierMenu.ResumeLayout(false);
             this.SupplierMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SupplierGrid)).EndInit();
@@ -142,8 +145,8 @@ namespace Contracts.NET
         #endregion
 
         private System.Windows.Forms.MenuStrip SupplierMenu;
-        private System.Windows.Forms.ToolStripMenuItem FileMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CreateMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FileMenu;
+        private System.Windows.Forms.ToolStripMenuItem SelectMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CloseMenuItem;
         private System.Windows.Forms.DataGridView SupplierGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
