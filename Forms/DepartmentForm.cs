@@ -4,20 +4,28 @@ namespace Contracts.NET
 {
     public partial class DepartmentForm : Form
     {
-        public DepartmentForm()
+        private DepartmentData DefaultDepartment;
+
+        public DepartmentForm(DepartmentData DefaultDepartment = new DepartmentData())
         {
             InitializeComponent();
+            this.DefaultDepartment = DefaultDepartment;
         }
 
         public DepartmentData SelectDepartment()
         {
-            if (ShowDialog() == DialogResult.OK) { return Department.DepartmentList[Grid.SelectedRows[0].Index]; }
-            else { return new DepartmentData(); }
+            SelectMenuItem.Visible = true;
+            Grid.DoubleClick += new System.EventHandler(SelectMenuItemClick);
+            if (ShowDialog() == DialogResult.OK) { return Department.DepartmentList[Grid.SelectedRows[0].Index]; } else { return DefaultDepartment; }
         }
 
         private void DepartmentFormLoad(object sender, System.EventArgs e)
         {
-            foreach (DepartmentData Item in Department.DepartmentList) { Grid.Rows.Add(Item.ToArray()); }
+            foreach (DepartmentData Item in Department.DepartmentList)
+            {
+                int Index = Grid.Rows.Add(Item.ToArray());
+                if (DefaultDepartment.Id == Item.Id) { Grid.Rows[Index].Selected = true; }
+            }
         }
 
         private void SelectMenuItemClick(object sender, System.EventArgs e)

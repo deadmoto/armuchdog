@@ -30,11 +30,11 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CloseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Grid = new System.Windows.Forms.DataGridView();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SelectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
             this.SuspendLayout();
@@ -57,6 +57,14 @@
             this.FileMenu.Name = "FileMenu";
             this.FileMenu.Size = new System.Drawing.Size(48, 20);
             this.FileMenu.Text = "Файл";
+            // 
+            // SelectMenuItem
+            // 
+            this.SelectMenuItem.Name = "SelectMenuItem";
+            this.SelectMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.SelectMenuItem.Text = "Выбрать";
+            this.SelectMenuItem.Visible = false;
+            this.SelectMenuItem.Click += new System.EventHandler(this.SelectMenuItemClick);
             // 
             // CloseMenuItem
             // 
@@ -101,13 +109,6 @@
             this.ColumnName.Name = "ColumnName";
             this.ColumnName.ReadOnly = true;
             this.ColumnName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // SelectMenuItem
-            // 
-            this.SelectMenuItem.Name = "SelectMenuItem";
-            this.SelectMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.SelectMenuItem.Text = "Выбрать";
-            this.SelectMenuItem.Click += new System.EventHandler(this.SelectMenuItemClick);
             // 
             // DepartmentForm
             // 
