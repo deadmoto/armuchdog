@@ -28,26 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.DepartmentMenu = new System.Windows.Forms.MenuStrip();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CloseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Grid = new System.Windows.Forms.DataGridView();
+            this.DepartmentGrid = new System.Windows.Forms.DataGridView();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
+            this.DepartmentMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DepartmentGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // DepartmentMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DepartmentMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(634, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "DepartmentMenu";
+            this.DepartmentMenu.Location = new System.Drawing.Point(0, 0);
+            this.DepartmentMenu.Name = "DepartmentMenu";
+            this.DepartmentMenu.Size = new System.Drawing.Size(634, 24);
+            this.DepartmentMenu.TabIndex = 1;
             // 
             // FileMenu
             // 
@@ -73,25 +72,25 @@
             this.CloseMenuItem.Text = "Закрыть";
             this.CloseMenuItem.Click += new System.EventHandler(this.CloseMenuItemClick);
             // 
-            // Grid
+            // DepartmentGrid
             // 
-            this.Grid.AllowUserToAddRows = false;
-            this.Grid.AllowUserToDeleteRows = false;
-            this.Grid.AllowUserToResizeColumns = false;
-            this.Grid.AllowUserToResizeRows = false;
-            this.Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DepartmentGrid.AllowUserToAddRows = false;
+            this.DepartmentGrid.AllowUserToDeleteRows = false;
+            this.DepartmentGrid.AllowUserToResizeColumns = false;
+            this.DepartmentGrid.AllowUserToResizeRows = false;
+            this.DepartmentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DepartmentGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnId,
             this.ColumnName});
-            this.Grid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Grid.Location = new System.Drawing.Point(0, 24);
-            this.Grid.MultiSelect = false;
-            this.Grid.Name = "Grid";
-            this.Grid.ReadOnly = true;
-            this.Grid.RowHeadersVisible = false;
-            this.Grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Grid.Size = new System.Drawing.Size(634, 428);
-            this.Grid.TabIndex = 2;
+            this.DepartmentGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DepartmentGrid.Location = new System.Drawing.Point(0, 24);
+            this.DepartmentGrid.MultiSelect = false;
+            this.DepartmentGrid.Name = "DepartmentGrid";
+            this.DepartmentGrid.ReadOnly = true;
+            this.DepartmentGrid.RowHeadersVisible = false;
+            this.DepartmentGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DepartmentGrid.Size = new System.Drawing.Size(634, 428);
+            this.DepartmentGrid.TabIndex = 3;
             // 
             // ColumnId
             // 
@@ -115,17 +114,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 452);
-            this.Controls.Add(this.Grid);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.DepartmentGrid);
+            this.Controls.Add(this.DepartmentMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.DepartmentMenu;
             this.Name = "DepartmentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справочник районов";
             this.Load += new System.EventHandler(this.DepartmentFormLoad);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
+            this.DepartmentMenu.ResumeLayout(false);
+            this.DepartmentMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DepartmentGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,12 +132,12 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip DepartmentMenu;
         private System.Windows.Forms.ToolStripMenuItem FileMenu;
+        private System.Windows.Forms.ToolStripMenuItem SelectMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CloseMenuItem;
-        private System.Windows.Forms.DataGridView Grid;
+        private System.Windows.Forms.DataGridView DepartmentGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
-        private System.Windows.Forms.ToolStripMenuItem SelectMenuItem;
     }
 }
