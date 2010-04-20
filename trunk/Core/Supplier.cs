@@ -10,6 +10,17 @@ namespace Contracts.NET
     {
         public int Id;
         public string Name;
+
+        /// <summary>
+        /// Returns array of fields
+        /// </summary>
+        public object[] ToArray()
+        {
+            object[] Result = new object[2];
+            Result[0] = Id;
+            Result[1] = Name;
+            return Result;
+        }
     }
 
     /// <summary>
