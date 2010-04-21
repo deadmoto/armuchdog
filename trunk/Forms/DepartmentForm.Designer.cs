@@ -60,7 +60,7 @@
             // SelectMenuItem
             // 
             this.SelectMenuItem.Name = "SelectMenuItem";
-            this.SelectMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.SelectMenuItem.Size = new System.Drawing.Size(121, 22);
             this.SelectMenuItem.Text = "Выбрать";
             this.SelectMenuItem.Visible = false;
             this.SelectMenuItem.Click += new System.EventHandler(this.SelectMenuItemClick);
@@ -68,7 +68,7 @@
             // CloseMenuItem
             // 
             this.CloseMenuItem.Name = "CloseMenuItem";
-            this.CloseMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CloseMenuItem.Size = new System.Drawing.Size(121, 22);
             this.CloseMenuItem.Text = "Закрыть";
             this.CloseMenuItem.Click += new System.EventHandler(this.CloseMenuItemClick);
             // 
@@ -78,6 +78,8 @@
             this.DepartmentGrid.AllowUserToDeleteRows = false;
             this.DepartmentGrid.AllowUserToResizeColumns = false;
             this.DepartmentGrid.AllowUserToResizeRows = false;
+            this.DepartmentGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DepartmentGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DepartmentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DepartmentGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnId,
@@ -94,7 +96,6 @@
             // 
             // ColumnId
             // 
-            this.ColumnId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.ColumnId.HeaderText = "Код";
             this.ColumnId.Name = "ColumnId";
             this.ColumnId.ReadOnly = true;

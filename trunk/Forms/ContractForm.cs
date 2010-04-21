@@ -1,52 +1,69 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Contracts.NET
 {
     public partial class ContractForm : Form
     {
-        public ContractForm()
+        ContractData DefaultContract;
+
+        public ContractForm(ContractData DefaultContract = new ContractData())
         {
             InitializeComponent();
-            CloseMenuItem.Click += new EventHandler(delegate { Close(); });
+            this.DefaultContract = DefaultContract;
         }
 
-        public void ShowDialog(ContractData Contract)
+        private void ContractFormLoad(object sender, EventArgs e)
         {
-            // Setting form text
-            if (Contract.ContractNumber != string.Empty) { Text += " №" + Contract.ContractNumber; }
-            if (Contract.RegistrationNumber != string.Empty) { Text += " (" + Contract.RegistrationNumber + ')'; }
-            if (Contract.ValidFrom != DateTime.MinValue) { Text += " от " + Contract.ValidFrom.ToShortDateString(); }
-            //
-
-            Department.Text = Contract.Department.Name;
-            textBox3.Text = Contract.Supplier.Name;
-            textBox1.Text = Contract.RegistrationNumber;
-            textBox2.Text = Contract.ContractNumber;
-            if (Contract.Recieved != DateTime.MinValue) { Recieved.Text = Contract.Recieved.ToShortDateString(); }
-            if (Contract.Registered != DateTime.MinValue) { Registered.Text = Contract.Registered.ToShortDateString(); }
-            if (Contract.ValidFrom != DateTime.MinValue) { ValidFrom.Text = Contract.ValidFrom.ToShortDateString(); }
-            if (Contract.ValidTo != DateTime.MinValue) { ValidTo.Text = Contract.ValidTo.ToShortDateString(); }
-
-            foreach (DetailData Detail in Contract.DetailList) { ContractDetailGridView.Rows.Add(Detail.ToArray()); }
-
-            ShowDialog();
+            UpdateContractForm();
+            UpdateDetailGrid();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void UpdateContractForm()
         {
-            DepartmentData Test = new DepartmentForm().SelectDepartment();
-            Department.Text = Test.Name;
+            if (DefaultContract.ContractNumber != string.Empty) { Text += " №" + DefaultContract.ContractNumber; }
+            if (DefaultContract.RegistrationNumber != string.Empty) { Text += " (" + DefaultContract.RegistrationNumber + ')'; }
+            if (DefaultContract.ValidFrom != DateTime.MinValue) { Text += " от " + DefaultContract.ValidFrom.ToShortDateString(); }
+            Department.Text = DefaultContract.Department.Name;
+            Supplier.Text = DefaultContract.Supplier.Name;
+            RegistrationNumber.Text = DefaultContract.RegistrationNumber;
+            ContractNumber.Text = DefaultContract.ContractNumber;
+            if (DefaultContract.Recieved != DateTime.MinValue) { Recieved.Text = DefaultContract.Recieved.ToShortDateString(); }
+            if (DefaultContract.Registered != DateTime.MinValue) { Registered.Text = DefaultContract.Registered.ToShortDateString(); }
+            if (DefaultContract.ValidFrom != DateTime.MinValue) { ValidFrom.Text = DefaultContract.ValidFrom.ToShortDateString(); }
+            if (DefaultContract.ValidTo != DateTime.MinValue) { ValidTo.Text = DefaultContract.ValidTo.ToShortDateString(); }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void UpdateDetailGrid()
         {
-            new SupplierForm().ShowDialog();
+            DetailGrid.Rows.Clear();
+            foreach (DetailData Detail in DefaultContract.DetailList)
+            {
+                DetailGrid.Rows.Add(Detail.ToArray());
+            }
+        }
+
+        private void DepartmentSelectClick(object sender, EventArgs e)
+        {
+            DefaultContract.Department = new DepartmentForm(DefaultContract.Department).SelectDepartment();
+            Department.Text = DefaultContract.Department.Name;
+        }
+
+        private void SupplierSelectClick(object sender, EventArgs e)
+        {
+            DefaultContract.Supplier = new SupplierForm(DefaultContract.Supplier).SelectSupplier();
+            Supplier.Text = DefaultContract.Supplier.Name;
+        }
+
+        private void UpdateMenuItemClick(object sender, EventArgs e)
+        {
+            DefaultContract.DetailList[DetailGrid.SelectedRows[0].Index] = new DetailForm(DefaultContract.DetailList[DetailGrid.SelectedRows[0].Index]).UpdateDetail();
+            UpdateDetailGrid();
+        }
+
+        private void CloseMenuItemClick(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
