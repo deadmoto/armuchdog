@@ -10,7 +10,7 @@ namespace Contracts.NET
     public struct DetailData
     {
         public long Id;
-        public string Classifier;
+        public ClassifierData Classifier;
         public OpcodeData Opcode;
         public DateTime DetailDate;
         public double Price;
@@ -24,7 +24,7 @@ namespace Contracts.NET
         {
             object[] Result = new object[5];
             if (DetailDate != DateTime.MinValue) { Result[0] = DetailDate.ToShortDateString(); }
-            Result[1] = Classifier;
+            Result[1] = Classifier.Id;
             Result[2] = Opcode.Id;
             Result[3] = Comment;
             Result[4] = Price;
@@ -59,7 +59,7 @@ namespace Contracts.NET
             {
                 DetailData Detail = new DetailData();
                 Detail.Id = Reader.GetInt64(Reader.GetOrdinal("id"));
-                Detail.Classifier = Reader.GetString(Reader.GetOrdinal("nomencl")).Trim();
+                Detail.Classifier = Classifier.Find(Reader.GetString(Reader.GetOrdinal("nomencl")).Trim());
                 Detail.Opcode = Opcode.Find(Reader.GetString(Reader.GetOrdinal("code")).Trim());
                 if (!Reader.IsDBNull(Reader.GetOrdinal("subdate")))
                 {
