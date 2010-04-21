@@ -1,6 +1,6 @@
 ﻿namespace Contracts.NET
 {
-    partial class NCEAForm
+    partial class ClassifierForm
     {
         /// <summary>
         /// Required designer variable.
@@ -75,12 +75,12 @@
             this.ColumnName.ReadOnly = true;
             this.ColumnName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // TCGOMenu
+            // NCEAMenu
             // 
             this.NCEAMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu});
             this.NCEAMenu.Location = new System.Drawing.Point(0, 0);
-            this.NCEAMenu.Name = "TCGOMenu";
+            this.NCEAMenu.Name = "NCEAMenu";
             this.NCEAMenu.Size = new System.Drawing.Size(634, 24);
             this.NCEAMenu.TabIndex = 1;
             this.NCEAMenu.Text = "menuStrip1";
@@ -90,16 +90,16 @@
             this.FileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloseMenuItem});
             this.FileMenu.Name = "FileMenu";
-            this.FileMenu.Size = new System.Drawing.Size(45, 20);
+            this.FileMenu.Size = new System.Drawing.Size(48, 20);
             this.FileMenu.Text = "Файл";
             // 
             // CloseMenuItem
             // 
             this.CloseMenuItem.Name = "CloseMenuItem";
-            this.CloseMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CloseMenuItem.Size = new System.Drawing.Size(120, 22);
             this.CloseMenuItem.Text = "Закрыть";
             // 
-            // NCEAForm
+            // ClassifierForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -109,7 +109,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.NCEAMenu;
             this.MinimumSize = new System.Drawing.Size(640, 480);
-            this.Name = "NCEAForm";
+            this.Name = "ClassifierForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справочник ОКВЭД";
             ((System.ComponentModel.ISupportInitialize)(this.NCEAGrid)).EndInit();

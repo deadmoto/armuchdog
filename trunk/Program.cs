@@ -10,8 +10,8 @@ namespace Contracts.NET
         static void Main()
         {
             Department.Retrieve();
-            NCEA.Retrieve();
-            TCGO.Retrieve();
+            Classifier.Retrieve();
+            Opcode.Retrieve();
             Supplier.Retrieve();
             Detail.Retrieve();
             Contract.Retrieve();
