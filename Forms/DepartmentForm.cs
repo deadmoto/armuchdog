@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Contracts.NET
 {
@@ -15,11 +16,18 @@ namespace Contracts.NET
         public DepartmentData SelectDepartment()
         {
             SelectMenuItem.Visible = true;
-            DepartmentGrid.DoubleClick += new System.EventHandler(SelectMenuItemClick);
-            if (ShowDialog() == DialogResult.OK) { return Department.DepartmentList[DepartmentGrid.SelectedRows[0].Index]; } else { return DefaultDepartment; }
+            DepartmentGrid.DoubleClick += new EventHandler(SelectMenuItemClick);
+            if (ShowDialog() == DialogResult.OK)
+            {
+                return Department.DepartmentList[DepartmentGrid.SelectedRows[0].Index];
+            }
+            else
+            {
+                return DefaultDepartment;
+            }
         }
 
-        private void DepartmentFormLoad(object sender, System.EventArgs e)
+        private void DepartmentFormLoad(object sender, EventArgs e)
         {
             foreach (DepartmentData Item in Department.DepartmentList)
             {
@@ -28,13 +36,13 @@ namespace Contracts.NET
             }
         }
 
-        private void SelectMenuItemClick(object sender, System.EventArgs e)
+        private void SelectMenuItemClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void CloseMenuItemClick(object sender, System.EventArgs e)
+        private void CloseMenuItemClick(object sender, EventArgs e)
         {
             Close();
         }
