@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace Contracts.NET
 {
-    public partial class NCEAForm : Form
+    public partial class ClassifierForm : Form
     {
-        public NCEAForm()
+        public ClassifierForm()
         {
             InitializeComponent();
             Load += new EventHandler(delegate { NCEAFormFill(); });
@@ -15,7 +15,7 @@ namespace Contracts.NET
         private void NCEAFormFill()
         {
             NCEAGrid.Rows.Clear();
-            foreach (NCEAData Item in NCEA.NCEAList)
+            foreach (ClassifierData Item in Classifier.ClassifierList)
             {
                 object[] Row = new object[2];
                 Row[0] = Item.Id.ToString();
