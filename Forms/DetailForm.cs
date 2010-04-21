@@ -17,7 +17,7 @@ namespace Contracts.NET
         {
             if (ShowDialog() == DialogResult.OK)
             {
-                DefaultDetail.Classifier = Classifier.Text;
+                DefaultDetail.Classifier = Classifier.Find(ClassifierId.Text);
                 DefaultDetail.Opcode = Opcode.Find(OpcodeId.Text);
                 DefaultDetail.DetailDate = DateTime.Parse(DetailDate.Text);
                 DefaultDetail.Price = double.Parse(Price.Text);
@@ -33,7 +33,8 @@ namespace Contracts.NET
 
         private void DetailFormLoad(object sender, EventArgs e)
         {
-            Classifier.Text = DefaultDetail.Classifier;
+            ClassifierId.Text = DefaultDetail.Classifier.Id;
+            ClassifierName.Text = DefaultDetail.Classifier.Name;
             OpcodeId.Text = DefaultDetail.Opcode.Id;
             OpcodeName.Text = DefaultDetail.Opcode.Name;
             if (DefaultDetail.DetailDate != DateTime.MinValue) { DetailDate.Text = DefaultDetail.DetailDate.ToShortDateString(); }
