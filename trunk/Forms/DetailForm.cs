@@ -43,6 +43,20 @@ namespace Contracts.NET
             Comment.Text = DefaultDetail.Comment;
         }
 
+        private void ClassifierSelectClick(object sender, EventArgs e)
+        {
+            ClassifierData NewClassifier = new ClassifierForm(Classifier.Find(ClassifierId.Text)).SelectClassifier();
+            ClassifierId.Text = NewClassifier.Id;
+            ClassifierName.Text = NewClassifier.Name;
+        }
+
+        private void OpcodeSelectClick(object sender, EventArgs e)
+        {
+            OpcodeData NewOpcode = new OpcodeForm(Opcode.Find(OpcodeId.Text)).SelectOpcode();
+            OpcodeId.Text = NewOpcode.Id;
+            OpcodeName.Text = NewOpcode.Name;
+        }
+
         private void SaveMenuItemClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
