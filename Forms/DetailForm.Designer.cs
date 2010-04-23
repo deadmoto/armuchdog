@@ -30,6 +30,7 @@
         {
             this.ClassifierId = new System.Windows.Forms.TextBox();
             this.ClassifierBox = new System.Windows.Forms.GroupBox();
+            this.ClassifierSelect = new System.Windows.Forms.Button();
             this.ClassifierName = new System.Windows.Forms.TextBox();
             this.OpcodeBox = new System.Windows.Forms.GroupBox();
             this.OpcodeName = new System.Windows.Forms.TextBox();
@@ -48,7 +49,6 @@
             this.PriceBox = new System.Windows.Forms.GroupBox();
             this.Report = new System.Windows.Forms.CheckBox();
             this.Price = new System.Windows.Forms.TextBox();
-            this.ClassifierSelect = new System.Windows.Forms.Button();
             this.ClassifierBox.SuspendLayout();
             this.OpcodeBox.SuspendLayout();
             this.DetailMenu.SuspendLayout();
@@ -79,6 +79,16 @@
             this.ClassifierBox.TabIndex = 0;
             this.ClassifierBox.TabStop = false;
             this.ClassifierBox.Text = "ОКВЭД:";
+            // 
+            // ClassifierSelect
+            // 
+            this.ClassifierSelect.Location = new System.Drawing.Point(444, 12);
+            this.ClassifierSelect.Name = "ClassifierSelect";
+            this.ClassifierSelect.Size = new System.Drawing.Size(24, 24);
+            this.ClassifierSelect.TabIndex = 2;
+            this.ClassifierSelect.Text = "...";
+            this.ClassifierSelect.UseVisualStyleBackColor = true;
+            this.ClassifierSelect.Click += new System.EventHandler(this.ClassifierSelectClick);
             // 
             // ClassifierName
             // 
@@ -119,6 +129,7 @@
             this.OpcodeSelect.TabIndex = 2;
             this.OpcodeSelect.Text = "...";
             this.OpcodeSelect.UseVisualStyleBackColor = true;
+            this.OpcodeSelect.Click += new System.EventHandler(this.OpcodeSelectClick);
             // 
             // OpcodeId
             // 
@@ -255,15 +266,6 @@
             this.Price.Size = new System.Drawing.Size(122, 20);
             this.Price.TabIndex = 1;
             this.Price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // ClassifierSelect
-            // 
-            this.ClassifierSelect.Location = new System.Drawing.Point(444, 12);
-            this.ClassifierSelect.Name = "ClassifierSelect";
-            this.ClassifierSelect.Size = new System.Drawing.Size(24, 24);
-            this.ClassifierSelect.TabIndex = 2;
-            this.ClassifierSelect.Text = "...";
-            this.ClassifierSelect.UseVisualStyleBackColor = true;
             // 
             // DetailForm
             // 
