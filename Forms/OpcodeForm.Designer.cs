@@ -61,7 +61,7 @@
             // SelectMenuItem
             // 
             this.SelectMenuItem.Name = "SelectMenuItem";
-            this.SelectMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.SelectMenuItem.Size = new System.Drawing.Size(121, 22);
             this.SelectMenuItem.Text = "Выбрать";
             this.SelectMenuItem.Visible = false;
             this.SelectMenuItem.Click += new System.EventHandler(this.SelectMenuItemClick);
@@ -69,7 +69,7 @@
             // CloseMenuItem
             // 
             this.CloseMenuItem.Name = "CloseMenuItem";
-            this.CloseMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CloseMenuItem.Size = new System.Drawing.Size(121, 22);
             this.CloseMenuItem.Text = "Закрыть";
             this.CloseMenuItem.Click += new System.EventHandler(this.CloseMenuItemClick);
             // 
@@ -87,9 +87,11 @@
             this.ColumnName});
             this.OpcodeGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OpcodeGrid.Location = new System.Drawing.Point(0, 24);
+            this.OpcodeGrid.MultiSelect = false;
             this.OpcodeGrid.Name = "OpcodeGrid";
             this.OpcodeGrid.ReadOnly = true;
             this.OpcodeGrid.RowHeadersVisible = false;
+            this.OpcodeGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.OpcodeGrid.Size = new System.Drawing.Size(634, 431);
             this.OpcodeGrid.TabIndex = 3;
             // 

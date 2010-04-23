@@ -17,14 +17,7 @@ namespace Contracts.NET
         {
             SelectMenuItem.Visible = true;
             OpcodeGrid.DoubleClick += new EventHandler(SelectMenuItemClick);
-            if (ShowDialog() == DialogResult.OK)
-            {
-                return Opcode.OpcodeList[OpcodeGrid.SelectedRows[0].Index];
-            }
-            else
-            {
-                return DefaultOpcode;
-            }
+            if (ShowDialog() == DialogResult.OK) { return Opcode.OpcodeList[OpcodeGrid.SelectedRows[0].Index]; } else { return DefaultOpcode; }
         }
 
         private void OpcodeFormLoad(object sender, EventArgs e)
