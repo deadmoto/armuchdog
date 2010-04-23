@@ -17,14 +17,7 @@ namespace Contracts.NET
         {
             SelectMenuItem.Visible = true;
             DepartmentGrid.DoubleClick += new EventHandler(SelectMenuItemClick);
-            if (ShowDialog() == DialogResult.OK)
-            {
-                return Department.DepartmentList[DepartmentGrid.SelectedRows[0].Index];
-            }
-            else
-            {
-                return DefaultDepartment;
-            }
+            if (ShowDialog() == DialogResult.OK) { return Department.DepartmentList[DepartmentGrid.SelectedRows[0].Index]; } else { return DefaultDepartment; }
         }
 
         private void DepartmentFormLoad(object sender, EventArgs e)
