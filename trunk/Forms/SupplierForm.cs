@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Forms;
 
 namespace Contracts.NET
@@ -15,11 +16,11 @@ namespace Contracts.NET
         public SupplierData SelectSupplier()
         {
             SelectMenuItem.Visible = true;
-            SupplierGrid.DoubleClick += new System.EventHandler(SelectMenuItemClick);
+            SupplierGrid.DoubleClick += new EventHandler(SelectMenuItemClick);
             if (ShowDialog() == DialogResult.OK) { return Supplier.SupplierList[SupplierGrid.SelectedRows[0].Index]; } else { return DefaultSupplier; }
         }
 
-        private void SupplierFormLoad(object sender, System.EventArgs e)
+        private void SupplierFormLoad(object sender, EventArgs e)
         {
             foreach (SupplierData Item in Supplier.SupplierList)
             {
@@ -27,15 +28,14 @@ namespace Contracts.NET
                 if (DefaultSupplier.Id == Item.Id) { SupplierGrid.Rows[Index].Selected = true; }
             }
         }
-
-
-        private void SelectMenuItemClick(object sender, System.EventArgs e)
+        
+        private void SelectMenuItemClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void CloseMenuItemClick(object sender, System.EventArgs e)
+        private void CloseMenuItemClick(object sender, EventArgs e)
         {
             Close();
         }
