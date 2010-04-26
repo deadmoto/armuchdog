@@ -55,15 +55,39 @@ namespace Contracts.NET
             Supplier.Text = DefaultContract.Supplier.Name;
         }
 
+        private void InsertMenuItemClick(object sender, EventArgs e)
+        {
+            DetailData? Detail = new DetailForm().InsertDetail();
+            if (Detail.HasValue)
+            {
+                DefaultContract.DetailList.Add(Detail.Value);
+                UpdateDetailGrid();
+            }
+        }
+
         private void UpdateMenuItemClick(object sender, EventArgs e)
         {
-            DefaultContract.DetailList[DetailGrid.SelectedRows[0].Index] = new DetailForm(DefaultContract.DetailList[DetailGrid.SelectedRows[0].Index]).UpdateDetail();
-            UpdateDetailGrid();
+            DetailData? Detail = new DetailForm(DefaultContract.DetailList[DetailGrid.SelectedRows[0].Index]).UpdateDetail();
+            if (Detail.HasValue)
+            {
+                DefaultContract.DetailList[DetailGrid.SelectedRows[0].Index] = Detail.Value;
+                UpdateDetailGrid();
+            }
+        }
+
+        private void DeleteMenuItemClick(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Удалить позицию договора?", Text, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                DefaultContract.DetailList.RemoveAt(DetailGrid.SelectedRows[0].Index);
+                UpdateDetailGrid();
+            }
         }
 
         private void CloseMenuItemClick(object sender, EventArgs e)
         {
             Close();
         }
+
     }
 }
