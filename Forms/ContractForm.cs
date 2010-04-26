@@ -57,7 +57,7 @@ namespace Contracts.NET
 
         private void InsertMenuItemClick(object sender, EventArgs e)
         {
-            DetailData? Detail = new DetailForm().InsertDetail();
+            DetailData? Detail = new DetailForm().GetDetail();
             if (Detail.HasValue)
             {
                 DefaultContract.DetailList.Add(Detail.Value);
@@ -67,7 +67,7 @@ namespace Contracts.NET
 
         private void UpdateMenuItemClick(object sender, EventArgs e)
         {
-            DetailData? Detail = new DetailForm(DefaultContract.DetailList[DetailGrid.SelectedRows[0].Index]).UpdateDetail();
+            DetailData? Detail = new DetailForm(DefaultContract.DetailList[DetailGrid.SelectedRows[0].Index]).GetDetail();
             if (Detail.HasValue)
             {
                 DefaultContract.DetailList[DetailGrid.SelectedRows[0].Index] = Detail.Value;
