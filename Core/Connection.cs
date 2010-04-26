@@ -28,20 +28,15 @@ namespace Contracts.NET
             }
         }
 
+        /// <summary>
+        /// Returns SqlCommand connected to SQL Server
+        /// </summary>
         public static SqlCommand GetCommand(string Query)
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
             Connection.Open();
             SqlCommand Command = new SqlCommand(Query, Connection);
             return Command;
-        }
-
-        public static SqlDataReader OpenSQL(string Query)
-        {
-            SqlConnection Connection = new SqlConnection(ConnectionString);
-            Connection.Open();
-            SqlCommand SQLCommand = new SqlCommand(Query, Connection);
-            return SQLCommand.ExecuteReader();
         }
     }
 }
