@@ -285,7 +285,6 @@
             this.Name = "DetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Позиция договора";
-            this.Load += new System.EventHandler(this.DetailFormLoad);
             this.ClassifierBox.ResumeLayout(false);
             this.ClassifierBox.PerformLayout();
             this.OpcodeBox.ResumeLayout(false);
