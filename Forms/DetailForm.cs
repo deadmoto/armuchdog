@@ -13,7 +13,7 @@ namespace Contracts.NET
             this.DefaultDetail = DefaultDetail;
         }
 
-        public DetailData UpdateDetail()
+        public DetailData? InsertDetail()
         {
             if (ShowDialog() == DialogResult.OK)
             {
@@ -27,7 +27,25 @@ namespace Contracts.NET
             }
             else
             {
+                return null;
+            }
+        }
+
+        public DetailData? UpdateDetail()
+        {
+            if (ShowDialog() == DialogResult.OK)
+            {
+                DefaultDetail.Classifier = Classifier.Find(ClassifierId.Text);
+                DefaultDetail.Opcode = Opcode.Find(OpcodeId.Text);
+                DefaultDetail.DetailDate = DateTime.Parse(DetailDate.Text);
+                DefaultDetail.Price = double.Parse(Price.Text);
+                DefaultDetail.Report = Report.Checked;
+                DefaultDetail.Comment = Comment.Text;
                 return DefaultDetail;
+            }
+            else
+            {
+                return null;
             }
         }
 
