@@ -5,25 +5,27 @@ namespace Contracts.NET
 {
     public partial class DetailForm : Form
     {
-        private DetailData DefaultDetail;
-
-        public DetailForm(DetailData DefaultDetail = new DetailData())
+        public DetailForm(DetailData? Detail = null)
         {
             InitializeComponent();
-            this.DefaultDetail = DefaultDetail;
+            if (Detail.HasValue)
+            {
+                LoadDetail(Detail.Value);
+            }
         }
 
-        public DetailData? InsertDetail()
+        public DetailData? GetDetail()
         {
             if (ShowDialog() == DialogResult.OK)
             {
-                DefaultDetail.Classifier = Classifier.Find(ClassifierId.Text);
-                DefaultDetail.Opcode = Opcode.Find(OpcodeId.Text);
-                DefaultDetail.DetailDate = DateTime.Parse(DetailDate.Text);
-                DefaultDetail.Price = double.Parse(Price.Text);
-                DefaultDetail.Report = Report.Checked;
-                DefaultDetail.Comment = Comment.Text;
-                return DefaultDetail;
+                DetailData Detail = new DetailData();
+                Detail.Classifier = Classifier.Find(ClassifierId.Text);
+                Detail.Opcode = Opcode.Find(OpcodeId.Text);
+                Detail.DetailDate = DateTime.Parse(DetailDate.Text);
+                Detail.Price = double.Parse(Price.Text);
+                Detail.Report = Report.Checked;
+                Detail.Comment = Comment.Text;
+                return Detail;
             }
             else
             {
@@ -31,34 +33,16 @@ namespace Contracts.NET
             }
         }
 
-        public DetailData? UpdateDetail()
+        private void LoadDetail(DetailData Detail)
         {
-            if (ShowDialog() == DialogResult.OK)
-            {
-                DefaultDetail.Classifier = Classifier.Find(ClassifierId.Text);
-                DefaultDetail.Opcode = Opcode.Find(OpcodeId.Text);
-                DefaultDetail.DetailDate = DateTime.Parse(DetailDate.Text);
-                DefaultDetail.Price = double.Parse(Price.Text);
-                DefaultDetail.Report = Report.Checked;
-                DefaultDetail.Comment = Comment.Text;
-                return DefaultDetail;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private void DetailFormLoad(object sender, EventArgs e)
-        {
-            ClassifierId.Text = DefaultDetail.Classifier.Id;
-            ClassifierName.Text = DefaultDetail.Classifier.Name;
-            OpcodeId.Text = DefaultDetail.Opcode.Id;
-            OpcodeName.Text = DefaultDetail.Opcode.Name;
-            if (DefaultDetail.DetailDate != DateTime.MinValue) { DetailDate.Text = DefaultDetail.DetailDate.ToShortDateString(); }
-            Price.Text = DefaultDetail.Price.ToString();
-            Report.Checked = DefaultDetail.Report;
-            Comment.Text = DefaultDetail.Comment;
+            ClassifierId.Text = Detail.Classifier.Id;
+            ClassifierName.Text = Detail.Classifier.Name;
+            OpcodeId.Text = Detail.Opcode.Id;
+            OpcodeName.Text = Detail.Opcode.Name;
+            if (Detail.DetailDate != DateTime.MinValue) { DetailDate.Text = Detail.DetailDate.ToShortDateString(); }
+            Price.Text = Detail.Price.ToString();
+            Report.Checked = Detail.Report;
+            Comment.Text = Detail.Comment;
         }
 
         private void ClassifierSelectClick(object sender, EventArgs e)
