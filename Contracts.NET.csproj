@@ -54,6 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\ContractData.cs" />
+    <Compile Include="Data\DepartmentData.cs" />
+    <Compile Include="Data\DetailData.cs" />
+    <Compile Include="Data\SupplierData.cs" />
     <Compile Include="Forms\DetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,9 +76,9 @@
     <Compile Include="Forms\ContractForm.Designer.cs">
       <DependentUpon>ContractForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Department.cs" />
-    <Compile Include="Core\Contract.cs" />
-    <Compile Include="Core\Detail.cs" />
+    <Compile Include="Data\Department.cs" />
+    <Compile Include="Data\Contract.cs" />
+    <Compile Include="Data\Detail.cs" />
     <Compile Include="Core\Classifier.cs" />
     <Compile Include="Core\Supplier.cs" />
     <Compile Include="Core\Opcode.cs" />
@@ -92,7 +96,7 @@
     </Compile>
     <Compile Include="Forms\InputBox.cs">
     </Compile>
-    <Compile Include="Core\Connection.cs" />
+    <Compile Include="Core\Client.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,57 +1,43 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
+using Contracts.NET.Core;
+using Contracts.NET.Data;
 
 namespace Contracts.NET
 {
-    /// <summary>
-    /// Represents supplier data
-    /// </summary>
-    public struct SupplierData
-    {
-        public int Id;
-        public string Name;
-
-        /// <summary>
-        /// Returns array of fields
-        /// </summary>
-        public object[] ToArray()
-        {
-            object[] Result = new object[2];
-            Result[0] = Id;
-            Result[1] = Name;
-            return Result;
-        }
-    }
-
-    /// <summary>
-    /// Provides access to supplier list
-    /// </summary>
     static class Supplier
     {
-        public static List<SupplierData> SupplierList = new List<SupplierData>();
+        public static List<SupplierData> Items = new List<SupplierData>();
 
-        /// <summary>
-        /// Returns supplier by Id
-        /// </summary>
         public static SupplierData Find(int Id)
         {
-            return SupplierList.Find(delegate(SupplierData Supplier) { return Supplier.Id == Id; });
+            SupplierData Data = Items.Find(delegate(SupplierData Supplier) { return Supplier.Id == Id; });
+
+            if (Data == null)
+            {
+                return new SupplierData();
+            }
+            else
+            {
+                return Data;
+            }
         }
 
-        /// <summary>
-        /// Retrieves supplier list from database
-        /// </summary>
-        public static void Retrieve()
+        public static void Fetch()
         {
-            SupplierList.Clear();
-            SqlCommand Command = Connection.GetCommand("SELECT * FROM SupplierDog");
+            SqlCommand Command = Client.GetCommand("SELECT * FROM SupplierDog");
             SqlDataReader Reader = Command.ExecuteReader();
+
+            Items.Clear();
+
             while (Reader.Read())
             {
                 SupplierData Supplier = new SupplierData();
+
                 Supplier.Id = Reader.GetInt32(Reader.GetOrdinal("ID_SUPPLIER"));
                 Supplier.Name = Reader.GetString(Reader.GetOrdinal("SUPPLIER")).Trim();
-                SupplierList.Add(Supplier);
+
+                Items.Add(Supplier);
             }
         }
     }

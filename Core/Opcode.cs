@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
+using Contracts.NET.Core;
 
 namespace Contracts.NET
 {
@@ -41,10 +42,10 @@ namespace Contracts.NET
         /// <summary>
         /// Retrieves opcode list from database
         /// </summary>
-        public static void Retrieve()
+        public static void Fetch()
         {
             OpcodeList.Clear();
-            SqlCommand Command = Connection.GetCommand("SELECT * FROM ArticleDog");
+            SqlCommand Command = Client.GetCommand("SELECT * FROM ArticleDog");
             SqlDataReader Reader = Command.ExecuteReader();
             while (Reader.Read())
             {
