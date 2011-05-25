@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
+using Contracts.NET.Core;
 
 namespace Contracts.NET
 {
@@ -41,10 +42,10 @@ namespace Contracts.NET
         /// <summary>
         /// Retrieves classifier list from database
         /// </summary>
-        public static void Retrieve()
+        public static void Fetch()
         {
             ClassifierList.Clear();
-            SqlCommand Command = Connection.GetCommand("SELECT * FROM NomenclDog");
+            SqlCommand Command = Client.GetCommand("SELECT * FROM NomenclDog");
             SqlDataReader Reader = Command.ExecuteReader();
             while (Reader.Read())
             {

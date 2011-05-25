@@ -42,13 +42,13 @@
             this.DetailMenu = new System.Windows.Forms.MenuStrip();
             this.CommentBox = new System.Windows.Forms.GroupBox();
             this.Comment = new System.Windows.Forms.TextBox();
-            this.DetailDate = new System.Windows.Forms.MaskedTextBox();
             this.DetailDateBox = new System.Windows.Forms.GroupBox();
+            this.DetailDate = new System.Windows.Forms.DateTimePicker();
             this.Balance = new System.Windows.Forms.TextBox();
             this.BalanceBox = new System.Windows.Forms.GroupBox();
             this.PriceBox = new System.Windows.Forms.GroupBox();
-            this.Report = new System.Windows.Forms.CheckBox();
             this.Price = new System.Windows.Forms.TextBox();
+            this.Report = new System.Windows.Forms.CheckBox();
             this.ClassifierBox.SuspendLayout();
             this.OpcodeBox.SuspendLayout();
             this.DetailMenu.SuspendLayout();
@@ -60,11 +60,10 @@
             // 
             // ClassifierId
             // 
-            this.ClassifierId.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ClassifierId.Location = new System.Drawing.Point(3, 16);
+            this.ClassifierId.Location = new System.Drawing.Point(6, 19);
             this.ClassifierId.Name = "ClassifierId";
             this.ClassifierId.ReadOnly = true;
-            this.ClassifierId.Size = new System.Drawing.Size(64, 20);
+            this.ClassifierId.Size = new System.Drawing.Size(108, 20);
             this.ClassifierId.TabIndex = 0;
             // 
             // ClassifierBox
@@ -72,17 +71,16 @@
             this.ClassifierBox.Controls.Add(this.ClassifierSelect);
             this.ClassifierBox.Controls.Add(this.ClassifierName);
             this.ClassifierBox.Controls.Add(this.ClassifierId);
-            this.ClassifierBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ClassifierBox.Location = new System.Drawing.Point(0, 24);
+            this.ClassifierBox.Location = new System.Drawing.Point(12, 27);
             this.ClassifierBox.Name = "ClassifierBox";
-            this.ClassifierBox.Size = new System.Drawing.Size(474, 42);
+            this.ClassifierBox.Size = new System.Drawing.Size(474, 45);
             this.ClassifierBox.TabIndex = 0;
             this.ClassifierBox.TabStop = false;
             this.ClassifierBox.Text = "ОКВЭД:";
             // 
             // ClassifierSelect
             // 
-            this.ClassifierSelect.Location = new System.Drawing.Point(444, 12);
+            this.ClassifierSelect.Location = new System.Drawing.Point(444, 16);
             this.ClassifierSelect.Name = "ClassifierSelect";
             this.ClassifierSelect.Size = new System.Drawing.Size(24, 24);
             this.ClassifierSelect.TabIndex = 2;
@@ -92,11 +90,10 @@
             // 
             // ClassifierName
             // 
-            this.ClassifierName.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ClassifierName.Location = new System.Drawing.Point(67, 16);
+            this.ClassifierName.Location = new System.Drawing.Point(132, 19);
             this.ClassifierName.Name = "ClassifierName";
             this.ClassifierName.ReadOnly = true;
-            this.ClassifierName.Size = new System.Drawing.Size(371, 20);
+            this.ClassifierName.Size = new System.Drawing.Size(306, 20);
             this.ClassifierName.TabIndex = 1;
             // 
             // OpcodeBox
@@ -104,26 +101,24 @@
             this.OpcodeBox.Controls.Add(this.OpcodeName);
             this.OpcodeBox.Controls.Add(this.OpcodeSelect);
             this.OpcodeBox.Controls.Add(this.OpcodeId);
-            this.OpcodeBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.OpcodeBox.Location = new System.Drawing.Point(0, 66);
+            this.OpcodeBox.Location = new System.Drawing.Point(12, 78);
             this.OpcodeBox.Name = "OpcodeBox";
-            this.OpcodeBox.Size = new System.Drawing.Size(474, 43);
+            this.OpcodeBox.Size = new System.Drawing.Size(474, 45);
             this.OpcodeBox.TabIndex = 1;
             this.OpcodeBox.TabStop = false;
             this.OpcodeBox.Text = "КОСГУ:";
             // 
             // OpcodeName
             // 
-            this.OpcodeName.Dock = System.Windows.Forms.DockStyle.Left;
-            this.OpcodeName.Location = new System.Drawing.Point(67, 16);
+            this.OpcodeName.Location = new System.Drawing.Point(132, 19);
             this.OpcodeName.Name = "OpcodeName";
             this.OpcodeName.ReadOnly = true;
-            this.OpcodeName.Size = new System.Drawing.Size(371, 20);
+            this.OpcodeName.Size = new System.Drawing.Size(306, 20);
             this.OpcodeName.TabIndex = 1;
             // 
             // OpcodeSelect
             // 
-            this.OpcodeSelect.Location = new System.Drawing.Point(444, 12);
+            this.OpcodeSelect.Location = new System.Drawing.Point(444, 16);
             this.OpcodeSelect.Name = "OpcodeSelect";
             this.OpcodeSelect.Size = new System.Drawing.Size(24, 24);
             this.OpcodeSelect.TabIndex = 2;
@@ -133,11 +128,10 @@
             // 
             // OpcodeId
             // 
-            this.OpcodeId.Dock = System.Windows.Forms.DockStyle.Left;
-            this.OpcodeId.Location = new System.Drawing.Point(3, 16);
+            this.OpcodeId.Location = new System.Drawing.Point(6, 19);
             this.OpcodeId.Name = "OpcodeId";
             this.OpcodeId.ReadOnly = true;
-            this.OpcodeId.Size = new System.Drawing.Size(64, 20);
+            this.OpcodeId.Size = new System.Drawing.Size(108, 20);
             this.OpcodeId.TabIndex = 0;
             // 
             // FileMenu
@@ -169,14 +163,13 @@
             this.FileMenu});
             this.DetailMenu.Location = new System.Drawing.Point(0, 0);
             this.DetailMenu.Name = "DetailMenu";
-            this.DetailMenu.Size = new System.Drawing.Size(474, 24);
+            this.DetailMenu.Size = new System.Drawing.Size(498, 24);
             this.DetailMenu.TabIndex = 0;
             // 
             // CommentBox
             // 
             this.CommentBox.Controls.Add(this.Comment);
-            this.CommentBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.CommentBox.Location = new System.Drawing.Point(0, 151);
+            this.CommentBox.Location = new System.Drawing.Point(12, 180);
             this.CommentBox.Name = "CommentBox";
             this.CommentBox.Size = new System.Drawing.Size(474, 141);
             this.CommentBox.TabIndex = 5;
@@ -193,85 +186,82 @@
             this.Comment.Size = new System.Drawing.Size(468, 122);
             this.Comment.TabIndex = 0;
             // 
-            // DetailDate
-            // 
-            this.DetailDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DetailDate.Location = new System.Drawing.Point(3, 16);
-            this.DetailDate.Mask = "00/00/0000";
-            this.DetailDate.Name = "DetailDate";
-            this.DetailDate.Size = new System.Drawing.Size(61, 20);
-            this.DetailDate.TabIndex = 0;
-            this.DetailDate.ValidatingType = typeof(System.DateTime);
-            // 
             // DetailDateBox
             // 
             this.DetailDateBox.Controls.Add(this.DetailDate);
-            this.DetailDateBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.DetailDateBox.Location = new System.Drawing.Point(0, 109);
+            this.DetailDateBox.Location = new System.Drawing.Point(12, 129);
             this.DetailDateBox.Name = "DetailDateBox";
-            this.DetailDateBox.Size = new System.Drawing.Size(67, 42);
+            this.DetailDateBox.Size = new System.Drawing.Size(120, 45);
             this.DetailDateBox.TabIndex = 2;
             this.DetailDateBox.TabStop = false;
             this.DetailDateBox.Text = "Дата:";
             // 
+            // DetailDate
+            // 
+            this.DetailDate.Checked = false;
+            this.DetailDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DetailDate.Location = new System.Drawing.Point(6, 19);
+            this.DetailDate.Name = "DetailDate";
+            this.DetailDate.ShowCheckBox = true;
+            this.DetailDate.Size = new System.Drawing.Size(108, 20);
+            this.DetailDate.TabIndex = 0;
+            // 
             // Balance
             // 
-            this.Balance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Balance.Location = new System.Drawing.Point(3, 16);
+            this.Balance.Location = new System.Drawing.Point(6, 16);
             this.Balance.Name = "Balance";
             this.Balance.ReadOnly = true;
-            this.Balance.Size = new System.Drawing.Size(122, 20);
+            this.Balance.Size = new System.Drawing.Size(91, 20);
             this.Balance.TabIndex = 0;
+            this.Balance.Text = "0";
             this.Balance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // BalanceBox
             // 
             this.BalanceBox.Controls.Add(this.Balance);
-            this.BalanceBox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.BalanceBox.Location = new System.Drawing.Point(346, 109);
+            this.BalanceBox.Location = new System.Drawing.Point(383, 129);
             this.BalanceBox.Name = "BalanceBox";
-            this.BalanceBox.Size = new System.Drawing.Size(128, 42);
+            this.BalanceBox.Size = new System.Drawing.Size(103, 45);
             this.BalanceBox.TabIndex = 4;
             this.BalanceBox.TabStop = false;
             this.BalanceBox.Text = "Остаток:";
             // 
             // PriceBox
             // 
-            this.PriceBox.Controls.Add(this.Report);
             this.PriceBox.Controls.Add(this.Price);
-            this.PriceBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PriceBox.Location = new System.Drawing.Point(67, 109);
+            this.PriceBox.Controls.Add(this.Report);
+            this.PriceBox.Location = new System.Drawing.Point(138, 129);
             this.PriceBox.Name = "PriceBox";
-            this.PriceBox.Size = new System.Drawing.Size(279, 42);
+            this.PriceBox.Size = new System.Drawing.Size(239, 45);
             this.PriceBox.TabIndex = 3;
             this.PriceBox.TabStop = false;
             this.PriceBox.Text = "Сумма:";
             // 
+            // Price
+            // 
+            this.Price.Location = new System.Drawing.Point(141, 16);
+            this.Price.Name = "Price";
+            this.Price.Size = new System.Drawing.Size(92, 20);
+            this.Price.TabIndex = 2;
+            this.Price.Text = "0";
+            this.Price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Price.TextChanged += new System.EventHandler(this.Validate);
+            // 
             // Report
             // 
             this.Report.AutoSize = true;
-            this.Report.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Report.Location = new System.Drawing.Point(3, 16);
+            this.Report.Location = new System.Drawing.Point(6, 19);
             this.Report.Name = "Report";
-            this.Report.Size = new System.Drawing.Size(151, 23);
+            this.Report.Size = new System.Drawing.Size(129, 17);
             this.Report.TabIndex = 0;
             this.Report.Text = "Скрывать в отчётах:";
             this.Report.UseVisualStyleBackColor = true;
-            // 
-            // Price
-            // 
-            this.Price.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Price.Location = new System.Drawing.Point(154, 16);
-            this.Price.Name = "Price";
-            this.Price.Size = new System.Drawing.Size(122, 20);
-            this.Price.TabIndex = 1;
-            this.Price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // DetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 292);
+            this.ClientSize = new System.Drawing.Size(498, 333);
             this.Controls.Add(this.PriceBox);
             this.Controls.Add(this.BalanceBox);
             this.Controls.Add(this.DetailDateBox);
@@ -294,7 +284,6 @@
             this.CommentBox.ResumeLayout(false);
             this.CommentBox.PerformLayout();
             this.DetailDateBox.ResumeLayout(false);
-            this.DetailDateBox.PerformLayout();
             this.BalanceBox.ResumeLayout(false);
             this.BalanceBox.PerformLayout();
             this.PriceBox.ResumeLayout(false);
@@ -317,16 +306,16 @@
         private System.Windows.Forms.MenuStrip DetailMenu;
         private System.Windows.Forms.GroupBox CommentBox;
         private System.Windows.Forms.TextBox Comment;
-        private System.Windows.Forms.MaskedTextBox DetailDate;
         private System.Windows.Forms.GroupBox DetailDateBox;
         private System.Windows.Forms.TextBox Balance;
         private System.Windows.Forms.GroupBox BalanceBox;
         private System.Windows.Forms.GroupBox PriceBox;
         private System.Windows.Forms.CheckBox Report;
-        private System.Windows.Forms.TextBox Price;
         private System.Windows.Forms.TextBox ClassifierName;
         private System.Windows.Forms.TextBox OpcodeName;
         private System.Windows.Forms.Button ClassifierSelect;
+        private System.Windows.Forms.DateTimePicker DetailDate;
+        private System.Windows.Forms.TextBox Price;
 
 
     }

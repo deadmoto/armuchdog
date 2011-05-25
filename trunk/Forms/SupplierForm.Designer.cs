@@ -33,11 +33,11 @@ namespace Contracts.NET
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CloseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SupplierGrid = new System.Windows.Forms.DataGridView();
+            this.Grid = new System.Windows.Forms.DataGridView();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplierMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SupplierGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
             this.SuspendLayout();
             // 
             // SupplierMenu
@@ -61,7 +61,7 @@ namespace Contracts.NET
             // SelectMenuItem
             // 
             this.SelectMenuItem.Name = "SelectMenuItem";
-            this.SelectMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.SelectMenuItem.Size = new System.Drawing.Size(121, 22);
             this.SelectMenuItem.Text = "Выбрать";
             this.SelectMenuItem.Visible = false;
             this.SelectMenuItem.Click += new System.EventHandler(this.SelectMenuItemClick);
@@ -69,19 +69,19 @@ namespace Contracts.NET
             // CloseMenuItem
             // 
             this.CloseMenuItem.Name = "CloseMenuItem";
-            this.CloseMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CloseMenuItem.Size = new System.Drawing.Size(121, 22);
             this.CloseMenuItem.Text = "Закрыть";
             this.CloseMenuItem.Click += new System.EventHandler(this.CloseMenuItemClick);
             // 
-            // SupplierGrid
+            // Grid
             // 
-            this.SupplierGrid.AllowUserToAddRows = false;
-            this.SupplierGrid.AllowUserToDeleteRows = false;
-            this.SupplierGrid.AllowUserToResizeColumns = false;
-            this.SupplierGrid.AllowUserToResizeRows = false;
-            this.SupplierGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            this.SupplierGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.SupplierGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Grid.AllowUserToAddRows = false;
+            this.Grid.AllowUserToDeleteRows = false;
+            this.Grid.AllowUserToResizeColumns = false;
+            this.Grid.AllowUserToResizeRows = false;
+            this.Grid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnId,
             this.ColumnName});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -91,16 +91,17 @@ namespace Contracts.NET
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SupplierGrid.DefaultCellStyle = dataGridViewCellStyle1;
-            this.SupplierGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SupplierGrid.Location = new System.Drawing.Point(0, 24);
-            this.SupplierGrid.MultiSelect = false;
-            this.SupplierGrid.Name = "SupplierGrid";
-            this.SupplierGrid.ReadOnly = true;
-            this.SupplierGrid.RowHeadersVisible = false;
-            this.SupplierGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.SupplierGrid.Size = new System.Drawing.Size(634, 431);
-            this.SupplierGrid.TabIndex = 1;
+            this.Grid.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Grid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Grid.Location = new System.Drawing.Point(0, 24);
+            this.Grid.MultiSelect = false;
+            this.Grid.Name = "Grid";
+            this.Grid.ReadOnly = true;
+            this.Grid.RowHeadersVisible = false;
+            this.Grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.Grid.Size = new System.Drawing.Size(634, 428);
+            this.Grid.TabIndex = 1;
+            this.Grid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectMenuItemClick);
             // 
             // ColumnId
             // 
@@ -124,8 +125,8 @@ namespace Contracts.NET
             // SupplierForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(634, 455);
-            this.Controls.Add(this.SupplierGrid);
+            this.ClientSize = new System.Drawing.Size(634, 452);
+            this.Controls.Add(this.Grid);
             this.Controls.Add(this.SupplierMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -136,7 +137,7 @@ namespace Contracts.NET
             this.Load += new System.EventHandler(this.SupplierFormLoad);
             this.SupplierMenu.ResumeLayout(false);
             this.SupplierMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SupplierGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,7 +149,7 @@ namespace Contracts.NET
         private System.Windows.Forms.ToolStripMenuItem FileMenu;
         private System.Windows.Forms.ToolStripMenuItem SelectMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CloseMenuItem;
-        private System.Windows.Forms.DataGridView SupplierGrid;
+        private System.Windows.Forms.DataGridView Grid;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
     }

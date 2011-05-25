@@ -1,28 +1,38 @@
 ﻿using System;
 using System.Windows.Forms;
+using Contracts.NET.Data;
 
 namespace Contracts.NET
 {
     public partial class DetailForm : Form
     {
-        public DetailForm(DetailData? Detail = null)
+        public DetailForm(DetailData Detail = null)
         {
             InitializeComponent();
-            if (Detail.HasValue)
+            if (Detail != null)
             {
-                LoadDetail(Detail.Value);
+                LoadDetail(Detail);
             }
         }
 
-        public DetailData? GetDetail()
+        public DetailData GetDetail()
         {
             if (ShowDialog() == DialogResult.OK)
             {
                 DetailData Detail = new DetailData();
                 Detail.Classifier = Classifier.Find(ClassifierId.Text);
                 Detail.Opcode = Opcode.Find(OpcodeId.Text);
-                Detail.DetailDate = DateTime.Parse(DetailDate.Text);
-                Detail.Price = double.Parse(Price.Text);
+
+                if (DetailDate.Checked)
+                {
+                    Detail.DetailDate = DetailDate.Value;
+                }
+                else
+                {
+                    Detail.DetailDate = DateTime.MinValue;
+                }
+
+                double.TryParse(Price.Text, out Detail.Price);
                 Detail.Report = Report.Checked;
                 Detail.Comment = Comment.Text;
                 return Detail;
@@ -39,10 +49,22 @@ namespace Contracts.NET
             ClassifierName.Text = Detail.Classifier.Name;
             OpcodeId.Text = Detail.Opcode.Id;
             OpcodeName.Text = Detail.Opcode.Name;
-            if (Detail.DetailDate != DateTime.MinValue) { DetailDate.Text = Detail.DetailDate.ToShortDateString(); }
+            DetailDate.Checked = Detail.DetailDate != DateTime.MinValue;
+
+            if (Detail.DetailDate != DateTime.MinValue)
+            {
+                DetailDate.Value = Detail.DetailDate;
+            }
+
             Price.Text = Detail.Price.ToString();
             Report.Checked = Detail.Report;
             Comment.Text = Detail.Comment;
+        }
+
+        private void Validate(object sender, EventArgs e)
+        {
+            double Result;
+            SaveMenuItem.Enabled = double.TryParse(Price.Text, out Result);
         }
 
         private void ClassifierSelectClick(object sender, EventArgs e)

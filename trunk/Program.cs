@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using System.Threading;
+using Contracts.NET.Data;
 
 namespace Contracts.NET
 {
@@ -9,12 +10,12 @@ namespace Contracts.NET
         [STAThread]
         static void Main()
         {
-            Department.Retrieve();
-            Classifier.Retrieve();
-            Opcode.Retrieve();
-            Supplier.Retrieve();
-            Detail.Retrieve();
-            Contract.Retrieve();
+            Department.Fetch();
+            Classifier.Fetch();
+            Opcode.Fetch();
+            Supplier.Fetch();
+            Detail.Fetch();
+            Contract.Fetch();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

@@ -1,34 +1,39 @@
 using System;
 using System.Windows.Forms;
+using Contracts.NET.Data;
 
 namespace Contracts.NET
 {
     public partial class SupplierForm : Form
     {
-        private SupplierData DefaultSupplier;
-
-        public SupplierForm(SupplierData DefaultSupplier = new SupplierData())
+        public SupplierForm()
         {
             InitializeComponent();
-            this.DefaultSupplier = DefaultSupplier;
+            Grid.CellDoubleClick += SelectMenuItemClick;
         }
 
         public SupplierData SelectSupplier()
         {
             SelectMenuItem.Visible = true;
-            SupplierGrid.DoubleClick += new EventHandler(SelectMenuItemClick);
-            if (ShowDialog() == DialogResult.OK) { return Supplier.SupplierList[SupplierGrid.SelectedRows[0].Index]; } else { return DefaultSupplier; }
+
+            if (ShowDialog() == DialogResult.OK)
+            {
+                return Supplier.Items[Grid.SelectedRows[0].Index];
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private void SupplierFormLoad(object sender, EventArgs e)
         {
-            foreach (SupplierData Item in Supplier.SupplierList)
+            foreach (SupplierData Item in Supplier.Items)
             {
-                int Index = SupplierGrid.Rows.Add(Item.ToArray());
-                if (DefaultSupplier.Id == Item.Id) { SupplierGrid.Rows[Index].Selected = true; }
+                Grid.Rows.Add(Item.ToArray());
             }
         }
-        
+
         private void SelectMenuItemClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
